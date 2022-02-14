@@ -1,7 +1,8 @@
 import L from 'leaflet';
 
 /*
-creates an object for the custom marker icon for the leaflet map
+creates an object for the custom marker icon for the leaflet map.
+The SVG file is located in "assets" (it's literally just a 'pin' icon)
 */
 
 export const VenueLocationIcon = L.icon({
