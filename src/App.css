@@ -2,3 +2,8 @@
   width: 100vw;
   height: 100vh;
 }
+
+/*
+The css file just sets the height and width of the leaflet container 
+so it fills the viewport (vw: viewport-width, vh: viewport-height).
+*/

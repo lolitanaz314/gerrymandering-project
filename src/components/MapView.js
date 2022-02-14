@@ -4,6 +4,12 @@ import 'leaflet/dist/leaflet.css';
 import data from '../assets/data';
 import Markers from './VenueMarkers';
 
+/*
+currentLocation contains fallback coordinates of the center of the United States
+"zoom" default value is set to 5
+These settings will make the map center on the middle of the US with a zoom level of 5 on page load
+*/
+
 class MapView extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +18,11 @@ class MapView extends Component {
       zoom: 5,
     }
   }
+  /*
+  in the render() function the MapContainer() function is returned.
+  TileLayer component adds the tiles for the map
+  We pass data.venues as props to the Markeres component so all markers are displayed on the map
+  */
 
   render() {
     const { currentLocation, zoom } = this.state;
