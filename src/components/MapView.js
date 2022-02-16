@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import dataFile from '../assets/data';
 import Markers from './VenueMarkers';
-import tennessee from "../assets/tennessee.json";
+import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina.json"
 
 /*
@@ -30,16 +30,16 @@ class MapView extends Component {
 
   render() {
     const { currentLocation, zoom } = this.state;
-    var testing = tennessee
+    var state1 = tennessee
 
-     var testing2 = southcarolina
+    var testing2 = southcarolina
 
     return (
       <MapContainer center={currentLocation} zoom={zoom}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        <GeoJSON data={testing} />
+        <GeoJSON data={state1} />
         <GeoJSON data={testing2} />
         <Markers venues={dataFile.venues} />
       </MapContainer>
