@@ -3,8 +3,8 @@ import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import dataFile from '../assets/data';
 import Markers from './VenueMarkers';
-import tennessee from "../assets/tennessee.json";
-import southcarolina from "../assets/southcarolina.json";
+import tennessee from "../assets/tennessee_congressional_districts.json";
+import southcarolina from "../assets/southcarolina_congressional.json";
 import L from 'leaflet';
 
 /*
