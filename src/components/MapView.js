@@ -8,12 +8,19 @@ import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 import L from 'leaflet';
+import MarkerPopup from "./MarkerPopup"
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
 "zoom" default value is set to 5
 These settings will make the map center on the middle of the US with a zoom level of 5 on page load
 */
+
+const myComponentStyle = {
+  lineHeight: 10,
+  position: 'absolute',
+  top:67,
+}
 
 // class MapView extends Component {
 function MapView(props) {
@@ -77,18 +84,25 @@ function MapView(props) {
     // var { currentLocation, zoom } = this.state;
 
     return (
-      <MapContainer center={currentLocation.center} zoom={currentLocation.zoom}>
-        <MyComponent />
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        <GeoJSON data={tennessee}/>
-        <GeoJSON data={southcarolina}/>
-        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} //i added both so i can calculate the center of the polygon
-        />
-        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} />
-        <Markers venues={dataFile.venues} />
-      </MapContainer>
+
+      <div style={myComponentStyle}>
+        <MapContainer center={currentLocation.center} zoom={currentLocation.zoom}>
+          <MyComponent />
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
+          <GeoJSON data={tennessee}/>
+          <GeoJSON data={southcarolina}/>
+          <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
+            <MarkerPopup data="hello"/>
+          </GeoJSON> //i added both so i can calculate the center of the polygon
+          
+          <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
+            <MarkerPopup data="hello"/>
+          </GeoJSON>
+          <Markers venues={dataFile.venues} />
+        </MapContainer>
+      </div>
     );
   // }
 }
