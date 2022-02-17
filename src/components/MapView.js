@@ -23,36 +23,22 @@ const myComponentStyle = {
   color: 'blue'
 }
 
-// class MapView extends Component {
-function MapView() {
-  // constructor(props) {
-    // super(props);
-    // this.state = {
-    //   currentLocation: { lat: 39.8283, lng: -98.5795 },
-    //   zoom: 5,
-    // }
-    const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
-  // }
+function MapView(props) {
+  const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
-  // zoomState = (state) => {
-    function zoomState(state){
-      var polygon = new L.Polygon(state.geometry.coordinates);
-      var bounds = polygon.getBounds();
-      var center = bounds.getCenter();
-      var latitude = center.lng;
-      var longitude = center.lat;
-      var coords = {lat: latitude, lng: longitude};
-  
-      // this.setState({
-      //   currentLocation: {lat: center.lat, lng: center.lng}, 
-      //   zoom: 50
-      // }, function(){ console.log(this.state.currentLocation); });
-  
-      console.log(coords);
-      setLocation({
-        center: coords, zoom: 7, name: state.properties.name
-      });
-    }
+  function zoomState(state){
+    var polygon = new L.Polygon(state.geometry.coordinates);
+    var bounds = polygon.getBounds();
+    var center = bounds.getCenter();
+    var latitude = center.lng;
+    var longitude = center.lat;
+    var coords = {lat: latitude, lng: longitude};
+
+    console.log(coords);
+    setLocation({
+      center: coords, zoom: 7, name: state.properties.name
+    });
+  }
 
   function MyComponent() {
     const map = useMap();
@@ -62,7 +48,6 @@ function MapView() {
     return null;
   }
 
-  // clicked = (feature, layer) => {
   function clicked (feature, layer){
     // if (feature.properties && feature.properties.popupContent) {
     //   layer.bindPopup(feature.properties.popupContent);
@@ -71,7 +56,6 @@ function MapView() {
         //  ,"popupContent": "THSI IS TENNEESEAEAWADSD"
 
     // bind click
-    // layer.on('click', () => this.zoomState(feature));
     layer.on('click', () => zoomState(feature));
   }
 
@@ -80,9 +64,6 @@ function MapView() {
   TileLayer component adds the tiles for the map
   We pass data.venues as props to the Markers component so all markers are displayed on the map
   */
-
-  // render() {
-    // var { currentLocation, zoom } = this.state;
 
     return (
       <div style={myComponentStyle}>
@@ -96,8 +77,7 @@ function MapView() {
           
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello"/>
-          </GeoJSON> //i added both so i can calculate the center of the polygon
-          
+          </GeoJSON>
           <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello"/>
           </GeoJSON>
@@ -105,7 +85,6 @@ function MapView() {
         </MapContainer>
       </div>
     );
-  // }
 }
 
-export default MapView;
+export default MapView
