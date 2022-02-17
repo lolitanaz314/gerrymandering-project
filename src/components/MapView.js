@@ -24,7 +24,7 @@ const myComponentStyle = {
 }
 
 // class MapView extends Component {
-function MapView(props) {
+function MapView() {
   // constructor(props) {
     // super(props);
     // this.state = {
@@ -35,24 +35,24 @@ function MapView(props) {
   // }
 
   // zoomState = (state) => {
-  function zoomState(state){
-    var polygon = new L.Polygon(state.geometry.coordinates);
-    var bounds = polygon.getBounds();
-    var center = bounds.getCenter();
-    var latitude = center.lng;
-    var longitude = center.lat;
-    var coords = {lat: latitude, lng: longitude};
-
-    // this.setState({
-    //   currentLocation: {lat: center.lat, lng: center.lng}, 
-    //   zoom: 50
-    // }, function(){ console.log(this.state.currentLocation); });
-
-    console.log(coords);
-    setLocation({
-      center: coords, zoom: 7, name: state.properties.name
-    });
-  }
+    function zoomState(state){
+      var polygon = new L.Polygon(state.geometry.coordinates);
+      var bounds = polygon.getBounds();
+      var center = bounds.getCenter();
+      var latitude = center.lng;
+      var longitude = center.lat;
+      var coords = {lat: latitude, lng: longitude};
+  
+      // this.setState({
+      //   currentLocation: {lat: center.lat, lng: center.lng}, 
+      //   zoom: 50
+      // }, function(){ console.log(this.state.currentLocation); });
+  
+      console.log(coords);
+      setLocation({
+        center: coords, zoom: 7, name: state.properties.name
+      });
+    }
 
   function MyComponent() {
     const map = useMap();
@@ -93,6 +93,7 @@ function MapView(props) {
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
           <GeoJSON data={tennessee}/>
           <GeoJSON data={southcarolina}/>
+          
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello"/>
           </GeoJSON> //i added both so i can calculate the center of the polygon
