@@ -76,8 +76,7 @@ function MapView(props) {
           <GeoJSON data={southcarolina}/>
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello"/>
-          </GeoJSON> //i added both so i can calculate the center of the polygon
-          
+          </GeoJSON>
           <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello"/>
           </GeoJSON>
