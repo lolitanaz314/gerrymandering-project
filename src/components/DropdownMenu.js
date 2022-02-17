@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './DropdownMenu.css';
 import { Link } from 'react-router-dom';
 // import MapView from './MapView';
+import Dropdown from 'react-bootstrap/Dropdown'
   
-const Dropdown = () => {
+const Dropdownmenu = () => {
     const States = [
         {
           title: 'Tennessee',
@@ -19,21 +20,18 @@ const Dropdown = () => {
 
     return (
         <>
-            {/* <ul
-                onClick={handleClick}
-                className = {click ? 'dropdown-menu clicked' : 'dropdown-menu'}
-            > */}
-                {States.map((item, index) => {
-                    return (
-                        <li key={index} onClick = {() =>  setClick(false)}>
-                            
-                                {item.title}
-                        </li>
-                    )
-                })}
-            {/* </ul> */}
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    States
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-2">Tennessee</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">South Carolina</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
         </>
     )
 }
 
-export default Dropdown;
+export default Dropdownmenu;

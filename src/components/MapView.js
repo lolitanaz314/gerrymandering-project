@@ -19,7 +19,8 @@ These settings will make the map center on the middle of the US with a zoom leve
 const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
-  top:67,
+  top:100,
+  color: 'blue'
 }
 
 // class MapView extends Component {
@@ -84,7 +85,6 @@ function MapView(props) {
     // var { currentLocation, zoom } = this.state;
 
     return (
-
       <div style={myComponentStyle}>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom}>
           <MyComponent />

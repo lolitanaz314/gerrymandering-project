@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import "./Navbar.css"
-import Dropdown from './DropdownMenu';
+import Dropdownmenu from './DropdownMenu';
 import {  Link } from "react-router-dom";
 
 const Navbar= () => {
-
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -43,8 +42,7 @@ const Navbar= () => {
       <ul className="list">
       <li className="items">CSE 416</li>
       <li className="items">LYNX</li>
-      <li className="items">Dropdown</li>
-      <Dropdown/>
+      <Dropdownmenu/>
     </ul>
       )}
     </nav>
