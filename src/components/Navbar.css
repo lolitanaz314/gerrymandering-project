@@ -15,12 +15,27 @@ nav {
     align-items: center;
     position: relative;
 }
-.items {
+
+.className {
+    padding-left:1px;
+    margin-right: 200px;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+.teamName {
+    padding-left:30px;
     margin-right: 10px;
     font-size: 20px;
     text-transform: uppercase;
     color: #f1f1f1;
     cursor: pointer;
+}
+
+.dropdown {
+    padding-left: 200px;
 }
 
 @media screen and (max-width: 500px){
