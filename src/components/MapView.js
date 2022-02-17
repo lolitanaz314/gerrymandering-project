@@ -48,13 +48,10 @@ function MapView(props) {
     return null;
   }
 
-  function clicked (feature, layer){
-    // if (feature.properties && feature.properties.popupContent) {
-    //   layer.bindPopup(feature.properties.popupContent);
-    // }
-    //MUST ADD: to feature.properties
-        //  ,"popupContent": "THSI IS TENNEESEAEAWADSD"
-
+  /*
+    clicked is called when user clicks on a state from the map. Used from GEOJson feature.
+  */
+  function clicked(feature, layer){
     // bind click
     layer.on('click', () => zoomState(feature));
   }
@@ -64,21 +61,20 @@ function MapView(props) {
   TileLayer component adds the tiles for the map
   We pass data.venues as props to the Markers component so all markers are displayed on the map
   */
-
     return (
       <div style={myComponentStyle}>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom}>
           <MyComponent />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" /> 
           <GeoJSON data={tennessee}/>
           <GeoJSON data={southcarolina}/>
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
-            <MarkerPopup data="hello"/>
+            <MarkerPopup data="hello" />
           </GeoJSON>
           <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
-            <MarkerPopup data="hello"/>
+            <MarkerPopup data="hello" />
           </GeoJSON>
           <Markers venues={dataFile.venues} />
         </MapContainer>
