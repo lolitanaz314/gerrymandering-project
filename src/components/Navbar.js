@@ -17,33 +17,17 @@ const Navbar= () => {
     const changeWidth = () => {
       setScreenWidth(window.innerWidth);
     }
-
     window.addEventListener('resize', changeWidth)
-
   }, [])
 
-
   return (
-	// <header class="header">
-	// 	<div class="left">
-	// 		<a href="#">CSE 416 Project</a>
-	// 	</div>
-  //       <div class="mid">
-  //           <ul class="navbar">
-  //               <li> Team Lynx </li>
-  //           </ul>
-  //       </div>
-	//     <div class="right">
-        
-  //       </div>
-  //   </header>
   <nav>
       {(screenWidth>500) && (
       <ul className="list">
-      <li className="items">CSE 416</li>
-      <li className="items">LYNX</li>
-      <Dropdownmenu/>
-    </ul>
+        <li className="className">CSE 416</li>
+        <li className="teamName">TEAM LYNX</li>
+        <Dropdownmenu className="dropdown"/>
+      </ul>
       )}
     </nav>
   );

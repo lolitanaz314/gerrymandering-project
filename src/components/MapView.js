@@ -70,6 +70,7 @@ function MapView(props) {
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" /> 
           <GeoJSON data={tennessee}/>
           <GeoJSON data={southcarolina}/>
+          
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
             <MarkerPopup data="hello" />
           </GeoJSON>
@@ -82,4 +83,4 @@ function MapView(props) {
     );
 }
 
-export default MapView;
+export default MapView
