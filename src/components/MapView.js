@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import dataFile from '../assets/data';
@@ -23,7 +23,7 @@ const myComponentStyle = {
   color: 'blue'
 }
 
-function MapView(props) {
+const MapView = ({show, handleShow}) => {
   const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
   function zoomState(state){
@@ -53,6 +53,8 @@ function MapView(props) {
   function clicked(feature, layer){
     // bind click
     layer.on('click', () => zoomState(feature));
+    layer.on('click', () => handleShow());
+    // console.log("Clicked");
   }
 
   /*
