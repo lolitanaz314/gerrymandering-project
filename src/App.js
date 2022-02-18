@@ -1,19 +1,27 @@
 import React from 'react'
-import MapView from './components/MapView'
-import Navbar from './components/Navbar';
+import { useState } from 'react';
+import Navigation from './components/Navigation';
+import Sidebar from './components/Sidebar';
+import MapView from './components/MapView';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-// terminal  "npm install react-bootstrap bootstrap@5.1.3"
-// terminal  "npm install react react-dom"  
+ 
 
 /*
 THIS is the starting point of the react app. 
 */
 function App() {
+  // state for Sidebar
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="App">
-      <Navbar/>
-      <MapView/>
+      <Navigation/>
+      <Sidebar show={show} handleClose={handleClose}/>
+      <MapView show={show} handleShow={handleShow}/>
     </div>
   );
 }
