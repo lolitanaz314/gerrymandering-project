@@ -19,7 +19,7 @@ These settings will make the map center on the middle of the US with a zoom leve
 const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
-  top:66,
+  top:100, //66
   color: 'blue'
 }
 
@@ -42,8 +42,7 @@ function MapView(props) {
 
   function MyComponent() {
     const map = useMap();
-    // map.setZoom(currentLocation.zoom);
-    // map.panTo(currentLocation.center);
+    //pan & zoom
     map.setView(currentLocation.center, currentLocation.zoom);
     return null;
   }
@@ -61,6 +60,7 @@ function MapView(props) {
   TileLayer component adds the tiles for the map
   We pass data.venues as props to the Markers component so all markers are displayed on the map
   */
+
     return (
       <div style={myComponentStyle}>
         <MapContainer className='google-maps' center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
@@ -72,10 +72,10 @@ function MapView(props) {
           <GeoJSON data={southcarolina}/>
           
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
-            <MarkerPopup data="hello" />
+            {/* <MarkerPopup data="hello" /> */}
           </GeoJSON>
           <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
-            <MarkerPopup data="hello" />
+            {/* <MarkerPopup data="hello" /> */}
           </GeoJSON>
           <Markers venues={dataFile.venues} />
         </MapContainer>
