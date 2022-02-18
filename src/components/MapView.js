@@ -19,7 +19,7 @@ These settings will make the map center on the middle of the US with a zoom leve
 const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
-  top:100,
+  top:66,
   color: 'blue'
 }
 
@@ -63,7 +63,7 @@ function MapView(props) {
   */
     return (
       <div style={myComponentStyle}>
-        <MapContainer center={currentLocation.center} zoom={currentLocation.zoom}>
+        <MapContainer className='google-maps' center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
           <MyComponent />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
