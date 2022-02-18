@@ -3,9 +3,9 @@
   height: 100vh;
 }
 
-.google-maps{
+/* .google-maps{
   z-index: -1;
-}
+} */
 
 /*
 The css file just sets the height and width of the leaflet container 
