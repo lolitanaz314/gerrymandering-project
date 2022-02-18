@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.google-maps{
+  z-index: -1;
+}
+
 /*
 The css file just sets the height and width of the leaflet container 
 so it fills the viewport (vw: viewport-width, vh: viewport-height).
