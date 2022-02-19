@@ -19,7 +19,7 @@ These settings will make the map center on the middle of the US with a zoom leve
 const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
-  top:100, //66
+  top:56, //66
   color: 'blue'
 }
 
@@ -38,6 +38,7 @@ const MapView = ({show, handleShow}) => {
     setLocation({
       center: coords, zoom: 7, name: state.properties.name
     });
+    handleShow();
   }
 
   function MyComponent() {
@@ -53,7 +54,7 @@ const MapView = ({show, handleShow}) => {
   function clicked(feature, layer){
     // bind click
     layer.on('click', () => zoomState(feature));
-    layer.on('click', () => handleShow());
+    // layer.on('click', () => handleShow());
     // console.log("Clicked");
   }
 
