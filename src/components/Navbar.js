@@ -3,7 +3,7 @@ import "./style/Navbar.css"
 import Dropdownmenu from './DropdownMenu';
 import {  Link } from "react-router-dom";
 
-const Navbar= () => {
+const Navbar = (props) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -13,7 +13,6 @@ const Navbar= () => {
 
   /* FOR RESIZING PURPOSES*/
   useEffect(() => {
-
     const changeWidth = () => {
       setScreenWidth(window.innerWidth);
     }

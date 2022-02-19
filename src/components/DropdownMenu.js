@@ -29,8 +29,7 @@ const Dropdownmenu = () => {
             <Dropdown>
                 <Dropdown.Toggle 
                 variant="success" 
-                id="dropdown-basic"
-                >
+                id="dropdown-basic" >
                     States
                 </Dropdown.Toggle>
 

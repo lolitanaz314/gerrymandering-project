@@ -23,7 +23,7 @@ const myComponentStyle = {
   color: 'blue'
 }
 
-const MapView = ({show, handleShow}) => {
+const MapView = ( {show, handleShow} ) => {
   const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
   function zoomState(state){
@@ -70,7 +70,7 @@ const MapView = ({show, handleShow}) => {
           <MyComponent />
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" /> 
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/> 
           <GeoJSON data={tennessee}/>
           <GeoJSON data={southcarolina}/>
           
