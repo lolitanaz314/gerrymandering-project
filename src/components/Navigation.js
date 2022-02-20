@@ -2,11 +2,6 @@ import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 
-function sayHello () {
-  console.log("state in dropdown was clicked")
-  //MapView.zoomState(tennesseeOutline)
-}
-
 const Navigation = (props) => {
   return (
     <>
