@@ -21,6 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
 /src/assets/tennessee_precinct_data_2020.json
 /src/assets/south_carolina_precinct_data_2020.json
+=======
+>>>>>>> c3deef0919f5bdfbc93a30aeba6c35030ca165e7

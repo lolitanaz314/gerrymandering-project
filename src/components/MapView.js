@@ -27,7 +27,7 @@ const myComponentStyle = {
 const MapView = ( {show, handleShow} ) => {
   const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
-  function zoomState(state) {
+  function zoomState(state){
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();

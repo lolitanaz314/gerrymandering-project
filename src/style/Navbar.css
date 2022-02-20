@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> c3deef0919f5bdfbc93a30aeba6c35030ca165e7
 nav {
     position: fixed;
     top: 0;
     width: 100%;
+<<<<<<< HEAD
+=======
+    height: 50px;
+>>>>>>> c3deef0919f5bdfbc93a30aeba6c35030ca165e7
     background: midnightblue;
 }
 
@@ -57,5 +64,9 @@ nav {
     .btn {
         display: block;
     }
+<<<<<<< HEAD
 }
 */
+=======
+}
+>>>>>>> c3deef0919f5bdfbc93a30aeba6c35030ca165e7
