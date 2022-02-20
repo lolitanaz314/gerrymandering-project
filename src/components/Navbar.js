@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import "./Navbar.css"
 import Dropdownmenu from './DropdownMenu';
-import {  Link } from "react-router-dom";
 
+/*NOT BEING USED RIGHT NOW*/
 const Navbar= () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -13,7 +13,6 @@ const Navbar= () => {
 
   /* FOR RESIZING PURPOSES*/
   useEffect(() => {
-
     const changeWidth = () => {
       setScreenWidth(window.innerWidth);
     }
@@ -22,7 +21,7 @@ const Navbar= () => {
 
   return (
   <nav>
-      {(screenWidth>500) && (
+      {(screenWidth>300) && (
       <ul className="list">
         <li className="className">CSE 416</li>
         <li className="teamName">TEAM LYNX</li>

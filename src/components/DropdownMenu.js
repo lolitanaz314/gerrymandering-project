@@ -6,21 +6,13 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 
+/* NOT BEING USED!! */
 function sayHello () {
     console.log("state in dropdown was clicked")
     //MapView.zoomState(tennesseeOutline)
 }
 
 const Dropdownmenu = () => {
-    /*
-    const States = [
-        {
-          title: 'Tennessee',
-        },
-        {
-          title: 'South Carolina',
-        }
-    ];*/
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     

@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import dataFile from '../assets/data';
 import Markers from './VenueMarkers';
+import Navigation from './Navigation';
 import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
@@ -19,14 +20,15 @@ These settings will make the map center on the middle of the US with a zoom leve
 const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
-  top:100, //66
+  top:30, //66
+  height: 30,
   color: 'blue'
 }
 
 const MapView = ({show, handleShow}) => {
   const [ currentLocation, setLocation] = useState({center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
-  function zoomState(state){
+  function zoomState(state) {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
@@ -65,6 +67,7 @@ const MapView = ({show, handleShow}) => {
 
     return (
       <div style={myComponentStyle}>
+        <Navigation/>
         <MapContainer className='google-maps' center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
           <MyComponent />
           <TileLayer
