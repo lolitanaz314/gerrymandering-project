@@ -1,0 +1,2 @@
+southcarolina_precinct_data_2020.json filter=lfs diff=lfs merge=lfs -text
+tennessee_precinct_data_2020.json filter=lfs diff=lfs merge=lfs -text
