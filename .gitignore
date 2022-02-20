@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/assets/tennessee_precinct_data_2020.json
+/src/assets/south_carolina_precinct_data_2020.json
