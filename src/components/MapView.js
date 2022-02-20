@@ -9,7 +9,6 @@ import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 import L from 'leaflet';
-import MarkerPopup from "./MarkerPopup"
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
