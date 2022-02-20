@@ -6,7 +6,6 @@ import MapView from './components/MapView';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
  
-
 /*
 THIS is the starting point of the react app. 
 */

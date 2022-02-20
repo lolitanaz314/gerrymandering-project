@@ -1,4 +1,6 @@
 import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
+import tennesseeOutline from "../assets/tennessee.json";
+import southcarolinaOutline from "../assets/southcarolina.json";
 
 function sayHello () {
   console.log("state in dropdown was clicked")
@@ -16,8 +18,8 @@ const Navigation = (props) => {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Choose State" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#tennessee" onClick={sayHello}>Tennessee</NavDropdown.Item>
-                <NavDropdown.Item href="#southCarolina" onClick={sayHello}>South Carolina</NavDropdown.Item>
+                <NavDropdown.Item href="#tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
+                <NavDropdown.Item href="#southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

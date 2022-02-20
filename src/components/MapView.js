@@ -65,10 +65,9 @@ const MapView = ( {show, handleShow} ) => {
   TileLayer component adds the tiles for the map
   We pass data.venues as props to the Markers component so all markers are displayed on the map
   */
-
     return (
       <div style={myComponentStyle}>
-        <Navigation/>
+        <Navigation zoomState = {zoomState}/>
         <MapContainer className='google-maps' center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
           <MyComponent />
           <TileLayer
