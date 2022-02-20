@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './DropdownMenu.css';
+import './style/DropdownMenu.css';
 import { Link } from 'react-router-dom';
 import MapView from './MapView';
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -21,8 +21,7 @@ const Dropdownmenu = () => {
             <Dropdown>
                 <Dropdown.Toggle 
                 variant="success" 
-                id="dropdown-basic"
-                >
+                id="dropdown-basic" >
                     States
                 </Dropdown.Toggle>
 
