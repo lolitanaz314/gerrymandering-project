@@ -10,16 +10,15 @@ import './App.css';
 THIS is the starting point of the react app. 
 */
 function App() {
-  // state for Sidebar
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
+  // states for MapView
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  
   return (
     <div className="App">
-      <Navigation />
-      <Sidebar show={show} handleClose={handleClose}/>
-      <MapView show={show} handleShow={handleShow}/>
+      {/*<Sidebar show={show} handleClose={handleClose} /> */}
+      <MapView show={show} setShow = {setShow} handleShow={handleShow} />
     </div>
   );
 }
