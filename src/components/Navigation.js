@@ -3,7 +3,7 @@ import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 
 const myComponentStyle = {
-    marginLeft:800,
+    marginLeft: 800,
     position: 'sticky',
 }
 
