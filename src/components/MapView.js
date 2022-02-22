@@ -22,7 +22,7 @@ const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
   top: 30, //66
-  color: 'blue'
+  // color: 'blue'
 }
 
 const MapView = ({ show, setShow, handleShow }) => {
@@ -62,6 +62,28 @@ const MapView = ({ show, setShow, handleShow }) => {
     // console.log("Clicked");
   }
 
+  // get color -- would be useful for colors by total population
+  // function getColor(total) {
+  //   return total> 100000 ? '#800026' :
+  //                '#FFEDA0';
+  // }
+
+  function setStyle(feature) {
+    return {
+      //fill property shows 'red' or 'blue' based on republican/democratic district
+      fillColor: feature.properties.fill,
+      color: feature.properties.fill,
+      //color: getColor(feature.properties.TOTAL),
+    };
+  }
+
+  function outlineStyle(){
+    return{
+      opacity: 0,
+      fillOpacity: 0
+    }
+  }
+
   /*
   in the render() function the MapContainer() function is returned.
   TileLayer component adds the tiles for the map
@@ -76,14 +98,14 @@ const MapView = ({ show, setShow, handleShow }) => {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        <GeoJSON data={tennessee} />
-        <GeoJSON data={southcarolina} />
+        <GeoJSON data={tennessee} style ={setStyle}/>
+        <GeoJSON data={southcarolina} style ={setStyle}/>
 
-        <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
+        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style = {outlineStyle}>
             <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
         </GeoJSON>
 
-        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
+        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style = {outlineStyle}>
             <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
         </GeoJSON>
         
