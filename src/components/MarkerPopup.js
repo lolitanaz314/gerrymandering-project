@@ -1,4 +1,3 @@
-import React from 'react';
 import {Popup} from 'react-leaflet';
 
 /* The MarkerPopup component just opens the popup when a marker is clicked on

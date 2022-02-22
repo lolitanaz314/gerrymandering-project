@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import Navigation from './Navigation';
+// assets
 import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
+// components
+import Navigation from './Navigation';
 import Sidebar from './Sidebar';
-import L from 'leaflet';
+
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
 "zoom" default value is set to 5
 These settings will make the map center on the middle of the US with a zoom level of 5 on page load
 */
-
-const myComponentStyle = {
-  lineHeight: 10,
-  position: 'absolute',
-  top: 30, //66
-  // color: 'blue'
-}
 
 const MapView = (props) => {
   const [currentLocation, setLocation] = useState({
@@ -160,7 +156,7 @@ const MapView = (props) => {
   */
 
   return (
-    <div style={myComponentStyle} id='map'>
+    <div id='map'>
       <Navigation zoomState={zoomState} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />

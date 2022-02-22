@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Offcanvas} from 'react-bootstrap';
+// assets
+import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
+// components
 import PopUp from './PopUp'
-import boxAndWhisker from './boxAndWhisker.jpeg'
+
 
 const Sidebar = ({show, handleClose, name}) => {
   const [isOpen, setIsOpen] = useState(false);
