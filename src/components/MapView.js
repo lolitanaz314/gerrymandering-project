@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import dataFile from '../assets/data';
+//import dataFile from '../assets/data';
 import Markers from './VenueMarkers';
 import Navigation from './Navigation';
 import tennessee from "../assets/tennessee_congressional_districts.json";
@@ -27,8 +27,7 @@ const myComponentStyle = {
 
 const MapView = ({ show, setShow, handleShow }) => {
   const [currentLocation, setLocation] = useState({ center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
-
-  const handleClose = () => setShow(false); // currently not reseting the state of the sidebar
+  const handleClose = () => setShow(false); // this is for the sidebar
 
   function zoomState(state) {
     var polygon = new L.Polygon(state.geometry.coordinates);
