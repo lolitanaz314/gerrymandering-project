@@ -22,7 +22,7 @@ const myComponentStyle = {
   lineHeight: 10,
   position: 'absolute',
   top: 30, //66
-  color: 'blue'
+  // color: 'blue'
 }
 
 const MapView = (props) => {
@@ -130,6 +130,38 @@ const MapView = (props) => {
   }
 
   /*
+    clicked is called when user clicks on a state from the map. Used from GEOJson feature.
+  */
+  function clicked(feature, layer) {
+    // bind click
+    layer.on('click', () => zoomState(feature));
+    // layer.on('click', () => handleShow());
+    // console.log("Clicked");
+  }
+
+  // get color -- would be useful for colors by total population
+  // function getColor(total) {
+  //   return total> 100000 ? '#800026' :
+  //                '#FFEDA0';
+  // }
+
+  function setStyle(feature) {
+    return {
+      //fill property shows 'red' or 'blue' based on republican/democratic district
+      fillColor: feature.properties.fill,
+      color: feature.properties.fill,
+      //color: getColor(feature.properties.TOTAL),
+    };
+  }
+
+  function outlineStyle(){
+    return{
+      opacity: 0,
+      fillOpacity: 0
+    }
+  }
+
+  /*
   in the render() function the MapContainer() function is returned.
   TileLayer component adds the tiles for the map
   We pass data.venues as props to the Markers component so all markers are displayed on the map
@@ -143,10 +175,10 @@ const MapView = (props) => {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        <GeoJSON data={tennessee} onEachFeature={highlight}/>
-        <GeoJSON data={southcarolina} onEachFeature={highlight}/>
-        <GeoJSON data={tennesseeOutline} onEachFeature={clicked}/>
-        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}/>
+        <GeoJSON data={tennessee} style ={setStyle} onEachFeature={highlight}/>
+        <GeoJSON data={southcarolina} style ={setStyle} onEachFeature={highlight}/>
+        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style = {outlineStyle} />
+        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style = {outlineStyle} />
         <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
 
         <div className="info-box hidden">
@@ -156,7 +188,6 @@ const MapView = (props) => {
               <p>Hover on each county for more details</p>
             </div>
           )}
-          
           {onselect.district && (
             <ul className = "census-info">
               <li><strong>District {onselect.district}</strong></li><br />
@@ -164,6 +195,7 @@ const MapView = (props) => {
             </ul>
           )}
         </div>
+        
       </MapContainer>
     </div>
   );
