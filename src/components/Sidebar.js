@@ -1,8 +1,8 @@
 // import { useState } from 'react';
 import { Offcanvas} from 'react-bootstrap';
+import PopUp from './PopUp'
 
 const Sidebar = ({show, handleClose, name}) => {
-  
   return (
     <>
       {/* <Button variant="primary" onClick={handleShow}>
@@ -14,8 +14,9 @@ const Sidebar = ({show, handleClose, name}) => {
           <Offcanvas.Title>{name}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Text
-          
+
+          <button> Show Box and Whisker Plot </button>
+          <PopUp/>
         </Offcanvas.Body>
       </Offcanvas>
     </>

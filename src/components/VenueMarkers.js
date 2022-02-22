@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react'
 import {Marker} from 'react-leaflet';
-import {VenueLocationIcon} from './VenueLocationIcon';
 import MarkerPopup from './MarkerPopup';
+
+/*Don't worry  about this file */
 
 /* props is venues data from the parent component MapView.js*/
 const VenueMarkers = (props) => {
   const { venues } = props;
 
   const markers = venues.map((venue, index) => (
-    <Marker key={index} position={venue.geometry} icon={VenueLocationIcon}>
+    <Marker key={index} position={venue.geometry}>
       <MarkerPopup data={venue}/>
     </Marker>
   ));

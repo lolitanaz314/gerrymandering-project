@@ -28,8 +28,7 @@ const myComponentStyle = {
 const MapView = ({ show, setShow, handleShow }) => {
   const [currentLocation, setLocation] = useState({ center: { lat: 39.8283, lng: -98.5795 }, zoom: 5, name: 'USA' });
 
-  const handleClose = () => setShow(false); // reset the state of the sidebar
-  const [showSidebar, setShowSidebar] = useState(false);
+  const handleClose = () => setShow(false); // currently not reseting the state of the sidebar
 
   function zoomState(state) {
     var polygon = new L.Polygon(state.geometry.coordinates);
@@ -82,13 +81,13 @@ const MapView = ({ show, setShow, handleShow }) => {
         <GeoJSON data={southcarolina} />
 
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked}>
-            <Sidebar show={show} handleClose={handleClose} name={"Tennessee"} />
+            <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
         </GeoJSON>
 
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}>
-            <Sidebar show={show} handleClose={handleClose} name={"South"} />
+            <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
         </GeoJSON>
-        {/*<Markers venues={dataFile.venues} /> */}
+        
       </MapContainer>
     </div>
   );

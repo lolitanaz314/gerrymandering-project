@@ -17,7 +17,7 @@ function App() {
   
   return (
     <div className="App">
-      {/*<Sidebar show={show} handleClose={handleClose} /> */}
+      {/*<Sidebar show={show} handleClose={handleClose} /> */} {/* NOT supposed to be here because data isn't being passed through to SideBar, it's supposed to be in MapView */}
       <MapView show={show} setShow = {setShow} handleShow={handleShow} />
     </div>
   );
