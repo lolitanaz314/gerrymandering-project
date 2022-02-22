@@ -16,7 +16,6 @@
     "react-leaflet": "^3.2.5",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "react-switch": "^6.0.0",
     "reactjs-popup": "^2.0.5",
     "web-vitals": "^2.1.4"
   },

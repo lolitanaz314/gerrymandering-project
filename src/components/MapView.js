@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import dataFile from '../assets/data';
+//import dataFile from '../assets/data';
 import Markers from './VenueMarkers';
 import Navigation from './Navigation';
 import tennessee from "../assets/tennessee_congressional_districts.json";
@@ -147,7 +147,7 @@ const MapView = (props) => {
         <GeoJSON data={southcarolina} onEachFeature={highlight}/>
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked}/>
-        {/* <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} /> */}
+        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
 
         <div className="info-box hidden">
           {!onselect.district && (
