@@ -75,6 +75,7 @@ const MapView = (props) => {
     //   color: "black",
     //   fillOpacity: 1
     // });
+    // layer.feature.fillColor = 'lighten';
   });
 
   // const resetHighlight = (e => {
@@ -108,6 +109,8 @@ const MapView = (props) => {
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
+
+    //changes css to show boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
     document.getElementsByClassName("legend")[0].classList.remove('hidden');
   }

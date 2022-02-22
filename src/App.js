@@ -11,13 +11,13 @@ THIS is the starting point of the react app.
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MapView />} />
-          {/* <MapView/> */}
-        </Routes>
+          <Route path="/" element={<MapView />} /> */}
+          <MapView/>
+        {/* </Routes> */}
         {/* <Legend/> */}
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </div>
   );
 }
