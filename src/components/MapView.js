@@ -18,13 +18,6 @@ currentLocation contains fallback coordinates of the center of the United States
 These settings will make the map center on the middle of the US with a zoom level of 5 on page load
 */
 
-const myComponentStyle = {
-  lineHeight: 10,
-  position: 'absolute',
-  top: 30, //66
-  // color: 'blue'
-}
-
 const MapView = (props) => {
   const [currentLocation, setLocation] = useState({
     center: { lat: 39.8283, lng: -98.5795 },
@@ -163,7 +156,7 @@ const MapView = (props) => {
   */
 
   return (
-    <div style={myComponentStyle} id='map'>
+    <div id='map'>
       <Navigation zoomState={zoomState} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />

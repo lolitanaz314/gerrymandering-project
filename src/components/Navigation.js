@@ -1,7 +1,7 @@
 import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
-import "./style/Navbar.css";
+// import "./style/Navbar.css"; // commented because dropdown looked weird
 
 const myComponentStyle = {
     marginLeft: 800,
