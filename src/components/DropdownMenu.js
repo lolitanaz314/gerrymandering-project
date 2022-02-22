@@ -6,19 +6,16 @@ const Dropdownmenu = () => {
     return (
         <>
             <Dropdown>
-                <Dropdown.Toggle 
-                variant="success" 
-                id="dropdown-basic" >
+                <Dropdown.Toggle variant="success" id="dropdown-basic" >
                     States
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                     <div>
-                    <Dropdown.Item>Tennessee</Dropdown.Item>
+                        <Dropdown.Item>Tennessee</Dropdown.Item>
                     </div>
 
                     <div>
-                    <Dropdown.Item>South Carolina</Dropdown.Item>
+                        <Dropdown.Item>South Carolina</Dropdown.Item>
                     </div>
                 </Dropdown.Menu>
             </Dropdown>
