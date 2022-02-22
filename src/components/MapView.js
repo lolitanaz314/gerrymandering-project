@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import Navigation from './Navigation';
+// assets
 import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
+// components
+import Navigation from './Navigation';
 import Sidebar from './Sidebar';
-import L from 'leaflet';
+
 
 /*
 currentLocation contains fallback coordinates of the center of the United States

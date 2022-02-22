@@ -1,6 +1,5 @@
-import React from 'react';
-import './style/DropdownMenu.css';
 import Dropdown from 'react-bootstrap/Dropdown'
+import './style/DropdownMenu.css';
 
 const Dropdownmenu = () => {
     return (

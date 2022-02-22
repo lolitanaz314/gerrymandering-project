@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import {Marker} from 'react-leaflet';
 import MarkerPopup from './MarkerPopup';
 

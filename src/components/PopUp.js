@@ -1,4 +1,3 @@
-import React from "react";
 import "./style/PopUp.css";
 
 const Popup = props => {
