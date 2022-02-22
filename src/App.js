@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MapView from './components/MapView';
-import './style/Legend.css';
+import './components/style/Legend.css';
 
 /*
 THIS is the starting point of the react app. 

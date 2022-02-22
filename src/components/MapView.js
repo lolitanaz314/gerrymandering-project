@@ -65,10 +65,13 @@ const MapView = (props) => {
   const highlightFeature = (e => {
     var layer = e.target;
     const pop = layer.feature.properties.POPULATION;
-    const county = layer.feature.properties.DISTRICT;
+    const district = layer.feature.properties.DISTRICT;
+    var vote = 'Republican'
+    if(layer.feature.properties.fill === 'blue') vote = "Democratic";
     setOnselect({
       population: pop,
-      district: county
+      district: district,
+      voted: vote
     });
     // layer.setStyle({
     //   weight: 1,
@@ -173,14 +176,15 @@ const MapView = (props) => {
         <div className="info-box hidden">
           {!onselect.district && (
             <div className = "census-info-hover">
-              <strong>Kenya population density</strong>
-              <p>Hover on each county for more details</p>
+              <strong>{currentLocation.name} Census Information </strong>
+              <p>Hover on each congressional district for more details</p>
             </div>
           )}
           {onselect.district && (
             <ul className = "census-info">
               <li><strong>District {onselect.district}</strong></li><br />
-              <li>Total Population:{onselect.population} (I beleive is wrong)</li>
+              <li>Total Population: {onselect.population}</li>
+              <li>Voted: {onselect.voted}</li>
             </ul>
           )}
         </div>
