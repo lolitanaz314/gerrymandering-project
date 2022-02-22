@@ -9,7 +9,7 @@ const Sidebar = ({show, handleClose, name}) => {
         Launch
       </Button> */}
 
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleClose} backdrop={false}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{name}</Offcanvas.Title>
         </Offcanvas.Header>
