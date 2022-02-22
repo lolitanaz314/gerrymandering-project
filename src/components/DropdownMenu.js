@@ -1,10 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './style/DropdownMenu.css';
-import { Link } from 'react-router-dom';
-import MapView from './MapView';
 import Dropdown from 'react-bootstrap/Dropdown'
-import tennesseeOutline from "../assets/tennessee.json";
-import southcarolinaOutline from "../assets/southcarolina.json";
 
 const Dropdownmenu = () => {
     return (

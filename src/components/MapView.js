@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-//import dataFile from '../assets/data';
-import Markers from './VenueMarkers';
 import Navigation from './Navigation';
 import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
@@ -10,7 +8,6 @@ import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
 import Sidebar from './Sidebar';
 import L from 'leaflet';
-import MarkerPopup from './MarkerPopup';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -66,7 +63,6 @@ const MapView = (props) => {
   }
   
   const highlightFeature = (e => {
-    console.log('hovering')
     var layer = e.target;
     const pop = layer.feature.properties.POPULATION;
     const county = layer.feature.properties.DISTRICT;
@@ -129,16 +125,6 @@ const MapView = (props) => {
     return null;
   }
 
-  /*
-    clicked is called when user clicks on a state from the map. Used from GEOJson feature.
-  */
-  function clicked(feature, layer) {
-    // bind click
-    layer.on('click', () => zoomState(feature));
-    // layer.on('click', () => handleShow());
-    // console.log("Clicked");
-  }
-
   // get color -- would be useful for colors by total population
   // function getColor(total) {
   //   return total> 100000 ? '#800026' :
@@ -175,10 +161,10 @@ const MapView = (props) => {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
-        <GeoJSON data={tennessee} style ={setStyle} onEachFeature={highlight}/>
-        <GeoJSON data={southcarolina} style ={setStyle} onEachFeature={highlight}/>
-        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style = {outlineStyle} />
-        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style = {outlineStyle} />
+        <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
+        <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
+        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
+        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
 
         <div className="info-box hidden">
@@ -195,7 +181,7 @@ const MapView = (props) => {
             </ul>
           )}
         </div>
-        
+
       </MapContainer>
     </div>
   );
