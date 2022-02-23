@@ -6,4 +6,6 @@ Navbar options: "npm install react react-dom"<br/>
 
 Popup Modal: "npm install reactjs-popup --save"
 
+Bottom Drawer: "npm install react-bottom-drawer"
+
 Routes: "npm install --save browser-router"

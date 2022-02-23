@@ -10,6 +10,7 @@ import southcarolinaOutline from "../assets/southcarolina.json";
 // components
 import Navigation from './Navigation';
 import Sidebar from './Sidebar';
+import BottomTab from './BottomTab';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -46,6 +47,11 @@ const MapView = (props) => {
   //   return density > 3023 ? '#a50f15' : density > 676 ? '#de2d26' : density > 428
   //   ? '#fb6a4a' : density > 236 ? '#fc9272' : density > 23 ? '#fcbba1' : '#fee5d9';
   // })
+
+  // bottom drawer
+  const [isVisible, setIsVisible] = useState(false);
+  const openDrawer = () => setIsVisible(true);
+  const closeDrawer = () => setIsVisible(false);
 
   //district hovering functions
   const highlight = (feature, layer) => {
@@ -148,7 +154,7 @@ const MapView = (props) => {
 
   return (
     <div id='map'>
-      <Navigation zoomState={zoomState} />
+      <Navigation zoomState={zoomState} className='google-maps' />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -156,7 +162,7 @@ const MapView = (props) => {
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} />
+        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} openDrawer={openDrawer} />
 
         <div className="info-box hidden">
           {!onselect.district && (
@@ -172,6 +178,8 @@ const MapView = (props) => {
             </ul>
           )}
         </div>
+
+        <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
 
       </MapContainer>
     </div>
