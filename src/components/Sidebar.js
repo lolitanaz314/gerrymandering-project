@@ -16,7 +16,7 @@ const Sidebar = ({show, handleClose, name}) => {
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} backdrop={false}>
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header>
           <Offcanvas.Title>{name}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>

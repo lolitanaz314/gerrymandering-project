@@ -96,8 +96,8 @@ const MapView = (props) => {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
-    var latitude = center.lng;
-    var longitude = center.lat;
+    var latitude = center.lng + 0.5;
+    var longitude = center.lat - 1.5;
     var coords = { lat: latitude, lng: longitude };
     var prev = currentLocation.layer;
 
@@ -111,7 +111,7 @@ const MapView = (props) => {
 
     //changes css to show boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
-    document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    // document.getElementsByClassName("legend")[0].classList.remove('hidden');
   }
 
   function MyComponent() {
