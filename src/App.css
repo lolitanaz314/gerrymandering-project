@@ -35,8 +35,8 @@
 
 .census-info-hover{
   z-index: 999;
-  top: 55px;
-  right: 150px;
+  top: -10px;
+  right: 650px;
   height: 20%;
   width:16%;
   padding: 10px 10px;

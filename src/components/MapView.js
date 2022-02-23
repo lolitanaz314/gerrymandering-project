@@ -124,13 +124,8 @@ const MapView = (props) => {
     return null;
   }
 
-  function popColor(feature){
-    return {
-      
-    }
-  }
   // get color -- would be useful for colors by total population
-  // function popColor(total) {
+  // function getColor(total) {
   //   return total> 100000 ? '#800026' :
   //                '#FFEDA0';
   // }
