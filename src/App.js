@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MapView from './components/MapView';
+import Legend from './components/Legend';
 import './components/style/Legend.css';
 
 /*
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" element={<MapView />} /> */}
           <MapView/>
         {/* </Routes> */}
-        {/* <Legend/> */}
+        <Legend/>
       {/* </BrowserRouter> */}
     </div>
   );

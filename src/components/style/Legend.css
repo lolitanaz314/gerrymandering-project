@@ -1,8 +1,8 @@
 .legend {
     position: absolute;
     z-index: 999;
-    right: 150px;
-    bottom: 140px;
+    right: 350px;
+    top: 139px;
     padding:20px 10px;
     box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
     font-size:12px;

@@ -11,7 +11,6 @@ import southcarolinaOutline from "../assets/southcarolina.json";
 import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 
-
 /*
 currentLocation contains fallback coordinates of the center of the United States
 "zoom" default value is set to 5
@@ -23,7 +22,6 @@ const MapView = (props) => {
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
-    prev: null,
     layer: null
   });
 
@@ -62,12 +60,9 @@ const MapView = (props) => {
     var layer = e.target;
     const pop = layer.feature.properties.POPULATION;
     const district = layer.feature.properties.DISTRICT;
-    var vote = 'Republican'
-    if(layer.feature.properties.fill === 'blue') vote = "Democratic";
     setOnselect({
       population: pop,
       district: district,
-      voted: vote
     });
     // layer.setStyle({
     //   weight: 1,
@@ -96,15 +91,14 @@ const MapView = (props) => {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
-    var latitude = center.lng + 0.5;
+    var latitude = center.lng + 1;
     var longitude = center.lat - 1.5;
     var coords = { lat: latitude, lng: longitude };
-    var prev = currentLocation.layer;
 
     console.log(state.properties.name);
 
     setLocation({
-      center: coords, zoom: 7, name: state.properties.name, layer: layer, prev: prev
+      center: coords, zoom: 7, name: state.properties.name, layer: layer
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -116,9 +110,6 @@ const MapView = (props) => {
 
   function MyComponent() {
     const map = useMap();
-    if(currentLocation.prev){
-      map.addLayer(currentLocation.prev);
-    }
     //pan & zoom
     map.setView(currentLocation.center, currentLocation.zoom);
     if(currentLocation.layer){
@@ -160,9 +151,7 @@ const MapView = (props) => {
       <Navigation zoomState={zoomState} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
@@ -180,7 +169,6 @@ const MapView = (props) => {
             <ul className = "census-info">
               <li><strong>District {onselect.district}</strong></li><br />
               <li>Total Population: {onselect.population}</li>
-              <li>Voted: {onselect.voted}</li>
             </ul>
           )}
         </div>
