@@ -23,7 +23,7 @@ const MapView = (props) => {
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
-    layer: null,
+    layer: null, //this is used to remove geojson layer -> might need to delete later on
     view: 'election'
   });
 
@@ -95,6 +95,9 @@ const MapView = (props) => {
   }
   
   function zoomState(state, layer) {
+    setOnselect({}); //resets the info box if user clicks on a new state
+    if(currentLocation.view !== 'population') document.getElementsByClassName("legend")[0].classList.add('hidden');
+
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
@@ -132,7 +135,14 @@ const MapView = (props) => {
   // }
 
   function changeView(v){
-    setLocation({center: currentLocation.center, zoom: currentLocation.zoom, name: currentLocation.name, layer: currentLocation.layer,view: v});
+    if(v === 'population') document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    setLocation({
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
+      layer: currentLocation.layer,
+      view: v
+    });
   }
 
   function setStyle(feature) {
@@ -161,7 +171,7 @@ const MapView = (props) => {
 
   return (
     <div id='map'>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
+      <Navigation zoomState={zoomState} changeView={changeView} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -186,6 +196,7 @@ const MapView = (props) => {
           )}
         </div>
       </MapContainer>
+
       <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
     </div>
   );
