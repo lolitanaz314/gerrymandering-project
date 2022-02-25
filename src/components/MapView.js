@@ -105,7 +105,11 @@ const MapView = (props) => {
     console.log(state.properties.name);
 
     setLocation({
-      center: coords, zoom: 7, name: state.properties.name, layer: layer, view: currentLocation.view
+      center: coords, 
+      zoom: 7, 
+      name: state.properties.name, 
+      layer: layer, 
+      view: currentLocation.view
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -132,7 +136,11 @@ const MapView = (props) => {
   // }
 
   function changeView(v){
-    setLocation({center: currentLocation.center, zoom: currentLocation.zoom, name: currentLocation.name, layer: currentLocation.layer,view: v});
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,view: v});
   }
 
   function setStyle(feature) {
@@ -162,7 +170,8 @@ const MapView = (props) => {
   return (
     <div id='map'>
       <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
-      <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
+      <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} 
+      maxBounds = {[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom = {5} maxZoom = {15}>
         <MyComponent />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
