@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
+
 // assets
 import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
+import tennessee_pic from '../assets/tennessee_pic.png'
 // components
 import PopUp from './PopUp'
 
 const myComponentStyle = {
   margin: '56px 0px 0px 0px'
+}
+
+const imageComponent = {
+  width: 150,
+  height: 50
+}
+
+const tableComponent = {
+  spacing: 30
 }
 
 const Sidebar = ({ show, handleClose, name, openDrawer }) => {
@@ -20,7 +31,7 @@ const Sidebar = ({ show, handleClose, name, openDrawer }) => {
     <>
       <Offcanvas style = {myComponentStyle} show={show} onHide={handleClose} backdrop={false}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{name}</Offcanvas.Title>
+          <Offcanvas.Title><h2>{name}</h2></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div>
@@ -28,11 +39,6 @@ const Sidebar = ({ show, handleClose, name, openDrawer }) => {
               type="button"
               value="Show Box and Whisker Plot"
               onClick={togglePopup}
-            />
-            <input
-              type="button"
-              value="Compare"
-              onClick={openDrawer}
             />
 
             {isOpen && <PopUp
@@ -43,6 +49,53 @@ const Sidebar = ({ show, handleClose, name, openDrawer }) => {
               handleClose={togglePopup}
             />}
 
+            <div>
+              <h4>
+                Proposed plans
+              </h4>
+            </div>
+
+            <table style={tableComponent}>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+              <tr>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+                  <th> <img src={tennessee_pic} style = {imageComponent} /></th>
+              </tr>
+            </table>
+
+            <input
+              type="button"
+              value="Compare"
+              onClick={openDrawer}
+            />
+            
           </div>
         </Offcanvas.Body>
       </Offcanvas>
