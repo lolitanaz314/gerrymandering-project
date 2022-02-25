@@ -178,10 +178,8 @@ const MapView = (props) => {
             </ul>
           )}
         </div>
-
-        <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
-
       </MapContainer>
+      <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
     </div>
   );
 }
