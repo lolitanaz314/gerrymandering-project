@@ -23,7 +23,8 @@ const MapView = (props) => {
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
-    layer: null
+    layer: null,
+    view: 'election'
   });
 
   //sidebar
@@ -92,7 +93,7 @@ const MapView = (props) => {
     layer.on('click', () => zoomState(feature, layer));
     // console.log("Clicked");
   }
-
+  
   function zoomState(state, layer) {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
@@ -104,7 +105,7 @@ const MapView = (props) => {
     console.log(state.properties.name);
 
     setLocation({
-      center: coords, zoom: 7, name: state.properties.name, layer: layer
+      center: coords, zoom: 7, name: state.properties.name, layer: layer, view: currentLocation.view
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -130,13 +131,19 @@ const MapView = (props) => {
   //                '#FFEDA0';
   // }
 
+  function changeView(v){
+    setLocation({center: currentLocation.center, zoom: currentLocation.zoom, name: currentLocation.name, layer: currentLocation.layer,view: v});
+  }
+
   function setStyle(feature) {
-    return {
-      //fill property shows 'red' or 'blue' based on republican/democratic district
-      fillColor: feature.properties.fill,
-      color: feature.properties.fill,
-      //color: getColor(feature.properties.TOTAL),
-    };
+    let style = currentLocation.view;
+        return{
+          //fill property shows 'red' or 'blue' based on republican/democratic district
+          fillColor: feature.fill[style],
+          color: feature.fill[style],
+          //color: getColor(feature.properties.TOTAL),
+          }
+        
   }
 
   function outlineStyle(){
@@ -154,7 +161,7 @@ const MapView = (props) => {
 
   return (
     <div id='map'>
-      <Navigation zoomState={zoomState} className='google-maps' />
+      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false}>
         <MyComponent />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
