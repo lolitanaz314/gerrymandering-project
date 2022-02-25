@@ -72,30 +72,13 @@
     letter-spacing:1px;
     margin-top:150px;
     font-size:8px;
-  
   }
 }
 
 /* BOTTOM TAB */
 .drawer{
-  /* z-index: 2; */
-  
-}
-
-/* .open-btn {
-  background: green;
-  color: white;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
-  transition: 250ms box-shadow;
-  box-shadow: none;
-  transform: none;
-  cursor: pointer;
-} */
-
-.open-btn:hover {
-  box-shadow: 0 0 5px rgb(1, 85, 1);
+  position: relative;
+  z-index: 1111;
 }
 
 .how-to-close {
