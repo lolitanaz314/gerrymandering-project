@@ -5,6 +5,11 @@ import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
 // components
 import PopUp from './PopUp'
 
+const myComponentStyle = {
+  top: 'unset',
+  bottom: 0,  
+  height: "92.7%"
+}
 
 const Sidebar = ({ show, handleClose, name, openDrawer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +20,7 @@ const Sidebar = ({ show, handleClose, name, openDrawer }) => {
 
   return (
     <>
-      <Offcanvas show={show} onHide={handleClose} backdrop={false}>
+      <Offcanvas style = {myComponentStyle} show={show} onHide={handleClose} backdrop={false}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>{name}</Offcanvas.Title>
         </Offcanvas.Header>
