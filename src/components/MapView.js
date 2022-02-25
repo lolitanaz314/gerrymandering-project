@@ -90,6 +90,7 @@ const MapView = (props) => {
   */
   function clicked(feature, layer) {
     // bind click
+    console.log("CLICKED current view: " + currentLocation.view)
     layer.on('click', () => zoomState(feature, layer));
     // console.log("Clicked");
   }
@@ -106,6 +107,7 @@ const MapView = (props) => {
     var coords = { lat: latitude, lng: longitude };
 
     console.log(state.properties.name);
+    console.log("ZOOM STATE current view: " + currentLocation.view)
 
     setLocation({
       center: coords, 
@@ -141,12 +143,12 @@ const MapView = (props) => {
   function changeView(v){
     if(v === 'population') document.getElementsByClassName("legend")[0].classList.remove('hidden');
     setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
       layer: currentLocation.layer,
-      view: v
-    });
+      view: v});
+    console.log("change view current view: "+ currentLocation.view)
   }
 
   function setStyle(feature) {
@@ -156,8 +158,9 @@ const MapView = (props) => {
           fillColor: feature.fill[style],
           color: feature.fill[style],
           //color: getColor(feature.properties.TOTAL),
+          opacity:0.8,
+          fillOpacity:0.4
           }
-        
   }
 
   function outlineStyle(){

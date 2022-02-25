@@ -6,7 +6,8 @@ const Legend = () => {
             <div style={{ "--color": '#fb6a4a' }}>428 - 675</div>
             <div style={{ "--color": '#fc9272' }}>236 - 427</div>
             <div style={{ "--color": '#fcbba1'}}>23 - 235</div>
-            <div style={{ "--color": '#fee5d9' }}>6 - 22</div>
+            {/* commenting this color out for now because it is the same color as the map background */}
+            {/* <div style={{ "--color": '#fee5d9' }}>6 - 22</div> */}
         </div>
     );
 }
