@@ -6,9 +6,7 @@ import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
 import PopUp from './PopUp'
 
 const myComponentStyle = {
-  top: 'unset',
-  bottom: 0,  
-  height: "92.7%"
+  margin: '56px 0px 0px 0px'
 }
 
 const Sidebar = ({ show, handleClose, name, openDrawer }) => {
