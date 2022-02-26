@@ -12,7 +12,8 @@ import gerrymander_index from '../assets/gerrymander_index.png'
 import PopUp from './PopUp'
 
 const myComponentStyle = {
-  margin: '56px 0px 0px 0px'
+  margin: '56px 0px 0px 0px',
+  zIndex: 500
 }
 
 const imageComponentSidebar = {
