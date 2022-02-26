@@ -12,7 +12,6 @@ import './style/Legend.css';
 import Navigation from './Navigation';
 import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
-import BottomTab from './BottomTab';
 import Legend from './Legend';
 
 /*
@@ -248,7 +247,6 @@ const MapView = (props) => {
 
       </MapContainer>
 
-      <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
     </div>
   );
 }

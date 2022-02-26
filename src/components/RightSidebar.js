@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import React from 'react';
 import statemeasures from '../assets/state_measures.png'
+import seats_to_votes from '../assets/seats_to_votes.png'
+import voting_and_population_perc from '../assets/voting_and_population_perc.png'
 
 const myComponentStyle = {
   margin: '56px 0px 0px 0px',
@@ -10,8 +12,18 @@ const myComponentStyle = {
 }
 
 const imageComponentSidebar = {
-  width: 300,
+  width: 330,
   height: 120
+}
+
+const imageComponentSidebarStV = {
+  width: 330,
+  height: 250
+}
+
+const imageComponentSidebarVert= {
+  width: 220,
+  height: 450
 }
 
 const RightSidebar = ({ show, name, showModal }) => {
@@ -31,8 +43,12 @@ const RightSidebar = ({ show, name, showModal }) => {
           <div>
             Requirements Analysis
             <img src={statemeasures} style = {imageComponentSidebar} />
-          
 
+            Measure of Fairness - Seats to Votes
+            <img src={seats_to_votes} style = {imageComponentSidebarStV} />
+            
+            <img src={voting_and_population_perc}  style={imageComponentSidebarVert}/>
+            
           </div>
         </Offcanvas.Body>
       </Offcanvas>
