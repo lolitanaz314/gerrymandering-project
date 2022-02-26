@@ -162,7 +162,7 @@ const MapView = (props) => {
       name: currentLocation.name, 
       layer: currentLocation.layer,
       view: v});
-    console.log("change view current view: "+ currentLocation.view)
+    console.log("change view current view: " + currentLocation.view)
   }
 
   function setStyle(feature) {
@@ -174,7 +174,7 @@ const MapView = (props) => {
           weight: '1',
           //color: getColor(feature.properties.TOTAL),
           // opacity: 0.6,
-          fillOpacity: 0.6
+          fillOpacity: 0.7
           }
   }
 

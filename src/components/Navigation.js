@@ -5,13 +5,13 @@ import southcarolinaOutline from "../assets/southcarolina.json";
 // import "./style/Navbar.css"; // commented because dropdown looked weird
 
 const myComponentStyle = {
-    position: 'relative',
-    width: 100
+  position: 'relative',
+  width: 100
 }
 
 const myComponentStyleView = {
   position: 'relative',
-  left:340
+  left: 340
 }
 
 const myComponentStyleBorder = {
