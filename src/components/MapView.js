@@ -7,15 +7,14 @@ import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
-import tennesseeCounty from "../assets/tennessee_counties.json"
+// import tennesseeCounty from "../assets/tennessee_counties.json"
 // import southcarolinaPrecinct from "../assets/southcarolina_precincts.json"
-import southcarolinaCounty from "../assets/southcarolina_counties.json"
+// import southcarolinaCounty from "../assets/southcarolina_counties.json"
 import './style/Legend.css';
 // components
 import Navigation from './Navigation';
 import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
-import BottomTab from './BottomTab';
 import Legend from './Legend';
 
 /*
@@ -309,7 +308,6 @@ const MapView = (props) => {
 
       </MapContainer>
 
-      <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
     </div>
   );
 }
