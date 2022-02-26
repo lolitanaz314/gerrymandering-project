@@ -6,29 +6,35 @@ import Modal from "react-bootstrap/Modal";
 // assets
 import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
 import tennessee_pic from '../assets/tennessee_pic.png'
+import south_carolina_pic from '../assets/south_carolina_pic.png'
 import state_measures from '../assets/state_measures.png'
 import gerrymander_index from '../assets/gerrymander_index.png'
 // components
 import PopUp from './PopUp'
 
 const myComponentStyle = {
-  margin: '56px 0px 0px 0px',
-  zIndex: 500
+  margin: '56px 0px 0px 0px'
 }
 
-const imageComponentSidebar = {
+const imageComponentSidebar_Ten = {
   width: 150,
   height: 50
 }
 
+const imageComponentSidebar_SC = {
+  width: 150,
+  height: 90
+}
+
 const imageComponentModal = {
   width: 350,
-  height: 150
+  height: 130
 }
+
 
 const gerrymanderIndexComponentModal = {
   width: 350,
-  height: 200
+  height: 230
 }
 
 const tableComponent = {
@@ -40,6 +46,20 @@ const Sidebar = ({ show, handleClose, name, showModal, hideModal, isOpenModal })
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  }
+
+  console.log("The state we're looking at is " , name);
+
+  // just for the 
+  var imgSource;
+  var imageComponentSidebar;
+  if (name == "Tennessee") {
+    imgSource=tennessee_pic
+    imageComponentSidebar=imageComponentSidebar_Ten
+  }
+  else if (name == "South Carolina") {
+    imgSource=south_carolina_pic
+    imageComponentSidebar=imageComponentSidebar_SC
   }
 
   return (
@@ -66,30 +86,50 @@ const Sidebar = ({ show, handleClose, name, showModal, hideModal, isOpenModal })
 
             <div>
               <h4>
-                Proposed plans
+                Proposed District Plans
               </h4>
             </div>
 
             <table style={tableComponent}>
               <tr>
-                  <th> <button> <img src={tennessee_pic} style = {imageComponentSidebar} /> </button> </th>
-                  <th> <button><img src={tennessee_pic} style = {imageComponentSidebar} /> </button></th>
+                  <th> <button> <img src={imgSource} style = {imageComponentSidebar} /> </button> 
+                        Senator District Plan
+                  </th>
+                  <th> <button><img src={imgSource} style = {imageComponentSidebar} /> </button>
+                        Representative Plan
+                  </th>
               </tr>
               <tr>
-                  <th> <button> <img src={tennessee_pic} style = {imageComponentSidebar} /> </button> </th>
-                  <th> <button><img src={tennessee_pic} style = {imageComponentSidebar} /> </button></th>
+                  <th> <button> <img src={imgSource} style = {imageComponentSidebar} /> </button> 
+                        Senator District Plan
+                  </th>
+                  <th> <button><img src={imgSource} style = {imageComponentSidebar} /> </button>
+                        Representative Plan
+                  </th>
                </tr>
               <tr>
-                  <th> <button> <img src={tennessee_pic} style = {imageComponentSidebar} /> </button> </th>
-                  <th> <button><img src={tennessee_pic} style = {imageComponentSidebar} /> </button></th>
+                  <th> <button> <img src={imgSource} style = {imageComponentSidebar} /> </button> 
+                        Senator District Plan
+                  </th>
+                  <th> <button><img src={imgSource} style = {imageComponentSidebar} /> </button>
+                        Representative Plan
+                  </th>
               </tr>
               <tr>
-                  <th> <button> <img src={tennessee_pic} style = {imageComponentSidebar} /> </button> </th>
-                  <th> <button><img src={tennessee_pic} style = {imageComponentSidebar} /> </button></th>
+                  <th> <button> <img src={imgSource} style = {imageComponentSidebar} /> </button> 
+                        Senator District Plan
+                  </th>
+                  <th> <button><img src={imgSource} style = {imageComponentSidebar} /> </button>
+                        Representative Plan
+                  </th>
               </tr>
               <tr>
-                  <th> <button> <img src={tennessee_pic} style = {imageComponentSidebar} /> </button> </th>
-                  <th> <button><img src={tennessee_pic} style = {imageComponentSidebar} /> </button></th>
+                  <th> <button> <img src={imgSource} style = {imageComponentSidebar} /> </button> 
+                        Senator District Plan
+                  </th>
+                  <th> <button><img src={imgSource} style = {imageComponentSidebar} /> </button>
+                        Representative Plan
+                  </th>
               </tr>
               
             </table>
@@ -111,8 +151,8 @@ const Sidebar = ({ show, handleClose, name, showModal, hideModal, isOpenModal })
                     <div>
                       <table>
                               <tr>
-                                  <th> District 1 </th>
-                                  <th> District 2 </th>
+                                  <th> District X </th>
+                                  <th> District X </th>
                               </tr>
                               <tr>
                                   <th> <button> <img src={state_measures} style = {imageComponentModal} /> </button> </th>
