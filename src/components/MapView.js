@@ -7,11 +7,15 @@ import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
+import tennesseeCounty from "../assets/tennessee_counties.json"
+// import southcarolinaPrecinct from "../assets/southcarolina_precincts.json"
+import southcarolinaCounty from "../assets/southcarolina_counties.json"
 import './style/Legend.css';
 // components
 import Navigation from './Navigation';
 import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
+import BottomTab from './BottomTab';
 import Legend from './Legend';
 
 /*
@@ -26,7 +30,10 @@ const MapView = (props) => {
     zoom: 5,
     name: 'USA',
     layer: null, //this is used to remove geojson layer -> might need to delete later on
-    view: 'election'
+    view: 'election',
+    districtbord: true,
+    precinctbord: false,
+    countybord: false
   });
 
   //left sidebar
@@ -139,7 +146,10 @@ const MapView = (props) => {
       zoom: 6.5, 
       name: state.properties.name, 
       layer: layer, 
-      view: currentLocation.view
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -172,7 +182,11 @@ const MapView = (props) => {
       zoom: currentLocation.zoom, 
       name: currentLocation.name, 
       layer: currentLocation.layer,
-      view: v});
+      view: v,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord
+    });
     console.log("change view current view: " + currentLocation.view)
   }
 
@@ -196,6 +210,54 @@ const MapView = (props) => {
     }
   }
 
+  function toggleDistrict(){
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: !currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord
+    })
+    // console.log("district" + currentLocation.districtbord);
+    // console.log("precinct" + currentLocation.precinctbord);
+    // console.log("county" + currentLocation.countybord);
+  }
+
+  function togglePrecinct(){
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: !currentLocation.precinctbord,
+      countybord: currentLocation.countybord
+    })
+    // console.log("district" + currentLocation.districtbord);
+    // console.log("precinct" + currentLocation.precinctbord);
+    // console.log("county" + currentLocation.countybord);
+  }
+
+  function toggleCounty(){
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: !currentLocation.countybord
+    })
+    // console.log("district" + currentLocation.districtbord);
+    // console.log("precinct" + currentLocation.precinctbord);
+    // console.log("county" + currentLocation.countybord);
+  }
+
   /*
   in the render() function the MapContainer() function is returned.
   TileLayer component adds the tiles for the map
@@ -204,7 +266,7 @@ const MapView = (props) => {
 
   return (
     <div id='map'>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
+      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty}/>
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} 
         maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom={5} maxZoom={15} >
         <MyComponent />
@@ -247,6 +309,7 @@ const MapView = (props) => {
 
       </MapContainer>
 
+      <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
     </div>
   );
 }
