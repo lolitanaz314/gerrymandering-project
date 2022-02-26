@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -214,7 +214,7 @@ const MapView = (props) => {
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <LeftSidebar show={show} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
-        <RightSidebar show={show} name={currentLocation.name} showModal={showModal}/>
+        <RightSidebar show={show} currentState={currentLocation.state} />
 
         <div className="info-box hidden">
           {!onselect.district && (
