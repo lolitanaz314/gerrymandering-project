@@ -128,7 +128,7 @@ const MapView = (props) => {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
-    var latitude = center.lng + 0.7;
+    var latitude = center.lng + 1;
     var longitude = center.lat - 0.5;
     var coords = { lat: latitude, lng: longitude };
 

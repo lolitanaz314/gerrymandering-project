@@ -5,7 +5,8 @@ import React from 'react';
 
 const myComponentStyle = {
   margin: '56px 0px 0px 0px',
-  width: '300px'
+  width: '300px',
+  zIndex: '400'
 }
 
 const RightSidebar = ({ show, name, showModal }) => {
