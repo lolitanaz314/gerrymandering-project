@@ -79,11 +79,23 @@ const MapView = (props) => {
     const district = layer.feature.properties.DISTRICT;
     const incumbent = layer.feature.properties.INCUMBENT;
     const lean = layer.feature.properties.LEAN;
+    const white = layer.feature.race.white;
+    const black = layer.feature.race.black;
+    const native = layer.feature.race.native;
+    const asian = layer.feature.race.asian;
+    const islander = layer.feature.race.islander;
+    const hispanic = layer.feature.race.hispanic;
     setOnselect({
       population: pop,
       district: district,
       incumbent: incumbent,
-      lean: lean
+      lean: lean,
+      white: white,
+      black: black,
+      native: native,
+      asian: asian,
+      islander: islander,
+      hispanic: hispanic,
     });
     // layer.setStyle({
     //   weight: 1,
@@ -174,7 +186,7 @@ const MapView = (props) => {
           weight: '1',
           //color: getColor(feature.properties.TOTAL),
           // opacity: 0.6,
-          fillOpacity: 0.7
+          fillOpacity: 0.6
           }
   }
 
@@ -195,7 +207,7 @@ const MapView = (props) => {
     <div id='map'>
       <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} 
-        maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom={5} maxZoom={15}>
+        maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom={5} maxZoom={15} >
         <MyComponent />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
@@ -211,12 +223,23 @@ const MapView = (props) => {
               <p>Hover on each congressional district for more details</p>
             </div>
           )}
-          {onselect.district && (
-            <ul className = "census-info">
+          {onselect.district && currentLocation.view === "election" && (
+            <ul className="census-info" style={{height:'15%', width:'18%'}}>
               <li><strong>District {onselect.district}</strong></li><br />
-              <li>Total Population: {onselect.population} (needs to be updated)</li>
               <li>Incumbent: {onselect.incumbent}</li>
               <li>Partisan Lean: {onselect.lean}</li>
+            </ul>
+          )}
+          {onselect.district && currentLocation.view === "population" && (
+            <ul className="census-info" style={{height:'fit-content', width:'27%'}}>
+              <li><strong>District {onselect.district}</strong></li><br />
+              <li>Total Population: {onselect.population}</li>
+              <li>White: {onselect.white}</li>
+              <li>Black or African American: {onselect.black}</li>
+              <li>American Indian and Alaska Native: {onselect.native}</li>
+              <li>Asian: {onselect.asian}</li>
+              <li>Native Hawaiian and Other Pacific Islander: {onselect.islander}</li>
+              <li>Hispanic or Latino: {onselect.hispanic}</li>
             </ul>
           )}
         </div>

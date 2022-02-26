@@ -16,8 +16,8 @@
   display: flex;
   flex-direction: column;
   align-items: right;
-  top: -10px;
-  right: 640px;
+  top: -30px;
+  right: 500px;
   padding: 10px 10px;
   border-radius: 5px;
   color: white;
@@ -25,9 +25,9 @@
   background: rgba(0,0,0,0.8);
   margin-top: 150px;
   list-style: none;
-  width: 18%;
-  height: 20%;
-  font-size:12px;
+  /* width: fit-content;
+  height: fit-content; */
+  font-size: 12px;
   position: absolute;
   z-index: 500;
   box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
@@ -35,16 +35,16 @@
 
 .census-info-hover{
   z-index: 500;
-  top: -10px;
-  right: 650px;
-  height: 20%;
-  width:16%;
+  top: -30px;
+  right: 500px;
+  height: fit-content;
+  width: 16%;
   padding: 10px 10px;
   border-radius: 5px;
   color: white;
   position: absolute;
   letter-spacing:2px;
-  margin-top:150px;
+  margin-top: 150px;
   font-size: 14px;
   box-shadow:  0 0 5px 0 rgba(184, 140, 140, 0.3);
   background: rgba(0,0,0,0.8);
