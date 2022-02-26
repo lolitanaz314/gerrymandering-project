@@ -64,8 +64,8 @@ const Sidebar = ({ show, handleClose, name, showModal, hideModal, isOpenModal })
 
   return (
     <>
-      <Offcanvas style = {myComponentStyle} show={show} backdrop={false}>
-        <Offcanvas.Header>
+      <Offcanvas style = {myComponentStyle} show={show} onHide={handleClose} backdrop={false}>
+        <Offcanvas.Header closeButton>
           <Offcanvas.Title><h2>{name}</h2></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>

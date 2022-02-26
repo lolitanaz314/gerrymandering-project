@@ -29,7 +29,7 @@ const MapView = (props) => {
     view: 'election'
   });
 
-  //sidebar
+  //left sidebar
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false); // reset the state of the sidebar
