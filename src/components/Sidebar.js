@@ -53,11 +53,11 @@ const Sidebar = ({ show, handleClose, name, showModal, hideModal, isOpenModal })
   // just for the 
   var imgSource;
   var imageComponentSidebar;
-  if (name == "Tennessee") {
+  if (name === "Tennessee") {
     imgSource=tennessee_pic
     imageComponentSidebar=imageComponentSidebar_Ten
   }
-  else if (name == "South Carolina") {
+  else if (name === "South Carolina") {
     imgSource=south_carolina_pic
     imageComponentSidebar=imageComponentSidebar_SC
   }
