@@ -7,10 +7,12 @@ import tennessee from "../assets/tennessee_congressional_districts.json";
 import southcarolina from "../assets/southcarolina_congressional.json";
 import tennesseeOutline from "../assets/tennessee.json";
 import southcarolinaOutline from "../assets/southcarolina.json";
+import './style/Legend.css';
 // components
 import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 import BottomTab from './BottomTab';
+import Legend from './Legend';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -67,9 +69,13 @@ const MapView = (props) => {
     var layer = e.target;
     const pop = layer.feature.properties.POPULATION;
     const district = layer.feature.properties.DISTRICT;
+    const incumbent = layer.feature.properties.INCUMBENT;
+    const lean = layer.feature.properties.LEAN;
     setOnselect({
       population: pop,
       district: district,
+      incumbent: incumbent,
+      lean: lean
     });
     // layer.setStyle({
     //   weight: 1,
@@ -97,7 +103,7 @@ const MapView = (props) => {
   
   function zoomState(state, layer) {
     setOnselect({}); //resets the info box if user clicks on a new state
-    if(currentLocation.view !== 'population') document.getElementsByClassName("legend")[0].classList.add('hidden');
+    // if(currentLocation.view !== 'population') document.getElementsByClassName("legend")[0].classList.add('hidden');
 
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
@@ -121,7 +127,7 @@ const MapView = (props) => {
 
     //changes css to show boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
-    // document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    document.getElementsByClassName("legend")[0].classList.remove('hidden');
   }
 
   function MyComponent() {
@@ -141,7 +147,7 @@ const MapView = (props) => {
   // }
 
   function changeView(v){
-    if(v === 'population') document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    // if(v === 'population') document.getElementsByClassName("legend")[0].classList.remove('hidden');
     setLocation({
       center: currentLocation.center, 
       zoom: currentLocation.zoom, 
@@ -156,10 +162,11 @@ const MapView = (props) => {
         return{
           //fill property shows 'red' or 'blue' based on republican/democratic district
           fillColor: feature.fill[style],
-          color: feature.fill[style],
+          color: 'black',
+          weight: '1',
           //color: getColor(feature.properties.TOTAL),
-          opacity:0.8,
-          fillOpacity:0.4
+          // opacity: 0.6,
+          fillOpacity: 0.6
           }
   }
 
@@ -199,10 +206,14 @@ const MapView = (props) => {
           {onselect.district && (
             <ul className = "census-info">
               <li><strong>District {onselect.district}</strong></li><br />
-              <li>Total Population: {onselect.population}</li>
+              <li>Total Population: {onselect.population} (needs to be updated)</li>
+              <li>Incumbent: {onselect.incumbent}</li>
+              <li>Partisan Lean: {onselect.lean}</li>
             </ul>
           )}
         </div>
+        <Legend view={currentLocation.view} />
+
       </MapContainer>
 
       <BottomTab isVisible={isVisible} closeDrawer={closeDrawer} />
