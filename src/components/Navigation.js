@@ -47,18 +47,9 @@ const Navigation = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style = {myComponentStyleBorder}>
-              <li className="checkbox form-group" onClick = {() => props.toggleDistrict()}>
-                <input type="checkbox" value="district" name="district" defaultChecked="true"/>
-                <label htmlFor="district">District</label>
-              </li>
-              <li className="checkbox form-group" onClick = {() => props.togglePrecinct()}>
-                <input type="checkbox" value="precinct" name="precinct"/>
-                <label htmlFor="precinct">Precinct</label>
-              </li>
-              <li className="checkbox form-group" onClick = {() => props.toggleCounty()}>
-                <input type="checkbox" value="county" name="county" />
-                <label htmlFor="county">County</label>
-              </li>
+                <NavDropdown.Item>District</NavDropdown.Item>
+                <NavDropdown.Item>Precinct</NavDropdown.Item>
+                <NavDropdown.Item>County</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
