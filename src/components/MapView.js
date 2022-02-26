@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, {useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -54,11 +54,19 @@ const MapView = (props) => {
   const openDrawer = () => setIsVisible(true);
   const closeDrawer = () => setIsVisible(false);
 
+  // the modal stuff (District comparison)
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
+  const showModal = () => {
+    setIsOpenModal(true);
+  };
+  const hideModal = () => {
+    setIsOpenModal(false);
+  };
+
   //district hovering functions
   const highlight = (feature, layer) => {
     layer.on({
       mouseover: highlightFeature
-      // ,
       // mouseout: resetHighlight
     });
   }
@@ -184,7 +192,7 @@ const MapView = (props) => {
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} openDrawer={openDrawer} />
+        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
 
         <div className="info-box hidden">
           {!onselect.district && (
