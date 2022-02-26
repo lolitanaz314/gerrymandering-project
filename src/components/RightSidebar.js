@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import React from 'react';
-
+import statemeasures from '../assets/state_measures.png'
 
 const myComponentStyle = {
   margin: '56px 0px 0px 0px',
-  width: '300px',
+  width: '348px',
   zIndex: '400'
+}
+
+const imageComponentSidebar = {
+  width: 300,
+  height: 120
 }
 
 const RightSidebar = ({ show, name, showModal }) => {
@@ -24,17 +29,10 @@ const RightSidebar = ({ show, name, showModal }) => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div>
-            <input
-              type="button"
-              value="Show Box and Whisker Plot"
-              onClick={togglePopup}
-            />
+            Requirements Analysis
+            <img src={statemeasures} style = {imageComponentSidebar} />
+          
 
-            <input
-              type="button"
-              value="Compare"
-              onClick={showModal}
-            />
           </div>
         </Offcanvas.Body>
       </Offcanvas>
