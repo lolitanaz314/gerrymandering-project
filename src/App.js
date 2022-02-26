@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<MapView />} /> */}
           <MapView/>
         {/* </Routes> */}
-        <Legend/>
+        {/* <Legend/> */}
       {/* </BrowserRouter> */}
     </div>
   );
