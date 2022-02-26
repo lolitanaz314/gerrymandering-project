@@ -10,7 +10,8 @@ import southcarolinaOutline from "../assets/southcarolina.json";
 import './style/Legend.css';
 // components
 import Navigation from './Navigation';
-import Sidebar from './Sidebar';
+import LeftSidebar from './LeftSidebar';
+import RightSidebar from './RightSidebar';
 import BottomTab from './BottomTab';
 import Legend from './Legend';
 
@@ -32,7 +33,6 @@ const MapView = (props) => {
   //left sidebar
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false); // reset the state of the sidebar
 
   //district hovering
   const [onselect, setOnselect] = useState({});
@@ -128,8 +128,8 @@ const MapView = (props) => {
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
-    var latitude = center.lng + 1;
-    var longitude = center.lat - 1.5;
+    var latitude = center.lng + 0.7;
+    var longitude = center.lat - 0.5;
     var coords = { lat: latitude, lng: longitude };
 
     console.log(state.properties.name);
@@ -137,7 +137,7 @@ const MapView = (props) => {
 
     setLocation({
       center: coords, 
-      zoom: 7, 
+      zoom: 6.5, 
       name: state.properties.name, 
       layer: layer, 
       view: currentLocation.view
@@ -214,7 +214,8 @@ const MapView = (props) => {
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-        <Sidebar show={show} handleClose={handleClose} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
+        <LeftSidebar show={show} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
+        <RightSidebar show={show} name={currentLocation.name} showModal={showModal}/>
 
         <div className="info-box hidden">
           {!onselect.district && (
