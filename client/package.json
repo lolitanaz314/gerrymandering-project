@@ -11,7 +11,7 @@
     "leaflet": "^1.7.1",
     "leaflet-sidebar-v2": "^3.2.3",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.1.2",
+    "react-bootstrap": "^2.2.0",
     "react-bootstrap-tab": "^2.6.6",
     "react-bootstrap-tabs": "^2.0.0",
     "react-bottom-drawer": "^0.1.1",
@@ -30,7 +30,6 @@
     "build": "react-scripts --max_old_space_size=8192 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": [

@@ -1,9 +1,9 @@
 import { Offcanvas } from 'react-bootstrap';
 import { useState } from 'react'
 import React from 'react';
-import statemeasures from '../assets/state_measures.png'
-import seats_to_votes from '../assets/seats_to_votes.png'
-import voting_and_population_perc from '../assets/voting_and_population_perc.png'
+import statemeasures from '../assets/img/state_measures.png'
+import seats_to_votes from '../assets/img/seats_to_votes.png'
+import voting_and_population_perc from '../assets/img/voting_and_population_perc.png'
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 

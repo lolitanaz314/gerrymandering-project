@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
 // assets
-import tennessee from "../assets/tennessee_congressional_districts.json";
-import southcarolina from "../assets/southcarolina_congressional.json";
-import tennesseeOutline from "../assets/tennessee.json";
-import southcarolinaOutline from "../assets/southcarolina.json";
-// import tennesseeCounty from "../assets/tennessee_counties.json"
-// import southcarolinaPrecinct from "../assets/southcarolina_precincts.json"
-// import southcarolinaCounty from "../assets/southcarolina_counties.json"
+import tennessee from "../assets/json/tennessee_congressional.json";
+import southcarolina from "../assets/json/southcarolina_congressional.json";
+import tennesseeOutline from "../assets/json/tennessee.json";
+import southcarolinaOutline from "../assets/json/southcarolina.json";
+// import tennesseeCounty from "../assets/json/tennessee_counties.json"
+// import southcarolinaPrecinct from "../assets/json/southcarolina_precincts.json"
+// import southcarolinaCounty from "../assets/json/southcarolina_counties.json"
 import './style/Legend.css';
+
 // components
 import Navigation from './Navigation';
 import LeftSidebar from './LeftSidebar';

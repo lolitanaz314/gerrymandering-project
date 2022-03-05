@@ -4,11 +4,11 @@ import React from 'react';
 import Modal from "react-bootstrap/Modal";
 
 // assets
-import boxAndWhisker from '../assets/boxAndWhisker.jpeg'
-import tennessee_pic from '../assets/tennessee_pic.png'
-import south_carolina_pic from '../assets/south_carolina_pic.png'
-import state_measures from '../assets/state_measures.png'
-import gerrymander_index from '../assets/gerrymander_index.png'
+import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
+import tennessee_pic from '../assets/img/tennessee_pic.png'
+import south_carolina_pic from '../assets/img/south_carolina_pic.png'
+import state_measures from '../assets/img/state_measures.png'
+import gerrymander_index from '../assets/img/gerrymander_index.png'
 // components
 import PopUp from './PopUp'
 

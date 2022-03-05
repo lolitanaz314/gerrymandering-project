@@ -1,7 +1,7 @@
 import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
 import React, {useState} from 'react'
-import tennesseeOutline from "../assets/tennessee.json";
-import southcarolinaOutline from "../assets/southcarolina.json";
+import tennesseeOutline from "../assets/json/tennessee.json";
+import southcarolinaOutline from "../assets/json/southcarolina.json";
 // import "./style/Navbar.css"; // commented because dropdown looked weird
 
 const myComponentStyle = {
