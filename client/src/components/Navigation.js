@@ -2,6 +2,7 @@ import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
 import React, {useState} from 'react'
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
+import coloradoOutline from "../assets/json/colorado.json";
 // import "./style/Navbar.css"; // commented because dropdown looked weird
 
 const myComponentStyle = {
@@ -31,6 +32,7 @@ const Navigation = (props) => {
               <NavDropdown title="Choose State" id="basic-nav-dropdown" style = {myComponentStyle}>
                 <NavDropdown.Item href="#tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
                 <NavDropdown.Item href="#southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
+                <NavDropdown.Item href="#colorado" onClick={() => props.zoomState(coloradoOutline)}>Colorado</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

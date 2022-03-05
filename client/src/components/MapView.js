@@ -6,8 +6,10 @@ import 'leaflet/dist/leaflet.css';
 // assets
 import tennessee from "../assets/json/tennessee_congressional.json";
 import southcarolina from "../assets/json/southcarolina_congressional.json";
+import colorado from "../assets/json/colorado_congressional.json";
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
+import coloradoOutline from "../assets/json/colorado.json";
 // import tennesseeCounty from "../assets/json/tennessee_counties.json"
 // import southcarolinaPrecinct from "../assets/json/southcarolina_precincts.json"
 // import southcarolinaCounty from "../assets/json/southcarolina_counties.json"
@@ -104,18 +106,7 @@ const MapView = (props) => {
       islander: islander,
       hispanic: hispanic,
     });
-    // layer.setStyle({
-    //   weight: 1,
-    //   color: "black",
-    //   fillOpacity: 1
-    // });
-    // layer.feature.fillColor = 'lighten';
   });
-
-  // const resetHighlight = (e => {
-  //   setOnselect({});
-  //   e.target.setStyle(style(e.target.feature));
-  // })
 
   //zoom state functions
   /*
@@ -274,8 +265,10 @@ const MapView = (props) => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
+        <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
+        <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
         <LeftSidebar show={show} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
         <RightSidebar show={show} currentState={currentLocation.state} />
 

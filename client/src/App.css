@@ -16,8 +16,8 @@
   display: flex;
   flex-direction: column;
   align-items: right;
-  top: -30px;
-  right: 620px;
+  top: -70px;
+  right: 600px;
   padding: 10px 10px;
   border-radius: 5px;
   color: white;
@@ -35,8 +35,8 @@
 
 .census-info-hover{
   z-index: 500;
-  top: -30px;
-  right: 640px;
+  top: -70px;
+  right: 600px;
   height: fit-content;
   width: 16%;
   padding: 10px 10px;
@@ -63,7 +63,7 @@
   }
   .census-info-hover{
     z-index: 999;
-    top: 120px;
+    top: 80px;
     right: 38px;
     height: 15%;
     width:30%;
@@ -73,34 +73,6 @@
     margin-top:150px;
     font-size:8px;
   }
-}
-
-/* BOTTOM TAB */
-.drawer{
-  position: relative;
-  z-index: 1111;
-}
-
-.how-to-close {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.esc-key {
-  border: 1px solid #ccc;
-  background: #ccc;
-  color: white;
-  box-shadow: 0 0 2px black;
-  border-radius: 2px;
-  padding: 5px;
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.drawer-content {
-  margin: 0 10px;
 }
 
 /*
