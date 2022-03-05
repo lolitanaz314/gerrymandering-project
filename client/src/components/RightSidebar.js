@@ -1,4 +1,5 @@
 import { Offcanvas } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import { useState } from 'react'
 import React from 'react';
 import statemeasures from '../assets/img/state_measures.png'
@@ -39,6 +40,35 @@ const RightSidebar = (props) => {
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="Summary">
                             <img src={voting_and_population_perc} style={imageComponentSidebarVert} />
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                    <td>3</td>
+                                    <td colSpan={2}>Larry the Bird</td>
+                                    <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </Tab>
                         <Tab eventKey="measures" title="Measures">
                             <div>
