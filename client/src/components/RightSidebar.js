@@ -40,13 +40,16 @@ const RightSidebar = (props) => {
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="Summary">
                             <img src={voting_and_population_perc} style={imageComponentSidebarVert} />
-                            <Table striped bordered hover>
+                            <Table striped responsive="sm" bordered hover>
                                 <thead>
                                     <tr>
                                     <th>#</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Username</th>
+                                    <th>Column 5</th>
+                                    <th>Column 6</th>
+                                    <th>Column 7</th>
                                     </tr>
                                 </thead>
                                 <tbody>

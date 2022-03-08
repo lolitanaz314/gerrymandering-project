@@ -60,11 +60,6 @@ const MapView = (props) => {
   //   ? '#fb6a4a' : density > 236 ? '#fc9272' : density > 23 ? '#fcbba1' : '#fee5d9';
   // })
 
-  // bottom drawer
-  const [isVisible, setIsVisible] = useState(false);
-  const openDrawer = () => setIsVisible(true);
-  const closeDrawer = () => setIsVisible(false);
-
   // the modal stuff (District comparison)
   const [isOpenModal, setIsOpenModal] = React.useState(false);
   const showModal = () => {
