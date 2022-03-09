@@ -5,6 +5,8 @@ Run server: <br/>
 mvn clean install <br />
 mvn spring-boot:run
 
+npm install axios
+
 Navbar options: "npm install react react-dom"<br/>
                 "npm install react-bootstrap bootstrap@5.1.3"
 
