@@ -14,18 +14,17 @@ import lombok.*;
 @Setter
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "user")
-public class user {
+@Table(name = "Demographic")
+public class Demographic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column(name="id")
     private Integer id;
 
-    // @Column(name = "first")
-    private String first;
+    @Column(name = "race")
+    private String race;
 
-    // @Column(name = "last")
-    private String last;
-
-    // @Column(name = "username")
-    private String username;
+    @Column(name = "population")
+    private Integer population;
 }

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import UserService from '../service/UserService';
+import Demographic from '../service/DemographicService';
 
-const UserTable = () => {
+const UserTable = (props) => {
 
-    const [users, setUsers] = useState([]);
+    const [demographic, setDemographic] = useState([]);
 
     useEffect(() => {
-        UserService.getAll()
+        Demographic.getAll()
           .then(response => {
             console.log('Printing user data', response.data);
-            setUsers(response.data);
+            setDemographic(response.data);
           })
           .catch(error => {
             console.log('Something went wrong', error);
@@ -21,20 +21,16 @@ const UserTable = () => {
         <>
             {/*<button onClick={this.retrieveUsers} href="/users">click</button>*/}
             <Table striped responsive="sm" bordered hover>
-                
+                    <h4>Population Data</h4>
                     <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
+                        <th>Race</th>
+                        <th>Population</th>
                     </tr>
                     {
-                        users.map(users => (
+                        demographic.map(demographic => (
                             <tr>
-                                <td>{users.id}</td>
-                                <td>{users.first}</td>
-                                <td>{users.last}</td>
-                                <td>{users.username}</td>
+                                <td>{demographic.race}</td>
+                                <td>{demographic.population}</td>
                             </tr>
                         ))
                     }

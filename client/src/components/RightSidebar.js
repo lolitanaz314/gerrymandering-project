@@ -40,8 +40,9 @@ const RightSidebar = (props) => {
                 <Offcanvas.Body>
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="Summary">
-                            <img src={voting_and_population_perc} style={imageComponentSidebarVert} />
                             <UserTable></UserTable>
+                            {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
+                            
                         </Tab>
                         <Tab eventKey="measures" title="Measures">
                             <div>
