@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import Demographic from '../service/DemographicService';
 
-const UserTable = (props) => {
+const DemographicTable = (props) => {
 
     const [demographic, setDemographic] = useState([]);
 
@@ -38,4 +38,4 @@ const UserTable = (props) => {
         </>)
 }
 
-export default UserTable;
+export default DemographicTable;
