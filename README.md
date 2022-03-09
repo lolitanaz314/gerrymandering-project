@@ -1,7 +1,8 @@
 # gerrymandering-project
 CSE 416 Project
 
-mvn clean install
+Run server: <br/>
+mvn clean install <br />
 mvn spring-boot:run
 
 Navbar options: "npm install react react-dom"<br/>
