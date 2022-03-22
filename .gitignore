@@ -10,6 +10,7 @@ node_modules/
 /coverage
 
 # production
+client/build
 /build
 
 # misc
@@ -23,3 +24,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 DefaultREADME
+server/src/main/resources/application.properties
