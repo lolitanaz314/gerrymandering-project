@@ -30,9 +30,9 @@ const Navigation = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Choose State" id="basic-nav-dropdown" style = {myComponentStyle}>
-                <NavDropdown.Item href="/tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
-                <NavDropdown.Item href="/southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
-                <NavDropdown.Item href="/colorado" onClick={() => props.zoomState(coloradoOutline)}>Colorado</NavDropdown.Item>
+                <NavDropdown.Item href="#tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
+                <NavDropdown.Item href="#southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
+                <NavDropdown.Item href="#colorado" onClick={() => props.zoomState(coloradoOutline)}>Colorado</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

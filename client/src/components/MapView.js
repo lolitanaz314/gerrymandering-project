@@ -73,9 +73,13 @@ const MapView = (props) => {
   const highlight = (feature, layer) => {
     layer.on({
       mouseover: highlightFeature
-      // mouseout: resetHighlight
+      // ,mouseout: resetHighlight
     });
   }
+  
+  // const resetHighlight = (
+  //   setOnselect({})
+  // )
   
   const highlightFeature = (e => {
     var layer = e.target;
@@ -109,15 +113,12 @@ const MapView = (props) => {
   */
   function clicked(feature, layer) {
     // bind click
-    console.log("CLICKED current view: " + currentLocation.view)
     layer.on('click', () => zoomState(feature, layer));
     // console.log("Clicked");
   }
   
   function zoomState(state, layer) {
     setOnselect({}); //resets the info box if user clicks on a new state
-    // if(currentLocation.view !== 'population') document.getElementsByClassName("legend")[0].classList.add('hidden');
-
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
@@ -125,14 +126,11 @@ const MapView = (props) => {
     var longitude = center.lat - 0.5;
     var coords = { lat: latitude, lng: longitude };
 
-    console.log(state.properties.name);
-    console.log("ZOOM STATE current view: " + currentLocation.view)
-
     setLocation({
       center: coords, 
       zoom: 6.5, 
       name: state.properties.name, 
-      layer: layer, 
+      layer: layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
@@ -141,29 +139,24 @@ const MapView = (props) => {
     handleShow();
     // state.data = state.properties.name.toLowerCase();
 
-    //changes css to show boxes
+    //changes css to show hover boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
     document.getElementsByClassName("legend")[0].classList.remove('hidden');
   }
 
   function MyComponent() {
     const map = useMap();
-    //pan & zoom
+    //zoom
     map.setView(currentLocation.center, currentLocation.zoom);
     if(currentLocation.layer){
-      map.removeLayer(currentLocation.layer);
+      if(map.hasLayer(currentLocation.layer)) map.removeLayer(currentLocation.layer);
+      // else map.addLayer(currentLocation.layer);
     }
     return null;
   }
 
-  // get color -- would be useful for colors by total population
-  // function getColor(total) {
-  //   return total> 100000 ? '#800026' :
-  //                '#FFEDA0';
-  // }
-
   function changeView(v){
-    // if(v === 'population') document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    setOnselect({});
     setLocation({
       center: currentLocation.center, 
       zoom: currentLocation.zoom, 
@@ -174,7 +167,7 @@ const MapView = (props) => {
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord
     });
-    console.log("change view current view: " + currentLocation.view)
+    console.log("change view to: " + currentLocation.view)
   }
 
   function setStyle(feature) {
@@ -208,9 +201,6 @@ const MapView = (props) => {
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord
     })
-    // console.log("district" + currentLocation.districtbord);
-    // console.log("precinct" + currentLocation.precinctbord);
-    // console.log("county" + currentLocation.countybord);
   }
 
   function togglePrecinct(){
@@ -224,9 +214,6 @@ const MapView = (props) => {
       precinctbord: !currentLocation.precinctbord,
       countybord: currentLocation.countybord
     })
-    // console.log("district" + currentLocation.districtbord);
-    // console.log("precinct" + currentLocation.precinctbord);
-    // console.log("county" + currentLocation.countybord);
   }
 
   function toggleCounty(){
@@ -240,9 +227,6 @@ const MapView = (props) => {
       precinctbord: currentLocation.precinctbord,
       countybord: !currentLocation.countybord
     })
-    // console.log("district" + currentLocation.districtbord);
-    // console.log("precinct" + currentLocation.precinctbord);
-    // console.log("county" + currentLocation.countybord);
   }
 
   /*
@@ -261,6 +245,7 @@ const MapView = (props) => {
         <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
         <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle}/>
+
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
@@ -268,9 +253,15 @@ const MapView = (props) => {
         <RightSidebar show={show} currentState={currentLocation.state} />
 
         <div className="info-box hidden">
-          {!onselect.district && (
+          {!onselect.district && currentLocation.view === "election" && (
             <div className = "census-info-hover">
-              <strong>{currentLocation.name} Census Information </strong>
+              <strong>{currentLocation.name} Election Data </strong>
+              <p>Hover on each congressional district for more details</p>
+            </div>
+          )}
+          {!onselect.district && currentLocation.view === "population" && (
+            <div className = "census-info-hover">
+              <strong>{currentLocation.name} Population Data </strong>
               <p>Hover on each congressional district for more details</p>
             </div>
           )}
