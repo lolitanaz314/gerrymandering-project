@@ -95,47 +95,15 @@ const RightSidebar = (props) => {
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="plans" title="Plans">
                             <div>
-                                <input
-                                    type="button"
-                                    value="Show Box and Whisker Plot"
-                                    onClick={togglePopup}
-                                />
-
+                                <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
                                 {isOpen && <PopUp
                                     content={<>
                                         <p>Box and Whisker Plot</p>
                                         <img src={boxAndWhisker} class="imageResize" />
                                     </>}
-                                    handleClose={togglePopup}
-                                />}
-                                <div>
-                                    <h4> Proposed District Plans</h4>
-                                </div>
+                                    handleClose={togglePopup} />}
+                                <div> <h4> Proposed District Plans</h4> </div>
                                 <table style={tableComponent}>
-                                    <tr>
-                                        <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Senator District Plan
-                                        </th>
-                                        <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Representative Plan
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Senator District Plan
-                                        </th>
-                                        <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Representative Plan
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Senator District Plan
-                                        </th>
-                                        <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Representative Plan
-                                        </th>
-                                    </tr>
                                     <tr>
                                         <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
                                             Senator District Plan
@@ -159,7 +127,6 @@ const RightSidebar = (props) => {
                         <Tab eventKey="summary" title="Summary">
                             <DemographicTable></DemographicTable>
                             {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
-
                         </Tab>
                         <Tab eventKey="measures" title="Measures">
                             <div>
