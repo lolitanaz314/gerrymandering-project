@@ -17,7 +17,6 @@ import './style/Legend.css';
 
 // components
 import Navigation from './Navigation';
-import LeftSidebar from './LeftSidebar';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
 
@@ -123,12 +122,12 @@ const MapView = (props) => {
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
     var latitude = center.lng + 1;
-    var longitude = center.lat - 0.5;
+    var longitude = center.lat + 3.5;
     var coords = { lat: latitude, lng: longitude };
 
     setLocation({
       center: coords, 
-      zoom: 6.5, 
+      zoom: 6.5,
       name: state.properties.name, 
       layer: layer,
       view: currentLocation.view,
@@ -249,8 +248,7 @@ const MapView = (props) => {
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
-        <LeftSidebar show={show} name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
-        <RightSidebar show={show} currentState={currentLocation.state} />
+        <RightSidebar show={show} currentState={currentLocation.state}  name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
 
         <div className="info-box hidden">
           {!onselect.district && currentLocation.view === "election" && (
