@@ -1,6 +1,6 @@
 .legend {
     position: absolute;
-    z-index: 500;
+    z-index: 400;
     right: 750px;
     top: 80px;
     padding: 10px 10px;

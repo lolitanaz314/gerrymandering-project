@@ -172,7 +172,7 @@ const RightSidebar = (props) => {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <Modal show={props.isOpenModal} onHide={props.hideModal} size="lg">
+            <Modal show={props.isOpenModal} onHide={props.hideModal} size="lg" style={{zIndex: 500}}>
                 <Modal.Header>
                     <Modal.Title>District Plan Comparison</Modal.Title>
                 </Modal.Header>

@@ -29,12 +29,12 @@
   height: fit-content; */
   font-size: 12px;
   position: absolute;
-  z-index: 500;
+  z-index: 400;
   box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
 }
 
 .census-info-hover{
-  z-index: 500;
+  z-index: 400;
   top: -70px;
   right: 1000px;
   height: fit-content;

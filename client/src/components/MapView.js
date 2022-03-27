@@ -38,26 +38,12 @@ const MapView = (props) => {
     countybord: false
   });
 
-  //left sidebar
+  //sidebar
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
   //district hovering
   const [onselect, setOnselect] = useState({});
-  // const style = (feature => {
-  //   return ({
-  //     fillColor: mapPolygonColorToDensity(feature.properties.POPULATION),
-  //     weight: 1,
-  //     opacity: 1,
-  //     color: 'white',
-  //     dashArray: '2',
-  //     fillOpacity: 0.5
-  //   });
-  // });
-  // const mapPolygonColorToDensity = (density => {
-  //   return density > 3023 ? '#a50f15' : density > 676 ? '#de2d26' : density > 428
-  //   ? '#fb6a4a' : density > 236 ? '#fc9272' : density > 23 ? '#fcbba1' : '#fee5d9';
-  // })
 
   // the modal stuff (District comparison)
   const [isOpenModal, setIsOpenModal] = React.useState(false);
@@ -75,11 +61,7 @@ const MapView = (props) => {
       // ,mouseout: resetHighlight
     });
   }
-  
-  // const resetHighlight = (
-  //   setOnselect({})
-  // )
-  
+
   const highlightFeature = (e => {
     var layer = e.target;
     const pop = layer.feature.properties.POPULATION;
@@ -107,9 +89,6 @@ const MapView = (props) => {
   });
 
   //zoom state functions
-  /*
-    clicked is called when user clicks on a state from the map. Used from GEOJson feature.
-  */
   function clicked(feature, layer) {
     // bind click
     layer.on('click', () => zoomState(feature, layer));
