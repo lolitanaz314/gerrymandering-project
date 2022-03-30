@@ -9,8 +9,8 @@ const DemographicTable = (props) => {
     useEffect(() => {
         Demographic.getAll()
           .then(response => {
-            console.log('Printing user data', response.data);
             setDemographic(response.data);
+            console.log('Printing user data', response.data);
           })
           .catch(error => {
             console.log('Something went wrong', error);
@@ -20,20 +20,22 @@ const DemographicTable = (props) => {
       return (
         <>
             {/*<button onClick={this.retrieveUsers} href="/users">click</button>*/}
+            <h4>Population Data</h4>
             <Table striped responsive="sm" bordered hover>
-                    <h4>Population Data</h4>
-                    <tr>
-                        <th>Race</th>
-                        <th>Population</th>
-                    </tr>
-                    {
-                        demographic.map(demographic => (
-                            <tr>
-                                <td>{demographic.race}</td>
-                                <td>{demographic.population}</td>
-                            </tr>
-                        ))
-                    }
+                    <thead>
+                        <tr>
+                            <th>Race</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {demographic.map(demographic => (
+                        <tr key = {demographic.id}>
+                            <td>{demographic.race}</td>
+                            <td>{demographic.population}</td>
+                        </tr>
+                    ))}
+                    </tbody>
             </Table>    
         </>)
 }
