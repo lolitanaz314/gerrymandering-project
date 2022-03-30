@@ -104,22 +104,24 @@ const RightSidebar = (props) => {
                                     handleClose={togglePopup} />}
                                 <div> <h4> Proposed District Plans</h4> </div>
                                 <table style={tableComponent}>
-                                    <tr>
-                                        <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Senator District Plan
-                                        </th>
-                                        <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Representative Plan
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Senator District Plan
-                                        </th>
-                                        <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                            Representative Plan
-                                        </th>
-                                    </tr>
+                                    <tbody>
+                                        <tr>
+                                            <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
+                                                Senator District Plan
+                                            </th>
+                                            <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
+                                                Representative Plan
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
+                                                Senator District Plan
+                                            </th>
+                                            <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
+                                                Representative Plan
+                                            </th>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <input type="button" value="Compare" onClick={props.showModal} />
                             </div>
@@ -149,22 +151,26 @@ const RightSidebar = (props) => {
                 }}>
                     <div>
                         <table>
-                            <tr>
-                                <th> District X </th>
-                                <th> District X </th>
-                            </tr>
-                            <tr>
-                                <th> <button> <img src={state_measures} style={imageComponentModal} /> </button> </th>
-                                <th> <button><img src={state_measures} style={imageComponentModal} /> </button></th>
-                            </tr>
-                            <tr>
-                                <th> <button> <img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button> </th>
-                                <th> <button><img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button></th>
-                            </tr>
-                            <tr>
-                                <th> Number of anomalous districts: 4 </th>
-                                <th> Number of anomalous districts: 7 </th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th> District X </th>
+                                    <th> District X </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th> <button> <img src={state_measures} style={imageComponentModal} /> </button> </th>
+                                    <th> <button><img src={state_measures} style={imageComponentModal} /> </button></th>
+                                </tr>
+                                <tr>
+                                    <th> <button> <img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button> </th>
+                                    <th> <button><img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button></th>
+                                </tr>
+                                <tr>
+                                    <th> Number of anomalous districts: 4 </th>
+                                    <th> Number of anomalous districts: 7 </th>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </Modal.Body>

@@ -14,7 +14,7 @@ import lombok.*;
 @Setter
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "Demographic")
+@Table(name = "demographic")
 public class Demographic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

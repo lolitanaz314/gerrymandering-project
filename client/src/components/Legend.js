@@ -2,7 +2,7 @@ const Legend = (props) => {
 
     //default legend is for election data
     let out = <div className="legend hidden">
-        <h9 style={{color:'white', fontWeight:'bold'}}>Partisan Voting Index</h9><br /><br />   
+        <h6 style={{color:'white', fontWeight:'bold'}}>Partisan Voting Index</h6> 
         <div style={{ "--color": "#0015FF" }}>D+41 - D+60</div>
         <div style={{ "--color": "#3A50FF" }}>D+21 - D+40</div>
         <div style={{ "--color": "#7686FF" }}>D+1 - D+20</div>
@@ -13,7 +13,7 @@ const Legend = (props) => {
 
     if(props.view === 'population'){ //population
         out = <div className="legend hidden">
-        <h9 style={{color:'white', fontWeight:'bold'}}>Population (per 1000)</h9><br /><br />   
+        <h6 style={{color:'white', fontWeight:'bold'}}>Population (per 1000)</h6> 
         <div style={{ "--color": "#00A015" }}>751+</div>
         <div style={{ "--color": "#24BE39" }}>601 - 750</div>
         <div style={{ "--color": "#49D55C" }}>451 - 600</div>
