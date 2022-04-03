@@ -1,7 +1,7 @@
 package com.example.server.controller;
 
-import com.example.server.model.Demographic;
-import com.example.server.repository.DemographicRepository;
+import com.example.server.model.District;
+import com.example.server.repository.DistrictRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
-public class DemographicController {
+public class DistrictController {
 
     @Autowired
-    DemographicRepository DemographicRepository;
+    DistrictRepository DistrictRepository;
 
-    @GetMapping("/demographic")
-    public Iterable<Demographic> getAllDemographics() {
-        return DemographicRepository.findAll();
+    @GetMapping("/district")
+    public Iterable<District> getAllDistricts() {
+        return DistrictRepository.findAll();
     }
 }
