@@ -1,6 +1,7 @@
 package com.example.server.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import lombok.*;
 
@@ -13,15 +14,19 @@ import lombok.*;
 @Table(name = "state")
 public class State {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
+    @Column(name="state_name")
+    private StateCode stateName;
 
-    @Column(name="name")
-    private String name;
+    @Column(name = "total_population")
+    private int totalPopulation;
 
-    @Column(name="population")
-    private int population;
+    @Transient
+    @Column(name = "demographic")
+    private List<Tuple> demographic;
 
-    // private Collection<DistrictPlan> districtPlans;
+    @Transient
+    private List<DistrictPlan> districtPlans;
+
+    // boxWhiskerData: BoxAndWhiskerData
+    // seaWulfPlansSummary: JSON
 }

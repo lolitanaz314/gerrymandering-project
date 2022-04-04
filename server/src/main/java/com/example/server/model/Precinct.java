@@ -1,7 +1,10 @@
 package com.example.server.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
+
+import com.example.server.embeddedId.PrecinctId;
 import lombok.*;
 
 @Getter
@@ -12,17 +15,16 @@ import lombok.*;
 @Entity
 @Table(name = "precinct")
 public class Precinct {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
-    // private State state; // This needs to change to ENUM
-    // private District district;
+    @EmbeddedId
+    private PrecinctId precinctId;
 
-    @Column(name = "totalPopulation")
+    @Column(name = "total_population")
     private int totalPopulation;
 
-    // private Collection<Precinct> precinctNeighbors;
+    @Transient
+    @Column(name = "demographic")
+    private List<Tuple> demographic;
 
-    // private Collection<Tuple> population;
+    @Transient
+    private Collection<Precinct> precinctNeighbors;
 }

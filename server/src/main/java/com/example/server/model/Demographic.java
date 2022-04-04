@@ -8,11 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity // These tells Hibernate to make a table out of this class
 @Table(name = "demographic")
 public class Demographic {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Integer id;
 

@@ -1,7 +1,9 @@
 package com.example.server.model;
 
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
+
+import com.example.server.embeddedId.DistrictId;
 import lombok.*;
 
 @Getter
@@ -12,20 +14,23 @@ import lombok.*;
 @Entity
 @Table(name = "district")
 public class District {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
+    @EmbeddedId
+    private DistrictId districtPlanId;
+
+    @Column(name = "incumbent")
+    private String incumbent;
 
     @Transient
     @Column(name = "lean")
     private Tuple lean;
 
-    @Column(name = "incumbent")
-    private String incumbent;
-
-    @Column(name = "totalPopulation")
+    @Column(name = "total_population")
     private int totalPopulation;
 
-    // private Collection<Tuple> population;
+    @Transient
+    @Column(name = "demographic")
+    private List<Tuple> demographic;
+
+    @Transient
+    private List<Precinct> precincts;
 }

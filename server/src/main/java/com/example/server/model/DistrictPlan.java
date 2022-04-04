@@ -1,8 +1,10 @@
 package com.example.server.model;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
+
+import com.example.server.embeddedId.DistrictPlanId;
 import lombok.*;
 
 @Getter
@@ -13,23 +15,21 @@ import lombok.*;
 @Entity
 @Table(name = "district_plan")
 public class DistrictPlan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-    private int id;
-
-    @Column(name="status")
-    private String status;
-
-    @Column(name="proposedBy")
-    private String proposedBy;
+    @EmbeddedId
+    private DistrictPlanId districtPlanId;
 
     @Column(name="date")
     private Date date;
 
-    @Column(name="totalPopulation")
-    private int totalPopulation;
+    @Column(name="status")
+    private Status status;
 
-    // private Collection<Tuple> population;
-    // private Collection<District> districts;
+    @Column(name="proposed_by")
+    private String proposedBy;
+
+    @Transient
+    private List<District> districts;
+
+    // borderData: JSON
 }
+
