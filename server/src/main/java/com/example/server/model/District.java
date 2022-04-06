@@ -2,7 +2,6 @@ package com.example.server.model;
 
 import java.util.List;
 import javax.persistence.*;
-
 import com.example.server.embeddedId.DistrictId;
 import lombok.*;
 
