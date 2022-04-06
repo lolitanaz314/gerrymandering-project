@@ -107,6 +107,9 @@ data = pandas.DataFrame(
     for partition in chain
 )
 
+# SEGMENTATION FAULT occurs when I uncomment the below lines???? what the fook????? America explain-
+
+'''
 fig, ax = plt.subplots(figsize=(8, 6))
 
 # Draw 50% line
@@ -125,4 +128,4 @@ ax.set_xlabel("Sorted districts")
 ax.set_ylim(0, 1)
 ax.set_yticks([0, 0.25, 0.5, 0.75, 1])
 
-plt.show()
+plt.show()'''
