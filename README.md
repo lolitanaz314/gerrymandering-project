@@ -11,10 +11,8 @@ npm install axios
 Navbar options: "npm install react react-dom"<br/>
                 "npm install react-bootstrap bootstrap@5.1.3"
 
-Popup Modal: "npm install reactjs-popup --save"
+Popup Modal: "npm install reactjs-popup"
 
 Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
 
-Scrolling Menu: "npm install react-horizontal-scrolling-menu"
-
-Routes: "npm install --save browser-router"
+Routes: "npm install browser-router"
