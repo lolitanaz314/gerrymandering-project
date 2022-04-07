@@ -1,15 +1,12 @@
 package com.example.server.model;
 
-public enum RacialType {
-    WHITE(0),
-    AFRICAN_AMERICAN(1),
-    ASIAN(2),
-    HISPANIC(3)
-    ;
+public enum PoliticalCategory {
+    DEMOCRATIC_PARTY(0),
+    REPUBLICAN_PARTY(1);
 
     private final int value;
 
-    RacialType(int value) {
+    PoliticalCategory(int value) {
         this.value = value;
     }
 

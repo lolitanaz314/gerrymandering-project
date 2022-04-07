@@ -3,6 +3,9 @@ package com.example.server.model;
 import javax.persistence.*;
 import lombok.*;
 
+import javax.persistence.MapKeyEnumerated;
+import java.util.Map;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,9 +18,7 @@ public class Demographic {
     @Column(name="id")
     private Integer id;
 
-    @Column(name = "race")
-    private String race;
+    @MapKeyEnumerated
+    private Map<RacialCategory, Integer> populations; // basically a dictionary
 
-    @Column(name = "population")
-    private Integer population;
 }

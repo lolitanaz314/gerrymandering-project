@@ -2,10 +2,15 @@ package com.example.server.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 import com.example.server.embeddedId.DistrictPlanId;
 import lombok.*;
+
+
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Getter
 @Setter
@@ -18,17 +23,21 @@ public class DistrictPlan {
     @EmbeddedId
     private DistrictPlanId districtPlanId;
 
-    @Column(name="date")
+    //@Column(name="date")
     private Date date;
 
-    @Column(name="status")
+    //@Column(name="status")
     private Status status;
 
-    @Column(name="proposed_by")
+    //@Column(name="proposed_by")
     private String proposedBy;
 
+    @OneToOne
+    private Measures measures;
+
     @Transient
-    private List<District> districts;
+    @OneToMany
+    private Set<District> districts;
 
     // borderData: JSON
 }
