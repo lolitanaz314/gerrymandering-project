@@ -15,4 +15,6 @@ Popup Modal: "npm install reactjs-popup --save"
 
 Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
 
+Scrolling Menu: "npm install react-horizontal-scrolling-menu"
+
 Routes: "npm install --save browser-router"
