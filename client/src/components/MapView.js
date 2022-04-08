@@ -35,7 +35,8 @@ const MapView = (props) => {
     view: 'election',
     districtbord: true,
     precinctbord: false,
-    countybord: false
+    countybord: false,
+    currentDp: 0
   });
 
   //sidebar
@@ -112,7 +113,8 @@ const MapView = (props) => {
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -143,7 +145,8 @@ const MapView = (props) => {
       view: v,
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp
     });
     console.log("change view to: " + currentLocation.view)
   }
@@ -177,7 +180,8 @@ const MapView = (props) => {
       view: currentLocation.view,
       districtbord: !currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp
     })
   }
 
@@ -190,7 +194,8 @@ const MapView = (props) => {
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
       precinctbord: !currentLocation.precinctbord,
-      countybord: currentLocation.countybord
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp
     })
   }
 
@@ -203,7 +208,34 @@ const MapView = (props) => {
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
-      countybord: !currentLocation.countybord
+      countybord: !currentLocation.countybord,
+      currentDp: currentLocation.currentDp
+    })
+  }
+
+  //scrolling menu functions
+  let dps = [0, 1, 2, 3];
+  function selectDP(id){
+    //remove selected from class name (if previously selected)
+    let plans = document.getElementsByClassName('dp-item');
+    for(var i = 0; i< plans.length; i++){
+      if(i !== id){
+        plans[i].classList.remove('dp-selected');
+      }else{
+        plans[i].classList.add('dp-selected');
+      }
+    }
+
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord,
+      currentDp: id
     })
   }
 
@@ -215,7 +247,9 @@ const MapView = (props) => {
 
   return (
     <div id='map'>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty}/>
+      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView}
+        toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty}/>
+
       <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} 
         maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom={5} maxZoom={15} >
         <MyComponent />
@@ -227,7 +261,16 @@ const MapView = (props) => {
         <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
-        <RightSidebar show={show} currentState={currentLocation.state}  name={currentLocation.name} showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}/>
+
+        <RightSidebar selectDP={(id) => selectDP(id)}
+          show={show} dps={dps}
+          currentState={currentLocation.name}
+          currentDp={currentLocation.currentDp}
+          name={currentLocation.name}
+          showModal={showModal}
+          hideModal ={hideModal}
+          isOpenModal={isOpenModal}
+        />
 
         <div className="info-box hidden">
           {!onselect.district && currentLocation.view === "election" && (

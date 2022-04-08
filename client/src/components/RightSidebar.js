@@ -1,18 +1,20 @@
 import { Offcanvas } from 'react-bootstrap';
 import { useState } from 'react'
 import React from 'react';
-
-// components
-import PopUp from './PopUp'
 import Modal from "react-bootstrap/Modal";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+
+// components
+import PopUp from './PopUp'
+import DistrictPlan from './DistrictPlan';
 import DemographicTable from './DemographicTable';
 
 // assets
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
 import tennessee_pic from '../assets/img/tennessee_pic.png'
 import south_carolina_pic from '../assets/img/south_carolina_pic.png'
+import colorado_pic from '../assets/img/colorado_pic.png'
 import state_measures from '../assets/img/state_measures.png'
 import gerrymander_index from '../assets/img/gerrymander_index.png'
 import statemeasures from '../assets/img/state_measures.png'
@@ -25,19 +27,14 @@ const myComponentStyle = {
     zIndex: '400'
 }
 
-const imageComponentSidebar = {
-    width: 275,
-    height: 100
+const titleStyle = {
+    height: '7%',
+    display: 'block'
 }
 
 const imageComponentSidebarStV = {
     width: 275,
     height: 208
-}
-
-const imageComponentSidebarVert = {
-    width: 270,
-    height: 500
 }
 
 const imageComponentSidebar_Ten = {
@@ -74,23 +71,44 @@ const RightSidebar = (props) => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
-    var imgSource;
-    var imageComponentSidebar;
+    var imgSource = colorado_pic;
+    var imageComponentSidebar = imageComponentSidebar_SC;
     if (props.name === "Tennessee") {
-        imgSource = tennessee_pic
-        imageComponentSidebar = imageComponentSidebar_Ten
+        imgSource = tennessee_pic;
+        imageComponentSidebar = imageComponentSidebar_Ten;
     }
     else if (props.name === "South Carolina") {
-        imgSource = south_carolina_pic
-        imageComponentSidebar = imageComponentSidebar_SC
+        imgSource = south_carolina_pic;
+    }
+
+    //scorllbar menu functions
+    var menu = document.getElementById('dp-container');
+    function scrollRight(){
+        menu.scrollLeft += 100;
+    }
+
+    function scrollLeft(){
+        menu.scrollLeft -= 100;
     }
 
     return (
         <>
             <Offcanvas style={myComponentStyle} show={props.show} backdrop={false} placement='end'>
-                <Offcanvas.Header>
+                <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
+                <hr/>
+                <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
+                <div className='scroll-menu'>
+                    <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
+                    <div className='right-arrow' onClick={scrollRight}> &gt; </div>
+                    <div id='dp-container'> {props.dps.map(id => 
+                        <DistrictPlan
+                            id={id} state={props.currentState}
+                            selectDP={(id) => props.selectDP(id)}
+                        />)}
+                    </div>
+                </div>
                 <Offcanvas.Body>
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="plans" title="Plans">

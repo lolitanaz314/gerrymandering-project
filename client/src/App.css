@@ -75,7 +75,56 @@
   }
 }
 
-/*
-The css file just sets the height and width of the leaflet container 
-so it fills the viewport (vw: viewport-width, vh: viewport-height).
-*/
+.scroll-menu{
+  width: inherit;
+  height: 200px;
+}
+
+.left-arrow{
+  width: 50px;
+  padding: 81px 0px 81px 0px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: x-large;
+  float: left;
+  display: block;
+  cursor: pointer;
+}
+
+.right-arrow{
+  width: 50px;
+  padding: 81px 0px 81px 0px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: x-large;
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+
+#dp-container{
+  overflow-x: scroll;
+  display: flex;
+  width: 85.5%;
+  height: 200px;
+}
+
+.dp-item{
+  margin: 1%;
+  padding: 2%;
+  height: 90%;
+  width: 100%;
+}
+
+.dp-item:hover{
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+.dp-selected{
+  background-color: grey!important;
+}
+
+.dp-info{
+  margin-left: 1%;
+}
