@@ -19,6 +19,7 @@
     "react-dom": "^17.0.2",
     "react-horizontal-scrolling": "^0.1.8",
     "react-horizontal-scrolling-menu": "^2.7.1",
+    "react-icons": "^4.3.1",
     "react-leaflet": "^3.2.5",
     "react-native-scrollview": "0.0.1-alpha.0",
     "react-router-dom": "^6.2.1",

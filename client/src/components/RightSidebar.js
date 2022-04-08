@@ -83,6 +83,9 @@ const RightSidebar = (props) => {
 
     //scorllbar menu functions
     var menu = document.getElementById('dp-container');
+    let pinnedDP = 'District Plan #' + props.pinned;
+    if(props.pinned === null) pinnedDP = "None"
+
     function scrollRight(){
         menu.scrollLeft += 100;
     }
@@ -99,11 +102,14 @@ const RightSidebar = (props) => {
                 </Offcanvas.Header>
                 <hr/>
                 <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
+                <h6 className='dp-info'> Pinned Plan: {pinnedDP} </h6>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
                     <div id='dp-container'> {props.dps.map(id => 
                         <DistrictPlan
+                            pinDP={(id) => props.pinDP(id)}
+                            unpinDP={(id) => props.unpinDP(id)}
                             id={id} state={props.currentState}
                             selectDP={(id) => props.selectDP(id)}
                         />)}
