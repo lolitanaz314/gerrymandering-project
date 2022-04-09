@@ -18,3 +18,8 @@ Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
 Icon: "npm install react-icons"
 
 Routes: "npm install browser-router"
+
+
+In data:
+
+pip install gerrychain
