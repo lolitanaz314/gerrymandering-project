@@ -8,7 +8,6 @@ import javax.persistence.*;
 import com.example.server.embeddedId.DistrictPlanId;
 import lombok.*;
 
-
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 

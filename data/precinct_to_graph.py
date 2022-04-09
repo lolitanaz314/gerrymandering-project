@@ -16,6 +16,38 @@ VTD geometries and Partition of our adjacency graph into districts.
  This Partition will be the initial state of our Markov chain.
 '''
 
+'''
+What the data is supposed to look like, being fed into Seawulf
+{
+    "1": {
+        "adjacent_nodes": [
+            "2",
+            "12"
+        ],
+        "population": 50,
+        "voting_history": "D",
+        "district": "A"
+    },
+    "2": {
+        "adjacent_nodes": [
+            "3",
+            "13"
+        ],
+        "population": 50,
+        "voting_history": "D",
+        "district": "A"
+    },
+    "3": {
+        "adjacent_nodes": [
+            "4",
+            "14"
+        ],
+        "population": 50,
+        "voting_history": "D",
+        "district": "A"
+
+'''
+
 graph = Graph.from_json("./PA_VTDs.json") # this is going to be a command line argument (Colorado, SC, or Ten-I-see)
 
 # hypothetical election results
