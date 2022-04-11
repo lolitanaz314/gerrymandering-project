@@ -1,4 +1,4 @@
-package com.example.server.model;
+package com.example.server.enumeration;
 
 // MCMC shows :
 // >> estimated political splits

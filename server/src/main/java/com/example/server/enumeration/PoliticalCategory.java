@@ -1,4 +1,4 @@
-package com.example.server.model;
+package com.example.server.enumeration;
 
 public enum PoliticalCategory {
     DEMOCRATIC_PARTY(0),
