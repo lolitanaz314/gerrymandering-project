@@ -12,7 +12,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-// @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
 
@@ -21,12 +20,12 @@ import java.util.Set;
 @IdClass(DistrictPlanId.class)
 public class DistrictPlan {
     @Id
-    @Column(name = "state_id", nullable = false)
-    private StateCode stateId;
-
-    @Id
     @Column(name = "id", nullable = false)
     private int id;
+
+    @Id
+    @Column(name = "state_id", nullable = false)
+    private StateCode stateId;
 
     @Column(name="date")
     private Date date;
@@ -37,25 +36,14 @@ public class DistrictPlan {
     @Column(name="proposed_by")
     private String proposedBy;
 
-//    @Transient
-//    @OneToMany
-//    @Column(name="districts")
-//    private Set<District> districts;
+    @Transient
+    @OneToMany
+    private Set<District> districts;
 
     @Transient
-    // @Column(name="votes")
     private int[] votes;
 
     @Transient
     @OneToOne
-    // @Column(name="measures")
     private Measures measures;
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public StateCode getStateId() {
-//        return stateId;
-//    }
 }

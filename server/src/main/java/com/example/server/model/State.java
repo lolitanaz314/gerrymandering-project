@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-// @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
 
@@ -24,16 +23,8 @@ public class State {
     private int totalPop;
 
     @Transient
-    // @Column(name = "demographic")
     private int[] demographic;
 
     @Transient
-    // @Column(name = "districtPlans")
     private List<DistrictPlan> districtPlans;
-
-    // getters
-//    public StateCode getId() {
-//        return id;
-//    }
-
 }

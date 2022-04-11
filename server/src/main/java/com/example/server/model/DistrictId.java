@@ -10,7 +10,8 @@ import java.io.Serializable;
 @With
 @NoArgsConstructor
 @AllArgsConstructor
-public class DistrictPlanId implements Serializable {
+public class DistrictId implements Serializable {
     private int id;
+    private int districtPlanId;
     private StateCode stateId;
 }

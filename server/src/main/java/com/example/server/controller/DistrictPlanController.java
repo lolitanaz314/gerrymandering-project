@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -23,12 +22,13 @@ public class DistrictPlanController {
 
     // Test
     @GetMapping("/api/districtPlans")
-    List<DistrictPlan> getDistrictPlan() {
+    List<DistrictPlan> getDistrictPlans() {
         return dpService.findAll();
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans")
-    CollectionModel<EntityModel<DistrictPlan>> getDistrictPlanByStateId(@PathVariable("state_id") StateCode stateId) {
+    CollectionModel<EntityModel<DistrictPlan>> getDistrictPlansByStateId(
+            @PathVariable("state_id") StateCode stateId) {
 //        List<EntityModel<DistrictPlan>> districtPlan = dpService.getDistrictPlanByStateId(stateId).stream().map(EntityModel::of).collect(Collectors.toList());
 //        return CollectionModel.of(districtPlan);
 
@@ -36,14 +36,16 @@ public class DistrictPlanController {
         List<EntityModel<DistrictPlan>> districtPlans = dpService.getDistrictPlanByStateId(stateId).stream().map(dp ->
                 EntityModel.of(dp,
                 linkTo(methodOn(DistrictPlanController.class).getDistrictPlanById(dp.getStateId(), dp.getId())).withSelfRel(),
-                linkTo(methodOn(DistrictPlanController.class).getDistrictPlanByStateId(dp.getStateId())).withRel("districtPlans")))
+                linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
         return CollectionModel.of(districtPlans,
-                linkTo(methodOn(StateController.class).getStates()).withSelfRel());
+                linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(stateId)).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{id}")
-    EntityModel<DistrictPlan> getDistrictPlanById(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
+    EntityModel<DistrictPlan> getDistrictPlanById(
+            @PathVariable("state_id") StateCode stateId,
+            @PathVariable("id") int id) {
 //        DistrictPlan dp = dpService.getDistrictPlanById(stateId, id);
 //        return EntityModel.of(dp);
 
@@ -51,6 +53,6 @@ public class DistrictPlanController {
         DistrictPlan dp = dpService.getDistrictPlanById(stateId, id);
         return EntityModel.of(dp,
                 linkTo(methodOn(DistrictPlanController.class).getDistrictPlanById(dp.getStateId(), dp.getId())).withSelfRel(),
-                linkTo(methodOn(DistrictPlanController.class).getDistrictPlanByStateId(dp.getStateId())).withRel("districtPlans"));
+                linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(dp.getStateId())).withRel("districtPlans"));
     }
 }

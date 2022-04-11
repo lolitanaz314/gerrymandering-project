@@ -29,9 +29,9 @@ public class StateController {
 //        return CollectionModel.of(states);
 
         // With return links
-        Set<EntityModel<State>> states = sService.findAll().stream().map(s ->
-                EntityModel.of(s,
-                linkTo(methodOn(StateController.class).getStateById(s.getId())).withSelfRel(),
+        Set<EntityModel<State>> states = sService.findAll().stream().map(state ->
+                EntityModel.of(state,
+                linkTo(methodOn(StateController.class).getStateById(state.getId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
         .collect(Collectors.toSet());
         return CollectionModel.of(states,
@@ -40,7 +40,8 @@ public class StateController {
     }
 
     @GetMapping("/api/states/{id}")
-    EntityModel<State> getStateById(@PathVariable("id") StateCode id) {
+    EntityModel<State> getStateById(
+            @PathVariable("id") StateCode id) {
 //        State state = sService.getStateById(id);
 //        return EntityModel.of(state);
 
@@ -50,15 +51,4 @@ public class StateController {
                 linkTo(methodOn(StateController.class).getStateById(id)).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
-
-//    Considering removal
-//    @GetMapping("/api/states")
-//    public Iterable<State> getStates() throws Exception {
-//        return sService.findAll();
-//    }
-
-//    @GetMapping("/api/states/{id}")
-//    public State getStateById(@PathVariable StateCode id) throws Exception {
-//        return sService.findById(id);
-//    }
 }

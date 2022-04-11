@@ -1,7 +1,6 @@
 package com.example.server.service;
 
 import com.example.server.model.DistrictPlan;
-import com.example.server.model.DistrictPlanId;
 import com.example.server.enumeration.StateCode;
 
 import com.example.server.repository.DistrictPlanRepository;
