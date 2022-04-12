@@ -19,6 +19,7 @@ import './style/Legend.css';
 import Navigation from './Navigation';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
+import HoverBox from './HoverBox';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -97,25 +98,29 @@ const MapView = (props) => {
     layer.on('click', () => zoomState(feature, layer));
     // console.log("Clicked");
   }
-  
+
   function zoomState(state, layer) {
+    //changes the leaflet map sizing
+    let map = document.getElementById('leaflet-map');
+    map.classList.add('on-state');
+
     setOnselect({}); //resets the info box if user clicks on a new state
     var polygon = new L.Polygon(state.geometry.coordinates);
     var bounds = polygon.getBounds();
     var center = bounds.getCenter();
-    var latitude = center.lng + 1;
-    var longitude = center.lat + 3.5;
+    var latitude = center.lng + 1.2;
+    var longitude = center.lat;
     var coords = { lat: latitude, lng: longitude };
 
     //reset pinned dp
-    if(currentLocation.pinned !== null){
+    if (currentLocation.pinned !== null) {
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
       document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
     }
     setLocation({
-      center: coords, 
+      center: coords,
       zoom: 6.5,
-      name: state.properties.name, 
+      name: state.properties.name,
       layer: layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -134,21 +139,25 @@ const MapView = (props) => {
 
   function MyComponent() {
     const map = useMap();
+
+    //recenters map after changing window size
+    map.invalidateSize();
+
     //zoom
     map.setView(currentLocation.center, currentLocation.zoom);
-    if(currentLocation.layer){
-      if(map.hasLayer(currentLocation.layer)) map.removeLayer(currentLocation.layer);
+    if (currentLocation.layer) {
+      if (map.hasLayer(currentLocation.layer)) map.removeLayer(currentLocation.layer);
       // else map.addLayer(currentLocation.layer);
     }
     return null;
   }
 
-  function changeView(v){
+  function changeView(v) {
     setOnselect({});
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: v,
       districtbord: currentLocation.districtbord,
@@ -162,29 +171,29 @@ const MapView = (props) => {
 
   function setStyle(feature) {
     let style = currentLocation.view;
-        return{
-          //fill property shows 'red' or 'blue' based on republican/democratic district
-          fillColor: feature.fill[style],
-          color: 'black',
-          weight: '1',
-          //color: getColor(feature.properties.TOTAL),
-          // opacity: 0.6,
-          fillOpacity: 0.6
-          }
+    return {
+      //fill property shows 'red' or 'blue' based on republican/democratic district
+      fillColor: feature.fill[style],
+      color: 'black',
+      weight: '1',
+      //color: getColor(feature.properties.TOTAL),
+      // opacity: 0.6,
+      fillOpacity: 0.6
+    }
   }
 
-  function outlineStyle(){
-    return{
+  function outlineStyle() {
+    return {
       opacity: 0,
       fillOpacity: 0
     }
   }
 
-  function toggleDistrict(){
+  function toggleDistrict() {
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: !currentLocation.districtbord,
@@ -195,11 +204,11 @@ const MapView = (props) => {
     })
   }
 
-  function togglePrecinct(){
+  function togglePrecinct() {
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -210,11 +219,11 @@ const MapView = (props) => {
     })
   }
 
-  function toggleCounty(){
+  function toggleCounty() {
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -228,21 +237,21 @@ const MapView = (props) => {
   //scrolling menu functions
   let dps = [0, 1, 2, 3];
 
-  function selectDP(id){
+  function selectDP(id) {
     //remove selected from class name (if previously selected)
     let plans = document.getElementsByClassName('dp-item');
-    for(var i = 0; i < plans.length; i++){
-      if(i !== id){
+    for (var i = 0; i < plans.length; i++) {
+      if (i !== id) {
         plans[i].classList.remove('dp-selected');
-      }else{
+      } else {
         plans[i].classList.add('dp-selected');
       }
     }
 
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -253,11 +262,9 @@ const MapView = (props) => {
     })
   }
 
-  function pinDP(id){
-    console.log(currentLocation.pinned)
-
+  function pinDP(id) {
     //allow only one dp to be pinned
-    if(currentLocation.pinned !== null){
+    if (currentLocation.pinned !== null) {
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
       document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
     }
@@ -268,9 +275,9 @@ const MapView = (props) => {
     show.classList.remove('hidden');
 
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -281,16 +288,16 @@ const MapView = (props) => {
     })
   }
 
-  function unpinDP(id){
+  function unpinDP(id) {
     let pin = document.getElementById(currentLocation.name + '-outline-' + id);
     let show = document.getElementById(currentLocation.name + '-fill-' + id);
     pin.classList.remove('hidden');
     show.classList.add('hidden');
 
     setLocation({
-      center: currentLocation.center, 
-      zoom: currentLocation.zoom, 
-      name: currentLocation.name, 
+      center: currentLocation.center,
+      zoom: currentLocation.zoom,
+      name: currentLocation.name,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -307,65 +314,35 @@ const MapView = (props) => {
   */
 
   return (
-    <div id='map'>
+    <div>
       <Navigation zoomState={zoomState} className='google-maps' changeView={changeView}
-        toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty}/>
+        toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty} />
+      <div id='map'>
+        <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
+          maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
 
-      <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} 
-        maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} minZoom={5} maxZoom={15} >
-        <MyComponent />
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle}/>
-        <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle}/>
-        <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle}/>
+          <MyComponent />
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
-        <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-        <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
+          <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
+          <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle} />
+          <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />
 
-        <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
-          show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
-          currentState={currentLocation.name} currentDp={currentLocation.currentDp}
-          showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}
-        />
+          <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
+          <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
+          <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
 
-        <div className="info-box hidden">
-          {!onselect.district && currentLocation.view === "election" && (
-            <div className = "census-info-hover">
-              <strong>{currentLocation.name} Election Data </strong>
-              <p>Hover on each congressional district for more details</p>
-            </div>
-          )}
-          {!onselect.district && currentLocation.view === "population" && (
-            <div className = "census-info-hover">
-              <strong>{currentLocation.name} Population Data </strong>
-              <p>Hover on each congressional district for more details</p>
-            </div>
-          )}
-          {onselect.district && currentLocation.view === "election" && (
-            <ul className="census-info" style={{height:'15%', width:'18%'}}>
-              <li><strong>District {onselect.district}</strong></li><br />
-              <li>Incumbent: {onselect.incumbent}</li>
-              <li>Partisan Lean: {onselect.lean}</li>
-            </ul>
-          )}
-          {onselect.district && currentLocation.view === "population" && (
-            <ul className="census-info" style={{height:'fit-content', width:'27%'}}>
-              <li><strong>District {onselect.district}</strong></li><br />
-              <li>Total Population: {onselect.population}</li>
-              <li>White: {onselect.white}</li>
-              <li>Black or African American: {onselect.black}</li>
-              <li>American Indian and Alaska Native: {onselect.native}</li>
-              <li>Asian: {onselect.asian}</li>
-              <li>Native Hawaiian and Other Pacific Islander: {onselect.islander}</li>
-              <li>Hispanic or Latino: {onselect.hispanic}</li>
-            </ul>
-          )}
-        </div>
-        <Legend view={currentLocation.view} />
+          <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
+            show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
+            currentState={currentLocation.name} currentDp={currentLocation.currentDp}
+            showModal={showModal} hideModal={hideModal} isOpenModal={isOpenModal}
+          />
 
-      </MapContainer>
+          <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />
+          <Legend view={currentLocation.view} />
 
+        </MapContainer>
+      </div>
     </div>
   );
 }
