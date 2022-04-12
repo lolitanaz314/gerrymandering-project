@@ -2,7 +2,6 @@ package com.example.server.model;
 
 import com.example.server.enumeration.StateCode;
 import com.example.server.enumeration.Status;
-import com.example.server.enumeration.Measures;
 
 import lombok.*;
 import javax.persistence.*;

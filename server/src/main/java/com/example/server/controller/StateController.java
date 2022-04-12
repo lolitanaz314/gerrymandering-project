@@ -23,6 +23,7 @@ public class StateController {
         this.sService = sService;
     }
 
+    // get states
     @GetMapping("/api/states")
     CollectionModel<EntityModel<State>> getStates() {
 //        Set<EntityModel<State>> states = sService.findAll().stream().map(EntityModel::of).collect(Collectors.toSet());
@@ -36,9 +37,9 @@ public class StateController {
         .collect(Collectors.toSet());
         return CollectionModel.of(states,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
-
     }
 
+    // get state by id
     @GetMapping("/api/states/{id}")
     EntityModel<State> getStateById(
             @PathVariable("id") StateCode id) {

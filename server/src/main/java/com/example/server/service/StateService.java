@@ -2,8 +2,8 @@ package com.example.server.service;
 
 import com.example.server.model.State;
 import com.example.server.enumeration.StateCode;
-
 import com.example.server.repository.StateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class StateService {
+    @Autowired
     private final StateRepository sRepository;
     public StateService(StateRepository sRepository) {
         this.sRepository = sRepository;

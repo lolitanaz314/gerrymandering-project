@@ -2,7 +2,6 @@ package com.example.server.service;
 
 import com.example.server.enumeration.StateCode;
 import com.example.server.model.District;
-
 import com.example.server.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class DistrictService {
 
     public List<District> findAll() {return dRepository.findAll(); }
 
-    public List<District> getDistrictByDistrictPlanID(StateCode stateId, int dpId){
+    public List<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
         return (List<District>) dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);
     }
 

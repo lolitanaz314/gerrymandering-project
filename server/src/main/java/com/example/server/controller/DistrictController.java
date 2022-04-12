@@ -27,12 +27,13 @@ public class DistrictController {
         return dService.findAll();
     }
 
+    // get districts by state_id and dp_id
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")
     public CollectionModel<EntityModel<District>> getDistrictsByDistrictPlanId(
             @PathVariable("state_id") StateCode stateId,
             @PathVariable("dp_id") int dpId) {
 
-        Set<EntityModel<District>> districts = dService.getDistrictByDistrictPlanID(stateId, dpId).stream().map(district ->
+        Set<EntityModel<District>> districts = dService.getDistrictsByDistrictPlanId(stateId, dpId).stream().map(district ->
                 EntityModel.of(district,
                 linkTo(methodOn(DistrictController.class).getDistrictById(district.getStateId(), district.getDistrictPlanId(), district.getId())).withSelfRel(),
                 linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(district.getStateId(), district.getDistrictPlanId())).withRel("districts")))
@@ -41,11 +42,13 @@ public class DistrictController {
                     linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(stateId, dpId)).withSelfRel());
     }
 
+    // get districts by state_id, dp_id, and id
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts/{id}")
     public EntityModel<District> getDistrictById(
             @PathVariable("state_id") StateCode stateId,
             @PathVariable("dp_id") int dpId,
             @PathVariable("id") int id) {
+
         District d = dService.getDistrictById(stateId, dpId, id);
         return EntityModel.of(d,
                 linkTo(methodOn(DistrictController.class).getDistrictById               (d.getStateId(), d.getDistrictPlanId(), d.getId())).withSelfRel(),

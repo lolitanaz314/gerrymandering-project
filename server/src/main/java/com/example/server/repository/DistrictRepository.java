@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface DistrictRepository extends JpaRepository<District, DistrictId> {
 
-
     Iterable<District> findByStateIdAndDistrictPlanId(StateCode stateId, int dpId);
 
     Optional<District> findByStateIdAndDistrictPlanIdAndId(StateCode stateId, int dpId, int id);

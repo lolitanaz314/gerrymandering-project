@@ -48,6 +48,6 @@ public class District {
     @Transient
     private int[] votes;
 
-    //@Transient
-    //private Set<Precinct> precincts;
+    @Transient
+    private Set<Precinct> precincts;
 }
