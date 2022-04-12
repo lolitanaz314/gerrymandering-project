@@ -2,6 +2,8 @@ import tennessee_pic from '../assets/img/tennessee_pic.png';
 import south_carolina_pic from '../assets/img/south_carolina_pic.png';
 import colorado_pic from '../assets/img/colorado_pic.png';
 
+import {AiOutlinePushpin, AiFillPushpin} from "react-icons/ai";
+
 
 const DistrictPlan = (props) => {
     var imgSource = colorado_pic;
@@ -13,12 +15,19 @@ const DistrictPlan = (props) => {
     }
 
     let dp = <img src={imgSource} id={props.state + "-" + props.id} className='dp-item' onClick={() => props.selectDP(props.id)} />;
-
     if(props.id === 0){
         dp = <img src={imgSource} id={props.state + "-" + props.id} className='dp-item dp-selected' onClick={() => props.selectDP(props.id)} />;
     }
 
-    return(dp);
+    return(
+        <div>
+            <AiOutlinePushpin className='pin-icon' id={props.state + '-outline-' + props.id}
+                onClick={() => props.pinDP(props.id)} />
+            <AiFillPushpin className='pin-icon hidden' id={props.state + '-fill-' + props.id} 
+                onClick={() => props.unpinDP(props.id)} />
+            {dp}
+        </div>
+    );
 
 }
 

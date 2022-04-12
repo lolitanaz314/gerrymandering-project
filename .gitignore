@@ -24,3 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 DefaultREADME
 src/main/resources/application.properties
+
+data/co_data
+data/sc_data
+data/tn_data

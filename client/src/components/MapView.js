@@ -36,7 +36,8 @@ const MapView = (props) => {
     districtbord: true,
     precinctbord: false,
     countybord: false,
-    currentDp: 0
+    currentDp: 0,
+    pinned: null
   });
 
   //sidebar
@@ -105,6 +106,11 @@ const MapView = (props) => {
     var longitude = center.lat + 3.5;
     var coords = { lat: latitude, lng: longitude };
 
+    //reset pinned dp
+    if(currentLocation.pinned !== null){
+      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
+      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
+    }
     setLocation({
       center: coords, 
       zoom: 6.5,
@@ -114,7 +120,8 @@ const MapView = (props) => {
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp
+      currentDp: 0,
+      pinned: null
     });
     handleShow();
     // state.data = state.properties.name.toLowerCase();
@@ -146,7 +153,8 @@ const MapView = (props) => {
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp
+      currentDp: currentLocation.currentDp,
+      pinned: currentLocation.pinned
     });
     console.log("change view to: " + currentLocation.view)
   }
@@ -181,7 +189,8 @@ const MapView = (props) => {
       districtbord: !currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp
+      currentDp: currentLocation.currentDp,
+      pinned: currentLocation.pinned
     })
   }
 
@@ -195,7 +204,8 @@ const MapView = (props) => {
       districtbord: currentLocation.districtbord,
       precinctbord: !currentLocation.precinctbord,
       countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp
+      currentDp: currentLocation.currentDp,
+      pinned: currentLocation.pinned
     })
   }
 
@@ -209,7 +219,8 @@ const MapView = (props) => {
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
       countybord: !currentLocation.countybord,
-      currentDp: currentLocation.currentDp
+      currentDp: currentLocation.currentDp,
+      pinned: currentLocation.pinned
     })
   }
 
@@ -235,10 +246,56 @@ const MapView = (props) => {
       districtbord: currentLocation.districtbord,
       precinctbord: currentLocation.precinctbord,
       countybord: currentLocation.countybord,
-      currentDp: id
+      currentDp: id,
+      pinned: currentLocation.pinned
     })
   }
 
+  function pinDP(id){
+    //allow only one dp to be pinned
+    if(currentLocation.pinned !== null){
+      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
+      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
+    }
+
+    let pin = document.getElementById(currentLocation.name + '-outline-' + id);
+    let show = document.getElementById(currentLocation.name + '-fill-' + id);
+    pin.classList.add('hidden');
+    show.classList.remove('hidden');
+
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp,
+      pinned: id
+    })
+  }
+
+  function unpinDP(id){
+    let pin = document.getElementById(currentLocation.name + '-outline-' + id);
+    let show = document.getElementById(currentLocation.name + '-fill-' + id);
+    pin.classList.remove('hidden');
+    show.classList.add('hidden');
+
+    setLocation({
+      center: currentLocation.center, 
+      zoom: currentLocation.zoom, 
+      name: currentLocation.name, 
+      layer: currentLocation.layer,
+      view: currentLocation.view,
+      districtbord: currentLocation.districtbord,
+      precinctbord: currentLocation.precinctbord,
+      countybord: currentLocation.countybord,
+      currentDp: currentLocation.currentDp,
+      pinned: null
+    })
+  }
   /*
   in the render() function the MapContainer() function is returned.
   TileLayer component adds the tiles for the map
@@ -262,14 +319,10 @@ const MapView = (props) => {
         <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
         <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
 
-        <RightSidebar selectDP={(id) => selectDP(id)}
-          show={show} dps={dps}
-          currentState={currentLocation.name}
-          currentDp={currentLocation.currentDp}
-          name={currentLocation.name}
-          showModal={showModal}
-          hideModal ={hideModal}
-          isOpenModal={isOpenModal}
+        <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
+          show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
+          currentState={currentLocation.name} currentDp={currentLocation.currentDp}
+          showModal={showModal} hideModal ={hideModal} isOpenModal={isOpenModal}
         />
 
         <div className="info-box hidden">
