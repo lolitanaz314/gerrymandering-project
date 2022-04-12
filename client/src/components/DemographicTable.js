@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import Demographic from '../service/DemographicService';
+import Demographic from '../api/service/DemographicService';
 
 const DemographicTable = (props) => {
 
     const [demographic, setDemographic] = useState([]);
 
     useEffect(() => {
-        Demographic.getAll()
+        Demographic.getAllDemographics()
           .then(response => {
             setDemographic(response.data);
             console.log('Printing user data', response.data);
@@ -32,7 +32,7 @@ const DemographicTable = (props) => {
                     {demographic.map(demographic => (
                         <tr key = {demographic.id}>
                             <td>{demographic.race}</td>
-                            <td>{demographic.population}</td>
+                            <td>{demographic.totalPop}</td>
                         </tr>
                     ))}
                     </tbody>

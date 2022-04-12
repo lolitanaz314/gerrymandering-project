@@ -108,10 +108,11 @@ const RightSidebar = (props) => {
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
                     <div id='dp-container'> {props.dps.map(id => 
                         <DistrictPlan
-                            pinDP={(id) => props.pinDP(id)}
-                            unpinDP={(id) => props.unpinDP(id)}
-                            id={id} state={props.currentState}
-                            selectDP={(id) => props.selectDP(id)}
+                        key={id}    // Replaced 'id' with 'key' [debugged]
+                        pinDP={(id) => props.pinDP(id)}
+                        unpinDP={(id) => props.unpinDP(id)}
+                        state={props.currentState}
+                        selectDP={(id) => props.selectDP(id)}
                         />)}
                     </div>
                 </div>

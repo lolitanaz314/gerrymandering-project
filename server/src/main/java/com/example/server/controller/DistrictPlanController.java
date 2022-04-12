@@ -6,6 +6,7 @@ import com.example.server.enumeration.StateCode;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @RestController
+@CrossOrigin("*")
 public class DistrictPlanController {
     DistrictPlanService dpService; // DistrictPlanService
     public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }

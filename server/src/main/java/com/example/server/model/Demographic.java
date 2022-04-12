@@ -19,11 +19,19 @@ import java.util.Map;
 @Table(name = "demographic")
 public class Demographic {
     @Id
-    @Column(name="id")
-    private Integer id;
+    //@Column(name="id")
+    private int id;
 
-    @MapKeyEnumerated(EnumType.STRING)
-    @Transient
-    private Map<RacialCategory, Integer> populations; // basically a dictionary
+    // temporary
+    //@Column(name="race")
+    private RacialCategory race;
+
+    // temporary
+    //@Column(name = "total_pop") // total population
+    private int totalPop;
+
+//    @MapKeyEnumerated(EnumType.STRING)
+//    @Transient
+//    private Map<RacialCategory, Integer> populations; // basically a dictionary
 
 }
