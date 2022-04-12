@@ -76,6 +76,7 @@ const MapView = (props) => {
     const asian = layer.feature.race.asian;
     const islander = layer.feature.race.islander;
     const hispanic = layer.feature.race.hispanic;
+
     setOnselect({
       population: pop,
       district: district,
@@ -226,10 +227,11 @@ const MapView = (props) => {
 
   //scrolling menu functions
   let dps = [0, 1, 2, 3];
+
   function selectDP(id){
     //remove selected from class name (if previously selected)
     let plans = document.getElementsByClassName('dp-item');
-    for(var i = 0; i< plans.length; i++){
+    for(var i = 0; i < plans.length; i++){
       if(i !== id){
         plans[i].classList.remove('dp-selected');
       }else{
@@ -252,6 +254,8 @@ const MapView = (props) => {
   }
 
   function pinDP(id){
+    console.log(currentLocation.pinned)
+
     //allow only one dp to be pinned
     if(currentLocation.pinned !== null){
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');

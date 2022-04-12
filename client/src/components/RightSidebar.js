@@ -38,33 +38,33 @@ const imageComponentSidebarStV = {
 }
 
 const imageComponentSidebar_Ten = {
-  width: 150,
-  height: 50
+    width: 150,
+    height: 50
 }
 
 const imageComponentSidebar_SC = {
-  width: 150,
-  height: 90
+    width: 150,
+    height: 90
 }
 
 const imageComponentModal = {
-  width: 350,
-  height: 130
+    width: 350,
+    height: 130
 }
 
 
 const gerrymanderIndexComponentModal = {
-  width: 350,
-  height: 230
+    width: 350,
+    height: 230
 }
 
 const tableComponent = {
-  spacing: 30
+    spacing: 30
 }
 
 const RightSidebar = (props) => {
     //set tab
-    const [key, setKey] = useState('plans');
+    const [key, setKey] = useState('summary');
 
     // for the popup
     const [isOpen, setIsOpen] = useState(false);
@@ -84,13 +84,13 @@ const RightSidebar = (props) => {
     //scorllbar menu functions
     var menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
-    if(props.pinned === null) pinnedDP = "None"
+    if (props.pinned === null) pinnedDP = "None"
 
-    function scrollRight(){
+    function scrollRight() {
         menu.scrollLeft += 100;
     }
 
-    function scrollLeft(){
+    function scrollLeft() {
         menu.scrollLeft -= 100;
     }
 
@@ -100,25 +100,29 @@ const RightSidebar = (props) => {
                 <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
-                <hr/>
+                <hr />
                 <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
-                <h6 className='dp-info'> Pinned Plan: {pinnedDP} </h6>
+                <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
-                    <div id='dp-container'> {props.dps.map(id => 
+                    <div id='dp-container'> {props.dps.map(id =>
                         <DistrictPlan
-                        key={id}    // Replaced 'id' with 'key' [debugged]
-                        pinDP={(id) => props.pinDP(id)}
-                        unpinDP={(id) => props.unpinDP(id)}
-                        state={props.currentState}
-                        selectDP={(id) => props.selectDP(id)}
+                            key={id} id={id}
+                            pinDP={(id) => props.pinDP(id)}
+                            unpinDP={(id) => props.unpinDP(id)}
+                            state={props.currentState}
+                            selectDP={(id) => props.selectDP(id)}
                         />)}
                     </div>
                 </div>
                 <Offcanvas.Body>
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
-                        <Tab eventKey="plans" title="Plans">
+                        <Tab eventKey="summary" title="Summary">
+                            <DemographicTable></DemographicTable>
+                            {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
+                        </Tab>
+                        <Tab eventKey="measures" title="Measures">
                             <div>
                                 <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
                                 {isOpen && <PopUp
@@ -127,36 +131,8 @@ const RightSidebar = (props) => {
                                         <img src={boxAndWhisker} class="imageResize" />
                                     </>}
                                     handleClose={togglePopup} />}
-                                <div> <h4> Proposed District Plans</h4> </div>
-                                <table style={tableComponent}>
-                                    <tbody>
-                                        <tr>
-                                            <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                                Senator District Plan
-                                            </th>
-                                            <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                                Representative Plan
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th> <button> <img src={imgSource} style={imageComponentSidebar} /> </button>
-                                                Senator District Plan
-                                            </th>
-                                            <th> <button><img src={imgSource} style={imageComponentSidebar} /> </button>
-                                                Representative Plan
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
                                 <input type="button" value="Compare" onClick={props.showModal} />
-                            </div>
-                        </Tab>
-                        <Tab eventKey="summary" title="Summary">
-                            <DemographicTable></DemographicTable>
-                            {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
-                        </Tab>
-                        <Tab eventKey="measures" title="Measures">
-                            <div>
                                 <img src={statemeasures} style={imageComponentSidebar} />
                                 Measure of Fairness - Seats to Votes
                                 <img src={seats_to_votes} style={imageComponentSidebarStV} />
@@ -166,7 +142,7 @@ const RightSidebar = (props) => {
                 </Offcanvas.Body>
             </Offcanvas>
 
-            <Modal show={props.isOpenModal} onHide={props.hideModal} size="lg" style={{zIndex: 500}}>
+            <Modal show={props.isOpenModal} onHide={props.hideModal} size="lg" style={{ zIndex: 500 }}>
                 <Modal.Header>
                     <Modal.Title>District Plan Comparison</Modal.Title>
                 </Modal.Header>
