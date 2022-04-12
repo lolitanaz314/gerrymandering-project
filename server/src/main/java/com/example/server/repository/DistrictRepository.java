@@ -1,8 +1,15 @@
 package com.example.server.repository;
 
 import com.example.server.model.District;
-import org.springframework.data.repository.CrudRepository;
+import com.example.server.model.DistrictId;
+import com.example.server.enumeration.StateCode;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DistrictRepository extends CrudRepository<District, Integer> {
+import java.util.Optional;
 
+public interface DistrictRepository extends JpaRepository<District, DistrictId> {
+
+    Iterable<District> findByStateIdAndDistrictPlanId(StateCode stateId, int dpId);
+
+    Optional<District> findByStateIdAndDistrictPlanIdAndId(StateCode stateId, int dpId, int id);
 }

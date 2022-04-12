@@ -1,7 +1,8 @@
 package com.example.server.repository;
 
 import com.example.server.model.State;
-import org.springframework.data.repository.CrudRepository;
+import com.example.server.enumeration.StateCode;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StateRepository extends CrudRepository<State, Integer> {
+public interface StateRepository extends JpaRepository<State, StateCode> {
 }

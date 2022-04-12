@@ -1,30 +1,35 @@
 package com.example.server.model;
 
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.*;
-
-import com.example.server.embeddedId.PrecinctId;
+import com.example.server.enumeration.StateCode;
 import lombok.*;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
+@With
 @NoArgsConstructor
 @AllArgsConstructor
 
 @Entity
 @Table(name = "precinct")
+@IdClass(PrecinctId.class)
 public class Precinct {
-    @EmbeddedId
-    private PrecinctId precinctId;
+    @Id
+    @Column(name="id", nullable = false)
+    private int id;
 
-    @Column(name = "total_population")
-    private int totalPopulation;
+    @Id
+    @Column(name="state_id", nullable = false)
+    private StateCode stateId;
+
+    @Column(name = "total_pop") // total population
+    private int totalPop;
 
     @Transient
-    @Column(name = "demographic")
-    private List<Tuple> demographic;
+    private int[] demographic;
 
     @Transient
-    private Collection<Precinct> precinctNeighbors;
+    private Set<Precinct> precinctNeighbors;
 }

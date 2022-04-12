@@ -1,11 +1,9 @@
-package com.example.server.repository; // 3) Create the Repository
+// EDITING needed
+package com.example.server.repository;
 
 import com.example.server.model.Demographic;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
-// CRUD refers Create, Read, Update, Delete
-
-public interface DemographicRepository extends CrudRepository<Demographic, Integer> {
+public interface DemographicRepository extends JpaRepository<Demographic, Long> {
 
 }

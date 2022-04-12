@@ -1,7 +1,14 @@
 package com.example.server.repository;
 
+import com.example.server.enumeration.StateCode;
 import com.example.server.model.Precinct;
-import org.springframework.data.repository.CrudRepository;
+import com.example.server.model.PrecinctId;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PrecinctRepository extends CrudRepository<Precinct, Integer> {
+import java.util.Optional;
+
+public interface PrecinctRepository extends JpaRepository<Precinct, PrecinctId> {
+    Iterable<Precinct> findByStateId(StateCode state_id);
+
+    Optional<Precinct> findByStateIdAndId(StateCode state_id, int id);
 }

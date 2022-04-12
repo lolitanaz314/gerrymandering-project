@@ -1,43 +1,48 @@
 package com.example.server.model;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import javax.persistence.*;
+import com.example.server.enumeration.StateCode;
+import com.example.server.enumeration.Status;
 
-import com.example.server.embeddedId.DistrictPlanId;
 import lombok.*;
-
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "district_plan")
+@IdClass(DistrictPlanId.class)
 public class DistrictPlan {
-    @EmbeddedId
-    private DistrictPlanId districtPlanId;
+    @Id
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    //@Column(name="date")
+    @Id
+    @Column(name = "state_id", nullable = false)
+    private StateCode stateId;
+
+    @Column(name="date")
     private Date date;
 
-    //@Column(name="status")
+    @Column(name="status")
     private Status status;
 
-    //@Column(name="proposed_by")
+    @Column(name="proposed_by")
     private String proposedBy;
-
-    @OneToOne
-    private Measures measures;
 
     @Transient
     @OneToMany
     private Set<District> districts;
 
-    // borderData: JSON
-}
+    @Transient
+    private int[] votes;
 
+    @Transient
+    @OneToOne
+    private Measures measures;
+}

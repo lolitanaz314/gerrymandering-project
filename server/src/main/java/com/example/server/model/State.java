@@ -1,32 +1,30 @@
 package com.example.server.model;
 
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.*;
+import com.example.server.enumeration.StateCode;
+
 import lombok.*;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "state")
 public class State {
     @Id
-    @Column(name="state_name")
-    private StateCode stateName;
+    @Column(name = "id")
+    private StateCode id;
 
-    @Column(name = "total_population")
-    private int totalPopulation;
+    @Column(name = "total_pop") // total population
+    private int totalPop;
 
     @Transient
-    @Column(name = "demographic")
-    private List<Tuple> demographic;
+    private int[] demographic;
 
     @Transient
     private List<DistrictPlan> districtPlans;
-
-    // boxWhiskerData: BoxAndWhiskerData
-    // seaWulfPlansSummary: JSON
 }

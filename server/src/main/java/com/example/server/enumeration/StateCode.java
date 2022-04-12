@@ -1,4 +1,4 @@
-package com.example.server.model;
+package com.example.server.enumeration;
 
 public enum StateCode {
     AL,AK,AZ,AR,CA,

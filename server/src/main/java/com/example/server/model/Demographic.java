@@ -1,9 +1,13 @@
+// EDITING needed
 package com.example.server.model;
 
-import javax.persistence.*;
-import lombok.*;
+import com.example.server.enumeration.RacialCategory;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.MapKeyEnumerated;
+import javax.persistence.*;
 import java.util.Map;
 
 @Getter
@@ -18,7 +22,8 @@ public class Demographic {
     @Column(name="id")
     private Integer id;
 
-    @MapKeyEnumerated
+    @MapKeyEnumerated(EnumType.STRING)
+    @Transient
     private Map<RacialCategory, Integer> populations; // basically a dictionary
 
 }
