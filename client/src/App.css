@@ -8,7 +8,7 @@
 } */
 
 .on-state{
-  width: 55%;
+  width: 54.5%;
 }
 
 /* HOVER INFO BOXES */
@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: right;
   top: -70px;
-  right: 290px;
+  right: 325px;
   padding: 10px 10px;
   border-radius: 5px;
   color: white;
@@ -40,7 +40,7 @@
 .census-info-hover{
   z-index: 400;
   top: -70px;
-  right: 290px;
+  right: 325px;
   height: fit-content;
   width: 36%;
   padding: 10px 10px;

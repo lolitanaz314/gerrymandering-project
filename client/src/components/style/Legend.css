@@ -1,7 +1,7 @@
 .legend {
     position: absolute;
     z-index: 400;
-    right: 25px;
+    right: 35px;
     top: 80px;
     padding: 10px 10px;
     box-shadow: 0 0 5px 0 rgba(184, 140, 140, 0.3);
