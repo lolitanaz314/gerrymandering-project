@@ -118,25 +118,27 @@ const RightSidebar = (props) => {
                 </div>
                 <Offcanvas.Body>
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
-                        <Tab eventKey="summary" title="Summary">
+                        <Tab eventKey="summary" title="State Summary">
+                            <h4>{props.name} Population Data 2020</h4>
                             <DemographicTable></DemographicTable>
                             {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
                         </Tab>
-                        <Tab eventKey="measures" title="Measures">
+                        <Tab eventKey="measures" title="District Plan Measures">
                             <div>
-                                <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
+                                <input type="button" value="Compare" onClick={props.showModal} />
+                                <img src={statemeasures} style={imageComponentSidebar} />
+                                <p>Measure of Fairness - Seats to Votes</p>
+                                <img src={seats_to_votes} style={imageComponentSidebarStV} />
+                            </div>
+                        </Tab>
+                        <Tab eventKey="fairness" title="Fairness">
+                            <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
                                 {isOpen && <PopUp
                                     content={<>
                                         <p>Box and Whisker Plot</p>
                                         <img src={boxAndWhisker} class="imageResize" />
                                     </>}
                                     handleClose={togglePopup} />}
-
-                                <input type="button" value="Compare" onClick={props.showModal} />
-                                <img src={statemeasures} style={imageComponentSidebar} />
-                                Measure of Fairness - Seats to Votes
-                                <img src={seats_to_votes} style={imageComponentSidebarStV} />
-                            </div>
                         </Tab>
                     </Tabs>
                 </Offcanvas.Body>

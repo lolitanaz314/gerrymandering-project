@@ -20,12 +20,12 @@ const DemographicTable = (props) => {
       return (
         <>
             {/*<button onClick={this.retrieveUsers} href="/users">click</button>*/}
-            <h4>Population Data</h4>
             <Table striped responsive="sm" bordered hover>
                     <thead>
                         <tr>
                             <th>Race</th>
                             <th>Population</th>
+                            <th>%</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,28 @@ const DemographicTable = (props) => {
                         </tr>
                     ))}
                     </tbody>
-            </Table>    
+            </Table>
+
+            <h4>Voting Age Population 2020</h4>
+            <Table striped responsive="sm" bordered hover>
+                <thead>
+                    <tr>
+                        <th>Race</th>
+                        <th>Population</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+            </Table>
+            
+            <h4>Composite 2020</h4>   
+            <Table striped responsive="sm" bordered hover>
+                <thead>
+                    <tr>
+                        <th>Votes</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+            </Table>
         </>)
 }
 
