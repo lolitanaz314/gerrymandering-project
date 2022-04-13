@@ -147,14 +147,49 @@ const RightSidebar = (props) => {
                                 </Navbar>
                             {/* </nav> */}
                                 <br></br>
-                                <h4 id="total-pop">{props.name} Population Data 2020</h4>
+                                <h5 id="total-pop">{props.name} Population Data 2020</h5>
                                 <DemographicTable></DemographicTable>
                             {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
+                            <Navbar bg="light" expand="lg">
+                                <Container>
+                                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                    <Navbar.Collapse id="basic-navbar-nav">
+                                        <Nav className="me-auto">
+                                            <span class="underline-on-hover">
+                                                <Nav.Link href="#districting-sum">Summary</Nav.Link>
+                                            </span>
+                                            <span class="underline-on-hover">
+                                                <Nav.Link href="#more-measures">More Measures</Nav.Link>
+                                            </span>
+                                            <span class="underline-on-hover">
+                                                <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
+                                            </span>
+                                        </Nav>
+                                    </Navbar.Collapse>
+                                </Container>
+                            </Navbar>
+                            <br></br>
                             <div>
-                                <img src={statemeasures} style={imageComponentSidebar} />
-                                <p>Measure of Fairness - Seats to Votes</p>
+                                <h5 id="districting-sum">District Plan {props.currentDp} Summary</h5>
+                                <p>
+                                    Date: 0000<br></br>
+                                    Status: Enacted<br></br>
+                                    Proposed By: xyz
+                                </p>
+                            </div>
+                            <br></br>
+
+                            <div>
+                                <h5 id="more-measures">More Measures here</h5>
+                                <img  src={statemeasures} style={imageComponentSidebar} />
+                                <br></br>
+                            </div>
+                            <br></br>
+                            
+                            <div>
+                                <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
                                 <img src={seats_to_votes} style={imageComponentSidebarStV} />
                             </div>
                         </Tab>
