@@ -6,7 +6,7 @@ import {AiOutlinePushpin, AiFillPushpin} from "react-icons/ai";
 
 
 const DistrictPlan = (props) => {
-    var imgSource = colorado_pic;
+    let imgSource = colorado_pic;
     if (props.state === "Tennessee") {
         imgSource = tennessee_pic;
     }

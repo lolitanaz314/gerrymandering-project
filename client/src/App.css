@@ -148,3 +148,8 @@
   background-color: #ececec;
   cursor: pointer;
 }
+
+.compare-button{
+  display: block;
+  float: right;
+}

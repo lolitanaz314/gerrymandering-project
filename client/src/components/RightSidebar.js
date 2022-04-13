@@ -71,8 +71,8 @@ const RightSidebar = (props) => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
-    var imgSource = colorado_pic;
-    var imageComponentSidebar = imageComponentSidebar_SC;
+    let imgSource = colorado_pic;
+    let imageComponentSidebar = imageComponentSidebar_SC;
     if (props.name === "Tennessee") {
         imgSource = tennessee_pic;
         imageComponentSidebar = imageComponentSidebar_Ten;
@@ -82,7 +82,7 @@ const RightSidebar = (props) => {
     }
 
     //scorllbar menu functions
-    var menu = document.getElementById('dp-container');
+    let menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None"
 
@@ -100,9 +100,11 @@ const RightSidebar = (props) => {
                 <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
+
                 <hr />
                 <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                 <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
+                <div className='compare-button'> <input type="button" value="Compare" onClick={props.showModal} /> </div>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
@@ -116,6 +118,7 @@ const RightSidebar = (props) => {
                         />)}
                     </div>
                 </div>
+
                 <Offcanvas.Body>
                     <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="State Summary">
@@ -125,7 +128,6 @@ const RightSidebar = (props) => {
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <div>
-                                <input type="button" value="Compare" onClick={props.showModal} />
                                 <img src={statemeasures} style={imageComponentSidebar} />
                                 <p>Measure of Fairness - Seats to Votes</p>
                                 <img src={seats_to_votes} style={imageComponentSidebarStV} />
