@@ -66,7 +66,7 @@ const MapView = (props) => {
   }
 
   const highlightFeature = (e => {
-    var layer = e.target;
+    let layer = e.target;
     const pop = layer.feature.properties.POPULATION;
     const district = layer.feature.properties.DISTRICT;
     const incumbent = layer.feature.properties.INCUMBENT;
@@ -105,12 +105,12 @@ const MapView = (props) => {
     map.classList.add('on-state');
 
     setOnselect({}); //resets the info box if user clicks on a new state
-    var polygon = new L.Polygon(state.geometry.coordinates);
-    var bounds = polygon.getBounds();
-    var center = bounds.getCenter();
-    var latitude = center.lng + 1.2;
-    var longitude = center.lat;
-    var coords = { lat: latitude, lng: longitude };
+    let polygon = new L.Polygon(state.geometry.coordinates);
+    let bounds = polygon.getBounds();
+    let center = bounds.getCenter();
+    let latitude = center.lng + 1.2;
+    let longitude = center.lat;
+    let coords = { lat: latitude, lng: longitude };
 
     //reset pinned dp
     if (currentLocation.pinned !== null) {
@@ -240,7 +240,7 @@ const MapView = (props) => {
   function selectDP(id) {
     //remove selected from class name (if previously selected)
     let plans = document.getElementsByClassName('dp-item');
-    for (var i = 0; i < plans.length; i++) {
+    for (let i = 0; i < plans.length; i++) {
       if (i !== id) {
         plans[i].classList.remove('dp-selected');
       } else {

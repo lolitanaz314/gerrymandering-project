@@ -149,10 +149,7 @@
   cursor: pointer;
 }
 
-.tab-fixed{
-  position: fixed
-}
-
-.tab-not-fixed{
-  position: static
+.compare-button{
+  display: block;
+  float: right;
 }
