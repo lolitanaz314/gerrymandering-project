@@ -132,9 +132,15 @@ const RightSidebar = (props) => {
                                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                         <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
-                                            <Nav.Link href="#total-pop">Total Population</Nav.Link>
+                                            <span class="underline-on-hover">
+                                                <Nav.Link href="#total-pop">Total Population</Nav.Link>
+                                            </span>
+                                            <span class="underline-on-hover">
                                             <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
-                                            <Nav.Link href="#composite">Composite</Nav.Link>
+                                            </span>
+                                            <span class="underline-on-hover">
+                                                <Nav.Link href="#composite">Composite</Nav.Link>
+                                            </span>
                                         </Nav>
                                         </Navbar.Collapse>
                                     </Container>

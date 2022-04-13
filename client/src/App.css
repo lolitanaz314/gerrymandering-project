@@ -153,3 +153,7 @@
   display: block;
   float: right;
 }
+
+.underline-on-hover:hover {
+  text-decoration: underline
+}
