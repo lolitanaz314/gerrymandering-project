@@ -248,6 +248,13 @@ const MapView = (props) => {
       }
     }
 
+    //show compare button if a dp is pinned as well
+    if(currentLocation.pinned && currentLocation.pinned !== id){
+      document.getElementById('compare-button').classList.remove('hidden');
+    }else{
+      document.getElementById('compare-button').classList.add('hidden');
+    }
+
     setLocation({
       center: currentLocation.center,
       zoom: currentLocation.zoom,

@@ -11,6 +11,11 @@
   width: 54.5%;
 }
 
+.sticky {
+  position: fixed;
+  width: 100%;
+}
+
 /* HOVER INFO BOXES */
 .hidden{
   display: none!important;
@@ -79,6 +84,7 @@
   }
 } */
 
+/* SCROLL MENU */
 .scroll-menu{
   width: inherit;
   height: 200px;
@@ -104,10 +110,6 @@
   float: right;
   display: block;
   cursor: pointer;
-}
-
-.dp-info{
-  margin-left: 2%;
 }
 
 #dp-container{
@@ -149,11 +151,25 @@
   cursor: pointer;
 }
 
-.compare-button{
+/* .scroll-header{
+  margin-left: 2%;
   display: block;
-  float: right;
+  background-color: aqua;
+} */
+
+.dp-info{
+  float: left;
+  width: 60%;
+  background-color: red;
+}
+
+#compare-button{
+  float: left;
+  width: 20%;
+  background-color: orange;
 }
 
 .underline-on-hover:hover {
   text-decoration: underline
 }
+

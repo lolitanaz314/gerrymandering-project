@@ -104,10 +104,11 @@ const RightSidebar = (props) => {
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
 
-                <hr />
-                <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
+                <hr /> <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                 <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
-                <div className='compare-button'> <input type="button" value="Compare" onClick={props.showModal} /> </div>
+                <div id='compare-button' className='hidden'>
+                    <input type="button" value="Compare" onClick={props.showModal} />
+                </div>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
@@ -120,7 +121,7 @@ const RightSidebar = (props) => {
                             selectDP={(id) => props.selectDP(id)}
                         />)}
                     </div>
-                </div>
+                </div> <hr />
 
                 <Offcanvas.Body>
                     <Tabs fill justify id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
