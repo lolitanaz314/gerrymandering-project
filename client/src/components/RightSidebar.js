@@ -104,12 +104,13 @@ const RightSidebar = (props) => {
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
 
-                <hr />
+                <hr /> <div className='scroll-header'>
                     <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                     <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
                     <div id='compare-button' className='hidden'>
                         <input type="button" value="Compare" onClick={props.showModal} />
                     </div>
+                </div>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>

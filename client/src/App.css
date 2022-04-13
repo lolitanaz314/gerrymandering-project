@@ -151,21 +151,19 @@
   cursor: pointer;
 }
 
-/* .scroll-header{
+.scroll-header{
   margin-left: 2%;
-  display: block;
-  background-color: aqua;
-} */
+  /* display: block; */
+  height: 55px;
+}
 
 .dp-info{
   float: left;
-  width: 60%;
-  background-color: red;
+  width: 80%;
 }
 
 #compare-button{
-  float: left;
-  width: 20%;
+  display: inline;
   background-color: orange;
 }
 

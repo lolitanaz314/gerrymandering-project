@@ -281,6 +281,13 @@ const MapView = (props) => {
     pin.classList.add('hidden');
     show.classList.remove('hidden');
 
+    //show compare button if a dp is selected as well
+    if(currentLocation.selected !== id){
+      document.getElementById('compare-button').classList.remove('hidden');
+    }else{
+      document.getElementById('compare-button').classList.add('hidden');
+    }
+
     setLocation({
       center: currentLocation.center,
       zoom: currentLocation.zoom,
@@ -300,6 +307,9 @@ const MapView = (props) => {
     let show = document.getElementById(currentLocation.name + '-fill-' + id);
     pin.classList.remove('hidden');
     show.classList.add('hidden');
+
+    //remove compare button
+    document.getElementById('compare-button').classList.add('hidden');
 
     setLocation({
       center: currentLocation.center,
