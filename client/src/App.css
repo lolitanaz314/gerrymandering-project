@@ -148,3 +148,11 @@
   background-color: #ececec;
   cursor: pointer;
 }
+
+.tab-fixed{
+  position: fixed
+}
+
+.tab-not-fixed{
+  position: static
+}

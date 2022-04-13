@@ -4,6 +4,9 @@ import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
 
 // components
 import PopUp from './PopUp'
@@ -117,10 +120,26 @@ const RightSidebar = (props) => {
                     </div>
                 </div>
                 <Offcanvas.Body>
-                    <Tabs id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
+                    <Tabs fill justify id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="State Summary">
-                            <h4>{props.name} Population Data 2020</h4>
-                            <DemographicTable></DemographicTable>
+                            {/* <nav class="navbar navbar-expand-lg navbar-light bg-light"> */}
+                                {/* <Navbar sticky="top" bg="light" expand="lg"> */}
+                                <Navbar bg="light" expand="lg">
+                                    <Container>
+                                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                        <Navbar.Collapse id="basic-navbar-nav">
+                                        <Nav className="me-auto">
+                                            <Nav.Link href="#total-pop">Total Population</Nav.Link>
+                                            <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
+                                            <Nav.Link href="#composite">Composite</Nav.Link>
+                                        </Nav>
+                                        </Navbar.Collapse>
+                                    </Container>
+                                </Navbar>
+                            {/* </nav> */}
+                                <br></br>
+                                <h4 id="total-pop">{props.name} Population Data 2020</h4>
+                                <DemographicTable></DemographicTable>
                             {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
