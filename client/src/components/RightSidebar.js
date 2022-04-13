@@ -104,11 +104,12 @@ const RightSidebar = (props) => {
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
 
-                <hr /> <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
-                <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
-                <div id='compare-button' className='hidden'>
-                    <input type="button" value="Compare" onClick={props.showModal} />
-                </div>
+                <hr />
+                    <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
+                    <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
+                    <div id='compare-button' className='hidden'>
+                        <input type="button" value="Compare" onClick={props.showModal} />
+                    </div>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
@@ -133,13 +134,13 @@ const RightSidebar = (props) => {
                                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                         <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#total-pop">Total Population</Nav.Link>
                                             </span>
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                             <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
                                             </span>
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#composite">Composite</Nav.Link>
                                             </span>
                                         </Nav>
@@ -158,13 +159,13 @@ const RightSidebar = (props) => {
                                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#districting-sum">Summary</Nav.Link>
                                             </span>
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#more-measures">More Measures</Nav.Link>
                                             </span>
-                                            <span class="underline-on-hover">
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
                                             </span>
                                         </Nav>
