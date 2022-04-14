@@ -16,9 +16,6 @@ import StateInfo from './StateInfo';
 
 // assets
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
-import tennessee_pic from '../assets/img/tennessee_pic.png'
-import south_carolina_pic from '../assets/img/south_carolina_pic.png'
-import colorado_pic from '../assets/img/colorado_pic.png'
 import state_measures from '../assets/img/state_measures.png'
 import gerrymander_index from '../assets/img/gerrymander_index.png'
 
@@ -31,11 +28,6 @@ const myComponentStyle = {
 const titleStyle = {
     height: '7%',
     display: 'block'
-}
-
-const imageComponentSidebarStV = {
-    width: 275,
-    height: 208
 }
 
 const imageComponentSidebar_Ten = {
@@ -58,11 +50,10 @@ const gerrymanderIndexComponentModal = {
     height: 230
 }
 
-const tableComponent = {
-    spacing: 30
-}
-
 const RightSidebar = (props) => {
+    // if we are currently comparing 2 plans
+    const [comparing, setCompare] = useState(false);
+    
     //set tab
     const [key, setKey] = useState('summary');
 
@@ -70,16 +61,6 @@ const RightSidebar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
-    }
-
-    let imgSource = colorado_pic;
-    let imageComponentSidebar = imageComponentSidebar_SC;
-    if (props.name === "Tennessee") {
-        imgSource = tennessee_pic;
-        imageComponentSidebar = imageComponentSidebar_Ten;
-    }
-    else if (props.name === "South Carolina") {
-        imgSource = south_carolina_pic;
     }
 
     //scorllbar menu functions
@@ -106,7 +87,7 @@ const RightSidebar = (props) => {
                     <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                     <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
                     <div id='compare-button' className='hidden'>
-                        <input type="button" value="Compare" onClick={props.showModal} />
+                        <input type="button" value="Compare" onClick={() => setCompare(true)} />
                     </div>
                 </div>
                 <div className='scroll-menu'>
@@ -144,7 +125,7 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} />
+                            <br></br> <StateInfo name={props.name} compare={comparing} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -165,7 +146,7 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} />
+                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} compare={comparing} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
                             <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />

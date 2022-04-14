@@ -23,30 +23,36 @@ const DistrictMeasureInfo = (props) => {
         imageComponentSidebar = imageComponentSidebar_Ten;
     }
 
-    return (
-        <>
-            <div>
-                <h5 id="districting-sum">District Plan {props.currentDp} Summary</h5>
-                <p>
-                    Date: 0000<br></br>
-                    Status: Enacted<br></br>
-                    Proposed By: xyz
-                </p>
-            </div>
-            <br></br>
+    let basic = <>
+        <div>
+            <h5 id="districting-sum">District Plan {props.currentDp} Summary</h5>
+            <p>
+                Date: 0000<br></br>
+                Status: Enacted<br></br>
+                Proposed By: xyz
+            </p>
+        </div>
+        <br></br>
 
-            <div>
-                <h5 id="more-measures">More Measures here</h5>
-                <img src={statemeasures} style={imageComponentSidebar} />
-                <br></br>
-            </div>
+        <div>
+            <h5 id="more-measures">More Measures here</h5>
+            <img src={statemeasures} style={imageComponentSidebar} />
             <br></br>
+        </div>
+        <br></br>
 
-            <div>
-                <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
-                <img src={seats_to_votes} style={imageComponentSidebarStV} />
-            </div>
-        </>);
+        <div>
+            <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
+            <img src={seats_to_votes} style={imageComponentSidebarStV} />
+        </div>
+    </>;
+
+    //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
+    if(props.compare){
+        
+    }
+
+    return (basic);
 
 }
 
