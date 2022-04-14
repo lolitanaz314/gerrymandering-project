@@ -45,11 +45,15 @@ const MapView = (props) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
+  // if we are currently comparing 2 plans
+  const [comparing, setCompare] = useState(false);
+  const handleCompare = (val) => setCompare(val);
+
   //district hovering
   const [onselect, setOnselect] = useState({});
 
   // the modal stuff (District comparison)
-  const [isOpenModal, setIsOpenModal] = React.useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const showModal = () => {
     setIsOpenModal(true);
   };
@@ -101,9 +105,12 @@ const MapView = (props) => {
 
   function zoomState(state, layer) {
     //changes the leaflet map sizing
-    let map = document.getElementById('leaflet-map');
-    map.classList.add('on-state');
+    // let map = document.getElementById('leaflet-map');
+    // map.classList.add('on-state');
 
+    //resets comparision
+    handleCompare(false);
+    
     setOnselect({}); //resets the info box if user clicks on a new state
     let polygon = new L.Polygon(state.geometry.coordinates);
     let bounds = polygon.getBounds();
@@ -249,9 +256,9 @@ const MapView = (props) => {
     }
 
     //show compare button if a dp is pinned as well
-    if(currentLocation.pinned && currentLocation.pinned !== id){
+    if (currentLocation.pinned && currentLocation.pinned !== id) {
       document.getElementById('compare-button').classList.remove('hidden');
-    }else{
+    } else {
       document.getElementById('compare-button').classList.add('hidden');
     }
 
@@ -282,9 +289,9 @@ const MapView = (props) => {
     show.classList.remove('hidden');
 
     //show compare button if a dp is selected as well
-    if(currentLocation.currentDp !== id){
+    if (currentLocation.currentDp !== id) {
       document.getElementById('compare-button').classList.remove('hidden');
-    }else{
+    } else {
       document.getElementById('compare-button').classList.add('hidden');
     }
 
@@ -336,7 +343,8 @@ const MapView = (props) => {
         toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty} />
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
-          maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
+          maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]}
+          className={`${(currentLocation.name !== 'USA') ? "on-state" : ''}`}>
 
           <MyComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -353,6 +361,7 @@ const MapView = (props) => {
             show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
             currentState={currentLocation.name} currentDp={currentLocation.currentDp}
             showModal={showModal} hideModal={hideModal} isOpenModal={isOpenModal}
+            comparing={comparing} setCompare={(val) => handleCompare(val)}
           />
 
           <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />

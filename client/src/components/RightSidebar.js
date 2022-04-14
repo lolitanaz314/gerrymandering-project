@@ -51,9 +51,6 @@ const gerrymanderIndexComponentModal = {
 }
 
 const RightSidebar = (props) => {
-    // if we are currently comparing 2 plans
-    const [comparing, setCompare] = useState(false);
-    
     //set tab
     const [key, setKey] = useState('summary');
 
@@ -86,8 +83,8 @@ const RightSidebar = (props) => {
                 <hr /> <div className='scroll-header'>
                     <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                     <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
-                    <div id='compare-button' className='hidden'>
-                        <input type="button" value="Compare" onClick={() => setCompare(true)} />
+                    <div id='compare-button' className={`${props.comparing ? "":"hidden"}`}>
+                        <input type="button" value="Compare" onClick={() => props.setCompare(true)} />
                     </div>
                 </div>
                 <div className='scroll-menu'>
@@ -125,8 +122,8 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} compare={comparing}
-                                currentDp={props.currentDp} pinned={props.pinned}/>
+                            <br></br> <StateInfo name={props.name} compare={props.comparing}
+                                currentDp={props.currentDp} pinned={props.pinned} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -147,7 +144,8 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} compare={comparing} />
+                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} 
+                                compare={props.comparing} pinned={props.pinned} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
                             <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
