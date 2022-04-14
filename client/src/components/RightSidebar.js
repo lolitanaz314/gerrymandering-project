@@ -125,7 +125,8 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} compare={comparing} />
+                            <br></br> <StateInfo name={props.name} compare={comparing}
+                                currentDp={props.currentDp} pinned={props.pinned}/>
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">

@@ -171,3 +171,13 @@
   text-decoration: underline
 }
 
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+ }
+ 
