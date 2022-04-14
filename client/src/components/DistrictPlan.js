@@ -4,7 +4,6 @@ import colorado_pic from '../assets/img/colorado_pic.png';
 
 import {AiOutlinePushpin, AiFillPushpin} from "react-icons/ai";
 
-
 const DistrictPlan = (props) => {
     let imgSource = colorado_pic;
     if (props.state === "Tennessee") {

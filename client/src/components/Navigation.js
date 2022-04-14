@@ -3,33 +3,41 @@ import React, {useState} from 'react'
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
-// import "./style/Navbar.css"; // commented because dropdown looked weird
+import { HiMenu } from "react-icons/hi";
 
-const myComponentStyle = {
+const stateStyle = {
   position: 'relative',
   width: 100
 }
 
-const myComponentStyleView = {
+const viewStyle = {
   position: 'relative',
   left: 340
 }
 
-const myComponentStyleBorder = {
+const borderStyle = {
   position: 'relative',
   left: 150
+}
+
+const menuStyle = {
+  color: 'white',
+  fontSize: '200%',
+  padding: '5px',
+  marginLeft: '10px'
 }
 
 const Navigation = (props) => {
   return (
     <>
       <Navbar bg="primary" variant="dark" fixed="top">
+          <HiMenu className='menu-icon' style={menuStyle} />
         <Container>
           <Navbar.Brand href="/">CSE 416 Lynx</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Choose State" id="basic-nav-dropdown" style = {myComponentStyle}>
+              <NavDropdown title="Choose State" id="basic-nav-dropdown" style={stateStyle}>
                 <NavDropdown.Item href="#tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
                 <NavDropdown.Item href="#southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
                 <NavDropdown.Item href="#colorado" onClick={() => props.zoomState(coloradoOutline)}>Colorado</NavDropdown.Item>
@@ -39,7 +47,7 @@ const Navigation = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Choose View" id="basic-nav-dropdown" style = {myComponentStyleView}>
+              <NavDropdown title="Choose View" id="basic-nav-dropdown" style={viewStyle}>
                 <NavDropdown.Item onClick={() => props.changeView('election')}>Election</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => props.changeView('population')}>Population</NavDropdown.Item>
               </NavDropdown>
@@ -48,7 +56,7 @@ const Navigation = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style = {myComponentStyleBorder}>
+              <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style={borderStyle}>
               <li className="checkbox form-group" onClick = {() => props.toggleDistrict()}>
                 <input type="checkbox" value="district" name="district" defaultChecked="true"/>
                 <label htmlFor="district">District</label>

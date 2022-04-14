@@ -10,9 +10,6 @@ import colorado from "../assets/json/colorado_congressional.json";
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
-// import tennesseeCounty from "../assets/json/tennessee_counties.json"
-// import southcarolinaPrecinct from "../assets/json/southcarolina_precincts.json"
-// import southcarolinaCounty from "../assets/json/southcarolina_counties.json"
 import './style/Legend.css';
 
 // components
@@ -23,7 +20,6 @@ import HoverBox from './HoverBox';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
-"zoom" default value is set to 5
 These settings will make the map center on the middle of the US with a zoom level of 5 on page load
 */
 
@@ -127,11 +123,12 @@ const MapView = (props) => {
       pinned: null
     });
     handleShow();
-    // state.data = state.properties.name.toLowerCase();
 
     //changes css to show hover boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
     document.getElementsByClassName("legend")[0].classList.remove('hidden');
+
+    document.getElementById('bw').classList.add('hidden');
   }
 
   function MyComponent() {
@@ -325,11 +322,6 @@ const MapView = (props) => {
       pinned: null
     })
   }
-  /*
-  in the render() function the MapContainer() function is returned.
-  TileLayer component adds the tiles for the map
-  We pass data.venues as props to the Markers component so all markers are displayed on the map
-  */
 
   return (
     <div>

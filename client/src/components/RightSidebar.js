@@ -8,13 +8,12 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 
 // components
-import PopUp from './PopUp'
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
 
 // assets
-import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
+import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg';
 
 const headerStyle = {
     margin: '56px 0px 0px 0px',
@@ -31,12 +30,6 @@ const RightSidebar = (props) => {
     //set tab
     const [key, setKey] = useState('summary');
 
-    // for the popup
-    const [isOpen, setIsOpen] = useState(false);
-    const togglePopup = () => {
-        setIsOpen(!isOpen);
-    }
-
     //scorllbar menu functions
     let menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
@@ -48,6 +41,10 @@ const RightSidebar = (props) => {
 
     function scrollLeft() {
         menu.scrollLeft -= 100;
+    }
+
+    function showBW(){
+        document.getElementById('bw').classList.remove('hidden');
     }
 
     return (
@@ -125,13 +122,16 @@ const RightSidebar = (props) => {
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
-                            <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
-                            {isOpen && <PopUp
-                                content={<>
-                                    <p>Box and Whisker Plot</p>
-                                    <img src={boxAndWhisker} class="imageResize" />
-                                </>}
-                                handleClose={togglePopup} />}
+                            <p className='seawulf-desc'>
+                                This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
+                                cluster dedicated to research applications for Stony Brook faculty, staff, and students. 
+                                We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis for
+                                comparision</b> (ex. African American population percent), and <b>selected district plan </b>
+                                (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
+                                whisker plot</b>, with the selected district plan shown for comparision.
+                            </p>
+                            <input type="button" value="Generate" onClick={showBW} />
+                            <img src={boxAndWhisker} id='bw' className='box-whisker hidden'/>
                         </Tab>
                     </Tabs>
                 </Offcanvas.Body>

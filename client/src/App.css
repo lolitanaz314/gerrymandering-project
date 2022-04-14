@@ -179,4 +179,17 @@
 table {
   border-collapse: collapse;
 }
- 
+
+.menu-icon:hover{
+  cursor: pointer;
+}
+
+.seawulf-desc{
+  text-align: justify;
+  padding: 10px;
+}
+
+.box-whisker{
+  width: 85.5%;
+  display: block;
+}
