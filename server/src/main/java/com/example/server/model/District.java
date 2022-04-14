@@ -10,7 +10,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 
 @Entity
 @Table(name = "district")
@@ -37,10 +36,10 @@ public class District {
     private int totalPop;
 
     @Transient
-    private Tuple lean;
+    private int[] demographic;
 
     @Transient
-    private int[] demographic;
+    private Tuple lean;
 
     @Transient
     private int[] seats;
