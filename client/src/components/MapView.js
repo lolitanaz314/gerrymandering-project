@@ -105,11 +105,17 @@ const MapView = (props) => {
 
   function zoomState(state, layer) {
     //changes the leaflet map sizing
-    // let map = document.getElementById('leaflet-map');
-    // map.classList.add('on-state');
+    let map = document.getElementById('leaflet-map');
+    map.classList.add('on-state');
 
     //resets comparision
     handleCompare(false);
+    
+    //reset pinned dp
+    if (currentLocation.pinned !== null) {
+      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
+      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
+    }
     
     setOnselect({}); //resets the info box if user clicks on a new state
     let polygon = new L.Polygon(state.geometry.coordinates);
@@ -119,11 +125,6 @@ const MapView = (props) => {
     let longitude = center.lat;
     let coords = { lat: latitude, lng: longitude };
 
-    //reset pinned dp
-    if (currentLocation.pinned !== null) {
-      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
-      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
-    }
     setLocation({
       center: coords,
       zoom: 6.5,
@@ -183,8 +184,6 @@ const MapView = (props) => {
       fillColor: feature.fill[style],
       color: 'black',
       weight: '1',
-      //color: getColor(feature.properties.TOTAL),
-      // opacity: 0.6,
       fillOpacity: 0.6
     }
   }
@@ -260,6 +259,8 @@ const MapView = (props) => {
       document.getElementById('compare-button').classList.remove('hidden');
     } else {
       document.getElementById('compare-button').classList.add('hidden');
+      //resets comparision view
+      handleCompare(false);
     }
 
     setLocation({
@@ -293,6 +294,8 @@ const MapView = (props) => {
       document.getElementById('compare-button').classList.remove('hidden');
     } else {
       document.getElementById('compare-button').classList.add('hidden');
+      //resets comparision view
+      handleCompare(false);
     }
 
     setLocation({
@@ -317,6 +320,8 @@ const MapView = (props) => {
 
     //remove compare button
     document.getElementById('compare-button').classList.add('hidden');
+    //resets comparision view
+    handleCompare(false);
 
     setLocation({
       center: currentLocation.center,
@@ -343,8 +348,7 @@ const MapView = (props) => {
         toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty} />
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
-          maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]}
-          className={`${(currentLocation.name !== 'USA') ? "on-state" : ''}`}>
+          maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
 
           <MyComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
