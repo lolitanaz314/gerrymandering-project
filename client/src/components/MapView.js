@@ -131,7 +131,7 @@ const MapView = (props) => {
     document.getElementById('bw').classList.add('hidden');
   }
 
-  function MyComponent() {
+  function ZoomComponent() {
     const map = useMap();
 
     //recenters map after changing window size
@@ -331,7 +331,7 @@ const MapView = (props) => {
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
           maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
 
-          <MyComponent />
+          <ZoomComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />

@@ -26,7 +26,7 @@ const DistrictMeasureInfo = (props) => {
     }
 
     let basic = <>
-        <h6 id="districting-sum">District Plan {props.currentDp} Overview</h6>
+        <h6 id="districting-sum">Overview</h6>
         <p>
             Date: 0000<br></br>
             Status: Enacted<br></br>
