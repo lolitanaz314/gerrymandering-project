@@ -51,17 +51,6 @@ const MapView = (props) => {
 
   //district hovering
   const [onselect, setOnselect] = useState({});
-
-  // the modal stuff (District comparison)
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const showModal = () => {
-    setIsOpenModal(true);
-  };
-  const hideModal = () => {
-    setIsOpenModal(false);
-  };
-
-  //district hovering functions
   const highlight = (feature, layer) => {
     layer.on({
       mouseover: highlightFeature
@@ -110,7 +99,7 @@ const MapView = (props) => {
 
     //resets comparision
     handleCompare(false);
-    
+
     //reset pinned dp
     if (currentLocation.pinned !== null) {
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
@@ -364,7 +353,6 @@ const MapView = (props) => {
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
             currentState={currentLocation.name} currentDp={currentLocation.currentDp}
-            showModal={showModal} hideModal={hideModal} isOpenModal={isOpenModal}
             comparing={comparing} setCompare={(val) => handleCompare(val)}
           />
 

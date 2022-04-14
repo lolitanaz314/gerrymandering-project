@@ -1,7 +1,6 @@
 import { Offcanvas } from 'react-bootstrap';
 import { useState } from 'react'
 import React from 'react';
-import Modal from "react-bootstrap/Modal";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,10 +15,8 @@ import StateInfo from './StateInfo';
 
 // assets
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
-import state_measures from '../assets/img/state_measures.png'
-import gerrymander_index from '../assets/img/gerrymander_index.png'
 
-const myComponentStyle = {
+const headerStyle = {
     margin: '56px 0px 0px 0px',
     width: '700px',
     zIndex: '400'
@@ -28,26 +25,6 @@ const myComponentStyle = {
 const titleStyle = {
     height: '7%',
     display: 'block'
-}
-
-const imageComponentSidebar_Ten = {
-    width: 150,
-    height: 50
-}
-
-const imageComponentSidebar_SC = {
-    width: 150,
-    height: 90
-}
-
-const imageComponentModal = {
-    width: 350,
-    height: 130
-}
-
-const gerrymanderIndexComponentModal = {
-    width: 350,
-    height: 230
 }
 
 const RightSidebar = (props) => {
@@ -75,7 +52,7 @@ const RightSidebar = (props) => {
 
     return (
         <>
-            <Offcanvas style={myComponentStyle} show={props.show} backdrop={false} placement='end'>
+            <Offcanvas style={headerStyle} show={props.show} backdrop={false} placement='end'>
                 <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
@@ -159,44 +136,6 @@ const RightSidebar = (props) => {
                     </Tabs>
                 </Offcanvas.Body>
             </Offcanvas>
-
-            <Modal show={props.isOpenModal} onHide={props.hideModal} size="lg" style={{ zIndex: 500 }}>
-                <Modal.Header>
-                    <Modal.Title>District Plan Comparison</Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{
-                    maxHeight: 'calc(100vh - 210px)',
-                    overflowY: 'auto'
-                }}>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th> District X </th>
-                                    <th> District X </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th> <button> <img src={state_measures} style={imageComponentModal} /> </button> </th>
-                                    <th> <button><img src={state_measures} style={imageComponentModal} /> </button></th>
-                                </tr>
-                                <tr>
-                                    <th> <button> <img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button> </th>
-                                    <th> <button><img src={gerrymander_index} style={gerrymanderIndexComponentModal} /> </button></th>
-                                </tr>
-                                <tr>
-                                    <th> Number of anomalous districts: 4 </th>
-                                    <th> Number of anomalous districts: 7 </th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button onClick={props.hideModal}>X</button>
-                </Modal.Footer>
-            </Modal>
         </>
     );
 }
