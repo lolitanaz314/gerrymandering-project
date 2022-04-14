@@ -57,7 +57,7 @@ const testData = [ //testData has data of all plans from all states
         proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
       }, {
         id: 2,
-        status: "Propposed",
+        status: "Proposed",
         proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
       }, {
         id: 3,
