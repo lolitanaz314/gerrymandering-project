@@ -4,14 +4,15 @@ import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
 
 // components
 import PopUp from './PopUp'
 import DistrictPlan from './DistrictPlan';
-import DemographicTable from './DemographicTable';
+import DistrictMeasureInfo from './DistrictMeasureInfo';
+import StateInfo from './StateInfo';
 
 // assets
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg'
@@ -20,9 +21,6 @@ import south_carolina_pic from '../assets/img/south_carolina_pic.png'
 import colorado_pic from '../assets/img/colorado_pic.png'
 import state_measures from '../assets/img/state_measures.png'
 import gerrymander_index from '../assets/img/gerrymander_index.png'
-import statemeasures from '../assets/img/state_measures.png'
-import seats_to_votes from '../assets/img/seats_to_votes.png'
-// import voting_and_population_perc from '../assets/img/voting_and_population_perc.png'
 
 const myComponentStyle = {
     margin: '56px 0px 0px 0px',
@@ -55,7 +53,6 @@ const imageComponentModal = {
     height: 130
 }
 
-
 const gerrymanderIndexComponentModal = {
     width: 350,
     height: 230
@@ -74,6 +71,7 @@ const RightSidebar = (props) => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+
     let imgSource = colorado_pic;
     let imageComponentSidebar = imageComponentSidebar_SC;
     if (props.name === "Tennessee") {
@@ -128,31 +126,25 @@ const RightSidebar = (props) => {
                 <Offcanvas.Body>
                     <Tabs fill justify id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="State Summary">
-                            {/* <nav class="navbar navbar-expand-lg navbar-light bg-light"> */}
-                                {/* <Navbar sticky="top" bg="light" expand="lg"> */}
-                                <Navbar bg="light" expand="lg">
-                                    <Container>
-                                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Navbar bg="light" expand="lg">
+                                <Container>
+                                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                    <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#total-pop">Total Population</Nav.Link>
                                             </span>
                                             <span className="underline-on-hover">
-                                            <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
+                                                <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
                                             </span>
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#composite">Composite</Nav.Link>
                                             </span>
                                         </Nav>
-                                        </Navbar.Collapse>
-                                    </Container>
-                                </Navbar>
-                            {/* </nav> */}
-                                <br></br>
-                                <h5 id="total-pop">{props.name} Population Data 2020</h5>
-                                <DemographicTable></DemographicTable>
-                            {/* <img src={voting_and_population_perc} style={imageComponentSidebarVert} /> */}
+                                    </Navbar.Collapse>
+                                </Container>
+                            </Navbar>
+                            <br></br> <StateInfo name={props.name} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -173,37 +165,16 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br>
-                            <div>
-                                <h5 id="districting-sum">District Plan {props.currentDp} Summary</h5>
-                                <p>
-                                    Date: 0000<br></br>
-                                    Status: Enacted<br></br>
-                                    Proposed By: xyz
-                                </p>
-                            </div>
-                            <br></br>
-
-                            <div>
-                                <h5 id="more-measures">More Measures here</h5>
-                                <img  src={statemeasures} style={imageComponentSidebar} />
-                                <br></br>
-                            </div>
-                            <br></br>
-                            
-                            <div>
-                                <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
-                                <img src={seats_to_votes} style={imageComponentSidebarStV} />
-                            </div>
+                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
                             <input type="button" value="Show Box and Whisker Plot" onClick={togglePopup} />
-                                {isOpen && <PopUp
-                                    content={<>
-                                        <p>Box and Whisker Plot</p>
-                                        <img src={boxAndWhisker} class="imageResize" />
-                                    </>}
-                                    handleClose={togglePopup} />}
+                            {isOpen && <PopUp
+                                content={<>
+                                    <p>Box and Whisker Plot</p>
+                                    <img src={boxAndWhisker} class="imageResize" />
+                                </>}
+                                handleClose={togglePopup} />}
                         </Tab>
                     </Tabs>
                 </Offcanvas.Body>

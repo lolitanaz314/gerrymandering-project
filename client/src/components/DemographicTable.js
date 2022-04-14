@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Demographic from '../api/service/DemographicService';
 
@@ -37,29 +37,7 @@ const DemographicTable = (props) => {
                     ))}
                     </tbody>
             </Table>                                        
-            <br></br>
-
-            <h5 id="voting-age">Voting Age Population 2020</h5>
-            <Table striped responsive="sm" bordered hover>
-                <thead>
-                    <tr>
-                        <th>Race</th>
-                        <th>Population</th>
-                        <th>%</th>
-                    </tr>
-                </thead>
-            </Table>
-            <br></br>
-
-            <h5 id="composite">Composite 2020</h5>   
-            <Table striped responsive="sm" bordered hover>
-                <thead>
-                    <tr>
-                        <th>Votes</th>
-                        <th>%</th>
-                    </tr>
-                </thead>
-            </Table>
+            
         </>)
 }
 

@@ -1,6 +1,6 @@
 import "./style/PopUp.css";
 
-const Popup = props => {
+const Popup = (props) => {
   return (
     <div className="popup-box">
       <div className="box">

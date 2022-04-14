@@ -282,7 +282,7 @@ const MapView = (props) => {
     show.classList.remove('hidden');
 
     //show compare button if a dp is selected as well
-    if(currentLocation.selected !== id){
+    if(currentLocation.currentDp !== id){
       document.getElementById('compare-button').classList.remove('hidden');
     }else{
       document.getElementById('compare-button').classList.add('hidden');
