@@ -26,20 +26,12 @@ const DistrictMeasureInfo = (props) => {
     }
 
     let basic = <>
-        <h6 id="districting-sum">Overview</h6>
-        <p>
-            Date: 0000<br></br>
-            Status: Enacted<br></br>
-            Proposed By: xyz
-        </p>
-        <br></br>
-
-        <h6 id="more-measures">More Measures here</h6>
+        <h5 id="more-measures">More Measures here</h5>
         <img src={statemeasures} style={imageComponentSidebar} />
         <br></br>
         <br></br>
 
-        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
+        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
         <img src={seats_to_votes} style={imageComponentSidebarStV} />
     </>;
 
@@ -56,40 +48,24 @@ const DistrictMeasureInfo = (props) => {
             <tbody>
                 <Table className='column'>
                     <td>
-                        <h6 id="districting-sum">Overview</h6>
-                        <p>
-                            Date: 0000<br></br>
-                            Status: Enacted<br></br>
-                            Proposed By: xyz
-                        </p>
-                        <br></br>
-
-                        <h6 id="more-measures">More Measures here</h6>
+                        <h5 id="more-measures">More Measures here</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
                         <br></br>
                         <br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
+                        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
                         <img src={seats_to_votes} style={imageComponentSidebarStV} />
                     </td>
                 </Table>
 
                 <Table className='column'>
                     <td>
-                        <h6 id="districting-sum">Overview</h6>
-                        <p>
-                            Date: 0000<br></br>
-                            Status: Enacted<br></br>
-                            Proposed By: xyz
-                        </p>
-                        <br></br>
-
-                        <h6 id="more-measures">More Measures here</h6>
+                        <h5 id="more-measures">More Measures here</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
                         <br></br>
                         <br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
+                        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
                         <img src={seats_to_votes} style={imageComponentSidebarStV} />
                     </td>
                 </Table>

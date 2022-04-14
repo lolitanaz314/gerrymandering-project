@@ -28,6 +28,7 @@ const MapView = (props) => {
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
+    code: 'USA',
     layer: null, //this is used to remove geojson layer -> might need to delete later on
     view: 'election',
     districtbord: true,
@@ -101,7 +102,7 @@ const MapView = (props) => {
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
       document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
     }
-    
+
     setOnselect({}); //resets the info box if user clicks on a new state
     let polygon = new L.Polygon(state.geometry.coordinates);
     let bounds = polygon.getBounds();
@@ -114,6 +115,7 @@ const MapView = (props) => {
       center: coords,
       zoom: 6.5,
       name: state.properties.name,
+      code: state.properties.abbreviation,
       layer: layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -152,6 +154,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: v,
       districtbord: currentLocation.districtbord,
@@ -186,6 +189,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: !currentLocation.districtbord,
@@ -201,6 +205,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -216,6 +221,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -253,6 +259,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -288,6 +295,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -313,6 +321,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -345,7 +354,7 @@ const MapView = (props) => {
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
             currentState={currentLocation.name} currentDp={currentLocation.currentDp}
-            comparing={comparing} setCompare={(val) => handleCompare(val)}
+            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />
 
           <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />

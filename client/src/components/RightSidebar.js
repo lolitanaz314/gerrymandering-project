@@ -7,13 +7,65 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 
-// components
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
-
-// assets
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg';
+
+const testData = [ //testData has data of all plans from all states
+    [ //district plans for tennessee
+      { //array of dps with info
+        id: 0,
+        status: "Enacted",
+        proposedBy: 'Republican Party'
+      }, {
+        id: 1,
+        status: "Proposed",
+        proposedBy: 'Republican Party'
+      }, {
+        id: 2,
+        status: "Proposed",
+        proposedBy: 'Democratic Party'
+      }
+    ], [ //district plans for south carolina
+      {
+        id: 0,
+        status: "Enacted",
+        proposedBy: 'Republican Party'
+      }, {
+        id: 1,
+        status: "Proposed",
+        proposedBy: 'South Carolina state Senate'
+      }, {
+        id: 2,
+        status: "Approved",
+        proposedBy: 'South Carolina state House'
+      }, {
+        id: 3,
+        status: "Proposed",
+        proposedBy: 'South Carolina state House'
+      }
+    ], [ //district plans for colorado
+      {
+        id: 0,
+        status: "Enacted",
+        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
+  
+      }, {
+        id: 1,
+        status: "Approved",
+        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
+      }, {
+        id: 2,
+        status: "Propposed",
+        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
+      }, {
+        id: 3,
+        status: "Proposed",
+        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
+      }
+    ]
+]
 
 const headerStyle = {
     margin: '56px 0px 0px 0px',
@@ -27,8 +79,12 @@ const titleStyle = {
 }
 
 const RightSidebar = (props) => {
-    //set tab
+    //set default tab
     const [key, setKey] = useState('summary');
+
+    let stateID = 0;
+    if(props.code === "SC") stateID = 1;
+    else if(props.code === "CO") stateID = 2;
 
     //scorllbar menu functions
     let menu = document.getElementById('dp-container');
@@ -57,20 +113,19 @@ const RightSidebar = (props) => {
                 <hr /> <div className='scroll-header'>
                     <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
                     <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
-                    <div id='compare-button' className={`${props.comparing ? "":"hidden"}`}>
+                    <div id='compare-button' className={`${props.comparing ? "" : "hidden"}`}>
                         <input type="button" value="Compare" onClick={() => props.setCompare(true)} />
                     </div>
                 </div>
                 <div className='scroll-menu'>
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
-                    <div id='dp-container'> {props.dps.map(id =>
-                        <DistrictPlan
-                            key={id} id={id}
-                            pinDP={(id) => props.pinDP(id)}
-                            unpinDP={(id) => props.unpinDP(id)}
-                            state={props.currentState}
-                            selectDP={(id) => props.selectDP(id)}
+                    <div id='dp-container'>
+                        {props.dps.map(id =>
+                            <DistrictPlan
+                                key={id} id={id} state={props.currentState}
+                                pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
+                                selectDP={(id) => props.selectDP(id)} plan={testData[stateID][id]}
                         />)}
                     </div>
                 </div> <hr />
@@ -84,6 +139,9 @@ const RightSidebar = (props) => {
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
+                                                <Nav.Link href="#districting-sum">Summary</Nav.Link>
+                                            </span>
+                                            <span className="underline-on-hover">
                                                 <Nav.Link href="#total-pop">Total Population</Nav.Link>
                                             </span>
                                             <span className="underline-on-hover">
@@ -96,8 +154,9 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} compare={props.comparing}
-                                currentDp={props.currentDp} pinned={props.pinned} />
+                            <br></br> <StateInfo name={props.name} compare={props.comparing} pinned={props.pinned}
+                                currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
+                                comparing={testData[stateID][props.pinned]} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -106,10 +165,7 @@ const RightSidebar = (props) => {
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
-                                                <Nav.Link href="#districting-sum">Summary</Nav.Link>
-                                            </span>
-                                            <span className="underline-on-hover">
-                                                <Nav.Link href="#more-measures">More Measures</Nav.Link>
+                                                <Nav.Link href="#more-measures"> Measures</Nav.Link>
                                             </span>
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>

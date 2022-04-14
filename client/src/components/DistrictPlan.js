@@ -5,6 +5,7 @@ import colorado_pic from '../assets/img/colorado_pic.png';
 import {AiOutlinePushpin, AiFillPushpin} from "react-icons/ai";
 
 const DistrictPlan = (props) => {
+
     let imgSource = colorado_pic;
     if (props.state === "Tennessee") {
         imgSource = tennessee_pic;
@@ -24,7 +25,7 @@ const DistrictPlan = (props) => {
                 onClick={() => props.pinDP(props.id)} />
             <AiFillPushpin className='pin-icon hidden' id={props.state + '-fill-' + props.id} 
                 onClick={() => props.unpinDP(props.id)} />
-            {dp}
+            {dp} <span>{props.plan.status}</span>
         </div>
     );
 

@@ -3,11 +3,19 @@ import Table from 'react-bootstrap/Table';
 
 const StateInfo = (props) => {
     let basic = <>
-        <h6 id="total-pop">Population Data 2020</h6>
+        <h5 id="districting-sum">Overview</h5>
+        <p>
+            {/* Date: 0000<br></br> */}
+            <b>Status:</b> {props.plan.status}<br></br>
+            <b>Proposed By:</b> {props.plan.proposedBy}
+        </p>
+        <br></br>
+
+        <h5 id="total-pop">Population Data 2020</h5>
         <DemographicTable />
         <br></br>
 
-        <h6 id="voting-age">Voting Age Population 2020</h6>
+        <h5 id="voting-age">Voting Age Population 2020</h5>
         <Table striped responsive="sm" bordered hover>
             <thead>
                 <tr>
@@ -19,7 +27,7 @@ const StateInfo = (props) => {
         </Table>
         <br></br>
 
-        <h6 id="composite">Composite 2020</h6>
+        <h5 id="composite">Composite 2020</h5>
         <Table striped responsive="sm" bordered hover>
             <thead>
                 <tr>
@@ -35,19 +43,26 @@ const StateInfo = (props) => {
         basic = <Table>
             <thead>
                 <tr>
-                    <th style={{float:'left'}}>District Plan {props.currentDp}</th>
-                    <th style={{float:'right'}}>District Plan {props.pinned}</th>
+                    <th style={{ float: 'left' }}>District Plan {props.currentDp}</th>
+                    <th style={{ float: 'right' }}>District Plan {props.pinned}</th>
                 </tr>
             </thead>
 
             <tbody>
                 <Table className='column'>
                     <td>
-                        <h6 id="total-pop">Population Data 2020</h6>
+                        <h5 id="districting-sum">Overview</h5>
+                        <p>
+                            {/* Date: 0000<br></br> */}
+                            <b>Status:</b> {props.plan.status}<br></br>
+                            <b>Proposed By:</b> {props.plan.proposedBy}
+                        </p>
+                        <br></br>
+                        <h5 id="total-pop">Population Data 2020</h5>
                         <DemographicTable />
                         <br></br>
 
-                        <h6 id="voting-age">Voting Age Population 2020</h6>
+                        <h5 id="voting-age">Voting Age Population 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
@@ -59,7 +74,7 @@ const StateInfo = (props) => {
                         </Table>
                         <br></br>
 
-                        <h6 id="composite">Composite 2020</h6>
+                        <h5 id="composite">Composite 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
@@ -73,11 +88,18 @@ const StateInfo = (props) => {
 
                 <Table className='column'>
                     <td>
-                        <h6 id="total-pop">Population Data 2020</h6>
+                        <h5 id="districting-sum">Overview</h5>
+                        <p>
+                            {/* Date: 0000<br></br> */}
+                            <b>Status:</b> {props.comparing.status}<br></br>
+                            <b>Proposed By:</b> {props.comparing.proposedBy}
+                        </p>
+                        <br></br>
+                        <h5 id="total-pop">Population Data 2020</h5>
                         <DemographicTable />
                         <br></br>
 
-                        <h6 id="voting-age">Voting Age Population 2020</h6>
+                        <h5 id="voting-age">Voting Age Population 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
@@ -89,7 +111,7 @@ const StateInfo = (props) => {
                         </Table>
                         <br></br>
 
-                        <h6 id="composite">Composite 2020</h6>
+                        <h5 id="composite">Composite 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
