@@ -26,14 +26,13 @@ const DistrictMeasureInfo = (props) => {
     }
 
     let basic = <>
-        <h5 id="more-measures">More Measures here</h5>
+        <h5 id="more-measures">Measures</h5>
         <img src={statemeasures} style={imageComponentSidebar} />
-        <br></br>
-        <br></br>
-
+        <br></br><br></br>
         
-        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+        <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
         <SeatVoteCurve/>
+        <br></br>
     </>;
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
@@ -49,25 +48,24 @@ const DistrictMeasureInfo = (props) => {
             <tbody>
                 <Table className='column'>
                     <td>
-                        <h5 id="more-measures">More Measures here</h5>
+                        <h5 id="more-measures">Measures</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
-                        <br></br>
-                        <br></br>
+                        <br></br><br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
-                        <SeatVoteCurve/>
+                        <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
+                        <div><SeatVoteCurve/></div>
                     </td>
                 </Table>
 
                 <Table className='column'>
                     <td>
-                        <h5 id="more-measures">More Measures here</h5>
+                        <h5 id="more-measures">Measures</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
-                        <br></br>
-                        <br></br>
+                        <br></br><br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
-                        <SeatVoteCurve/>
+                        <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
+                        <div><SeatVoteCurve/></div>
+                        <br></br>
                     </td>
                 </Table>
             </tbody>

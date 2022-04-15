@@ -51,17 +51,7 @@ const coords = [{ x:  0.00022949621331248032 , y:  0.061224489795918366 },
 
 export default function SeatVoteCurve() {
     return (
-        <LineChart
-          width={500}
-          height={400}
-          data={coords}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
+        <LineChart width={500} height={400} data={coords} margin={{top: 5, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" domain={[0, 1]} dataKey="x"/>
           <YAxis type="number" domain={[0, 1]} dataKey="y" />

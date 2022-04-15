@@ -272,7 +272,7 @@ const RightSidebar = (props) => {
                             </p>
                             <input type="button" value="Generate" onClick={showBW} />
                             <div id='bw' className='box-whisker hidden'>
-                                <BoxAndWhisker2></BoxAndWhisker2>
+                                <BoxAndWhisker2 />
                             </div>
                         </Tab>
                     </Tabs>

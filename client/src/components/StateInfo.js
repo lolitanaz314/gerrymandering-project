@@ -77,6 +77,7 @@ const StateInfo = (props) => {
                             <b>Proposed By:</b> {props.plan.proposedBy}
                         </p>
                         <br></br>
+                        
                         <h5 id="total-pop">Population Data 2020</h5>
                         <DemographicTable />
                         <br></br>
