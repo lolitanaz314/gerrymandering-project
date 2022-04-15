@@ -1,11 +1,11 @@
 import httpClient from "../axios";
 
-const getDistrictPlansByStateId = () => {
-    return httpClient.get("/api/states/{state_id}/districtPlans")
+const getDistrictPlansByStateId = (state_id) => {
+    return httpClient.get("/api/states/"+state_id+"/districtPlans")
 }
 
-const getDistrictPlanById = () => {
-    return httpClient.get("/api/states/{state_id}/districtPlans/{id}")
+const getDistrictPlanById = (state_id, id) => {
+    return httpClient.get("/api/states/"+state_id+"/districtPlans/" + id)
 }
 
 export default {

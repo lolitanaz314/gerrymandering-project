@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import Demographic from '../api/service/DemographicService';
+import State from '../api/service/StateService';
+// import Demographic from '../api/service/DemographicService';
 
 const DemographicTable = (props) => {
 
-    const [demographic, setDemographic] = useState([]);
+    const [demographic, setDemographic] = useState({});
 
     useEffect(() => {
-        Demographic.getAllDemographics()
-          .then(response => {
-            setDemographic(response.data);
-            console.log('Printing user data', response.data);
+        // Demographic.getAllDemographics()
+        // console.log(props.code);
+        State.getStateById(props.code)
+        .then(response => {
+            // console.log('Printing user data', response);
+            console.log('Printing user data', response.data.demographic);
+            setDemographic(response.data.demographic);
           })
           .catch(error => {
             console.log('Something went wrong', error);
@@ -29,12 +33,21 @@ const DemographicTable = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {demographic.map(demographic => (
-                        <tr key = {demographic.id}>
-                            <td>{demographic.race}</td>
-                            <td>{demographic.totalPop}</td>
+                    {Object.keys(demographic).map(function (key) {
+                                    return <>
+                                        <tr>
+                                            <td>{key}</td>
+                                            <td>{demographic[key]}</td>
+                                        </tr>
+                                    </>;
+                                })}
+                    
+                    {/* {demographic.map(dm => (
+                        <tr key = {dm.race}>
+                            <td>{dm.race}</td>
+                            <td>{dm.totalPop}</td>
                         </tr>
-                    ))}
+                    ))} */}
                     </tbody>
             </Table>                                        
             

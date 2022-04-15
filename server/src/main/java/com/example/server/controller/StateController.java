@@ -1,5 +1,7 @@
 package com.example.server.controller;
 
+import com.example.server.service.DemographicService;
+import com.example.server.service.DistrictPlanService;
 import com.example.server.service.StateService;
 import com.example.server.model.State;
 import com.example.server.enumeration.StateCode;
@@ -20,9 +22,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @RestController
 @CrossOrigin("*")
 public class StateController {
-    private final StateService sService;    // StateService
-    public StateController (StateService sService) {
+    final StateService sService;            // StateService
+    final DistrictPlanService dpService;    // DistrictPlanService
+    final DemographicService dmService;
+
+    public StateController (StateService sService, DistrictPlanService dpService, DemographicService dmService) {
         this.sService = sService;
+        this.dpService = dpService;
+        this.dmService = dmService;
     }
 
     // get states
@@ -32,9 +39,9 @@ public class StateController {
 //        return CollectionModel.of(states);
 
         // With return links
-        Set<EntityModel<State>> states = sService.findAll().stream().map(state ->
-                EntityModel.of(state,
-                linkTo(methodOn(StateController.class).getStateById(state.getId())).withSelfRel(),
+        Set<EntityModel<State>> states = sService.findAll().stream().map(s ->
+                EntityModel.of(s,
+                linkTo(methodOn(StateController.class).getStateById(s.getId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
         .collect(Collectors.toSet());
         return CollectionModel.of(states,
@@ -50,6 +57,8 @@ public class StateController {
 
         // With return links
         State s = sService.getStateById(id);
+        s.setDemographic(dmService.getDemographicByStateId(id));
+        s.setDistrictPlans(dpService.getDistrictPlansByStateId(id));
         return EntityModel.of(s,
                 linkTo(methodOn(StateController.class).getStateById(id)).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));

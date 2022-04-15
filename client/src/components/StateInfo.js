@@ -1,7 +1,10 @@
 import DemographicTable from './DemographicTable';
 import Table from 'react-bootstrap/Table';
+// import State from '../api/service/StateService';
 
 const StateInfo = (props) => {
+    // let s = State.getStateById(props.code);
+
     let basic = <>
         <h5 id="districting-sum">Overview</h5>
         <p>
@@ -12,7 +15,7 @@ const StateInfo = (props) => {
         <br></br>
 
         <h5 id="total-pop">Population Data 2020</h5>
-        <DemographicTable />
+        <DemographicTable code={props.code}/>
         <br></br>
 
         <h5 id="voting-age">Voting Age Population 2020</h5>
@@ -79,7 +82,7 @@ const StateInfo = (props) => {
                         <br></br>
                         
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable />
+                        {/* <DemographicTable code={props.code}/> */}
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>

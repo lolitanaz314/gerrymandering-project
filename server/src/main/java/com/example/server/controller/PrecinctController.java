@@ -34,10 +34,10 @@ public class PrecinctController {
     public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(
         @PathVariable("state_id") StateCode stateId) {
 
-        Set<EntityModel<Precinct>> precincts = pService.getPrecinctsByStateId(stateId).stream().map(precinct ->
-                EntityModel.of(precinct,
-                        linkTo(methodOn(PrecinctController.class).getPrecinctsById(precinct.getStateId(), precinct.getId())).withSelfRel(),
-                        linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(precinct.getStateId())).withRel("precincts")))
+        Set<EntityModel<Precinct>> precincts = pService.getPrecinctsByStateId(stateId).stream().map(p ->
+                EntityModel.of(p,
+                        linkTo(methodOn(PrecinctController.class).getPrecinctsById(p.getStateId(), p.getId())).withSelfRel(),
+                        linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
                 .collect(Collectors.toSet());
         return CollectionModel.of(precincts,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(stateId)).withSelfRel());

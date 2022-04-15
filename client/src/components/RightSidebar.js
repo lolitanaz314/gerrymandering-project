@@ -237,7 +237,7 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} compare={props.comparing} pinned={props.pinned}
+                            <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing} pinned={props.pinned}
                                 currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} code={props.code}
                                 votingData={votingData[stateID]} />
