@@ -10,9 +10,6 @@ import colorado from "../assets/json/colorado_congressional.json";
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
-// import tennesseeCounty from "../assets/json/tennessee_counties.json"
-// import southcarolinaPrecinct from "../assets/json/southcarolina_precincts.json"
-// import southcarolinaCounty from "../assets/json/southcarolina_counties.json"
 import './style/Legend.css';
 
 // components
@@ -23,7 +20,6 @@ import HoverBox from './HoverBox';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
-"zoom" default value is set to 5
 These settings will make the map center on the middle of the US with a zoom level of 5 on page load
 */
 
@@ -32,6 +28,7 @@ const MapView = (props) => {
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
+    code: 'USA',
     layer: null, //this is used to remove geojson layer -> might need to delete later on
     view: 'election',
     districtbord: true,
@@ -105,7 +102,7 @@ const MapView = (props) => {
       document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
       document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
     }
-    
+
     setOnselect({}); //resets the info box if user clicks on a new state
     let polygon = new L.Polygon(state.geometry.coordinates);
     let bounds = polygon.getBounds();
@@ -118,6 +115,7 @@ const MapView = (props) => {
       center: coords,
       zoom: 6.5,
       name: state.properties.name,
+      code: state.properties.abbreviation,
       layer: layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -127,14 +125,15 @@ const MapView = (props) => {
       pinned: null
     });
     handleShow();
-    // state.data = state.properties.name.toLowerCase();
 
     //changes css to show hover boxes
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
     document.getElementsByClassName("legend")[0].classList.remove('hidden');
+
+    document.getElementById('bw').classList.add('hidden');
   }
 
-  function MyComponent() {
+  function ZoomComponent() {
     const map = useMap();
 
     //recenters map after changing window size
@@ -155,6 +154,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: v,
       districtbord: currentLocation.districtbord,
@@ -189,6 +189,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: !currentLocation.districtbord,
@@ -204,6 +205,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -219,6 +221,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -256,6 +259,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -291,6 +295,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -316,6 +321,7 @@ const MapView = (props) => {
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
+      code: currentLocation.code,
       layer: currentLocation.layer,
       view: currentLocation.view,
       districtbord: currentLocation.districtbord,
@@ -325,11 +331,6 @@ const MapView = (props) => {
       pinned: null
     })
   }
-  /*
-  in the render() function the MapContainer() function is returned.
-  TileLayer component adds the tiles for the map
-  We pass data.venues as props to the Markers component so all markers are displayed on the map
-  */
 
   return (
     <div>
@@ -339,7 +340,7 @@ const MapView = (props) => {
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
           maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
 
-          <MyComponent />
+          <ZoomComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
@@ -353,7 +354,7 @@ const MapView = (props) => {
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
             currentState={currentLocation.name} currentDp={currentLocation.currentDp}
-            comparing={comparing} setCompare={(val) => handleCompare(val)}
+            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />
 
           <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />

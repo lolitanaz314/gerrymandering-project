@@ -1,5 +1,5 @@
 import statemeasures from '../assets/img/state_measures.png'
-import seats_to_votes from '../assets/img/seats_to_votes.png'
+import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
 
@@ -26,21 +26,14 @@ const DistrictMeasureInfo = (props) => {
     }
 
     let basic = <>
-        <h6 id="districting-sum">District Plan {props.currentDp} Overview</h6>
-        <p>
-            Date: 0000<br></br>
-            Status: Enacted<br></br>
-            Proposed By: xyz
-        </p>
-        <br></br>
-
-        <h6 id="more-measures">More Measures here</h6>
+        <h5 id="more-measures">More Measures here</h5>
         <img src={statemeasures} style={imageComponentSidebar} />
         <br></br>
         <br></br>
 
-        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
-        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+        
+        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+        <SeatVoteCurve/>
     </>;
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
@@ -56,41 +49,25 @@ const DistrictMeasureInfo = (props) => {
             <tbody>
                 <Table className='column'>
                     <td>
-                        <h6 id="districting-sum">Overview</h6>
-                        <p>
-                            Date: 0000<br></br>
-                            Status: Enacted<br></br>
-                            Proposed By: xyz
-                        </p>
-                        <br></br>
-
-                        <h6 id="more-measures">More Measures here</h6>
+                        <h5 id="more-measures">More Measures here</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
                         <br></br>
                         <br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
-                        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+                        <SeatVoteCurve/>
                     </td>
                 </Table>
 
                 <Table className='column'>
                     <td>
-                        <h6 id="districting-sum">Overview</h6>
-                        <p>
-                            Date: 0000<br></br>
-                            Status: Enacted<br></br>
-                            Proposed By: xyz
-                        </p>
-                        <br></br>
-
-                        <h6 id="more-measures">More Measures here</h6>
+                        <h5 id="more-measures">More Measures here</h5>
                         <img src={statemeasures} style={imageComponentSidebar} />
                         <br></br>
                         <br></br>
 
-                        <h6 id="seat-vote">Measure of Fairness - Seats to Votes</h6>
-                        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+                        <SeatVoteCurve/>
                     </td>
                 </Table>
             </tbody>

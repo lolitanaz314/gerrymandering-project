@@ -35,10 +35,10 @@ public class DistrictController {
             @PathVariable("state_id") StateCode stateId,
             @PathVariable("dp_id") int dpId) {
 
-        Set<EntityModel<District>> districts = dService.getDistrictsByDistrictPlanId(stateId, dpId).stream().map(district ->
-                EntityModel.of(district,
-                linkTo(methodOn(DistrictController.class).getDistrictById(district.getStateId(), district.getDistrictPlanId(), district.getId())).withSelfRel(),
-                linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(district.getStateId(), district.getDistrictPlanId())).withRel("districts")))
+        Set<EntityModel<District>> districts = dService.getDistrictsByDistrictPlanId(stateId, dpId).stream().map(d ->
+                EntityModel.of(d,
+                linkTo(methodOn(DistrictController.class).getDistrictById(d.getStateId(), d.getDistrictPlanId(), d.getId())).withSelfRel(),
+                linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(d.getStateId(), d.getDistrictPlanId())).withRel("districts")))
             .collect(Collectors.toSet());
         return CollectionModel.of(districts,
                     linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(stateId, dpId)).withSelfRel());
