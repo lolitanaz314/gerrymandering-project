@@ -1,4 +1,5 @@
 import DemographicTable from './DemographicTable';
+import SeatVoteCurve from './SeatVoteCurve';
 import Table from 'react-bootstrap/Table';
 
 const StateInfo = (props) => {
@@ -36,6 +37,10 @@ const StateInfo = (props) => {
                 </tr>
             </thead>
         </Table>
+
+        <h6 id="seat-vote">Seats to Vote</h6>
+        <SeatVoteCurve/>
+        <br></br>
     </>;
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW

@@ -1,5 +1,5 @@
 import statemeasures from '../assets/img/state_measures.png'
-import seats_to_votes from '../assets/img/seats_to_votes.png'
+import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
 
@@ -31,8 +31,9 @@ const DistrictMeasureInfo = (props) => {
         <br></br>
         <br></br>
 
-        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
-        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+        
+        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+        <SeatVoteCurve/>
     </>;
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
@@ -53,8 +54,8 @@ const DistrictMeasureInfo = (props) => {
                         <br></br>
                         <br></br>
 
-                        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
-                        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+                        <SeatVoteCurve/>
                     </td>
                 </Table>
 
@@ -65,8 +66,8 @@ const DistrictMeasureInfo = (props) => {
                         <br></br>
                         <br></br>
 
-                        <h5 id="seat-vote">Measure of Fairness - Seats to Votes</h5>
-                        <img src={seats_to_votes} style={imageComponentSidebarStV} />
+                        <h6 id="seat-vote">Measure of Fairness - Seats to Vote</h6>
+                        <SeatVoteCurve/>
                     </td>
                 </Table>
             </tbody>
