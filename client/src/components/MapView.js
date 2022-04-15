@@ -233,8 +233,6 @@ const MapView = (props) => {
   }
 
   //scrolling menu functions
-  let dps = [0, 1, 2, 3];
-
   function selectDP(id) {
     //remove selected from class name (if previously selected)
     let plans = document.getElementsByClassName('dp-item');
@@ -352,7 +350,7 @@ const MapView = (props) => {
           <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
-            show={show} dps={dps} name={currentLocation.name} pinned={currentLocation.pinned}
+            show={show} name={currentLocation.name} pinned={currentLocation.pinned}
             currentState={currentLocation.name} currentDp={currentLocation.currentDp}
             comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />

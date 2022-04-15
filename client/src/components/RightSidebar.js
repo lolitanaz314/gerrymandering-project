@@ -121,11 +121,11 @@ const RightSidebar = (props) => {
                     <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
                     <div className='right-arrow' onClick={scrollRight}> &gt; </div>
                     <div id='dp-container'>
-                        {props.dps.map(id =>
+                        {testData[stateID].map(obj =>
                             <DistrictPlan
-                                key={id} id={id} state={props.currentState}
+                                key={obj.id} id={obj.id} state={props.currentState}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
-                                selectDP={(id) => props.selectDP(id)} plan={testData[stateID][id]}
+                                selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
                         />)}
                     </div>
                 </div> <hr />
@@ -156,7 +156,7 @@ const RightSidebar = (props) => {
                             </Navbar>
                             <br></br> <StateInfo name={props.name} compare={props.comparing} pinned={props.pinned}
                                 currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
-                                comparing={testData[stateID][props.pinned]} />
+                                comparing={testData[stateID][props.pinned]} code={props.code} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
