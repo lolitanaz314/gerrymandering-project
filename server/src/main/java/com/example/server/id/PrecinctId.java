@@ -1,4 +1,4 @@
-package com.example.server.model;
+package com.example.server.id;
 
 import com.example.server.enumeration.StateCode;
 import lombok.*;

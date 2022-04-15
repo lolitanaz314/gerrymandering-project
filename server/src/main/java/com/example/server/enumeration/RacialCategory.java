@@ -6,8 +6,8 @@ public enum RacialCategory {
     BLACK(2),
     ASIAN(3),
     NATIVE(4),
-    PACIFIC(5),
-    MIX(6);
+    PACIFIC(5);
+    // MIX(6);
 
     private final int value;
 

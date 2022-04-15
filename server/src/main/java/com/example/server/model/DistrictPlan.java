@@ -3,6 +3,7 @@ package com.example.server.model;
 import com.example.server.enumeration.StateCode;
 import com.example.server.enumeration.Status;
 
+import com.example.server.id.DistrictPlanId;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
@@ -37,6 +38,9 @@ public class DistrictPlan {
     @Transient
     @OneToMany
     private Set<District> districts;
+
+    @Transient
+    private int[] seats;
 
     @Transient
     private int[] votes;

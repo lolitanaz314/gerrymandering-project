@@ -1,7 +1,7 @@
 package com.example.server.repository;
 
 import com.example.server.model.District;
-import com.example.server.model.DistrictId;
+import com.example.server.id.DistrictId;
 import com.example.server.enumeration.StateCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 

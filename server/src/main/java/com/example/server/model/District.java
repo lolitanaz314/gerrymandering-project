@@ -1,9 +1,12 @@
 package com.example.server.model;
 
+import com.example.server.enumeration.RacialCategory;
 import com.example.server.enumeration.StateCode;
 
+import com.example.server.id.DistrictId;
 import lombok.*;
 import javax.persistence.*;
+import java.util.Map;
 import java.util.Set;
 
 @Getter
@@ -36,7 +39,9 @@ public class District {
     private int totalPop;
 
     @Transient
-    private int[] demographic;
+//    private int[] demographic;
+    @MapKeyEnumerated(EnumType.STRING)
+    private Map<RacialCategory, Integer> demographic;
 
     @Transient
     private Tuple lean;

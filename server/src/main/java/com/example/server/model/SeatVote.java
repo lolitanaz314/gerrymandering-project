@@ -1,10 +1,10 @@
 package com.example.server.model;
 
 import com.example.server.enumeration.StateCode;
+import com.example.server.id.DistrictPlanId;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
