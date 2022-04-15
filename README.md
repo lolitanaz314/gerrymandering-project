@@ -19,6 +19,8 @@ Icon: "npm install react-icons"
 
 Recharts: "npm install recharts"
 
+Plotly: "npm install react-plotly.js plotly.js"
+
 Routes: "npm install browser-router"
 
 

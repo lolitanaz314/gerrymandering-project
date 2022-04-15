@@ -11,6 +11,7 @@ import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
 import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg';
+import BoxAndWhisker2 from './BoxAndWhisker.js'
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -270,6 +271,7 @@ const RightSidebar = (props) => {
                                 (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
                                     whisker plot</b>, with the selected district plan shown for comparision.
                             </p>
+                            <BoxAndWhisker2></BoxAndWhisker2>
                             <input type="button" value="Generate" onClick={showBW} />
                             <img src={boxAndWhisker} id='bw' className='box-whisker hidden' />
                         </Tab>
