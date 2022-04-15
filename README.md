@@ -17,6 +17,8 @@ Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
 
 Icon: "npm install react-icons"
 
+Recharts: "npm install recharts"
+
 Routes: "npm install browser-router"
 
 
