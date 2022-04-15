@@ -1,5 +1,4 @@
 import DemographicTable from './DemographicTable';
-import SeatVoteCurve from './SeatVoteCurve';
 import Table from 'react-bootstrap/Table';
 
 const StateInfo = (props) => {
@@ -22,9 +21,18 @@ const StateInfo = (props) => {
                 <tr>
                     <th>Race</th>
                     <th>Population</th>
-                    <th>%</th>
                 </tr>
             </thead>
+            <tbody>
+                {Object.keys(props.votingData).map(function (key) {
+                    return <>
+                        <tr>
+                            <td>{key}</td>
+                            <td>{props.votingData[key]}</td>
+                        </tr>
+                    </>;
+                })}
+            </tbody>
         </Table>
         <br></br>
 
@@ -32,10 +40,20 @@ const StateInfo = (props) => {
         <Table striped responsive="sm" bordered hover>
             <thead>
                 <tr>
+                    <th>Party</th>
                     <th>Votes</th>
-                    <th>%</th>
                 </tr>
             </thead>
+            <tbody>
+                {Object.keys(props.plan.compositeData).map(function (key) {
+                    return <>
+                        <tr>
+                            <td>{key}</td>
+                            <td>{props.plan.compositeData[key]}</td>
+                        </tr>
+                    </>;
+                })}
+            </tbody>
         </Table>
     </>;
 
@@ -69,9 +87,18 @@ const StateInfo = (props) => {
                                 <tr>
                                     <th>Race</th>
                                     <th>Population</th>
-                                    <th>%</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {Object.keys(props.votingData).map(function (key) {
+                                    return <>
+                                        <tr>
+                                            <td>{key}</td>
+                                            <td>{props.votingData[key]}</td>
+                                        </tr>
+                                    </>;
+                                })}
+                            </tbody>
                         </Table>
                         <br></br>
 
@@ -79,10 +106,20 @@ const StateInfo = (props) => {
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
+                                    <th>Party</th>
                                     <th>Votes</th>
-                                    <th>%</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {Object.keys(props.plan.compositeData).map(function (key) {
+                                    return <>
+                                        <tr>
+                                            <td>{key}</td>
+                                            <td>{props.plan.compositeData[key]}</td>
+                                        </tr>
+                                    </>;
+                                })}
+                            </tbody>
                         </Table>
                     </td>
                 </Table>
@@ -106,9 +143,18 @@ const StateInfo = (props) => {
                                 <tr>
                                     <th>Race</th>
                                     <th>Population</th>
-                                    <th>%</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {Object.keys(props.votingData).map(function (key) {
+                                    return <>
+                                        <tr>
+                                            <td>{key}</td>
+                                            <td>{props.votingData[key]}</td>
+                                        </tr>
+                                    </>;
+                                })}
+                            </tbody>
                         </Table>
                         <br></br>
 
@@ -116,10 +162,20 @@ const StateInfo = (props) => {
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
+                                    <th>Party</th>
                                     <th>Votes</th>
-                                    <th>%</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {Object.keys(props.comparing.compositeData).map(function (key) {
+                                    return <>
+                                        <tr>
+                                            <td>{key}</td>
+                                            <td>{props.comparing.compositeData[key]}</td>
+                                        </tr>
+                                    </>;
+                                })}
+                            </tbody>
                         </Table>
                     </td>
                 </Table>

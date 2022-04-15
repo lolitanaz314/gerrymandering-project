@@ -14,58 +14,141 @@ import boxAndWhisker from '../assets/img/boxAndWhisker.jpeg';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
-      { //array of dps with info
-        id: 0,
-        status: "Enacted",
-        proposedBy: 'Republican Party'
-      }, {
-        id: 1,
-        status: "Proposed",
-        proposedBy: 'Republican Party'
-      }, {
-        id: 2,
-        status: "Proposed",
-        proposedBy: 'Democratic Party'
-      }
+        { //array of dps with info
+            id: 0,
+            status: "Enacted",
+            proposedBy: 'Republican Party',
+            compositeData: {
+                Democratic: 960129,
+                Republican: 1516348,
+                Other: 52042
+            }
+        }, {
+            id: 1,
+            status: "Proposed",
+            proposedBy: 'Republican Party',
+            compositeData: {
+                Democratic: 980139,
+                Republican: 1618378,
+                Other: 50793
+            }
+        }, {
+            id: 2,
+            status: "Proposed",
+            proposedBy: 'Democratic Party',
+            compositeData: {
+                Democratic: 100129,
+                Republican: 1246338,
+                Other: 42321
+            }
+        },
     ], [ //district plans for south carolina
-      {
-        id: 0,
-        status: "Enacted",
-        proposedBy: 'Republican Party'
-      }, {
-        id: 1,
-        status: "Proposed",
-        proposedBy: 'South Carolina state Senate'
-      }, {
-        id: 2,
-        status: "Approved",
-        proposedBy: 'South Carolina state House'
-      }, {
-        id: 3,
-        status: "Proposed",
-        proposedBy: 'South Carolina state House'
-      }
+        {
+            id: 0,
+            status: "Enacted",
+            proposedBy: 'Republican Party',
+            compositeData: {
+                Democratic: 887132,
+                Republican: 1046758,
+                Other: 40712
+            }
+        }, {
+            id: 1,
+            status: "Proposed",
+            proposedBy: 'South Carolina state Senate',
+            compositeData: {
+                Democratic: 987232,
+                Republican: 946738,
+                Other: 42382
+            }
+        }, {
+            id: 2,
+            status: "Approved",
+            proposedBy: 'South Carolina state House',
+            compositeData: {
+                Democratic: 782132,
+                Republican: 1240734,
+                Other: 53012
+            }
+        }, {
+            id: 3,
+            status: "Proposed",
+            proposedBy: 'South Carolina state House',
+            compositeData: {
+                Democratic: 801922,
+                Republican: 1349558,
+                Other: 30132
+            }
+        }
     ], [ //district plans for colorado
-      {
-        id: 0,
-        status: "Enacted",
-        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
-  
-      }, {
-        id: 1,
-        status: "Approved",
-        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
-      }, {
-        id: 2,
-        status: "Proposed",
-        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
-      }, {
-        id: 3,
-        status: "Proposed",
-        proposedBy: 'Colorado Independent Congressional Redistricting Commission staff'
-      }
+        {
+            id: 0,
+            status: "Enacted",
+            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            compositeData: {
+                Democratic: 1478348,
+                Republican: 1253070,
+                Other: 120439
+            }
+        }, {
+            id: 1,
+            status: "Approved",
+            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            compositeData: {
+                Democratic: 1135782,
+                Republican: 1009287,
+                Other: 201921
+            }
+        }, {
+            id: 2,
+            status: "Proposed",
+            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            compositeData: {
+                Democratic: 1348358,
+                Republican: 1153570,
+                Other: 140739
+            }
+        }, {
+            id: 3,
+            status: "Proposed",
+            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            compositeData: {
+                Democratic: 1476448,
+                Republican: 1053470,
+                Other: 100459
+            }
+        }
     ]
-]
+];
+
+const votingData = [
+    { //tenneesee voting data
+        Total: 5384473,
+        White: 3958294,
+        Hispanic: 305717,
+        Black: 864737,
+        Asian: 128329,
+        Native: 123641,
+        Pacific: 7254
+    }, { //sc voting data
+        Total: 4014460,
+        White: 2603421,
+        Hispanic: 231094,
+        Black: 1014792,
+        Asian: 88832,
+        Native: 79739,
+        Pacific: 5846
+    }, { //colorado voting data
+        Total: 4503234,
+        White: 3098236,
+        Hispanic: 864734,
+        Black: 219102,
+        Asian: 205832,
+        Native: 151772,
+        Pacific: 16320
+    }
+];
+
 
 const headerStyle = {
     margin: '56px 0px 0px 0px',
@@ -83,8 +166,8 @@ const RightSidebar = (props) => {
     const [key, setKey] = useState('summary');
 
     let stateID = 0;
-    if(props.code === "SC") stateID = 1;
-    else if(props.code === "CO") stateID = 2;
+    if (props.code === "SC") stateID = 1;
+    else if (props.code === "CO") stateID = 2;
 
     //scorllbar menu functions
     let menu = document.getElementById('dp-container');
@@ -99,7 +182,7 @@ const RightSidebar = (props) => {
         menu.scrollLeft -= 100;
     }
 
-    function showBW(){
+    function showBW() {
         document.getElementById('bw').classList.remove('hidden');
     }
 
@@ -126,7 +209,7 @@ const RightSidebar = (props) => {
                                 key={obj.id} id={obj.id} state={props.currentState}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
                                 selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
-                        />)}
+                            />)}
                     </div>
                 </div> <hr />
 
@@ -156,7 +239,8 @@ const RightSidebar = (props) => {
                             </Navbar>
                             <br></br> <StateInfo name={props.name} compare={props.comparing} pinned={props.pinned}
                                 currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
-                                comparing={testData[stateID][props.pinned]} code={props.code} />
+                                comparing={testData[stateID][props.pinned]} code={props.code}
+                                votingData={votingData[stateID]} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -174,20 +258,20 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name} 
+                            <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
                             <p className='seawulf-desc'>
                                 This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
-                                cluster dedicated to research applications for Stony Brook faculty, staff, and students. 
+                                cluster dedicated to research applications for Stony Brook faculty, staff, and students.
                                 We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis for
-                                comparision</b> (ex. African American population percent), and <b>selected district plan </b>
+                                    comparision</b> (ex. African American population percent), and <b>selected district plan </b>
                                 (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
-                                whisker plot</b>, with the selected district plan shown for comparision.
+                                    whisker plot</b>, with the selected district plan shown for comparision.
                             </p>
                             <input type="button" value="Generate" onClick={showBW} />
-                            <img src={boxAndWhisker} id='bw' className='box-whisker hidden'/>
+                            <img src={boxAndWhisker} id='bw' className='box-whisker hidden' />
                         </Tab>
                     </Tabs>
                 </Offcanvas.Body>
