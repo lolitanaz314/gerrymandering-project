@@ -13,7 +13,7 @@ Navbar options: "npm install react react-dom"<br/>
 
 Popup Modal: "npm install reactjs-popup --save"
 
-Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
+Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab" <br/> "npm install recharts"
 
 Icon: "npm install react-icons"
 
