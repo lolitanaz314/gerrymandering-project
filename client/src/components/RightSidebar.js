@@ -63,7 +63,7 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 2,
-            status: "Approved",
+            status: "Proposed",
             proposedBy: 'South Carolina state House',
             compositeData: {
                 Democratic: 782132,
@@ -72,7 +72,7 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 3,
-            status: "Proposed",
+            status: "Generated",
             proposedBy: 'South Carolina state House',
             compositeData: {
                 Democratic: 801922,
@@ -92,7 +92,7 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 1,
-            status: "Approved",
+            status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
             compositeData: {
                 Democratic: 1135782,
@@ -110,7 +110,7 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 3,
-            status: "Proposed",
+            status: "Generated",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
             compositeData: {
                 Democratic: 1476448,
