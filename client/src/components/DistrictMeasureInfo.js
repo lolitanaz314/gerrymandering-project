@@ -3,11 +3,6 @@ import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
 
-const imageComponentSidebarStV = {
-    width: 275,
-    height: 208
-}
-
 const imageComponentSidebar_Ten = {
     width: 150,
     height: 50

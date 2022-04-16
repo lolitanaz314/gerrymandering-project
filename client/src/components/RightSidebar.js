@@ -239,8 +239,7 @@ const RightSidebar = (props) => {
                             </Navbar>
                             <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing} pinned={props.pinned}
                                 currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
-                                comparing={testData[stateID][props.pinned]} code={props.code}
-                                votingData={votingData[stateID]} />
+                                comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
