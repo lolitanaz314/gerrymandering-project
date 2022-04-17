@@ -18,9 +18,7 @@ public class DistrictPlanService {
         this.dpRepository = dpRepository;
     }
 
-    public List<DistrictPlan> findAll() {
-        return dpRepository.findAll();
-    }
+    // public List<DistrictPlan> findAll() { return dpRepository.findAll(); }
 
     public List<DistrictPlan> getDistrictPlansByStateId(StateCode stateId) {
         return (List<DistrictPlan>) dpRepository.findByStateId(stateId);
@@ -29,7 +27,6 @@ public class DistrictPlanService {
     public DistrictPlan getDistrictPlanById(StateCode stateId, int id) {
         try{
             Optional<DistrictPlan> dp = dpRepository.findByStateIdAndId(stateId, id);
-            // Optional<DistrictPlan> dp = dpRepository.findById(new DistrictPlanId(stateId, id));
             return dp.get();
         } catch (NoSuchElementException ex){
             return null;

@@ -17,19 +17,23 @@ public class DemographicService {
         this.dmRepository = dmRepository;
     }
 
+    // get demographic of state
     public Map<RacialCategory, Integer> getDemographicByStateId(StateCode id) {
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
-            List<Demographic> s = dmRepository.findDemographicByStateIdNamedParamsNative(id);
-            System.out.println(s.size());
+            List<Demographic> s = dmRepository.findDemographicByStateId(id.ordinal());
+            // System.out.println(s.size());
             for (Demographic ptr : s) {
-                System.out.print(ptr.getRace() + " " + ptr.getTotalPop());
+                // System.out.println(ptr.getRace() + " " + ptr.getTotalPop());
                 demographic.put(ptr.getRace(), ptr.getTotalPop());
             }
             return demographic;
         } catch (NoSuchElementException ex){
             return null;
         }
-
     }
+
+    // get demographic of district
+
+    // get demographic of precinct
 }

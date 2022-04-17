@@ -45,7 +45,7 @@ public class DistrictPlan {
     @Transient
     private int[] votes;
 
-    @Transient
-    @OneToOne
-    private Measures measures;
+//    @Transient
+//    @OneToOne
+//    private Measures measures;
 }

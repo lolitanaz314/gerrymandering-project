@@ -1,16 +1,19 @@
 package com.example.server.enumeration;
 
 public enum PoliticalCategory {
-    DEMOCRATIC_PARTY(0),
-    REPUBLICAN_PARTY(1);
+    DEMOCRATIC_PARTY,
+    REPUBLICAN_PARTY;
 
-    private final int value;
-
-    PoliticalCategory(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return value;
-    }
+//    DEMOCRATIC_PARTY(0),
+//    REPUBLICAN_PARTY(1);
+//
+//    private final int value;
+//
+//    PoliticalCategory(int value) {
+//        this.value = value;
+//    }
+//
+//    public int getValue() {
+//        return value;
+//    }
 }

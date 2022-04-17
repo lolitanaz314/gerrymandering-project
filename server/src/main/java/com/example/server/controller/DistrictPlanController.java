@@ -23,10 +23,10 @@ public class DistrictPlanController {
     public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }
 
     // Test
-    @GetMapping("/api/districtPlans")
-    List<DistrictPlan> getDistrictPlans() {
-        return dpService.findAll();
-    }
+//    @GetMapping("/api/districtPlans")
+//    List<DistrictPlan> getDistrictPlans() {
+//        return dpService.findAll();
+//    }
 
     // get district plans by state_id
     @GetMapping("/api/states/{state_id}/districtPlans")
@@ -36,10 +36,10 @@ public class DistrictPlanController {
 //        return CollectionModel.of(districtPlan);
 
         // With return links
-        List<EntityModel<DistrictPlan>> districtPlans = dpService.getDistrictPlansByStateId(stateId).stream().map(districtPlan ->
-                EntityModel.of(districtPlan,
-                linkTo(methodOn(DistrictPlanController.class).getDistrictPlanById(districtPlan.getStateId(), districtPlan.getId())).withSelfRel(),
-                linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(districtPlan.getStateId())).withRel("districtPlans")))
+        List<EntityModel<DistrictPlan>> districtPlans = dpService.getDistrictPlansByStateId(stateId).stream().map(dp ->
+                EntityModel.of(dp,
+                linkTo(methodOn(DistrictPlanController.class).getDistrictPlanById(dp.getStateId(), dp.getId())).withSelfRel(),
+                linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
         return CollectionModel.of(districtPlans,
                 linkTo(methodOn(DistrictPlanController.class).getDistrictPlansByStateId(stateId)).withSelfRel());

@@ -32,33 +32,36 @@ public class StateController {
         this.dmService = dmService;
     }
 
-    // get states
     @GetMapping("/api/states")
     CollectionModel<EntityModel<State>> getStates() {
-//        Set<EntityModel<State>> states = sService.findAll().stream().map(EntityModel::of).collect(Collectors.toSet());
-//        return CollectionModel.of(states);
 
-        // With return links
-        Set<EntityModel<State>> states = sService.findAll().stream().map(s ->
+        // Get info for each state
+        List<State> states = sService.findAll();
+        for (State s : states){
+            s.setDemographic(dmService.getDemographicByStateId(s.getId()));
+            s.setDistrictPlans(dpService.getDistrictPlansByStateId(s.getId()));
+        }
+
+        // Add return links
+        Set<EntityModel<State>> statesSet = states.stream().map(s ->
                 EntityModel.of(s,
                 linkTo(methodOn(StateController.class).getStateById(s.getId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
         .collect(Collectors.toSet());
-        return CollectionModel.of(states,
+        return CollectionModel.of(statesSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
 
-    // get state by id
     @GetMapping("/api/states/{id}")
     EntityModel<State> getStateById(
             @PathVariable("id") StateCode id) {
-//        State state = sService.getStateById(id);
-//        return EntityModel.of(state);
 
-        // With return links
+        // Get info of chosen state
         State s = sService.getStateById(id);
         s.setDemographic(dmService.getDemographicByStateId(id));
         s.setDistrictPlans(dpService.getDistrictPlansByStateId(id));
+
+        // Add return links
         return EntityModel.of(s,
                 linkTo(methodOn(StateController.class).getStateById(id)).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));

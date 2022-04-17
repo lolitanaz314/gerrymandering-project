@@ -17,9 +17,7 @@ public class PrecinctService {
     public PrecinctService(PrecinctRepository pRepository) {
         this.pRepository = pRepository;
     }
-    public List<Precinct> findAll() {
-        return pRepository.findAll();
-    }
+    // public List<Precinct> findAll() { return pRepository.findAll(); }
 
     public List<Precinct> getPrecinctsByStateId(StateCode stateId) {
         return (List<Precinct>) pRepository.findByStateId(stateId);

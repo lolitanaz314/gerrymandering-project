@@ -24,10 +24,10 @@ public class DistrictController {
     public DistrictController (DistrictService dService) {this.dService = dService; }
 
     // Test
-    @GetMapping("/api/districts")
-    public List<District> getDistricts() {
-        return dService.findAll();
-    }
+//    @GetMapping("/api/districts")
+//    public List<District> getDistricts() {
+//        return dService.findAll();
+//    }
 
     // get districts by state_id and dp_id
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")

@@ -24,7 +24,6 @@ public class State {
     private int totalPop;
 
     @Transient
-    // private int[] demographic;
     @MapKeyEnumerated(EnumType.STRING)
     private Map<RacialCategory, Integer> demographic;
 

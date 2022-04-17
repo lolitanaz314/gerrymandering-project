@@ -14,9 +14,7 @@ import java.util.NoSuchElementException;
 public class StateService {
     @Autowired
     private final StateRepository sRepository;
-    public StateService(StateRepository sRepository) {
-        this.sRepository = sRepository;
-    }
+    public StateService(StateRepository sRepository) { this.sRepository = sRepository; }
 
     public List<State> findAll() {
         return sRepository.findAll();

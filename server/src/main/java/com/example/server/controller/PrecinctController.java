@@ -24,10 +24,10 @@ public class PrecinctController {
     public PrecinctController (PrecinctService pService) {this.pService = pService; }
 
     // Test
-    @GetMapping("/api/precincts")
-    public List<Precinct> getPrecincts() {
-        return pService.findAll();
-    }
+//    @GetMapping("/api/precincts")
+//    public List<Precinct> getPrecincts() {
+//        return pService.findAll();
+//    }
 
     // Get precincts by state_id
     @GetMapping("/api/states/{state_id}/precincts")

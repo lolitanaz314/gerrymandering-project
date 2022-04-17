@@ -18,7 +18,7 @@ public class DistrictService {
         this.dRepository = dRepository;
     }
 
-    public List<District> findAll() {return dRepository.findAll(); }
+    // public List<District> findAll() {return dRepository.findAll(); }
 
     public List<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
         return (List<District>) dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);

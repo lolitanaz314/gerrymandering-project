@@ -10,5 +10,5 @@ public enum StateCode {
     NM,NY,NC,ND,OH,
     OK,OR,PA,RI,SC,
     SD,TN,TX,UT,VT,
-    VA,WA,WV,WI,WY
+    VA,WA,WV,WI,WY;
 }
