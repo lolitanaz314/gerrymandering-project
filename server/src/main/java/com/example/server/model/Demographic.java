@@ -21,6 +21,7 @@ import javax.persistence.*;
 public class Demographic {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name="state_id", nullable = false)
