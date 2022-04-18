@@ -19,7 +19,7 @@ const DemographicTable = (props) => {
           .catch(error => {
             console.log('Something went wrong', error);
           })    
-      }, []);
+      }, [demographic]);
 
       return (
         <>
@@ -34,23 +34,15 @@ const DemographicTable = (props) => {
                     </thead>
                     <tbody>
                     {Object.keys(demographic).map(function (key) {
-                                    return <>
-                                        <tr>
-                                            <td>{key}</td>
-                                            <td>{demographic[key]}</td>
-                                        </tr>
-                                    </>;
-                                })}
-                    
-                    {/* {demographic.map(dm => (
-                        <tr key = {dm.race}>
-                            <td>{dm.race}</td>
-                            <td>{dm.totalPop}</td>
-                        </tr>
-                    ))} */}
+                        return <>
+                            <tr>
+                                <td>{key}</td>
+                                <td>{demographic[key]}</td>
+                            </tr>
+                        </>;
+                    })}
                     </tbody>
             </Table>                                        
-            
         </>)
 }
 
