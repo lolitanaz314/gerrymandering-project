@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
+'''
 from gerrychain import (GeographicPartition, Partition, Graph, MarkovChain,
                         proposals, updaters, constraints, accept, Election)
-from gerrychain.proposals import recom
+                     
+from gerrychain.proposals import recom'''
+
+import gerrychain
 from functools import partial
 import pandas
 
@@ -48,7 +52,7 @@ What the data is supposed to look like, being fed into Seawulf
 
 '''
 
-graph = Graph.from_json("./PA_VTDs.json") # this is going to be a command line argument (Colorado, SC, or Ten-I-see)
+graph = Graph.from_json("/Users/cherrypi/Desktop/gerrymandering-project/data/sample_data/PA_VTDs_sample.json") # this is going to be a command line argument (Colorado, SC, or Ten-I-see)
 
 # hypothetical election results
 elections = [
