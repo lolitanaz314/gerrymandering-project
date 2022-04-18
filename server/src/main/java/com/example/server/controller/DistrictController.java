@@ -21,6 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @CrossOrigin("*")
 public class DistrictController {
     DistrictService dService; // DistrictService
+
     public DistrictController (DistrictService dService) {this.dService = dService; }
 
     // Test

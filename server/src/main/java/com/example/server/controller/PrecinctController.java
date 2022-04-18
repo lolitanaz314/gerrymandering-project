@@ -21,6 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @CrossOrigin("*")
 public class PrecinctController {
     PrecinctService pService;
+
     public PrecinctController (PrecinctService pService) {this.pService = pService; }
 
     // Test
@@ -32,7 +33,7 @@ public class PrecinctController {
     // Get precincts by state_id
     @GetMapping("/api/states/{state_id}/precincts")
     public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(
-        @PathVariable("state_id") StateCode stateId) {
+            @PathVariable("state_id") StateCode stateId) {
 
         Set<EntityModel<Precinct>> precincts = pService.getPrecinctsByStateId(stateId).stream().map(p ->
                 EntityModel.of(p,
