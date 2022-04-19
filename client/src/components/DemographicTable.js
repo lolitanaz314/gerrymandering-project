@@ -29,7 +29,6 @@ const DemographicTable = (props) => {
                         <tr>
                             <th>Race</th>
                             <th>Population</th>
-                            <th>%</th>
                         </tr>
                     </thead>
                     <tbody>

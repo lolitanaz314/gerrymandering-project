@@ -237,8 +237,8 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing} pinned={props.pinned}
-                                currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
+                            <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing}
+                                pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
@@ -264,10 +264,10 @@ const RightSidebar = (props) => {
                             <p className='seawulf-desc'>
                                 This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
                                 cluster dedicated to research applications for Stony Brook faculty, staff, and students.
-                                We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis for
-                                    comparision</b> (ex. African American population percent), and <b>selected district plan </b>
+                                We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis
+                                for comparision</b> (ex. African American population percent), and <b>selected district plan </b>
                                 (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
-                                    whisker plot</b>, with the selected district plan shown for comparision.
+                                whisker plot</b>, with the selected district plan shown for comparision.
                             </p>
                             <input type="button" value="Generate" onClick={showBW} />
                             <div id='bw' className='box-whisker hidden'>
