@@ -28,3 +28,4 @@ src/main/resources/application.properties
 data/co_data
 data/sc_data
 data/tn_data
+data/sample_data
