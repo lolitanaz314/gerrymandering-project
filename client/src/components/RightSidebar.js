@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
-import BoxAndWhisker2 from './BoxAndWhisker.js'
+import BoxAndWhisker from './BoxAndWhisker.js'
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -34,7 +34,7 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 2,
-            status: "Proposed",
+            status: "Generated",
             proposedBy: 'Democratic Party',
             compositeData: {
                 Democratic: 100129,
@@ -183,6 +183,7 @@ const RightSidebar = (props) => {
     }
 
     function showBW() {
+        document.getElementById('seawulf').classList.add('hidden');
         document.getElementById('bw').classList.remove('hidden');
     }
 
@@ -261,17 +262,19 @@ const RightSidebar = (props) => {
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
                         <Tab eventKey="fairness" title="Fairness">
-                            <p className='seawulf-desc'>
-                                This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
-                                cluster dedicated to research applications for Stony Brook faculty, staff, and students.
-                                We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis
-                                for comparision</b> (ex. African American population percent), and <b>selected district plan </b>
-                                (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
-                                whisker plot</b>, with the selected district plan shown for comparision.
-                            </p>
-                            <input type="button" value="Generate" onClick={showBW} />
-                            <div id='bw' className='box-whisker hidden'>
-                                <BoxAndWhisker2 />
+                            <div id='seawulf'>
+                                <p className='seawulf-desc'>
+                                    This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
+                                    cluster dedicated to research applications for Stony Brook faculty, staff, and students.
+                                    We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis
+                                    for comparision</b> (ex. African American population percent), and <b>selected district plan </b>
+                                    (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
+                                    whisker plot</b>, with the selected district plan shown for comparision.
+                                </p>
+                                <input type="button" value="Generate" onClick={showBW} />
+                            </div>
+                            <div id='bw' className='hidden'>
+                                <BoxAndWhisker />
                             </div>
                         </Tab>
                     </Tabs>

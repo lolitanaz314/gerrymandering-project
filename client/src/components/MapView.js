@@ -30,13 +30,10 @@ const MapView = (props) => {
     name: 'USA',
     code: 'USA',
     layer: null, //this is used to remove geojson layer -> might need to delete later on
-    view: 'election',
-    districtbord: true,
-    precinctbord: false,
-    countybord: false,
-    currentDp: 0,
-    pinned: null
+    view: 'election'
   });
+
+  const [districtPlans, setDps] = useState({currentDp: 0, pinned: null});
 
   //sidebar
   const [show, setShow] = useState(false);
@@ -80,11 +77,11 @@ const MapView = (props) => {
       islander: islander,
       hispanic: hispanic,
     });
-  });
+  })
 
   //zoom state functions
   function clicked(feature, layer) {
-    // bind click
+    // bind click to geojson
     layer.on('click', () => zoomState(feature, layer));
     // console.log("Clicked");
   }
@@ -94,16 +91,15 @@ const MapView = (props) => {
     let map = document.getElementById('leaflet-map');
     map.classList.add('on-state');
 
-    //resets comparision
-    handleCompare(false);
-
-    //reset pinned dp
-    if (currentLocation.pinned !== null) {
-      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
-      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
+    //reset pinned dp back to default -> only works when choosing from sidebar?
+    if(districtPlans.pinned !== null) {
+      document.getElementById(currentLocation.name + '-fill-' + districtPlans.pinned).classList.add('hidden');
+      document.getElementById(currentLocation.name + '-outline-' + districtPlans.pinned).classList.remove('hidden');
     }
 
-    setOnselect({}); //resets the info box if user clicks on a new state
+    //resets comparison view
+    handleCompare(false);
+
     let polygon = new L.Polygon(state.geometry.coordinates);
     let bounds = polygon.getBounds();
     let center = bounds.getCenter();
@@ -117,20 +113,27 @@ const MapView = (props) => {
       name: state.properties.name,
       code: state.properties.abbreviation,
       layer: layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: 0,
-      pinned: null
+      view: currentLocation.view
     });
+
+    //shows sidebar
     handleShow();
 
     //changes css to show hover boxes
+    setOnselect({});
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
     document.getElementsByClassName("legend")[0].classList.remove('hidden');
 
+    //resets fairness tab
     document.getElementById('bw').classList.add('hidden');
+    document.getElementById('seawulf').classList.remove('hidden');
+
+    //resets compare button
+    document.getElementById('compare-button').classList.add('hidden');
+
+    if(districtPlans.currentDp !== 0)
+      document.getElementById(currentLocation.name + '-' + districtPlans.currentDp).classList.remove('dp-selected');
+    setDps({currentDp: 0, pinned: null})
   }
 
   function ZoomComponent() {
@@ -140,6 +143,7 @@ const MapView = (props) => {
     map.invalidateSize();
 
     //zoom
+    if (currentLocation.layer) map.addLayer(currentLocation.layer);
     map.setView(currentLocation.center, currentLocation.zoom);
     if (currentLocation.layer) {
       if (map.hasLayer(currentLocation.layer)) map.removeLayer(currentLocation.layer);
@@ -156,12 +160,7 @@ const MapView = (props) => {
       name: currentLocation.name,
       code: currentLocation.code,
       layer: currentLocation.layer,
-      view: v,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: currentLocation.pinned
+      view: v
     });
     console.log("change view to: " + currentLocation.view)
   }
@@ -184,54 +183,6 @@ const MapView = (props) => {
     }
   }
 
-  function toggleDistrict() {
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: !currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: currentLocation.pinned
-    })
-  }
-
-  function togglePrecinct() {
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: !currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: currentLocation.pinned
-    })
-  }
-
-  function toggleCounty() {
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: !currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: currentLocation.pinned
-    })
-  }
-
   //scrolling menu functions
   function selectDP(id) {
     //remove selected from class name (if previously selected)
@@ -245,7 +196,7 @@ const MapView = (props) => {
     }
 
     //show compare button if a dp is pinned as well
-    if (currentLocation.pinned && currentLocation.pinned !== id) {
+    if (districtPlans.pinned && districtPlans.pinned !== id) {
       document.getElementById('compare-button').classList.remove('hidden');
     } else {
       document.getElementById('compare-button').classList.add('hidden');
@@ -253,26 +204,16 @@ const MapView = (props) => {
       handleCompare(false);
     }
 
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: id,
-      pinned: currentLocation.pinned
+    setDps({
+      currentDp: id, pinned: districtPlans.pinned
     })
   }
 
   function pinDP(id) {
     //allow only one dp to be pinned
-    if (currentLocation.pinned !== null) {
-      document.getElementById(currentLocation.name + '-fill-' + currentLocation.pinned).classList.add('hidden');
-      document.getElementById(currentLocation.name + '-outline-' + currentLocation.pinned).classList.remove('hidden');
+    if (districtPlans.pinned !== null) {
+      document.getElementById(currentLocation.name + '-fill-' + districtPlans.pinned).classList.add('hidden');
+      document.getElementById(currentLocation.name + '-outline-' + districtPlans.pinned).classList.remove('hidden');
     }
 
     let pin = document.getElementById(currentLocation.name + '-outline-' + id);
@@ -281,7 +222,7 @@ const MapView = (props) => {
     show.classList.remove('hidden');
 
     //show compare button if a dp is selected as well
-    if (currentLocation.currentDp !== id) {
+    if (districtPlans.currentDp !== id) {
       document.getElementById('compare-button').classList.remove('hidden');
     } else {
       document.getElementById('compare-button').classList.add('hidden');
@@ -289,18 +230,8 @@ const MapView = (props) => {
       handleCompare(false);
     }
 
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: id
+    setDps({
+      currentDp: districtPlans.currentDp, pinned: id
     })
   }
 
@@ -315,25 +246,15 @@ const MapView = (props) => {
     //resets comparision view
     handleCompare(false);
 
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      layer: currentLocation.layer,
-      view: currentLocation.view,
-      districtbord: currentLocation.districtbord,
-      precinctbord: currentLocation.precinctbord,
-      countybord: currentLocation.countybord,
-      currentDp: currentLocation.currentDp,
-      pinned: null
+    setDps({
+      currentDp: districtPlans.currentDp, pinned: null
     })
   }
 
   return (
     <div>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView}
-        toggleDistrict={toggleDistrict} togglePrecinct={togglePrecinct} toggleCounty={toggleCounty} />
+      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
+
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
           maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
@@ -350,8 +271,8 @@ const MapView = (props) => {
           <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
-            show={show} name={currentLocation.name} pinned={currentLocation.pinned}
-            currentState={currentLocation.name} currentDp={currentLocation.currentDp}
+            show={show} name={currentLocation.name} pinned={districtPlans.pinned}
+            currentState={currentLocation.name} currentDp={districtPlans.currentDp}
             comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />
 

@@ -5,7 +5,7 @@ const getStates = () => {
 }
 
 const getStateById = (state_id) => {
-    console.log(httpClient.get("/states/"+state_id))
+    // console.log(httpClient.get("/states/"+state_id))
     return httpClient.get("/states/"+state_id)
 }
 

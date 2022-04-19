@@ -9,14 +9,19 @@ const imageComponentSidebar = {
     height: 200
 }
 
-const comparingStyle = { //style for compare view
+const curveStyle = { //style for selected dp
+    height: '330px',
+    width: '650px'
+}
+
+const comparingStyle = { //style for compare view (seat plot)
     height: '300px',
     width: '300px'
 }
 
-const curveStyle = { //style for selected dp
-    height: '330px',
-    width: '650px'
+const tableStyle = { //style for compare view (img)
+    width: 300,
+    height: 100
 }
 
 const DistrictMeasureInfo = (props) => {
@@ -45,7 +50,7 @@ const DistrictMeasureInfo = (props) => {
                 <Table className='column'>
                     <td>
                         <h5 id="more-measures">Measures</h5>
-                        <img src={statemeasures} style={imageComponentSidebar} />
+                        <img src={statemeasures} style={tableStyle} />
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
@@ -56,7 +61,7 @@ const DistrictMeasureInfo = (props) => {
                 <Table className='column'>
                     <td>
                         <h5 id="more-measures">Measures</h5>
-                        <img src={statemeasures} style={imageComponentSidebar} />
+                        <img src={statemeasures} style={tableStyle} />
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>

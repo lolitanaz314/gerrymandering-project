@@ -51,12 +51,10 @@ const d5 = {
   // boxpoints: 'Outliers'
 };
 
-export default function BoxAndWhisker2() {
+export default function BoxAndWhisker() {
   return (
-      <Plot
-        data= {[d1,d2,d3,d4,d5]}
-        layout={{width: 500, height: 400, title: 'Average Districting Box and Whisker Plot'}}
-      />
+      <Plot data= {[d1,d2,d3,d4,d5]}
+        layout={{width: 500, height: 400, title: 'Average Districting Box and Whisker Plot'}} />
     );
 }
 

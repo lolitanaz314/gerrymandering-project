@@ -8,7 +8,6 @@ const comparingStyle = { //height is used to make sure the comparision sections 
 
 const StateInfo = (props) => {
     // let s = State.getStateById(props.code);
-
     let basic = <>
         <h5 id="districting-sum">Overview</h5>
         <p>

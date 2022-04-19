@@ -57,15 +57,15 @@ const Navigation = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style={borderStyle}>
-              <li className="checkbox form-group" onClick = {() => props.toggleDistrict()}>
+              <li className="checkbox form-group"> {/* onClick = {() => props.toggleDistrict()}*/}
                 <input type="checkbox" value="district" name="district" defaultChecked="true"/>
                 <label htmlFor="district">District</label>
               </li>
-              <li className="checkbox form-group" onClick = {() => props.togglePrecinct()}>
+              <li className="checkbox form-group">
                 <input type="checkbox" value="precinct" name="precinct"/>
                 <label htmlFor="precinct">Precinct</label>
               </li>
-              <li className="checkbox form-group" onClick = {() => props.toggleCounty()}>
+              <li className="checkbox form-group">
                 <input type="checkbox" value="county" name="county" />
                 <label htmlFor="county">County</label>
               </li>
