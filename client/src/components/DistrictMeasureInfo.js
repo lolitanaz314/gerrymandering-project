@@ -20,8 +20,8 @@ const comparingStyle = { //style for compare view (seat plot)
 }
 
 const tableStyle = { //style for compare view (img)
-    width: 300,
-    height: 100
+    // width: 300,
+    height: 200,
 }
 
 const DistrictMeasureInfo = (props) => {
@@ -50,7 +50,7 @@ const DistrictMeasureInfo = (props) => {
                 <Table className='column'>
                     <td>
                         <h5 id="more-measures">Measures</h5>
-                        <img src={statemeasures} style={tableStyle} />
+                        <div style={tableStyle}> <DistrictPlanMeasuresTable/> </div>
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
@@ -61,7 +61,7 @@ const DistrictMeasureInfo = (props) => {
                 <Table className='column'>
                     <td>
                         <h5 id="more-measures">Measures</h5>
-                        <img src={statemeasures} style={tableStyle} />
+                        <div style={tableStyle}> <DistrictPlanMeasuresTable/> </div>
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
