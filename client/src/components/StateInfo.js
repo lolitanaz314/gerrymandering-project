@@ -73,7 +73,8 @@ const StateInfo = (props) => {
                     <th style={{ float: 'right' }}>District Plan {props.pinned}</th>
                 </tr>
             </thead>
-
+            
+            {/* table for 'selected' district plan */}
             <tbody>
                 <Table className='column'>
                     <td>
@@ -132,6 +133,7 @@ const StateInfo = (props) => {
                     </td>
                 </Table>
 
+                {/* table for 'pinned' district plan */}
                 <Table className='column'>
                     <td>
                         <h5 id="districting-sum">Overview</h5>
@@ -142,7 +144,7 @@ const StateInfo = (props) => {
                         </p>
                         <br></br>
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable />
+                        <DemographicTable code={props.code}/>
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>

@@ -3,22 +3,22 @@ import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
 
-const imageComponentSidebar_Ten = {
-    width: 150,
-    height: 50
+const imageComponentSidebar = {
+    width: 550,
+    height: 200
 }
 
-const imageComponentSidebar_SC = {
-    width: 150,
-    height: 90
+const comparingStyle = { //style for compare view
+    height: '300px',
+    width: '300px'
+}
+
+const curveStyle = { //style for selected dp
+    height: '330px',
+    width: '650px'
 }
 
 const DistrictMeasureInfo = (props) => {
-
-    let imageComponentSidebar = imageComponentSidebar_SC;
-    if (props.name === "Tennessee") {
-        imageComponentSidebar = imageComponentSidebar_Ten;
-    }
 
     let basic = <>
         <h5 id="more-measures">Measures</h5>
@@ -26,7 +26,7 @@ const DistrictMeasureInfo = (props) => {
         <br></br><br></br>
         
         <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
-        <SeatVoteCurve/>
+        <div style={curveStyle}> <SeatVoteCurve/> </div>
         <br></br>
     </>;
 
@@ -48,7 +48,7 @@ const DistrictMeasureInfo = (props) => {
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
-                        <div><SeatVoteCurve/></div>
+                        <div style={comparingStyle}> <SeatVoteCurve/> </div>
                     </td>
                 </Table>
 
@@ -59,8 +59,7 @@ const DistrictMeasureInfo = (props) => {
                         <br></br><br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
-                        <div><SeatVoteCurve/></div>
-                        <br></br>
+                        <div style={comparingStyle}> <SeatVoteCurve/> </div>
                     </td>
                 </Table>
             </tbody>
