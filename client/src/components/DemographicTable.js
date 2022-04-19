@@ -13,7 +13,7 @@ const DemographicTable = (props) => {
         State.getStateById(props.code)
         .then(response => {
             // console.log('Printing user data', response);
-            console.log('Printing user data', response.data.demographic);
+            // console.log('Printing user data', response.data.demographic);
             setDemographic(response.data.demographic);
           })
           .catch(error => {
@@ -29,6 +29,7 @@ const DemographicTable = (props) => {
                         <tr>
                             <th>Race</th>
                             <th>Population</th>
+                            <th>%</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@ const DemographicTable = (props) => {
                     })}
                     </tbody>
             </Table>                                        
+            
         </>)
 }
 

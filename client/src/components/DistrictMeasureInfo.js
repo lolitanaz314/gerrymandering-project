@@ -2,6 +2,7 @@ import statemeasures from '../assets/img/state_measures.png'
 import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
+import DistrictPlanMeasuresTable from './DistrictPlanMeasuresTable';
 
 const imageComponentSidebar = {
     width: 550,
@@ -22,7 +23,7 @@ const DistrictMeasureInfo = (props) => {
 
     let basic = <>
         <h5 id="more-measures">Measures</h5>
-        <img src={statemeasures} style={imageComponentSidebar} />
+        <div style={imageComponentSidebar}> <DistrictPlanMeasuresTable/> </div>
         <br></br><br></br>
         
         <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
