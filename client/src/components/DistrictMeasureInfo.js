@@ -28,8 +28,8 @@ const DistrictMeasureInfo = (props) => {
 
     let basic = <>
         <h5 id="more-measures">Measures</h5>
-        <div style={imageComponentSidebar}> <DistrictPlanMeasuresTable/> </div>
-        <br></br><br></br>
+        <div> <DistrictPlanMeasuresTable/> </div>
+        <br></br>
         
         <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
         <div style={curveStyle}> <SeatVoteCurve/> </div>
@@ -51,7 +51,7 @@ const DistrictMeasureInfo = (props) => {
                     <td>
                         <h5 id="more-measures">Measures</h5>
                         <div style={tableStyle}> <DistrictPlanMeasuresTable/> </div>
-                        <br></br><br></br>
+                        <br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
                         <div style={comparingStyle}> <SeatVoteCurve/> </div>
@@ -62,7 +62,7 @@ const DistrictMeasureInfo = (props) => {
                     <td>
                         <h5 id="more-measures">Measures</h5>
                         <div style={tableStyle}> <DistrictPlanMeasuresTable/> </div>
-                        <br></br><br></br>
+                        <br></br>
 
                         <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
                         <div style={comparingStyle}> <SeatVoteCurve/> </div>
