@@ -31,5 +31,3 @@ In data:
 MGGG algorithm: pip install gerrychain
 
 Mapping geographies (precinct to block, block to district): pip install maup
-
-
