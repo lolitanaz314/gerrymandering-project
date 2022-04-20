@@ -21,9 +21,9 @@ const DistrictPlan = (props) => {
 
     return(
         <div>
-            <AiOutlinePushpin className='pin-icon' id={props.state + '-outline-' + props.id}
+            <AiOutlinePushpin className='pin-icon icon-unfilled' id={props.state + '-outline-' + props.id}
                 onClick={() => props.pinDP(props.id)} />
-            <AiFillPushpin className='pin-icon hidden' id={props.state + '-fill-' + props.id} 
+            <AiFillPushpin className='pin-icon icon-filled hidden' id={props.state + '-fill-' + props.id} 
                 onClick={() => props.unpinDP(props.id)} />
             {dp} <span>{props.plan.status}</span>
         </div>

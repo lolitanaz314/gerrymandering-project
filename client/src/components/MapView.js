@@ -91,12 +91,6 @@ const MapView = (props) => {
     let map = document.getElementById('leaflet-map');
     map.classList.add('on-state');
 
-    //reset pinned dp back to default -> only works when choosing from sidebar?
-    if(districtPlans.pinned !== null) {
-      document.getElementById(currentLocation.name + '-fill-' + districtPlans.pinned).classList.add('hidden');
-      document.getElementById(currentLocation.name + '-outline-' + districtPlans.pinned).classList.remove('hidden');
-    }
-
     //resets comparison view
     handleCompare(false);
 
@@ -131,8 +125,24 @@ const MapView = (props) => {
     //resets compare button
     document.getElementById('compare-button').classList.add('hidden');
 
-    if(districtPlans.currentDp !== 0)
-      document.getElementById(currentLocation.name + '-' + districtPlans.currentDp).classList.remove('dp-selected');
+    //resets selected dp styling
+    let plans = document.getElementsByClassName('dp-item');
+    for (let i = 0; i < plans.length; i++) {
+      if (i !== 0) {
+        plans[i].classList.remove('dp-selected');
+      } else {
+        plans[i].classList.add('dp-selected');
+      }
+    }
+
+    //resets pinned dp
+    let filled = document.getElementsByClassName('icon-filled');
+    let unfilled = document.getElementsByClassName('icon-unfilled');
+    for (let i = 0; i < filled.length; i++) {
+      filled[i].classList.add('hidden');
+      unfilled[i].classList.remove('hidden');
+    }
+
     setDps({currentDp: 0, pinned: null})
   }
 
