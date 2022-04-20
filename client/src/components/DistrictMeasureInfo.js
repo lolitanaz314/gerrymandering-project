@@ -3,6 +3,7 @@ import SeatVoteCurve from './SeatVoteCurve';
 
 import Table from 'react-bootstrap/Table';
 import DistrictPlanMeasuresTable from './DistrictPlanMeasuresTable';
+import RadarCharting from './RadarChart';
 
 const imageComponentSidebar = {
     width: 550,
@@ -30,6 +31,10 @@ const DistrictMeasureInfo = (props) => {
         <h5 id="more-measures">Measures</h5>
         <div> <DistrictPlanMeasuresTable/> </div>
         <br></br>
+
+        {/* only here for now. should only show up when comparing 2 dp? */}
+        <h5 id="radar-chart">Radar Chart</h5>
+        <div><RadarCharting/></div>
         
         <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
         <div style={curveStyle}> <SeatVoteCurve/> </div>
