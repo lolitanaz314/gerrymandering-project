@@ -164,14 +164,14 @@ const MapView = (props) => {
     return null;
   }
 
-  function changeView(v) {
+  function changeView(view) {
     setOnselect({});
     setLocation({
       center: currentLocation.center,
       zoom: currentLocation.zoom,
       name: currentLocation.name,
       code: currentLocation.code,
-      view: v
+      view: view
     });
     console.log("change view to: " + currentLocation.view)
   }

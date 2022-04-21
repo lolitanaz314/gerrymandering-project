@@ -34,7 +34,7 @@ const DistrictMeasureInfo = (props) => {
 
         {/* only here for now. should only show up when comparing 2 dp? */}
         <h5 id="radar-chart">Radar Chart</h5>
-        <div><RadarCharting/></div>
+        <div> <RadarCharting/> </div>
         
         <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
         <div style={curveStyle}> <SeatVoteCurve/> </div>

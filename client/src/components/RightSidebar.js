@@ -261,7 +261,7 @@ const RightSidebar = (props) => {
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
-                        <Tab eventKey="fairness" title="Fairness">
+                        <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <div id='seawulf'>
                                 <p className='seawulf-desc'>
                                     This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
