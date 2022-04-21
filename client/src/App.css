@@ -26,7 +26,7 @@
   flex-direction: column;
   align-items: right;
   top: -70px;
-  right: 325px;
+  right: 250px;
   padding: 10px 10px;
   border-radius: 5px;
   color: white;
@@ -45,7 +45,7 @@
 .census-info-hover{
   z-index: 400;
   top: -70px;
-  right: 325px;
+  right: 250px;
   height: fit-content;
   width: 36%;
   padding: 10px 10px;
