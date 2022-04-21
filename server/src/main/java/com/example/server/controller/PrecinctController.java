@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,10 +24,8 @@ public class PrecinctController {
     public PrecinctController (PrecinctService pService) {this.pService = pService; }
 
     // Test
-//    @GetMapping("/api/precincts")
-//    public List<Precinct> getPrecincts() {
-//        return pService.findAll();
-//    }
+    /* @GetMapping("/api/precincts")
+    public List<Precinct> getPrecincts() { return pService.findAll(); }*/
 
     @GetMapping("/api/states/{state_id}/precincts")
     public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(@PathVariable("state_id") StateCode stateId) {
@@ -47,14 +44,14 @@ public class PrecinctController {
     public Set<EntityModel<Precinct>> assemblePrecincts(Set<Precinct> precincts){
         return precincts.stream().map(p ->
                 EntityModel.of(p,
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getId())).withSelfRel(),
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
                 .collect(Collectors.toSet());
     }
 
     public EntityModel<Precinct> assemblePrecinct(Precinct p){
         return EntityModel.of(p,
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getId())).withSelfRel(),
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts"));
     }
 }

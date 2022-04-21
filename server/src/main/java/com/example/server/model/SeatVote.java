@@ -16,12 +16,12 @@ import javax.persistence.*;
 @IdClass(DistrictPlanId.class)
 public class SeatVote {
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @Column(name="state_id", nullable = false)
+    private StateCode stateId;
 
     @Id
-    @Column(name = "state_id", nullable = false)
-    private StateCode stateId;
+    @Column(name="district_plan_id", nullable = false)
+    private int planId;
 
     @Column(name = "vote_bias")
     double voteBias;

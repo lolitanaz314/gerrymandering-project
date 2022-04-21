@@ -8,7 +8,6 @@ import com.example.server.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.Optional;
 import java.util.NoSuchElementException;
@@ -25,12 +24,12 @@ public class DistrictService {
         this.dmService = dmService;
     }
 
-    public List<District> findAll() {return dRepository.findAll(); }
+    // public List<District> findAll() {return dRepository.findAll(); }
 
     public Set<District> getDistrictsByPlanId(StateCode stateId, int planId){
-        Set<District> districts = dRepository.findByStateIdAndDistrictPlanId(stateId, planId);
+        Set<District> districts = dRepository.findByStateIdAndPlanId(stateId, planId);
         for (District d : districts){
-            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, planId, d.getId())));
+            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, planId, d.getDistrictId())));
             // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
         }
         return districts;
@@ -38,7 +37,7 @@ public class DistrictService {
 
     public District getDistrictByPlanIdAndDistrictId(StateCode stateId, int planId, int districtId) {
         try{
-            Optional<District> d = dRepository.findByStateIdAndDistrictPlanIdAndId(stateId, planId, districtId);
+            Optional<District> d = dRepository.findByStateIdAndPlanIdAndDistrictId(stateId, planId, districtId);
             if(d.isPresent()){
                 d.get().setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, planId, districtId)));
                 return d.get();
@@ -51,8 +50,11 @@ public class DistrictService {
     }
 
     // measures
-//    +getCompactnessMeasure(): double
-//    +isMajorityMinorityDistrict(): boolean
-//    +isCompetitiveDistrict(): boolean
-//    +getWastedVotes(): int[]
+    /*
+    getCompactnessMeasure(): double
+    isMajorityMinorityDistrict(): boolean
+    isCompetitiveDistrict(): boolean
+    getWastedVotes(): int[]
+     */
+//
 }

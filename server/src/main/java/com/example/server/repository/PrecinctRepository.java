@@ -11,7 +11,6 @@ import java.util.Set;
 public interface PrecinctRepository extends JpaRepository<Precinct, PrecinctId> {
 
     Set<Precinct> findByStateId(StateCode state_id);
-    // Iterable<Precinct> findByStateId(StateCode state_id);
 
-    Optional<Precinct> findByStateIdAndId(StateCode state_id, int id);
+    Optional<Precinct> findByStateIdAndPrecinctId(StateCode state_id, int id);
 }

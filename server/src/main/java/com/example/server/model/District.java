@@ -15,25 +15,25 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "district")
+@Table(name = "District")
 @IdClass(DistrictId.class)
 public class District {
-    @Id
-    @Column(name="id", nullable = false)
-    private int id;
-
-    @Id
-    @Column(name="district_plan_id", nullable = false)
-    private int districtPlanId;
-
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
 
-    @Column(name = "incumbent")
+    @Id
+    @Column(name="district_plan_id", nullable = false)
+    private int planId;
+
+    @Id
+    @Column(name="district_id", nullable = false)
+    private int districtId;
+
+    @Column(name="incumbent")
     private String incumbent;
 
-    @Column(name = "total_pop") // total population
+    @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient

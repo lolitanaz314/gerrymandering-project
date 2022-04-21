@@ -10,8 +10,7 @@ import java.util.Set;
 
 public interface DistrictRepository extends JpaRepository<District, DistrictId> {
 
-    Set<District> findByStateIdAndDistrictPlanId(StateCode stateId, int dpId);
-    // Iterable<District> findByStateIdAndDistrictPlanId(StateCode stateId, int dpId);
+    Set<District> findByStateIdAndPlanId(StateCode stateId, int dpId);
 
-    Optional<District> findByStateIdAndDistrictPlanIdAndId(StateCode stateId, int dpId, int id);
+    Optional<District> findByStateIdAndPlanIdAndDistrictId(StateCode stateId, int dpId, int id);
 }

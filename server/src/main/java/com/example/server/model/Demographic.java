@@ -24,6 +24,13 @@ public class Demographic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Id
+    @Column(name="race", nullable = false)
+    private RacialCategory race;
+
+    @Column(name = "population", nullable = false)
+    private int population;
+
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
 
@@ -35,11 +42,4 @@ public class Demographic {
 
     @Column(name="precinct_id", nullable = true)
     private Integer precinctId;
-
-    @Id
-    @Column(name="race", nullable = false)
-    private RacialCategory race;
-
-    @Column(name = "total_pop", nullable = false) // total population
-    private int totalPop;
 }

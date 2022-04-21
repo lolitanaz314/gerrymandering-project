@@ -8,7 +8,6 @@ import com.example.server.repository.PrecinctRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.Optional;
 import java.util.NoSuchElementException;
@@ -23,19 +22,19 @@ public class PrecinctService {
         this.dmService = dmService;
     }
 
-    public List<Precinct> findAll() { return pRepository.findAll(); }
+    // public List<Precinct> findAll() { return pRepository.findAll(); }
 
     public Set<Precinct> getPrecinctsByStateId(StateCode stateId) {
         Set<Precinct> precincts = pRepository.findByStateId(stateId);
         for (Precinct p : precincts){
-            p.setDemographic(dmService.getDemographicByPrecinctId(new PrecinctId(stateId, p.getId())));
+            p.setDemographic(dmService.getDemographicByPrecinctId(new PrecinctId(stateId, p.getPrecinctId())));
         }
         return precincts;
     }
 
     public Precinct getPrecinctsByStateIdAndPrecinctId(StateCode stateId, int precinctId) {
         try{
-            Optional<Precinct> p = pRepository.findByStateIdAndId(stateId, precinctId);
+            Optional<Precinct> p = pRepository.findByStateIdAndPrecinctId(stateId, precinctId);
             if(p.isPresent()){
                 p.get().setDemographic(dmService.getDemographicByPrecinctId(new PrecinctId(stateId, precinctId)));
                 return p.get();

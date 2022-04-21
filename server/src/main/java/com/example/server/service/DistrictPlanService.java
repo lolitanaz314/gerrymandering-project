@@ -21,19 +21,19 @@ public class DistrictPlanService {
         this.dService = dService;
     }
 
-    public List<DistrictPlan> findAll() { return dpRepository.findAll(); }
+    // public List<DistrictPlan> findAll() { return dpRepository.findAll(); }
 
     public List<DistrictPlan> getPlansByStateId(StateCode stateId) {
         List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId);
         for (DistrictPlan dp : districtPlans){
-            dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getId()));
+            dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getPlanId()));
         }
         return dpRepository.findByStateId(stateId);
     }
 
     public DistrictPlan getPlanByStateIdAndDistrictId(StateCode stateId, int planId) {
         try{
-            Optional<DistrictPlan> dp = dpRepository.findByStateIdAndId(stateId, planId);
+            Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId, planId);
             if(dp.isPresent()){
                 dp.get().setDistricts(dService.getDistrictsByPlanId(stateId, planId));
                 return dp.get();
@@ -46,15 +46,18 @@ public class DistrictPlanService {
     }
 
     // measures
-//    +getEstimationofVoteResults(): Map<Integer, Integer>
-//    +getPopulationEqualityMeasure(): double
-//    +getCompactnessMeasure(): double
-//    +getSplitCountyMeasure(): double
-//
-//    +getMajorityMinorityCount(): int
-//    +getCompetitiveDistrictCount(): int
-//    +getMeanMedianDiff(): double
-//    +getEfficiencyGapMeasure(): double
-//
-//    +getVoteSeatCurve(): SeatVoteCurve
+    /*
+    getEstimationofVoteResults(): Map<Integer, Integer>
+    getPopulationEqualityMeasure(): double
+    getCompactnessMeasure(): double
+    getSplitCountyMeasure(): double
+
+    getMajorityMinorityCount(): int
+    getCompetitiveDistrictCount(): int
+    getMeanMedianDiff(): double
+    getEfficiencyGapMeasure(): double
+
+    getVoteSeatCurve(): SeatVoteCurve
+     */
+
 }

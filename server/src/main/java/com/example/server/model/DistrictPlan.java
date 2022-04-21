@@ -15,16 +15,16 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "district_plan")
+@Table(name = "DistrictPlan")
 @IdClass(DistrictPlanId.class)
 public class DistrictPlan {
     @Id
-    @Column(name = "id", nullable = false)
-    private int id;
+    @Column(name="state_id", nullable = false)
+    private StateCode stateId;
 
     @Id
-    @Column(name = "state_id", nullable = false)
-    private StateCode stateId;
+    @Column(name="district_plan_id", nullable = false)
+    private int planId;
 
     // Change to simplified date
     @Column(name="date")

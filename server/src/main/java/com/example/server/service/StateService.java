@@ -26,8 +26,8 @@ public class StateService {
     public List<State> getStates() {
         List<State> states = sRepository.findAll();
         for (State s : states){
-            s.setDemographic(dmService.getDemographicByStateId(s.getId()));
-            s.setDistrictPlans(dpService.getPlansByStateId(s.getId()));
+            s.setDemographic(dmService.getDemographicByStateId(s.getStateId()));
+            s.setDistrictPlans(dpService.getPlansByStateId(s.getStateId()));
         }
         return states;
     }
@@ -48,6 +48,9 @@ public class StateService {
     }
 
     // measures
-//    + compareDistrictPlans():JSON
-//    + getBoxWhiskerPlot():BoxWhiskerPlot
+    /*
+    compareDistrictPlans():JSON
+    getBoxWhiskerPlot():BoxWhiskerPlot
+     */
+
 }

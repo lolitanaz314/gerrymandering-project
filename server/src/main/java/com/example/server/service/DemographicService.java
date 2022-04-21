@@ -32,7 +32,7 @@ public class DemographicService {
             List<Demographic> s = dmRepository.findDemographicByStateId(state);
             // System.out.println(s.size());
             for (Demographic category : s) {
-                demographic.put(category.getRace(), category.getTotalPop());
+                demographic.put(category.getRace(), category.getPopulation());
             }
             return demographic;
         } catch (NoSuchElementException ex){
@@ -43,15 +43,14 @@ public class DemographicService {
     // get demographic of district
     public Map<RacialCategory, Integer> getDemographicByDistrictId(DistrictId id) {
         int state = id.getStateId().ordinal();
-        int districtPlan = id.getDistrictPlanId();
-        int district = id.getId();
+        int districtPlan = id.getDistrictId();
+        int district = id.getDistrictId();
 
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
             List<Demographic> s = dmRepository.findDemographicByDistrictPlanAndDistrictId(state, districtPlan, district);
-            // System.out.println(s.size());
             for (Demographic category : s) {
-                demographic.put(category.getRace(), category.getTotalPop());
+                demographic.put(category.getRace(), category.getPopulation());
             }
             return demographic;
         } catch (NoSuchElementException ex){
@@ -62,14 +61,13 @@ public class DemographicService {
     // get demographic of precinct
     public Map<RacialCategory, Integer> getDemographicByPrecinctId(PrecinctId id) {
         int state = id.getStateId().ordinal();
-        int precinct = id.getId();
+        int precinct = id.getPrecinctId();
 
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
             List<Demographic> s = dmRepository.findDemographicByPrecinctId(state, precinct);
-            // System.out.println(s.size());
             for (Demographic category : s) {
-                demographic.put(category.getRace(), category.getTotalPop());
+                demographic.put(category.getRace(), category.getPopulation());
             }
             return demographic;
         } catch (NoSuchElementException ex){

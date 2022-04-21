@@ -12,5 +12,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class PrecinctId implements Serializable {
     private StateCode stateId;
-    private int id;
+    private int precinctId;
 }

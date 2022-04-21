@@ -11,9 +11,8 @@ import java.util.Optional;
 public interface DistrictPlanRepository extends JpaRepository<DistrictPlan, DistrictPlanId> {
 
     List<DistrictPlan> findByStateId(StateCode state_id);
-    // Iterable<DistrictPlan> findByStateId(StateCode state_id);
 
-    Optional<DistrictPlan> findByStateIdAndId(StateCode state_id, int id);
+    Optional<DistrictPlan> findByStateIdAndPlanId(StateCode state_id, int id);
 
 //    @Query(value = "SELECT * FROM Lynx.district_plan L " +
 //            "WHERE L.state_id = ?1", nativeQuery = true)

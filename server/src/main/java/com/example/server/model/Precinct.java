@@ -15,18 +15,18 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "precinct")
+@Table(name = "Precinct")
 @IdClass(PrecinctId.class)
 public class Precinct {
-    @Id
-    @Column(name="id", nullable = false)
-    private int id;
-
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
 
-    @Column(name = "total_pop") // total population
+    @Id
+    @Column(name="precinct_id", nullable = false)
+    private int precinctId;
+
+    @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient
