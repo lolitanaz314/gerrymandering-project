@@ -3,8 +3,6 @@ import RadarCharting from './RadarChart';
 import Table from 'react-bootstrap/Table';
 import DistrictPlanMeasuresTable from './DistrictPlanMeasuresTable';
 
-
-
 const curveStyle = { //style for graphs
     height: '330px',
     width: 'inherit'
@@ -25,19 +23,18 @@ const DistrictMeasureInfo = (props) => {
     const dataA = {
         type: 'scatterpolar',
         r: [1.5, 10, 39, 31, 15, 1.5],
-        theta: ['Majority-Minority Districts','Efficiency Gap','Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
         fill: 'toself',
         name: "District Plan #" + props.currentDp
     };
 
-    const dataB = 
-        {
-            type: 'scatterpolar',
-            r: [1.5, 28, 18, 31, 15, 24],
-            theta: ['Majority-Minority Districts','Efficiency Gap','Competitive Districts', 'Projected Political Fairness', 'Compactness'],
-            fill: 'toself',
-            name: "District Plan #" + props.pinned
-        };
+    const dataB = {
+        type: 'scatterpolar',
+        r: [1.5, 28, 18, 31, 15, 24],
+        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+        fill: 'toself',
+        name: "District Plan #" + props.pinned
+    };
 
     let basic = <>
         <h5 id="more-measures">Measures</h5>
@@ -49,8 +46,7 @@ const DistrictMeasureInfo = (props) => {
         <br></br>
 
         <h5 id="radar-chart">Radar Chart</h5>
-        <div style={curveStyle}> <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} /> </div>
-        <br></br>
+        <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} />
     </>;
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
@@ -89,9 +85,7 @@ const DistrictMeasureInfo = (props) => {
                 </tbody>
             </Table>
             <h5 id="radar-chart">Radar Chart</h5>
-            <div style={curveStyle}>
-                <RadarCharting dataA={dataA} dataB={dataB} currentDp={props.currentDp} pinnedDp={props.pinned} comparing={props.compare} />
-            </div>
+            <RadarCharting dataA={dataA} dataB={dataB} currentDp={props.currentDp} pinnedDp={props.pinned} comparing={props.compare} />
         </>
     }
 

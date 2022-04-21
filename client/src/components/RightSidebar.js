@@ -253,6 +253,9 @@ const RightSidebar = (props) => {
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
                                             </span>
+                                            <span className="underline-on-hover">
+                                                <Nav.Link href="#radar-chart">Radar Chart</Nav.Link>
+                                            </span>
                                         </Nav>
                                     </Navbar.Collapse>
                                 </Container>
