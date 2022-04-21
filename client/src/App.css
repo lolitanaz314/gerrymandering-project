@@ -8,7 +8,7 @@
 } */
 
 .on-state{
-  width: 54.5%;
+  width: 45%;
 }
 
 .sticky {
@@ -86,7 +86,6 @@
 
 /* SCROLL MENU */
 .scroll-menu{
-  width: inherit;
   height: 200px;
 }
 

@@ -149,10 +149,9 @@ const votingData = [
     }
 ];
 
-
-const headerStyle = {
+const sidebarStyle = {
     margin: '56px 0px 0px 0px',
-    width: '700px',
+    width: '55%',
     zIndex: '400'
 }
 
@@ -189,7 +188,7 @@ const RightSidebar = (props) => {
 
     return (
         <>
-            <Offcanvas style={headerStyle} show={props.show} backdrop={false} placement='end'>
+            <Offcanvas style={sidebarStyle} show={props.show} backdrop={false} placement='end'>
                 <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>

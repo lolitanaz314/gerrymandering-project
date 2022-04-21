@@ -39,7 +39,7 @@ const data = [
 
 const curveStyle = { //style for graphs
     height: '330px',
-    width: '650px'
+    width: 'inherit'
 }
 
 const comparingStyle = { //style for compare view (seat plot)
