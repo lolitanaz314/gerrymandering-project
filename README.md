@@ -25,9 +25,9 @@ Recharts: "npm install recharts"
 Plotly: "npm install react-plotly.js plotly.js"
 
 // currently wont need <br/>
-Centroid: "npm install @turf/centroid"
-Center of Mass: "npm install @turf/center-of-mass"
-Routes: "npm install browser-router"
+Centroid: "npm install @turf/centroid" <br/>
+Center of Mass: "npm install @turf/center-of-mass" <br/>
+Routes: "npm install browser-router" <br/>
 
 
 <hr />
