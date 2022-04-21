@@ -5,14 +5,16 @@ import shapely
 
 class Measures:
 
-    # I PUT IN SAMPLE DATA, ALL THIS WORKS!!!!!!!!!!
+    # I PUT IN SAMPLE DATA, ALL THIS WORKS
 
     # Make everything here static because it's going to be called in compute_measures.py
-    @staticmethod
+    # Inputs for every single method - Pandas dataframe 
+
+    @staticmethod 
     def population_equality(districts) -> float:
         return 1 - (districts['population'].max() - districts['population'].min()) / districts['population'].sum()
 
-    @staticmethod  # polsby popper is computed in seawulf using Gerrychain but impleneted here just in case just in case Gerrychian fcks it up
+    @staticmethod  # polsby popper is computed in seawulf using Gerrychain but impleneted here just in case just in case Gerrychian messes it up
     def geometric_compactness(districts) -> float:
         pp = 0
         for geometry in districts['geometry'].values:
@@ -23,7 +25,7 @@ class Measures:
     # Basing this computation off the Wikipedia definition: "majority-minority area
     # or minority-majority area is a term describing a U.S. state or jurisdiction whose population is composed of less than 50% non-Hispanic whites."
     @staticmethod
-    def majority_minority(districts) -> float: # I think this is how it's computed???? (Re-CHECK THIS, DONT BE  EGOTISTIC & THINK UR RIGHT)
+    def majority_minority(districts) -> float: # I think this is how it's computed???? (Re-CHECK THIS,)
         mm = 0   #
         for index, row in districts.iterrows():
             if row['black'] > (row['population'] / 2) or (row['asian'] > row['population'] / 2) or (row['hispanic'] > row['population'] / 2):
@@ -41,7 +43,7 @@ class Measures:
         return 1 - sum(abs(districts['population'] - enacted['population'])) / sum(districts['population'])
 
     @staticmethod
-    def dev_white(districts, enacted):  # RETURN VALUE: A PERCENT!!!!!!! PLS MAKE SURE THIS IS RIGHT!!!! CRHIST's SAKE!!!!!(future note to Lolo)
+    def dev_white(districts, enacted):  # RETURN VALUE: A PERCENT!!!!!!! PLS MAKE SURE THIS IS RIGHT!!!! CRHIST's SAKE!!!!!(future note)
         districts = districts.reset_index() # do the same thing for everything else
         enacted = enacted.reset_index()
         return 1 - sum(abs(districts['white'] - enacted['white'])) / sum(districts['white']) 
