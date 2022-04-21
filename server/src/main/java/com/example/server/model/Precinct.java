@@ -2,7 +2,7 @@ package com.example.server.model;
 
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
-import com.example.server.id.PrecinctId;
+import com.example.server.model.id.PrecinctId;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.example.server.model;
 
 import com.example.server.model.enumeration.StateCode;
-import com.example.server.id.DistrictPlanId;
+import com.example.server.model.id.DistrictPlanId;
 import lombok.*;
 
 import javax.persistence.*;

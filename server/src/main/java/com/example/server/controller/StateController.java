@@ -1,7 +1,5 @@
 package com.example.server.controller;
 
-import com.example.server.service.DemographicService;
-import com.example.server.service.DistrictPlanService;
 import com.example.server.service.StateService;
 import com.example.server.model.State;
 import com.example.server.model.enumeration.StateCode;

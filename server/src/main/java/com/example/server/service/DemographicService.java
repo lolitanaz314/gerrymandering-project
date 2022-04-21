@@ -1,7 +1,7 @@
 package com.example.server.service;
 
-import com.example.server.id.DistrictId;
-import com.example.server.id.PrecinctId;
+import com.example.server.model.id.DistrictId;
+import com.example.server.model.id.PrecinctId;
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Demographic;

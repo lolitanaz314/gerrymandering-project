@@ -1,6 +1,6 @@
 package com.example.server.service;
 
-import com.example.server.id.DistrictId;
+import com.example.server.model.id.DistrictId;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.District;
 import com.example.server.repository.DistrictRepository;
@@ -28,7 +28,7 @@ public class DistrictService {
     public Set<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
         Set<District> districts = dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);
         for (District d : districts){
-            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(d.getId(), dpId, stateId)));
+            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, dpId, d.getId())));
             // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
         }
         return districts;
@@ -38,7 +38,7 @@ public class DistrictService {
         try{
             Optional<District> d = dRepository.findByStateIdAndDistrictPlanIdAndId(stateId, dpId, id);
             if(d.isPresent()){
-                d.get().setDemographic(dmService.getDemographicByDistrictId(new DistrictId(id, dpId, stateId)));
+                d.get().setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, dpId, id)));
                 return d.get();
             } else{
                 throw new NoSuchElementException();

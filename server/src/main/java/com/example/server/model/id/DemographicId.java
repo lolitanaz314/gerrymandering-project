@@ -1,4 +1,4 @@
-package com.example.server.id;
+package com.example.server.model.id;
 
 import com.example.server.model.enumeration.RacialCategory;
 import lombok.*;

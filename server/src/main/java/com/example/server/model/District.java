@@ -3,7 +3,7 @@ package com.example.server.model;
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
 
-import com.example.server.id.DistrictId;
+import com.example.server.model.id.DistrictId;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Map;

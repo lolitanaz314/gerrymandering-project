@@ -2,7 +2,7 @@ package com.example.server.model;
 
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
-import com.example.server.id.DemographicId;
+import com.example.server.model.id.DemographicId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

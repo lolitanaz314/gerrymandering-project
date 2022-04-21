@@ -1,4 +1,4 @@
-package com.example.server.id;
+package com.example.server.model.id;
 
 import com.example.server.model.enumeration.StateCode;
 import lombok.*;
@@ -11,6 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DistrictPlanId implements Serializable {
-    private int id;
     private StateCode stateId;
+    private int id;
 }
