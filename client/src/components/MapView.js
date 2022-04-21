@@ -48,7 +48,9 @@ const MapView = (props) => {
     }
   }, [currentLocation.code]);
 
+  //state to store selected dp and pinned dp from scroll menu
   const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
+  //used to remove layer, might need to delete later
   const [layers, setLayers] = useState({ current: null, prev: null });
 
   //change demographic
@@ -159,14 +161,13 @@ const MapView = (props) => {
       }
     }
 
-    //resets pinned dp
+    //resets pinned dp & updates state
     let filled = document.getElementsByClassName('icon-filled');
     let unfilled = document.getElementsByClassName('icon-unfilled');
     for (let i = 0; i < filled.length; i++) {
       filled[i].classList.add('hidden');
       unfilled[i].classList.remove('hidden');
     }
-
     setDps({ currentDp: 0, pinned: null })
   }
 
