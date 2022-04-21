@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
-import BoxAndWhisker from './BoxAndWhisker.js'
+import BoxAndWhisker from './BoxAndWhisker';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -149,10 +149,9 @@ const votingData = [
     }
 ];
 
-
-const headerStyle = {
+const sidebarStyle = {
     margin: '56px 0px 0px 0px',
-    width: '700px',
+    width: '55%',
     zIndex: '400'
 }
 
@@ -189,7 +188,7 @@ const RightSidebar = (props) => {
 
     return (
         <>
-            <Offcanvas style={headerStyle} show={props.show} backdrop={false} placement='end'>
+            <Offcanvas style={sidebarStyle} show={props.show} backdrop={false} placement='end'>
                 <Offcanvas.Header style={titleStyle}>
                     <Offcanvas.Title><h2>{props.name}</h2></Offcanvas.Title>
                 </Offcanvas.Header>
@@ -207,7 +206,7 @@ const RightSidebar = (props) => {
                     <div id='dp-container'>
                         {testData[stateID].map(obj =>
                             <DistrictPlan
-                                key={obj.id} id={obj.id} state={props.currentState}
+                                key={obj.id} id={obj.id} state={props.currentState} code={props.code}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
                                 selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
                             />)}
@@ -238,7 +237,7 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing}
+                            <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
                                 pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
                         </Tab>
@@ -254,6 +253,9 @@ const RightSidebar = (props) => {
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
                                             </span>
+                                            <span className="underline-on-hover">
+                                                <Nav.Link href="#radar-chart">Radar Chart</Nav.Link>
+                                            </span>
                                         </Nav>
                                     </Navbar.Collapse>
                                 </Container>
@@ -261,7 +263,7 @@ const RightSidebar = (props) => {
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
-                        <Tab eventKey="fairness" title="Fairness">
+                        <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <div id='seawulf'>
                                 <p className='seawulf-desc'>
                                     This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)

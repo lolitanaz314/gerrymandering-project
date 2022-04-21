@@ -1,24 +1,22 @@
 import DemographicTable from './DemographicTable';
 import Table from 'react-bootstrap/Table';
-// import State from '../api/service/StateService';
 
 const comparingStyle = { //height is used to make sure the comparision sections are lined up
     height: '80px'
 }
 
 const StateInfo = (props) => {
-    // let s = State.getStateById(props.code);
     let basic = <>
         <h5 id="districting-sum">Overview</h5>
         <p>
-            {/* Date: 0000<br></br> */}
             <b>Status:</b> {props.plan.status}<br></br>
             <b>Proposed By:</b> {props.plan.proposedBy}
+            {/* Date Proposed: 0000<br></br> */}
         </p>
         <br></br>
 
         <h5 id="total-pop">Population Data 2020</h5>
-        <DemographicTable code={props.code}/>
+        <DemographicTable demographic={props.state.demographic}/>
         <br></br>
 
         <h5 id="voting-age">Voting Age Population 2020</h5>
@@ -86,7 +84,7 @@ const StateInfo = (props) => {
                         <br></br>
                         
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable code={props.code}/>
+                        <DemographicTable demographic={props.state.demographic}/>
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>
@@ -143,7 +141,7 @@ const StateInfo = (props) => {
                         </p>
                         <br></br>
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable code={props.code}/>
+                        <DemographicTable demographic={props.state.demographic}/>
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>

@@ -16,7 +16,7 @@ const DistrictPlanMeasuresTable = (props) => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Polsby Popper Compactness</td>
+                            <td>Polsby-Popper Compactness</td>
                             <td>X</td>
                         </tr>
                         <tr>
@@ -28,7 +28,7 @@ const DistrictPlanMeasuresTable = (props) => {
                             <td>X</td>
                         </tr>
                         <tr>
-                            <td>Mattingly Score</td>
+                            <td>Split Counties</td>
                             <td>X</td>
                         </tr>
                     </tbody>
