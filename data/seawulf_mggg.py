@@ -101,7 +101,7 @@ class Seawulf: # this is the mainest class
 if __name__ == '__main__':
     precincts_path = # insert name of precinct path
     state = # insert the name of the state
-    num_districtPlans = config['num_districtings']
+    num_districtPlans = # insert number of district Plans 
     iterations = # insert number iterations for the Markov Chain (algorithm metric)
     random_initial_partition = # insert graph object (in the form of a geoJSON)
     output_path = # put in the name for an output_path
