@@ -15,6 +15,11 @@ const viewStyle = {
   left: 340
 }
 
+const demographicStyle = {
+  position: 'relative',
+  left: 250
+}
+
 const borderStyle = {
   position: 'relative',
   left: 150
@@ -44,6 +49,7 @@ const Navigation = (props) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -53,6 +59,23 @@ const Navigation = (props) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavDropdown title="Choose Demographic" id="basic-nav-dropdown" style={demographicStyle}>
+                <NavDropdown.Item>Republican</NavDropdown.Item>
+                <NavDropdown.Item>Democratic</NavDropdown.Item>
+                <NavDropdown.Item>White</NavDropdown.Item>
+                <NavDropdown.Item>Black</NavDropdown.Item>
+                <NavDropdown.Item>Hispanic</NavDropdown.Item>
+                <NavDropdown.Item>Asian</NavDropdown.Item>
+                <NavDropdown.Item>Native America</NavDropdown.Item>
+                <NavDropdown.Item>Pacific Islander</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
