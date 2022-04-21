@@ -92,7 +92,7 @@ class Seawulf: # this is the mainest class
             id = ''.join([self.state, 'SeaWulf_districtPlan', str(i)])
 
             new_districtPlan, new_districts = self.one_iteration(chain, id) # One iteration of Markov chain for ONE district Plan!!!!
-            self.seawulf_districtPlan = self.seawulf_districtPlan.append(new_districting, ignore_index=True)
+            self.seawulf_districtPlan = self.seawulf_districtPlan.append(new_districtPlan, ignore_index=True)
             self.seawulf_districts = self.seawulf_districts.append(new_districts, ignore_index=True)
             
         self.seawulf_districtPlan.to_csv("".join([self.output_path, id, '_districtPlan.csv']), index=False)
