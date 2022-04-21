@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
-import BoxAndWhisker from './BoxAndWhisker.js'
+import BoxAndWhisker from './BoxAndWhisker';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -207,7 +207,7 @@ const RightSidebar = (props) => {
                     <div id='dp-container'>
                         {testData[stateID].map(obj =>
                             <DistrictPlan
-                                key={obj.id} id={obj.id} state={props.currentState}
+                                key={obj.id} id={obj.id} state={props.currentState} code={props.code}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
                                 selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
                             />)}
@@ -238,7 +238,7 @@ const RightSidebar = (props) => {
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
-                            <br></br> <StateInfo name={props.name} code={props.code} compare={props.comparing}
+                            <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
                                 pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
                         </Tab>
@@ -261,7 +261,7 @@ const RightSidebar = (props) => {
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
                         </Tab>
-                        <Tab eventKey="fairness" title="Fairness">
+                        <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <div id='seawulf'>
                                 <p className='seawulf-desc'>
                                     This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)

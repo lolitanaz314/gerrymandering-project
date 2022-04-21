@@ -1,30 +1,26 @@
 import React from 'react';
-import { Radar, RadarChart, PolarGrid, 
-    PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
   
-const RadarCharting = () => {
-    // Sample data
-    const data = [
-        { name: 'A', x: 21 },
-        { name: 'B', x: 22 },
-        { name: 'C', x: -32 },
-        { name: 'D', x: -14 },
-        { name: 'E', x: -51 },
-        { name: 'F', x: 16 },
-        { name: 'G', x: 7 },
-        { name: 'H', x: -8 },
-        { name: 'I', x: 9 },
-    ];
-  
+const RadarCharting = (props) => {
+
+    let radar = <Radar name={"District Plan #" + props.currentDp} dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+    if(props.comparing){
+        radar = <>
+            <Radar name={"District Plan #" + props.currentDp} dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            <Radar name={"District Plan #" + props.pinnedDp} dataKey="B" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.6} />
+        </>
+    }
+
     return (
-        <RadarChart height={500} width={500} 
-            outerRadius="80%" data={data}>
+    <ResponsiveContainer width={'100%'} height={'100%'}>
+        <RadarChart outerRadius={90} width={730} height={250} data={props.data}>
             <PolarGrid />
-            <PolarAngleAxis dataKey="name" />
-            <PolarRadiusAxis />
-            <Radar dataKey="x" stroke="green" 
-                fill="green" fillOpacity={0.5} />
+            <PolarAngleAxis dataKey="measure" />
+            <PolarRadiusAxis angle={30} domain={[0, 150]} />
+            {radar}
+            <Legend />
         </RadarChart>
+    </ResponsiveContainer>
     );
 }
   

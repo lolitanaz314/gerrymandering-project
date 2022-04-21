@@ -18,7 +18,7 @@ const StateInfo = (props) => {
         <br></br>
 
         <h5 id="total-pop">Population Data 2020</h5>
-        <DemographicTable code={props.code}/>
+        <DemographicTable demographic={props.state.demographic}/>
         <br></br>
 
         <h5 id="voting-age">Voting Age Population 2020</h5>
@@ -86,7 +86,7 @@ const StateInfo = (props) => {
                         <br></br>
                         
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable code={props.code}/>
+                        <DemographicTable demographic={props.state.demographic}/>
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>
@@ -143,7 +143,7 @@ const StateInfo = (props) => {
                         </p>
                         <br></br>
                         <h5 id="total-pop">Population Data 2020</h5>
-                        <DemographicTable code={props.code}/>
+                        <DemographicTable demographic={props.state.demographic}/>
                         <br></br>
 
                         <h5 id="voting-age">Voting Age Population 2020</h5>
