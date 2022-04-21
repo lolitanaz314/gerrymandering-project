@@ -15,6 +15,11 @@ const viewStyle = {
   left: 340
 }
 
+const demographicStyle = {
+  position: 'relative',
+  left: 250
+}
+
 const borderStyle = {
   position: 'relative',
   left: 150
@@ -44,6 +49,7 @@ const Navigation = (props) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -53,6 +59,23 @@ const Navigation = (props) => {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <NavDropdown title="Choose Demographic" id="basic-nav-dropdown" style={demographicStyle}>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Republican')}>Republican</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Democratic')}>Democratic</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('White')}>White</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Black')}>Black</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Hispanic')}>Hispanic</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Asian')}>Asian</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Native American')}>Native American</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Pacific Islander')}>Pacific Islander</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

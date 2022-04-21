@@ -51,6 +51,10 @@ const MapView = (props) => {
   const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
   const [layers, setLayers] = useState({ current: null, prev: null });
 
+  //change demographic
+  const [demographic, setDemographic] = useState("None");
+  const changeDemographic = (demo) => setDemographic(demo);
+
   //sidebar
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
@@ -280,7 +284,8 @@ const MapView = (props) => {
 
   return (
     <div>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
+      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView}
+        changeDemographic={(demo) => changeDemographic(demo)} />
 
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomSnap={0.1} zoomControl={false} minZoom={5} maxZoom={15}
@@ -298,7 +303,7 @@ const MapView = (props) => {
           <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
-            show={show} name={currentLocation.name} pinned={districtPlans.pinned}
+            show={show} name={currentLocation.name} pinned={districtPlans.pinned} demographic={demographic}
             currentState={currentLocation.name} currentDp={districtPlans.currentDp} state={state}
             comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />

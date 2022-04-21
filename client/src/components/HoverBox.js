@@ -16,11 +16,13 @@ const HoverBox = (props) => {
                     <p>Hover on each congressional district for more details</p>
                 </div>
             )}
+
             {props.onselect.district && props.view === "election" && (
                 <ul className="census-info" style={{ height: '15%', width: '36%' }}>
                     <li><strong>District {props.onselect.district}</strong></li><br />
                     <li>Incumbent: {props.onselect.incumbent}</li>
                     <li>Partisan Lean: {props.onselect.lean}</li>
+                    <li>Compactness: </li>
                 </ul>
             )}
             {props.onselect.district && props.view === "population" && (

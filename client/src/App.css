@@ -16,11 +16,16 @@
   width: 100%;
 }
 
-/* HOVER INFO BOXES */
 .hidden{
   display: none!important;
 }
 
+.disabled{
+  pointer-events: none;
+  color: darkgray;
+}
+
+/* HOVER INFO BOXES */
 .census-info {
   display: flex;
   flex-direction: column;
@@ -188,3 +193,7 @@ table {
   padding: 10px;
 }
 
+.jump-link-top{
+  font-size:xx-small;
+  text-align: right;
+}
