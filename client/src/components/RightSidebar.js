@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/Tab';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button'
 
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
@@ -217,6 +218,7 @@ const RightSidebar = (props) => {
                 </div> <hr />
 
                 <Offcanvas.Body>
+                    <div id="above-tab"></div>
                     <Tabs fill justify id="controlled-tab" activeKey={key} onSelect={(k) => setKey(k)}>
                         <Tab eventKey="summary" title="State Summary">
                             <Navbar bg="light" expand="lg">
@@ -243,6 +245,9 @@ const RightSidebar = (props) => {
                             <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
                                 pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
+                            <div class="jump-link-top">
+                                <Button variant="link" href="#above-tab">Back to Top</Button>
+                            </div>
                         </Tab>
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
@@ -252,7 +257,7 @@ const RightSidebar = (props) => {
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#more-measures"> Measures</Nav.Link>
-                                            </span>
+                                            </span> 
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
                                             </span>
@@ -265,6 +270,9 @@ const RightSidebar = (props) => {
                             </Navbar>
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
+                            <div class="jump-link-top">
+                                <Button variant="link" href="#above-tab">Back to Top</Button>
+                            </div>
                         </Tab>
                         <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <div id='seawulf'>
@@ -284,6 +292,9 @@ const RightSidebar = (props) => {
                             </div>
                             <div id='bw' className='hidden'>
                                 <BoxAndWhisker />
+                            </div>
+                            <div class="jump-link-top">
+                                <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>
                     </Tabs>
