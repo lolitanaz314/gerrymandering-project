@@ -14,20 +14,31 @@ import java.util.NoSuchElementException;
 public class DistrictPlanService {
     @Autowired
     private final DistrictPlanRepository dpRepository;
-    public DistrictPlanService(DistrictPlanRepository dpRepository) {
+    private final DistrictService dService;
+    public DistrictPlanService(DistrictPlanRepository dpRepository, DistrictService dService) {
         this.dpRepository = dpRepository;
+        this.dService = dService;
     }
 
     // public List<DistrictPlan> findAll() { return dpRepository.findAll(); }
 
     public List<DistrictPlan> getDistrictPlansByStateId(StateCode stateId) {
-        return (List<DistrictPlan>) dpRepository.findByStateId(stateId);
+        List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId);
+        for (DistrictPlan dp : districtPlans){
+            dp.setDistricts(dService.getDistrictsByDistrictPlanId(dp.getStateId(), dp.getId()));
+        }
+        return dpRepository.findByStateId(stateId);
     }
 
     public DistrictPlan getDistrictPlanById(StateCode stateId, int id) {
         try{
             Optional<DistrictPlan> dp = dpRepository.findByStateIdAndId(stateId, id);
-            return dp.get();
+            if(dp.isPresent()){
+                dp.get().setDistricts(dService.getDistrictsByDistrictPlanId(stateId, id));
+                return dp.get();
+            } else{
+                throw new NoSuchElementException();
+            }
         } catch (NoSuchElementException ex){
             return null;
         }

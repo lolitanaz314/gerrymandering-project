@@ -14,8 +14,8 @@ import java.util.NoSuchElementException;
 public class StateService {
     @Autowired
     private final StateRepository sRepository;
-    final DistrictPlanService dpService;
-    final DemographicService dmService;
+    private final DistrictPlanService dpService;
+    private final DemographicService dmService;
     public StateService(StateRepository sRepository, DistrictPlanService dpService, DemographicService dmService) {
         this.sRepository = sRepository;
         this.dpService = dpService;
@@ -34,9 +34,13 @@ public class StateService {
     public State getStateById(StateCode id) {
         try {
             Optional<State> s = sRepository.findById(id);
-            s.get().setDemographic(dmService.getDemographicByStateId(id));
-            s.get().setDistrictPlans(dpService.getDistrictPlansByStateId(id));
-            return s.get();
+            if (s.isPresent()){
+                s.get().setDemographic(dmService.getDemographicByStateId(id));
+                s.get().setDistrictPlans(dpService.getDistrictPlansByStateId(id));
+                return s.get();
+            } else{
+                throw new NoSuchElementException();
+            }
         } catch (NoSuchElementException ex){
             return null;
         }

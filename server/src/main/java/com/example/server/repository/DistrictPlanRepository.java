@@ -5,11 +5,13 @@ import com.example.server.id.DistrictPlanId;
 import com.example.server.model.enumeration.StateCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface DistrictPlanRepository extends JpaRepository<DistrictPlan, DistrictPlanId> {
 
-    Iterable<DistrictPlan> findByStateId(StateCode state_id);
+    List<DistrictPlan> findByStateId(StateCode state_id);
+    // Iterable<DistrictPlan> findByStateId(StateCode state_id);
 
     Optional<DistrictPlan> findByStateIdAndId(StateCode state_id, int id);
 

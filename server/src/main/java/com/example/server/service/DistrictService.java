@@ -1,33 +1,48 @@
 package com.example.server.service;
 
+import com.example.server.id.DistrictId;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.District;
 import com.example.server.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Service
 public class DistrictService {
     @Autowired
     private final DistrictRepository dRepository;
-    public DistrictService(DistrictRepository dRepository) {
+    // private final PrecinctService pService;
+    private final DemographicService dmService;
+    public DistrictService(DistrictRepository dRepository, PrecinctService pService, DemographicService dmService) {
         this.dRepository = dRepository;
+        // this.pService = pService;
+        this.dmService = dmService;
     }
 
     // public List<District> findAll() {return dRepository.findAll(); }
 
-    public List<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
-        return (List<District>) dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);
+    public Set<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
+        Set<District> districts = dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);
+        for (District d : districts){
+            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(d.getId(), dpId, stateId)));
+            // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
+        }
+        return districts;
     }
 
     public District getDistrictById(StateCode stateId, int dpId, int id) {
         try{
-            Optional<District> dp = dRepository.findByStateIdAndDistrictPlanIdAndId(stateId, dpId, id);
-            return dp.get();
+            Optional<District> d = dRepository.findByStateIdAndDistrictPlanIdAndId(stateId, dpId, id);
+            if(d.isPresent()){
+                d.get().setDemographic(dmService.getDemographicByDistrictId(new DistrictId(id, dpId, stateId)));
+                return d.get();
+            } else{
+                throw new NoSuchElementException();
+            }
         } catch (NoSuchElementException ex){
             return null;
         }

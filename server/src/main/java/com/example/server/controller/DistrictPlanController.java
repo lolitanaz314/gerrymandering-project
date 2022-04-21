@@ -19,7 +19,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @RestController
 @CrossOrigin("*")
 public class DistrictPlanController {
-    DistrictPlanService dpService; // DistrictPlanService
+    DistrictPlanService dpService;
 
     public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }
 

@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @RestController
 @CrossOrigin("*")
 public class DistrictController {
-    DistrictService dService; // DistrictService
+    private final DistrictService dService;
 
     public DistrictController (DistrictService dService) {this.dService = dService; }
 
@@ -32,7 +32,7 @@ public class DistrictController {
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")
     public CollectionModel<EntityModel<District>> getDistrictsByDistrictPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int dpId) {
-        List<District> districts = dService.getDistrictsByDistrictPlanId(stateId, dpId);
+        Set<District> districts = dService.getDistrictsByDistrictPlanId(stateId, dpId);
         Set<EntityModel<District>> districtSet = assembleDistricts(districts);
         return CollectionModel.of(districtSet,
                 linkTo(methodOn(DistrictController.class).getDistrictsByDistrictPlanId(stateId, dpId)).withSelfRel());
@@ -44,7 +44,7 @@ public class DistrictController {
         return assembleDistrict(d);
     }
 
-    public Set<EntityModel<District>> assembleDistricts(List<District> districts){
+    public Set<EntityModel<District>> assembleDistricts(Set<District> districts){
         return districts.stream().map(d ->
                 EntityModel.of(d,
                 linkTo(methodOn(DistrictController.class).getDistrictById(d.getStateId(), d.getDistrictPlanId(), d.getId())).withSelfRel(),

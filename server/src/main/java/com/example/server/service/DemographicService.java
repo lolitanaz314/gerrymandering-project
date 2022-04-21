@@ -1,5 +1,7 @@
 package com.example.server.service;
 
+import com.example.server.id.DistrictId;
+import com.example.server.id.PrecinctId;
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Demographic;
@@ -19,13 +21,14 @@ public class DemographicService {
 
     // get demographic of state
     public Map<RacialCategory, Integer> getDemographicByStateId(StateCode id) {
-        Map<RacialCategory, Integer> demographic = new HashMap<>();
+        int state = id.ordinal();
+
+        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
         try {
-            List<Demographic> s = dmRepository.findDemographicByStateId(id.ordinal());
+            List<Demographic> s = dmRepository.findDemographicByStateId(state);
             // System.out.println(s.size());
-            for (Demographic ptr : s) {
-                // System.out.println(ptr.getRace() + " " + ptr.getTotalPop());
-                demographic.put(ptr.getRace(), ptr.getTotalPop());
+            for (Demographic category : s) {
+                demographic.put(category.getRace(), category.getTotalPop());
             }
             return demographic;
         } catch (NoSuchElementException ex){
@@ -34,6 +37,39 @@ public class DemographicService {
     }
 
     // get demographic of district
+    public Map<RacialCategory, Integer> getDemographicByDistrictId(DistrictId id) {
+        int state = id.getStateId().ordinal();
+        int districtPlan = id.getDistrictPlanId();
+        int district = id.getId();
+
+        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
+        try {
+            List<Demographic> s = dmRepository.findDemographicByDistrictPlanAndDistrictId(state, districtPlan, district);
+            // System.out.println(s.size());
+            for (Demographic category : s) {
+                demographic.put(category.getRace(), category.getTotalPop());
+            }
+            return demographic;
+        } catch (NoSuchElementException ex){
+            return null;
+        }
+    }
 
     // get demographic of precinct
+    public Map<RacialCategory, Integer> getDemographicByPrecinctId(PrecinctId id) {
+        int state = id.getStateId().ordinal();
+        int precinct = id.getId();
+
+        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
+        try {
+            List<Demographic> s = dmRepository.findDemographicByPrecinctId(state, precinct);
+            // System.out.println(s.size());
+            for (Demographic category : s) {
+                demographic.put(category.getRace(), category.getTotalPop());
+            }
+            return demographic;
+        } catch (NoSuchElementException ex){
+            return null;
+        }
+    }
 }
