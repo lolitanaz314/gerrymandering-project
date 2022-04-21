@@ -23,7 +23,7 @@ const DistrictMeasureInfo = (props) => {
     const dataA = {
         type: 'scatterpolar',
         r: [3, 10, 39, 31, 15, 4],
-        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
         fill: 'toself',
         name: "District Plan #" + props.currentDp
     };
@@ -31,7 +31,7 @@ const DistrictMeasureInfo = (props) => {
     const dataB = {
         type: 'scatterpolar',
         r: [15, 28, 18, 6, 29, 24],
-        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
         fill: 'toself',
         name: "District Plan #" + props.pinned
     };
