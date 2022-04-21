@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,13 +10,14 @@ import colorado from "../assets/json/colorado_congressional.json";
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
-import './style/Legend.css';
 
 // components
 import Navigation from './Navigation';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
 import HoverBox from './HoverBox';
+import State from '../api/service/StateService';
+import './style/Legend.css';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -24,16 +25,31 @@ These settings will make the map center on the middle of the US with a zoom leve
 */
 
 const MapView = (props) => {
+  //mainly used for map zoom
   const [currentLocation, setLocation] = useState({
     center: { lat: 39.8283, lng: -98.5795 },
     zoom: 5,
     name: 'USA',
-    code: 'USA',
+    code: 'TN',
     view: 'election'
   });
 
-  const [districtPlans, setDps] = useState({currentDp: 0, pinned: null});
-  const [layers, setLayers] = useState({current: null, prev: null});
+  //get state object from server
+  const [state, setState] = useState({});
+  useEffect(() => {
+    if (currentLocation.code !== 'USA') {
+      State.getStateById(currentLocation.code)
+        .then(response => {
+          setState(response.data);
+        })
+        .catch(error => {
+          console.log('Something went wrong', error);
+        })
+    }
+  }, [currentLocation.code]);
+
+  const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
+  const [layers, setLayers] = useState({ current: null, prev: null });
 
   //sidebar
   const [show, setShow] = useState(false);
@@ -86,7 +102,7 @@ const MapView = (props) => {
     layer.on('click', () => zoomState(feature, layer));
   }
 
-  function zoomState(state, layer) {
+  function zoomState(feature, layer) {
     //changes the leaflet map sizing
     let map = document.getElementById('leaflet-map');
     map.classList.add('on-state');
@@ -94,7 +110,7 @@ const MapView = (props) => {
     //resets comparison view
     handleCompare(false);
 
-    let polygon = new L.Polygon(state.geometry.coordinates);
+    let polygon = new L.Polygon(feature.geometry.coordinates);
     let bounds = polygon.getBounds();
     let center = bounds.getCenter();
     let latitude = center.lng + 1.2;
@@ -104,14 +120,14 @@ const MapView = (props) => {
     setLocation({
       center: coords,
       zoom: 6.5,
-      name: state.properties.name,
-      code: state.properties.abbreviation,
+      name: feature.properties.name,
+      code: feature.properties.abbreviation,
       view: currentLocation.view
     });
 
-    if(layers.current !== layer){
+    if (layers.current !== layer) {
       let pre = layers.current;
-      setLayers({current: layer, prev: pre})
+      setLayers({ current: layer, prev: pre })
     }
 
     //shows sidebar
@@ -147,7 +163,7 @@ const MapView = (props) => {
       unfilled[i].classList.remove('hidden');
     }
 
-    setDps({currentDp: 0, pinned: null})
+    setDps({ currentDp: 0, pinned: null })
   }
 
   function ZoomComponent() {
@@ -283,7 +299,7 @@ const MapView = (props) => {
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} name={currentLocation.name} pinned={districtPlans.pinned}
-            currentState={currentLocation.name} currentDp={districtPlans.currentDp}
+            currentState={currentLocation.name} currentDp={districtPlans.currentDp} state={state}
             comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
           />
 
