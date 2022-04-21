@@ -1,10 +1,13 @@
 # gerrymandering-project
 CSE 416 Project
 
+<hr />
 Run server: <br/>
 mvn clean install <br />
 mvn spring-boot:run
 
+
+<hr />
 In client:
 npm install axios
 
@@ -21,11 +24,13 @@ Recharts: "npm install recharts"
 
 Plotly: "npm install react-plotly.js plotly.js"
 
-Centroid: "npm install @turf/centroid"
+// currently wont need <br/>
+Centroid: "npm install @turf/centroid" <br/>
+Center of Mass: "npm install @turf/center-of-mass" <br/>
+Routes: "npm install browser-router" <br/>
 
-Routes: "npm install browser-router"
 
-
+<hr />
 In data:
 
 MGGG algorithm: pip install gerrychain
