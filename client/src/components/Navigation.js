@@ -64,14 +64,14 @@ const Navigation = (props) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title="Choose Demographic" id="basic-nav-dropdown" style={demographicStyle}>
-                <NavDropdown.Item>Republican</NavDropdown.Item>
-                <NavDropdown.Item>Democratic</NavDropdown.Item>
-                <NavDropdown.Item>White</NavDropdown.Item>
-                <NavDropdown.Item>Black</NavDropdown.Item>
-                <NavDropdown.Item>Hispanic</NavDropdown.Item>
-                <NavDropdown.Item>Asian</NavDropdown.Item>
-                <NavDropdown.Item>Native America</NavDropdown.Item>
-                <NavDropdown.Item>Pacific Islander</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Republican')}>Republican</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Democratic')}>Democratic</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('White')}>White</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Black')}>Black</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Hispanic')}>Hispanic</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Asian')}>Asian</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Native American')}>Native American</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => props.changeDemographic('Pacific Islander')}>Pacific Islander</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

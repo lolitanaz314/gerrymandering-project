@@ -164,6 +164,9 @@ const RightSidebar = (props) => {
     //set default tab
     const [key, setKey] = useState('summary');
 
+    let demo = false;
+    if(props.demographic !== 'None') demo = true;
+
     let stateID = 0;
     if (props.code === "SC") stateID = 1;
     else if (props.code === "CO") stateID = 2;
@@ -171,7 +174,7 @@ const RightSidebar = (props) => {
     //scorllbar menu functions
     let menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
-    if (props.pinned === null) pinnedDP = "None"
+    if (props.pinned === null) pinnedDP = "None";
 
     function scrollRight() {
         menu.scrollLeft += 100;
@@ -269,11 +272,15 @@ const RightSidebar = (props) => {
                                     This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
                                     cluster dedicated to research applications for Stony Brook faculty, staff, and students.
                                     We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis
-                                    for comparision</b> (ex. African American population percent), and <b>selected district plan </b>
-                                    (currently district plan {props.currentDp}). These plans will be displayed in a <b>box &#38;
-                                    whisker plot</b>, with the selected district plan shown for comparision.
+                                        for comparision</b> (ex. African American population percent), and <b>selected district plan</b>
+                                    .These plans will be displayed in a <b>box &#38; whisker plot</b>,
+                                    with the selected district plan shown for comparision.
+                                    <br></br> <br></br>
+                                    <div>Current State Selected: {props.currentState}</div>
+                                    <div>Current District Plan Selected: #{props.currentDp}</div>
+                                    <div>Current Demographic Selected: {props.demographic}</div>
                                 </p>
-                                <input type="button" value="Generate" onClick={showBW} />
+                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" onClick={showBW} />
                             </div>
                             <div id='bw' className='hidden'>
                                 <BoxAndWhisker />
