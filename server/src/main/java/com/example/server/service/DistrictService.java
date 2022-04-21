@@ -50,11 +50,17 @@ public class DistrictService {
     }
 
     // measures
-    /*
-    getCompactnessMeasure(): double
-    isMajorityMinorityDistrict(): boolean
-    isCompetitiveDistrict(): boolean
-    getWastedVotes(): int[]
-     */
-//
+//    public double getCompactnessMeasure(){
+//        return 0;
+//    }
+//    public boolean isMajorityMinorityDistrict(int totalPop, int minorityPop){
+//        // get population and demographic of district
+//        return false;
+//    }
+//    public boolean isCompetitiveDistrict(int[] votes){
+//        return (float)(Math.abs(votes[0] - votes[1])/((votes[0] + votes[1])/2)) * 100 > .1;
+//    }
+//    public int[] getWastedVotes(int[] votes){
+//        return new int[] {1, 1};
+//    }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,21 @@ public class DistrictPlanController {
     public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId) {
         DistrictPlan districtPlan = dpService.getPlanByStateIdAndDistrictId(stateId, planId);
         return assembleDistrictPlan(districtPlan);
+    }
+
+    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id1}/{dp_id2}")
+    public CollectionModel<EntityModel<DistrictPlan>> comparePlans(
+            @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id1") int planId1, @PathVariable("dp_id2") int planId2) {
+        DistrictPlan districtPlan1 = dpService.getPlanByStateIdAndDistrictId(stateId, planId1);
+        DistrictPlan districtPlan2 = dpService.getPlanByStateIdAndDistrictId(stateId, planId2);
+
+        List<DistrictPlan> twoPlans = new ArrayList<>();
+        twoPlans.add(districtPlan1);
+        twoPlans.add(districtPlan2);
+
+        List<EntityModel<DistrictPlan>> twoPlansList = assembleDistrictPlans(twoPlans);
+        return CollectionModel.of(twoPlansList,
+                linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(stateId)).withSelfRel());
     }
 
     public List<EntityModel<DistrictPlan>> assembleDistrictPlans(List<DistrictPlan> districtPlans){
