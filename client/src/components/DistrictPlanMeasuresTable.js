@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 
 const DistrictPlanMeasuresTable = (props) => {
 
-    const [demographic, setDemographic] = useState({});
       return (
         <>
             {/*<button onClick={this.retrieveUsers} href="/users">click</button>*/}

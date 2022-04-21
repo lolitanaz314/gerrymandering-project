@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const HoverBox = (props) => {
     
     return (
@@ -18,11 +16,11 @@ const HoverBox = (props) => {
             )}
 
             {props.onselect.district && props.view === "election" && (
-                <ul className="census-info" style={{ height: '15%', width: '36%' }}>
+                <ul className="census-info" style={{ height: '15%', width: '40%' }}>
                     <li><strong>District {props.onselect.district}</strong></li><br />
                     <li>Incumbent: {props.onselect.incumbent}</li>
                     <li>Partisan Lean: {props.onselect.lean}</li>
-                    <li>Compactness: </li>
+                    <li>Compactness: X</li>
                 </ul>
             )}
             {props.onselect.district && props.view === "population" && (

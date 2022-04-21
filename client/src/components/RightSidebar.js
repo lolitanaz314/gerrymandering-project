@@ -245,7 +245,7 @@ const RightSidebar = (props) => {
                             <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
                                 pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
                                 comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
-                            <div class="jump-link-top">
+                            <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>
@@ -270,7 +270,7 @@ const RightSidebar = (props) => {
                             </Navbar>
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
                                 compare={props.comparing} pinned={props.pinned} />
-                            <div class="jump-link-top">
+                            <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>
@@ -293,7 +293,7 @@ const RightSidebar = (props) => {
                             <div id='bw' className='hidden'>
                                 <BoxAndWhisker />
                             </div>
-                            <div class="jump-link-top">
+                            <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>

@@ -1,5 +1,4 @@
 import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
-import React, {useState} from 'react'
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
