@@ -32,7 +32,7 @@ public class PrecinctService {
         return precincts;
     }
 
-    public Precinct getPrecinctsById(StateCode stateId, int id) {
+    public Precinct getPrecinctsByStateIdAndPrecinctId(StateCode stateId, int id) {
         try{
             Optional<Precinct> p = pRepository.findByStateIdAndId(stateId, id);
             if(p.isPresent()){

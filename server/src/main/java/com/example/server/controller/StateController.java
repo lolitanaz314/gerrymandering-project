@@ -26,29 +26,29 @@ public class StateController {
 
     @GetMapping("/api/states")
     public CollectionModel<EntityModel<State>> getStates() {
-        List<State> states = sService.findAll();
+        List<State> states = sService.getStates();
         Set<EntityModel<State>> stateSet = assembleStates(states);
         return CollectionModel.of(stateSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
 
     @GetMapping("/api/states/{id}")
-    public EntityModel<State> getStateById(@PathVariable("id") StateCode id) {
-        State state = sService.getStateById(id);
+    public EntityModel<State> getStateByStateId(@PathVariable("id") StateCode id) {
+        State state = sService.getStateByStateId(id);
         return assembleState(state);
     }
 
     public Set<EntityModel<State>> assembleStates(List<State> states){
         return states.stream().map(s ->
                 EntityModel.of(s,
-                linkTo(methodOn(StateController.class).getStateById(s.getId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStateByStateId(s.getId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
                 .collect(Collectors.toSet());
     }
 
     public EntityModel<State> assembleState(State state){
         return EntityModel.of(state,
-                linkTo(methodOn(StateController.class).getStateById(state.getId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStateByStateId(state.getId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
 }

@@ -23,21 +23,21 @@ public class StateService {
         this.dmService = dmService;
     }
 
-    public List<State> findAll() {
+    public List<State> getStates() {
         List<State> states = sRepository.findAll();
         for (State s : states){
             s.setDemographic(dmService.getDemographicByStateId(s.getId()));
-            s.setDistrictPlans(dpService.getDistrictPlansByStateId(s.getId()));
+            s.setDistrictPlans(dpService.getPlansByStateId(s.getId()));
         }
         return states;
     }
 
-    public State getStateById(StateCode id) {
+    public State getStateByStateId(StateCode id) {
         try {
             Optional<State> s = sRepository.findById(id);
             if (s.isPresent()){
                 s.get().setDemographic(dmService.getDemographicByStateId(id));
-                s.get().setDistrictPlans(dpService.getDistrictPlansByStateId(id));
+                s.get().setDistrictPlans(dpService.getPlansByStateId(id));
                 return s.get();
             } else{
                 throw new NoSuchElementException();

@@ -26,7 +26,7 @@ public class DistrictService {
 
     // public List<District> findAll() {return dRepository.findAll(); }
 
-    public Set<District> getDistrictsByDistrictPlanId(StateCode stateId, int dpId){
+    public Set<District> getDistrictsByPlanId(StateCode stateId, int dpId){
         Set<District> districts = dRepository.findByStateIdAndDistrictPlanId(stateId, dpId);
         for (District d : districts){
             d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, dpId, d.getId())));
@@ -35,7 +35,7 @@ public class DistrictService {
         return districts;
     }
 
-    public District getDistrictById(StateCode stateId, int dpId, int id) {
+    public District getDistrictByPlanIdAndDistrictId(StateCode stateId, int dpId, int id) {
         try{
             Optional<District> d = dRepository.findByStateIdAndDistrictPlanIdAndId(stateId, dpId, id);
             if(d.isPresent()){
