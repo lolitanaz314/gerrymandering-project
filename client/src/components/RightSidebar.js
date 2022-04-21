@@ -259,7 +259,7 @@ const RightSidebar = (props) => {
                                                 <Nav.Link href="#more-measures"> Measures</Nav.Link>
                                             </span> 
                                             <span className="underline-on-hover">
-                                                <Nav.Link href="#seat-vote">Seats to Vote</Nav.Link>
+                                                <Nav.Link href="#political-fairness">Political Fairness</Nav.Link>
                                             </span>
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#radar-chart">Radar Chart</Nav.Link>

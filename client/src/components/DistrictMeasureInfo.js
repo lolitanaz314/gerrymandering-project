@@ -41,10 +41,30 @@ const DistrictMeasureInfo = (props) => {
         <div> <DistrictPlanMeasuresTable /> </div>
         <br></br>
 
-        <h5 id="seat-vote"> Measure of Fairness - Seats to Vote</h5>
-        <div style={curveStyle}> <SeatVoteCurve /> </div>
-        <br></br>
-
+        <h5 id="political-fairness">Political Fairness</h5>
+            <h6>Seats to Vote Plot</h6>
+            <div style={curveStyle}> <SeatVoteCurve /> </div>
+            <br></br>
+            <Table striped responsive="sm" bordered hover>
+                <thead>
+                    <tr>
+                        <th>Measure</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Efficiency Gap</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>Mean-Median Difference</td>
+                        <td>X</td>
+                    </tr>
+                </tbody>
+            </Table>
+            
+        <hr />
         <h5 id="radar-chart">Radar Chart</h5>
         <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} />
     </>;
@@ -65,10 +85,30 @@ const DistrictMeasureInfo = (props) => {
                         <td>
                             <h5 id="more-measures">Measures</h5>
                             <div style={tableStyle}> <DistrictPlanMeasuresTable /> </div>
-                            <br></br>
+                            <br></br><br></br>
 
-                            <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
-                            <div style={comparingStyle}> <SeatVoteCurve /> </div>
+                            <h5 id="political-fairness">Political Fairness</h5>
+                                <h6>Seats to Vote Plot</h6>
+                                <div style={comparingStyle}> <SeatVoteCurve /> </div>
+                                <br></br>
+                                <Table striped responsive="sm" bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Measure</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Efficiency Gap</td>
+                                            <td>X</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mean-Median Difference</td>
+                                            <td>X</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
                         </td>
                     </Table>
 
@@ -76,10 +116,30 @@ const DistrictMeasureInfo = (props) => {
                         <td>
                             <h5 id="more-measures">Measures</h5>
                             <div style={tableStyle}> <DistrictPlanMeasuresTable /> </div>
-                            <br></br>
+                            <br></br><br></br>
 
-                            <h5 id="seat-vote">Measure of Fairness - Seats to Vote</h5>
+                            <h5 id="political-fairness">Political Fairness</h5>
+                            <h6>Seats to Vote Plot</h6>
                             <div style={comparingStyle}> <SeatVoteCurve /> </div>
+                                <br></br>
+                                <Table striped responsive="sm" bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Measure</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Efficiency Gap</td>
+                                            <td>X</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mean-Median Difference</td>
+                                            <td>X</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
                         </td>
                     </Table>
                 </tbody>

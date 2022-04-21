@@ -4,7 +4,6 @@ const DistrictPlanMeasuresTable = (props) => {
 
       return (
         <>
-            {/*<button onClick={this.retrieveUsers} href="/users">click</button>*/}
             <Table striped responsive="sm" bordered hover>
                     <thead>
                         <tr>
