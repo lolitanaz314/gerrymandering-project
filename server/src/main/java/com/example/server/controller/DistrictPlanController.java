@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
 public class DistrictPlanController {
-    DistrictPlanService dpService;
-
+    final DistrictPlanService dpService;
     public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }
 
     // Test
@@ -30,7 +30,7 @@ public class DistrictPlanController {
 //    }
 
     @GetMapping("/api/states/{state_id}/districtPlans")
-    CollectionModel<EntityModel<DistrictPlan>> getDistrictPlansByStateId(@PathVariable("state_id") StateCode stateId) {
+    public CollectionModel<EntityModel<DistrictPlan>> getDistrictPlansByStateId(@PathVariable("state_id") StateCode stateId) {
         List<DistrictPlan> districtPlans = dpService.getDistrictPlansByStateId(stateId);
         List<EntityModel<DistrictPlan>> districtPlanList = assembleDistrictPlans(districtPlans);
         return CollectionModel.of(districtPlanList,
@@ -38,7 +38,7 @@ public class DistrictPlanController {
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{id}")
-    EntityModel<DistrictPlan> getDistrictPlanById(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
+    public EntityModel<DistrictPlan> getDistrictPlanById(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
         DistrictPlan dp = dpService.getDistrictPlanById(stateId, id);
         return assembleDistrictPlan(dp);
     }

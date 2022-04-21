@@ -6,10 +6,14 @@ import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Demographic;
 import com.example.server.repository.DemographicRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Service
 public class DemographicService {
@@ -23,7 +27,7 @@ public class DemographicService {
     public Map<RacialCategory, Integer> getDemographicByStateId(StateCode id) {
         int state = id.ordinal();
 
-        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
+        Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
             List<Demographic> s = dmRepository.findDemographicByStateId(state);
             // System.out.println(s.size());
@@ -42,7 +46,7 @@ public class DemographicService {
         int districtPlan = id.getDistrictPlanId();
         int district = id.getId();
 
-        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
+        Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
             List<Demographic> s = dmRepository.findDemographicByDistrictPlanAndDistrictId(state, districtPlan, district);
             // System.out.println(s.size());
@@ -60,7 +64,7 @@ public class DemographicService {
         int state = id.getStateId().ordinal();
         int precinct = id.getId();
 
-        SortedMap<RacialCategory, Integer> demographic = new TreeMap<>();
+        Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
             List<Demographic> s = dmRepository.findDemographicByPrecinctId(state, precinct);
             // System.out.println(s.size());

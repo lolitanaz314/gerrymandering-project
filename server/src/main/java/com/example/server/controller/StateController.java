@@ -15,19 +15,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
 public class StateController {
     final StateService sService;
-
-    public StateController (StateService sService) {
-        this.sService = sService;
-    }
+    public StateController (StateService sService) { this.sService = sService; }
 
     @GetMapping("/api/states")
-    CollectionModel<EntityModel<State>> getStates() {
+    public CollectionModel<EntityModel<State>> getStates() {
         List<State> states = sService.findAll();
         Set<EntityModel<State>> stateSet = assembleStates(states);
         return CollectionModel.of(stateSet,
@@ -35,7 +33,7 @@ public class StateController {
     }
 
     @GetMapping("/api/states/{id}")
-    EntityModel<State> getStateById(@PathVariable("id") StateCode id) {
+    public EntityModel<State> getStateById(@PathVariable("id") StateCode id) {
         State state = sService.getStateById(id);
         return assembleState(state);
     }

@@ -4,12 +4,13 @@ import com.example.server.model.id.PrecinctId;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Precinct;
 import com.example.server.repository.PrecinctRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
+import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class PrecinctService {

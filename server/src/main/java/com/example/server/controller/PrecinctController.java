@@ -3,6 +3,7 @@ package com.example.server.controller;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Precinct;
 import com.example.server.service.PrecinctService;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,8 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @CrossOrigin("*")
 public class PrecinctController {
-    PrecinctService pService;
-
+    final PrecinctService pService;
     public PrecinctController (PrecinctService pService) {this.pService = pService; }
 
     // Test

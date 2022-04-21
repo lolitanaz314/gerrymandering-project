@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
 public class DistrictController {
-    private final DistrictService dService;
-
+    final DistrictService dService;
     public DistrictController (DistrictService dService) {this.dService = dService; }
 
     // Test
