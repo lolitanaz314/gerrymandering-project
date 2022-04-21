@@ -1,6 +1,6 @@
 package com.example.server.id;
 
-import com.example.server.enumeration.StateCode;
+import com.example.server.model.enumeration.StateCode;
 import lombok.*;
 
 import java.io.Serializable;

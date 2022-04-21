@@ -1,6 +1,6 @@
 package com.example.server.controller;
 
-import com.example.server.enumeration.StateCode;
+import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Precinct;
 import com.example.server.service.PrecinctService;
 import org.springframework.hateoas.CollectionModel;
@@ -30,26 +30,29 @@ public class PrecinctController {
 //        return pService.findAll();
 //    }
 
-    // Get precincts by state_id
     @GetMapping("/api/states/{state_id}/precincts")
-    public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(
-            @PathVariable("state_id") StateCode stateId) {
-
-        Set<EntityModel<Precinct>> precincts = pService.getPrecinctsByStateId(stateId).stream().map(p ->
-                EntityModel.of(p,
-                        linkTo(methodOn(PrecinctController.class).getPrecinctsById(p.getStateId(), p.getId())).withSelfRel(),
-                        linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
-                .collect(Collectors.toSet());
-        return CollectionModel.of(precincts,
+    public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(@PathVariable("state_id") StateCode stateId) {
+        List<Precinct> precincts = pService.getPrecinctsByStateId(stateId);
+        Set<EntityModel<Precinct>> precinctSet = assemblePrecincts(precincts);
+        return CollectionModel.of(precinctSet,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(stateId)).withSelfRel());
     }
 
-    // Get precinct by state_id and id
     @GetMapping("/api/states/{state_id}/precincts/{id}")
-    public EntityModel<Precinct> getPrecinctsById(
-            @PathVariable("state_id") StateCode stateId,
-            @PathVariable("id") int id) {
+    public EntityModel<Precinct> getPrecinctsById(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
         Precinct p = pService.getPrecinctsById(stateId, id);
+        return assemblePrecinct(p);
+    }
+
+    public Set<EntityModel<Precinct>> assemblePrecincts( List<Precinct> precincts){
+        return precincts.stream().map(p ->
+                EntityModel.of(p,
+                linkTo(methodOn(PrecinctController.class).getPrecinctsById(p.getStateId(), p.getId())).withSelfRel(),
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
+                .collect(Collectors.toSet());
+    }
+
+    public EntityModel<Precinct> assemblePrecinct(Precinct p){
         return EntityModel.of(p,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsById(p.getStateId(), p.getId())).withSelfRel(),
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts"));

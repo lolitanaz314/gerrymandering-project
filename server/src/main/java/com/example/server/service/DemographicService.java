@@ -1,7 +1,7 @@
 package com.example.server.service;
 
-import com.example.server.enumeration.RacialCategory;
-import com.example.server.enumeration.StateCode;
+import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.Demographic;
 import com.example.server.repository.DemographicRepository;
 import org.springframework.beans.factory.annotation.Autowired;

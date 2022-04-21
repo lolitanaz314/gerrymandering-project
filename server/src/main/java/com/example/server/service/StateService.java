@@ -1,7 +1,7 @@
 package com.example.server.service;
 
 import com.example.server.model.State;
-import com.example.server.enumeration.StateCode;
+import com.example.server.model.enumeration.StateCode;
 import com.example.server.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +14,35 @@ import java.util.NoSuchElementException;
 public class StateService {
     @Autowired
     private final StateRepository sRepository;
-    public StateService(StateRepository sRepository) { this.sRepository = sRepository; }
+    final DistrictPlanService dpService;
+    final DemographicService dmService;
+    public StateService(StateRepository sRepository, DistrictPlanService dpService, DemographicService dmService) {
+        this.sRepository = sRepository;
+        this.dpService = dpService;
+        this.dmService = dmService;
+    }
 
     public List<State> findAll() {
-        return sRepository.findAll();
+        List<State> states = sRepository.findAll();
+        for (State s : states){
+            s.setDemographic(dmService.getDemographicByStateId(s.getId()));
+            s.setDistrictPlans(dpService.getDistrictPlansByStateId(s.getId()));
+        }
+        return states;
     }
 
     public State getStateById(StateCode id) {
         try {
             Optional<State> s = sRepository.findById(id);
+            s.get().setDemographic(dmService.getDemographicByStateId(id));
+            s.get().setDistrictPlans(dpService.getDistrictPlansByStateId(id));
             return s.get();
         } catch (NoSuchElementException ex){
             return null;
         }
     }
+
+    // measures
+//    + compareDistrictPlans():JSON
+//    + getBoxWhiskerPlot():BoxWhiskerPlot
 }

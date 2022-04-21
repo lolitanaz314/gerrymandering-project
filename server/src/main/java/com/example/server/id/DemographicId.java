@@ -1,6 +1,6 @@
 package com.example.server.id;
 
-import com.example.server.enumeration.RacialCategory;
+import com.example.server.model.enumeration.RacialCategory;
 import lombok.*;
 
 import java.io.Serializable;

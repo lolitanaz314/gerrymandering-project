@@ -1,6 +1,6 @@
 package com.example.server.service;
 
-import com.example.server.enumeration.StateCode;
+import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.District;
 import com.example.server.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +32,10 @@ public class DistrictService {
             return null;
         }
     }
+
+    // measures
+//    +getCompactnessMeasure(): double
+//    +isMajorityMinorityDistrict(): boolean
+//    +isCompetitiveDistrict(): boolean
+//    +getWastedVotes(): int[]
 }

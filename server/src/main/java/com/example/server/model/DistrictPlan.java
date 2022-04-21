@@ -1,7 +1,7 @@
 package com.example.server.model;
 
-import com.example.server.enumeration.StateCode;
-import com.example.server.enumeration.Status;
+import com.example.server.model.enumeration.StateCode;
+import com.example.server.model.enumeration.Status;
 
 import com.example.server.id.DistrictPlanId;
 import lombok.*;
