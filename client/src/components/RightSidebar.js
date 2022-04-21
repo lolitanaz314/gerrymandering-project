@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
-import BoxAndWhisker from './BoxAndWhisker.js'
+import BoxAndWhisker from './BoxAndWhisker';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -207,7 +207,7 @@ const RightSidebar = (props) => {
                     <div id='dp-container'>
                         {testData[stateID].map(obj =>
                             <DistrictPlan
-                                key={obj.id} id={obj.id} state={props.currentState}
+                                key={obj.id} id={obj.id} state={props.currentState} code={props.code}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
                                 selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
                             />)}

@@ -29,11 +29,11 @@ const MapView = (props) => {
     zoom: 5,
     name: 'USA',
     code: 'USA',
-    layer: null, //this is used to remove geojson layer -> might need to delete later on
     view: 'election'
   });
 
   const [districtPlans, setDps] = useState({currentDp: 0, pinned: null});
+  const [layers, setLayers] = useState({current: null, prev: null});
 
   //sidebar
   const [show, setShow] = useState(false);
@@ -48,6 +48,7 @@ const MapView = (props) => {
   const highlight = (feature, layer) => {
     layer.on({
       mouseover: highlightFeature
+      // ,click: () => zoomState(feature, layer)
       // ,mouseout: resetHighlight
     });
   }
@@ -83,7 +84,6 @@ const MapView = (props) => {
   function clicked(feature, layer) {
     // bind click to geojson
     layer.on('click', () => zoomState(feature, layer));
-    // console.log("Clicked");
   }
 
   function zoomState(state, layer) {
@@ -106,9 +106,13 @@ const MapView = (props) => {
       zoom: 6.5,
       name: state.properties.name,
       code: state.properties.abbreviation,
-      layer: layer,
       view: currentLocation.view
     });
+
+    if(layers.current !== layer){
+      let pre = layers.current;
+      setLayers({current: layer, prev: pre})
+    }
 
     //shows sidebar
     handleShow();
@@ -152,13 +156,11 @@ const MapView = (props) => {
     //recenters map after changing window size
     map.invalidateSize();
 
-    //zoom
-    if (currentLocation.layer) map.addLayer(currentLocation.layer);
+    //set center & zoom
     map.setView(currentLocation.center, currentLocation.zoom);
-    if (currentLocation.layer) {
-      if (map.hasLayer(currentLocation.layer)) map.removeLayer(currentLocation.layer);
-      // else map.addLayer(currentLocation.layer);
-    }
+
+    if (layers.current && map.hasLayer(layers.current)) map.removeLayer(layers.current);
+    else if (layers.prev) map.addLayer(layers.prev);
     return null;
   }
 
@@ -169,7 +171,6 @@ const MapView = (props) => {
       zoom: currentLocation.zoom,
       name: currentLocation.name,
       code: currentLocation.code,
-      layer: currentLocation.layer,
       view: v
     });
     console.log("change view to: " + currentLocation.view)
