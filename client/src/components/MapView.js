@@ -286,8 +286,8 @@ const MapView = (props) => {
 
   return (
     <div>
-      <Navigation zoomState={zoomState} className='google-maps' changeView={changeView}
-        changeDemographic={(demo) => changeDemographic(demo)} />
+      <Navigation className='google-maps' changeView={changeView} zoomState={zoomState}  name={currentLocation.name}
+        changeDemographic={(demo) => changeDemographic(demo)} demographic={demographic} />
 
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomSnap={0.1} zoomControl={false} minZoom={5} maxZoom={15}
