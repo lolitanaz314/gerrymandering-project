@@ -171,6 +171,7 @@ const MapView = (props) => {
     setDps({ currentDp: 0, pinned: null })
   }
 
+  //component is needed to change the zoom level, center for leaflet
   function ZoomComponent() {
     const map = useMap();
 
