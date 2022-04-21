@@ -51,4 +51,9 @@ public class District {
 
     @Transient
     private Set<Precinct> precincts;
+
+    // Recently added measures
+    // @Transient is temporary for now
+    @Transient
+    private double compactness;
 }

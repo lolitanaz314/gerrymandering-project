@@ -26,6 +26,7 @@ public class DistrictPlan {
     @Column(name = "state_id", nullable = false)
     private StateCode stateId;
 
+    // Change to simplified date
     @Column(name="date")
     private Date date;
 
@@ -45,6 +46,22 @@ public class DistrictPlan {
     @Transient
     private int[] votes;
 
+    // Recently added measures
+    // @Transient is temporary for now
+    @Transient
+    private double populationEquality;
+    @Transient
+    private double compactness;
+    @Transient
+    private double splitCounty;
+    @Transient
+    private int majorityMinorityCount;
+    @Transient
+    private int competitiveDistrictCount;
+    @Transient
+    private double meanMedianDiff;
+    @Transient
+    private double efficiencyGap;
 //    @Transient
 //    @OneToOne
 //    private Measures measures;
