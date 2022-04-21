@@ -22,7 +22,7 @@ const DistrictMeasureInfo = (props) => {
     // fake data for radar chart
     const dataA = {
         type: 'scatterpolar',
-        r: [1.5, 10, 39, 31, 15, 1.5],
+        r: [3, 10, 39, 31, 15, 4],
         theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
         fill: 'toself',
         name: "District Plan #" + props.currentDp
@@ -30,7 +30,7 @@ const DistrictMeasureInfo = (props) => {
 
     const dataB = {
         type: 'scatterpolar',
-        r: [1.5, 28, 18, 31, 15, 24],
+        r: [15, 28, 18, 6, 29, 24],
         theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Projected Political Fairness', 'Compactness'],
         fill: 'toself',
         name: "District Plan #" + props.pinned
