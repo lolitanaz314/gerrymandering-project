@@ -3,39 +3,7 @@ import RadarCharting from './RadarChart';
 import Table from 'react-bootstrap/Table';
 import DistrictPlanMeasuresTable from './DistrictPlanMeasuresTable';
 
-// fake data
-const data = [
-    {
-        "measure": "Majority-Minority Districts",
-        "A": 120,
-        "B": 100,
-        "fullMark": 150
-    },
-    {
-        "measure": "Efficiency Gap",
-        "A": 98,
-        "B": 120,
-        "fullMark": 150
-    },
-    {
-        "measure": "Competitive Districts",
-        "A": 86,
-        "B": 90,
-        "fullMark": 150
-    },
-    {
-        "measure": "Projected Political Fairness",
-        "A": 99,
-        "B": 50,
-        "fullMark": 150
-    },
-    {
-        "measure": "Compactness",
-        "A": 85,
-        "B": 70,
-        "fullMark": 150
-    },
-];
+
 
 const curveStyle = { //style for graphs
     height: '330px',
@@ -53,6 +21,23 @@ const tableStyle = { //style for compare view (measure table)
 }
 
 const DistrictMeasureInfo = (props) => {
+    // fake data for radar chart
+    const dataA = {
+        type: 'scatterpolar',
+        r: [1.5, 10, 39, 31, 15, 1.5],
+        theta: ['Majority-Minority Districts','Efficiency Gap','Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+        fill: 'toself',
+        name: "District Plan #" + props.currentDp
+    };
+
+    const dataB = 
+        {
+            type: 'scatterpolar',
+            r: [1.5, 28, 18, 31, 15, 24],
+            theta: ['Majority-Minority Districts','Efficiency Gap','Competitive Districts', 'Projected Political Fairness', 'Compactness'],
+            fill: 'toself',
+            name: "District Plan #" + props.pinned
+        };
 
     let basic = <>
         <h5 id="more-measures">Measures</h5>
@@ -64,7 +49,7 @@ const DistrictMeasureInfo = (props) => {
         <br></br>
 
         <h5 id="radar-chart">Radar Chart</h5>
-        <div style={curveStyle}> <RadarCharting data={data} currentDp={props.currentDp} comparing={props.compare} /> </div>
+        <div style={curveStyle}> <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} /> </div>
         <br></br>
     </>;
 
@@ -105,7 +90,7 @@ const DistrictMeasureInfo = (props) => {
             </Table>
             <h5 id="radar-chart">Radar Chart</h5>
             <div style={curveStyle}>
-                <RadarCharting data={data} currentDp={props.currentDp} pinnedDp={props.pinned} comparing={props.compare} />
+                <RadarCharting dataA={dataA} dataB={dataB} currentDp={props.currentDp} pinnedDp={props.pinned} comparing={props.compare} />
             </div>
         </>
     }
