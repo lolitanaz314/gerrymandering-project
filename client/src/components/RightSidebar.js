@@ -19,6 +19,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Republican Party',
+            date: '2021-05-03',
             compositeData: {
                 Democratic: 960129,
                 Republican: 1516348,
@@ -28,6 +29,7 @@ const testData = [ //testData has data of all plans from all states
             id: 1,
             status: "Proposed",
             proposedBy: 'Republican Party',
+            date: '2021-10-20',
             compositeData: {
                 Democratic: 980139,
                 Republican: 1618378,
@@ -37,6 +39,7 @@ const testData = [ //testData has data of all plans from all states
             id: 2,
             status: "Generated",
             proposedBy: 'Democratic Party',
+            date: '2021-02-10',
             compositeData: {
                 Democratic: 100129,
                 Republican: 1246338,
@@ -48,6 +51,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Republican Party',
+            date: '2021-05-30',
             compositeData: {
                 Democratic: 887132,
                 Republican: 1046758,
@@ -56,7 +60,8 @@ const testData = [ //testData has data of all plans from all states
         }, {
             id: 1,
             status: "Proposed",
-            proposedBy: 'South Carolina state Senate',
+            proposedBy: 'South Carolina State Senate',
+            date: '2021-02-31',
             compositeData: {
                 Democratic: 987232,
                 Republican: 946738,
@@ -65,7 +70,8 @@ const testData = [ //testData has data of all plans from all states
         }, {
             id: 2,
             status: "Proposed",
-            proposedBy: 'South Carolina state House',
+            proposedBy: 'South Carolina State House',
+            date: '2021-12-31',
             compositeData: {
                 Democratic: 782132,
                 Republican: 1240734,
@@ -74,7 +80,8 @@ const testData = [ //testData has data of all plans from all states
         }, {
             id: 3,
             status: "Generated",
-            proposedBy: 'South Carolina state House',
+            proposedBy: 'South Carolina State House',
+            date: '2021-10-09',
             compositeData: {
                 Democratic: 801922,
                 Republican: 1349558,
@@ -86,6 +93,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            date: '2021-01-20',
             compositeData: {
                 Democratic: 1478348,
                 Republican: 1253070,
@@ -95,6 +103,7 @@ const testData = [ //testData has data of all plans from all states
             id: 1,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            date: '2021-06-09',
             compositeData: {
                 Democratic: 1135782,
                 Republican: 1009287,
@@ -104,6 +113,7 @@ const testData = [ //testData has data of all plans from all states
             id: 2,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            date: '2021-01-21',
             compositeData: {
                 Democratic: 1348358,
                 Republican: 1153570,
@@ -113,6 +123,7 @@ const testData = [ //testData has data of all plans from all states
             id: 3,
             status: "Generated",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
+            date: '2021-11-05',
             compositeData: {
                 Democratic: 1476448,
                 Republican: 1053470,
