@@ -119,7 +119,7 @@ const MapView = (props) => {
 
     setLocation({
       center: coords,
-      zoom: 6.5,
+      zoom: 6.7,
       name: feature.properties.name,
       code: feature.properties.abbreviation,
       view: currentLocation.view
@@ -283,7 +283,7 @@ const MapView = (props) => {
       <Navigation zoomState={zoomState} className='google-maps' changeView={changeView} />
 
       <div id='map'>
-        <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomControl={false} minZoom={5} maxZoom={15}
+        <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomSnap={0.1} zoomControl={false} minZoom={5} maxZoom={15}
           maxBounds={[[19.8283, -130.5795], [54.8283, -58.5795]]} id='leaflet-map'>
 
           <ZoomComponent />
