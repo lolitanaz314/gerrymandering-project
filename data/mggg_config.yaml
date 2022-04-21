@@ -1,7 +1,0 @@
-num_districtings: 10000
-iterations: 10000
-precincts_path: /gpfs/projects/CSE416/Lynx/[insert precinct path here]
-output_path: /gpfs/projects/CSE416/Lynx/seawulf/arkansas/
-random_initial_partition: True
-cut_edges_multiplier: 2
-state: TN

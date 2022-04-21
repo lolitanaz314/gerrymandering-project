@@ -4,9 +4,6 @@ import pandas as pd
 import shapely
 
 class Measures:
-
-    # I PUT IN SAMPLE DATA, ALL THIS WORKS
-
     # Make everything here static because it's going to be called in compute_measures.py
     # Inputs for every single method - Pandas dataframe 
 
@@ -34,6 +31,8 @@ class Measures:
 
     @staticmethod
     def split_county():
+
+        # NOT YET
         pass
 
     @staticmethod
