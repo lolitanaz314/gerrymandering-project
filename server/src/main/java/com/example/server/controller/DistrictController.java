@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,23 +25,23 @@ public class DistrictController {
     public DistrictController (DistrictService dService) {this.dService = dService; }
 
     // Test
-//    @GetMapping("/api/districts")
-//    public List<District> getDistricts() {
-//        return dService.findAll();
-//    }
+    @GetMapping("/api/districts")
+    public List<District> getDistricts() {
+        return dService.findAll();
+    }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")
-    public CollectionModel<EntityModel<District>> getDistrictsByPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int dpId) {
-        Set<District> districts = dService.getDistrictsByPlanId(stateId, dpId);
+    public CollectionModel<EntityModel<District>> getDistrictsByPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId) {
+        Set<District> districts = dService.getDistrictsByPlanId(stateId, planId);
         Set<EntityModel<District>> districtSet = assembleDistricts(districts);
         return CollectionModel.of(districtSet,
-                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(stateId, dpId)).withSelfRel());
+                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(stateId, planId)).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts/{id}")
-    public EntityModel<District> getDistrictByPlanIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int dpId, @PathVariable("id") int id) {
-        District d = dService.getDistrictByPlanIdAndDistrictId(stateId, dpId, id);
-        return assembleDistrict(d);
+    public EntityModel<District> getDistrictByPlanIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId, @PathVariable("id") int districtId) {
+        District district = dService.getDistrictByPlanIdAndDistrictId(stateId, planId, districtId);
+        return assembleDistrict(district);
     }
 
     public Set<EntityModel<District>> assembleDistricts(Set<District> districts){

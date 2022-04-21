@@ -33,8 +33,8 @@ public class StateController {
     }
 
     @GetMapping("/api/states/{id}")
-    public EntityModel<State> getStateByStateId(@PathVariable("id") StateCode id) {
-        State state = sService.getStateByStateId(id);
+    public EntityModel<State> getStateByStateId(@PathVariable("id") StateCode stateId) {
+        State state = sService.getStateByStateId(stateId);
         return assembleState(state);
     }
 

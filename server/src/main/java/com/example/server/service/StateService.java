@@ -32,12 +32,12 @@ public class StateService {
         return states;
     }
 
-    public State getStateByStateId(StateCode id) {
+    public State getStateByStateId(StateCode stateId) {
         try {
-            Optional<State> s = sRepository.findById(id);
+            Optional<State> s = sRepository.findById(stateId);
             if (s.isPresent()){
-                s.get().setDemographic(dmService.getDemographicByStateId(id));
-                s.get().setDistrictPlans(dpService.getPlansByStateId(id));
+                s.get().setDemographic(dmService.getDemographicByStateId(stateId));
+                s.get().setDistrictPlans(dpService.getPlansByStateId(stateId));
                 return s.get();
             } else{
                 throw new NoSuchElementException();

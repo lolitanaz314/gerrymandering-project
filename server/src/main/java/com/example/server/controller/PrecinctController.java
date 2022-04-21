@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,9 +39,9 @@ public class PrecinctController {
     }
 
     @GetMapping("/api/states/{state_id}/precincts/{id}")
-    public EntityModel<Precinct> getPrecinctsByStateIdAndPrecinctId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
-        Precinct p = pService.getPrecinctsByStateIdAndPrecinctId(stateId, id);
-        return assemblePrecinct(p);
+    public EntityModel<Precinct> getPrecinctsByStateIdAndPrecinctId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int precinctId) {
+        Precinct precinct = pService.getPrecinctsByStateIdAndPrecinctId(stateId, precinctId);
+        return assemblePrecinct(precinct);
     }
 
     public Set<EntityModel<Precinct>> assemblePrecincts(Set<Precinct> precincts){

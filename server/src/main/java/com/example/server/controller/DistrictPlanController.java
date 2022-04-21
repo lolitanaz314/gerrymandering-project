@@ -24,10 +24,10 @@ public class DistrictPlanController {
     public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }
 
     // Test
-//    @GetMapping("/api/districtPlans")
-//    List<DistrictPlan> getDistrictPlans() {
-//        return dpService.findAll();
-//    }
+    @GetMapping("/api/districtPlans")
+    List<DistrictPlan> getDistrictPlans() {
+        return dpService.findAll();
+    }
 
     @GetMapping("/api/states/{state_id}/districtPlans")
     public CollectionModel<EntityModel<DistrictPlan>> getPlansByStateId(@PathVariable("state_id") StateCode stateId) {
@@ -37,10 +37,10 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(stateId)).withSelfRel());
     }
 
-    @GetMapping("/api/states/{state_id}/districtPlans/{id}")
-    public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {
-        DistrictPlan dp = dpService.getPlanByStateIdAndDistrictId(stateId, id);
-        return assembleDistrictPlan(dp);
+    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}")
+    public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId) {
+        DistrictPlan districtPlan = dpService.getPlanByStateIdAndDistrictId(stateId, planId);
+        return assembleDistrictPlan(districtPlan);
     }
 
     public List<EntityModel<DistrictPlan>> assembleDistrictPlans(List<DistrictPlan> districtPlans){
