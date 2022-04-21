@@ -6,7 +6,8 @@ import { HiMenu } from "react-icons/hi";
 
 const stateStyle = {
   position: 'relative',
-  width: 100
+  width: 100,
+  textAlign: 'center'
 }
 
 const viewStyle = {
@@ -16,7 +17,9 @@ const viewStyle = {
 
 const demographicStyle = {
   position: 'relative',
-  left: 250
+  left: 250,
+  width: 200,
+  textAlign: 'center'
 }
 
 const borderStyle = {
@@ -32,6 +35,12 @@ const menuStyle = {
 }
 
 const Navigation = (props) => {
+
+  let demographicTitle = 'Choose Demographic';
+  if(props.demographic !== 'None') demographicTitle = props.demographic;
+  let stateTitle = "Choose State";
+  if(props.name !== 'USA') stateTitle = props.name;
+
   return (
     <>
       <Navbar bg="primary" variant="dark" fixed="top">
@@ -41,7 +50,7 @@ const Navigation = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Choose State" id="basic-nav-dropdown" style={stateStyle}>
+              <NavDropdown title={stateTitle} id="basic-nav-dropdown" style={stateStyle}>
                 <NavDropdown.Item href="#tennessee" onClick={() => props.zoomState(tennesseeOutline)}>Tennessee</NavDropdown.Item>
                 <NavDropdown.Item href="#southCarolina" onClick={() => props.zoomState(southcarolinaOutline)}>South Carolina</NavDropdown.Item>
                 <NavDropdown.Item href="#colorado" onClick={() => props.zoomState(coloradoOutline)}>Colorado</NavDropdown.Item>
@@ -62,7 +71,7 @@ const Navigation = (props) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Choose Demographic" id="basic-nav-dropdown" style={demographicStyle}>
+              <NavDropdown title={demographicTitle} id="basic-nav-dropdown" style={demographicStyle}>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Republican')}>Republican</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Democratic')}>Democratic</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => props.changeDemographic('White')}>White</NavDropdown.Item>

@@ -7,7 +7,19 @@ const RadarCharting = (props) => {
 
     return (
         <Plot data={data}
-            layout={{polar: {radialaxis: {visible: true, range: [0, 50]}}, height: 380}} />
+            layout={{
+                polar: {
+                    radialaxis: {
+                        visible: true, range: [0, 50]
+                    }
+                }, 
+                showlegend: true, 
+                legend: {
+                    x: 1,
+                    xanchor: 'right',
+                    y: 1,
+                  },
+                height: 380}} />
     );
 }
 

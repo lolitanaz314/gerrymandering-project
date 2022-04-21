@@ -29,3 +29,5 @@ variables_sc = ["CVAP_TOT20", "CVAP_ASN20", "CVAP_BLK20", "CVAP_NHP20", "CVAP_WH
 precincts_sc[variables_sc] = block_sc[variables_sc].groupby(assignment_sc).sum()
 precincts_sc[variables_sc]
 
+with open('/Users/cherrypi/Desktop/gerrymandering-project/data/sc_data/final_precinct_geoJSON_sc.json', 'w') as f:
+    json.dump(precincts_sc, f)

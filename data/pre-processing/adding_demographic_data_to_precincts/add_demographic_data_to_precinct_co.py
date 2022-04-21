@@ -18,3 +18,10 @@ variables_co = ["CVAP_TOT20", "CVAP_ASN20", "CVAP_BLK20", "CVAP_NHP20", "CVAP_WH
 precincts_co[variables_co] = block_co[variables_co].groupby(assignment_co).sum()
 
 precincts_co[variables_co] 
+
+with open('/Users/cherrypi/Desktop/gerrymandering-project/data/tn_data/final_precinct_geoJSON_tn.json', 'w') as f:
+    json.dump(precincts_tn, f)
+
+
+
+

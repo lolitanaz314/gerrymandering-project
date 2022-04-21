@@ -5,7 +5,7 @@ import maup
 precincts_tn=geopandas.read_file("/Users/cherrypi/Desktop/gerrymandering-project/data/tn_data/precinct/tn_precinct_election_2020_shp")
 blocks_tn=geopandas.read_file("/Users/cherrypi/Desktop/gerrymandering-project/data/tn_data/precinct/tn_cvap_2020_2020_b_shp")
 
-assignment_tn = maup.assign(blocks_tn, precincts_tn) # this returns a Pandas Series
+assignment_tn = maup.assign(blocks_tn, precincts_tn) # this returns a Pandas Series 
 
 '''
 For the Block shapefile
@@ -27,4 +27,11 @@ CVAP_AIB20            	CVAP Estimate for American Indian or Alaska Native and Bl
 variables_tn = ["CVAP_TOT20", "CVAP_ASN20", "CVAP_BLK20", "CVAP_NHP20", "CVAP_WHT20"]
 precincts_tn[variables_tn] = blocks_tn[variables_tn].groupby(assignment_tn).sum()
 
-precincts_tn[variables_tn]
+display(precincts_tn[variables_tn])
+
+with open('/Users/cherrypi/Desktop/gerrymandering-project/data/tn_data/final_precinct_geoJSON_tn.json', 'w') as f:
+    json.dump(precincts_tn, f)
+
+
+
+

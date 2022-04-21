@@ -4,15 +4,13 @@ import os
 from decimal import *
 import numpy as np
 
-# this would be happening while running MGGG 
-
 def reject_outliers(data): # this is going to come in the form of a list of numbers
     d = np.abs(data - np.median(data))
     mdev = np.median(d)
     s = d/mdev if mdev else 0
     return data [s<m]
     
-def getPlotPoints(basis): # for ONE district
+def getPlotPoints(basis): # FOr ONE category (white, af american, republican , etc)
     for dist in basis:
         # print(dist)
         arr = np.array(dist)
@@ -31,17 +29,22 @@ def getPlotPoints(basis): # for ONE district
         stats.append(maxi)
     return stats # returns a length 5 list
 
-PresD=     [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-PresR=     [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-Black=    [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-White=     [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-Asian=     [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-Hisp=      [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
-Polsby=    [[],[],[],[],[],[],[],[],[],[],[],[],[],[]] # nested arr, by district 
+# this is going to iterate through the JSON
+def populateTheDistrictPlanStats(numDistrictsInThePlan, processedDistrictPlanJSON):
+    PresD=[] # this is going to be a nested arr, by district 
+    PresR= [] 
+    Black=[] 
+    White=[] 
+    Asian=[] 
+    Hisp=[] 
 
-'''
-CODE TO POPULATE THE NESTED LISTS WILL GO HERE ONCE I KNOW WHAT THE RANDOM DISTRICT GEOPANDAS WILL LOOK LIKE, HANG TIGHT
-'''
+    # DID NOT FINISH YET!!!!
+
+    # Call getPlotPoints() for all the the districts' categories
+
+    return PresD, PresR, Black, White, Asian, Hisp, Polsby
+
+PresD, PresR, Black, White, Asian, Hisp, Polsby = populateTheDistrictPlanStats()
 
 boxWhisk = {}
 boxWhisk['PresD'] = PresD
@@ -53,7 +56,6 @@ boxWhisk['His'] = Hisp
 boxWhisk['Polsby'] = Polsby
 
 # THIS ENTIRE FILE WOULD OUTPUT THE BOX AND WHISKER DATA
-# print(boxWhisk)
-file_name = "./boxWhisk2.json"
+file_name = "./boxWhisk.json"
 file1 = open(file_name, "w")
 json.dump(boxWhisk, file1)

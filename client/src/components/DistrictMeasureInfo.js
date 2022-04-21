@@ -25,7 +25,7 @@ const DistrictMeasureInfo = (props) => {
         r: [3, 10, 39, 31, 15, 4],
         theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
         fill: 'toself',
-        name: "District Plan #" + props.currentDp
+        name: "District Plan #" + props.currentDp + "       "
     };
 
     const dataB = {
@@ -33,7 +33,7 @@ const DistrictMeasureInfo = (props) => {
         r: [15, 28, 18, 6, 29, 24],
         theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
         fill: 'toself',
-        name: "District Plan #" + props.pinned
+        name: "District Plan #" + props.pinned + "       "
     };
 
     let basic = <>

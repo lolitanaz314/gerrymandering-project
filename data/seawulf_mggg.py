@@ -11,34 +11,34 @@ import time
 import yaml
 import sys
 
-class Seawulf: # THIS is the meat & bones of the whole project
+class Seawulf: # this is the mainest class
 
-    # ***NEED TO RUN ON THE TN DATA***
-
-    def __init__(self, precincts_path, state, random_initial_partition=True, node_repeats=2,
-                 cut_edges_multiplier=2, population_deviation=0.1, output_path=''):
+    def __init__(self, precincts_path, state, random_initial_partition=True,
+                 cut_edges_multiplier=2, output_path=''):
         
-        self.precincts = geopandas.read_file(precincts_path)
-        self.district_list = list(self.precincts['districtId'].unique())
+        self.precincts = geopandas.read_file(precincts_path) 
+        self.district_list = list(self.precincts['districtId'])
         self.state = state
-        self.graph = Graph.from_geodataframe(self.precincts)
-        self.random_initial_partition = random_initial_partition
+        self.graph = Graph.from_geodataframe(self.precincts) # this creates the graph
+        self.random_initial_partition = random_initial_partition # A boolean
         self.seawulf_updaters = self.create_updaters()
-        self.ideal_metric = self.precincts[self.target_metric].sum() / len(self.district_list)
-        self.initial_partition = self.create_partition()
-        self.seawulf_districtings = pd.DataFrame(columns=['districtingId', 'state'])
+        self.initial_partition = self.create_partition() 
+        self.seawulf_districtplan = pd.DataFrame(columns=['districtPlanId', 'state'])
         self.seawulf_districts = pd.DataFrame(
-            columns=['districtId', 'districtingId', 'population', 'white', 'black', 'asian', 'hispanic', 'democrat', 'republican',
+            columns=['districtId', 'districtPlanId', 'population', 'white', 'black', 'asian', 'hispanic', 'democrat', 'republican',
                      'geometry'])
         self.output_path = output_path # for the graph
 
     def create_partition(self) -> Partition:
-        initial_partition = Partition(graph=self.graph, assignment=self.assignment_criteria,
-                                      updaters=self.seawulf_updaters)
+        initial_partition = Partition(graph=self.graph,  
+                                      updaters=self.seawulf_updaters) # instantiate the initial state of our Markov chain
+
         if self.random_initial_partition:
-            random_assignment = tree.recursive_tree_part(self.graph, self.district_list, self.ideal_metric,
+            random_assignment = tree.recursive_tree_part(self.graph, self.district_list, 
                                                          self.target_metric)
             initial_partition.assignment.update(random_assignment)
+        else:
+            # put in the district plan you want to base the partition off of
         return initial_partition
 
     # updaters in Gerrychain are used to have extra data in each geometric location
@@ -46,12 +46,12 @@ class Seawulf: # THIS is the meat & bones of the whole project
         seawulf_updaters = {}
         for column in self.precincts.columns:
             if column != 'geometry' and 'id' not in column.lower():
-                seawulf_updaters[column] = updaters.Tally(column)
-        return seawulf_updaters
+                seawulf_updaters[column] = updaters.Tally(column) # From the Gerrychain docs: Tally: Aggregates a node attribute (e.g. population) over each part of the partition.
+        return seawulf_updaters # returns a dictionary of all the updaters we would need for the Seawulf
 
-    def process_iteration(self, partition, id) -> (pd.DataFrame, pd.DataFrame):
+    def one_iteration(self, partition, id) -> (pd.DataFrame, pd.DataFrame): # this is executed for every single district plan 
         precincts = []
-        for node in partition.graph.nodes:
+        for node in partition.graph.nodes: #  # partition is a graph object, the nodes contain all the data 
             precinctId = partition.graph.nodes[node]['precinctId']
             districtId = "".join([id, str(partition.assignment[node])])
             population = partition.graph.nodes[node]['population']
@@ -63,6 +63,7 @@ class Seawulf: # THIS is the meat & bones of the whole project
             republican = partition.graph.nodes[node]['republican']
             geometry = partition.graph.nodes[node]['geometry']
             precincts.append([precinctId, districtId, population, white, black, asian, hispanic, democrat, republican, geometry])
+        
         precincts = pd.DataFrame(precincts,
                                  columns=['precinctId', 'districtId', 'population', 'white', 'black', 'asian','hispanic',
                                           'democrat',
@@ -70,30 +71,44 @@ class Seawulf: # THIS is the meat & bones of the whole project
 
         districts_info = precincts[
             ['districtId', 'population', 'white', 'black', 'asian', 'hispanic', 'democrat', 'republican']].groupby(
-            'districtId').sum().reset_index()  
-        districts_info['districtingId'] = id
+            'districtId').sum()
+        
+        districts_info['districtPlanId'] = id # creates a unique ID
+        
         districts_geo = precincts[['districtId', 'geometry']].groupby('districtId')['geometry'].apply(
-            unary_union).reset_index()
-        districts = districts_info.merge(districts_geo, on='districtId')
-        districting = pd.DataFrame([[id, self.state]], columns=['districtingId', 'state'])
-        return districting, districts
+            unary_union).reset_index() 
 
-    def run(self, num_districtings, iterations, max_time):
+        districts = districts_info.merge(districts_geo, on='districtId') # merge the table and the series together 
+        districtPlan = pd.DataFrame([[id, self.state]], columns=['districtPlanId', 'state'])
+        
+        return districtPlan, districts
 
-        for i in range(num_districtings):
-            chain_start = time.time()
+    def run(self, num_districtPlans, iterations): # iterations = Number of steps to run in the Markov Chain.
+        for i in range(num_districtPlans):
             chain = MarkovChain(
-                proposal=self.proposal,
-                constraints=self.constraints,
-                accept=always_accept,
-                initial_state=self.initial_partition,
+                initial_state=self.initial_partition, 
                 total_steps=iterations)
-            iterations_begin = time.time()
-            for idx, new_partition in enumerate(chain):
-                iterations_end = time.time()
-                if iterations_end - iterations_begin > max_time:
-                    break
-            chain_end = time.time()
-            id = ''.join([self.state, 'SW', str(i)])
+            
+            id = ''.join([self.state, 'SeaWulf_districtPlan', str(i)])
 
-        # CALL THE BOX AND WHISKER.py FILE ON THE DISTRICT HERE!!!!!
+            new_districtPlan, new_districts = self.one_iteration(chain, id) # One iteration of Markov chain for ONE district Plan!!!!
+            self.seawulf_districtPlan = self.seawulf_districtPlan.append(new_districting, ignore_index=True)
+            self.seawulf_districts = self.seawulf_districts.append(new_districts, ignore_index=True)
+            
+        self.seawulf_districtPlan.to_csv("".join([self.output_path, id, '_districtPlan.csv']), index=False)
+        self.seawulf_districts.to_csv("".join([self.output_path, id, '_districts.csv']), index=False)
+            
+if __name__ == '__main__':
+    precincts_path = # insert name of precinct path
+    state = # insert the name of the state
+    num_districtPlans = config['num_districtings']
+    iterations = # insert number iterations for the Markov Chain (algorithm metric)
+    random_initial_partition = # insert graph object (in the form of a geoJSON)
+    output_path = # put in the name for an output_path
+
+    seawulf = Seawulf(precincts_path=precincts_path, output_path=output_path, 
+                      random_initial_partition=random_initial_partition, state=state
+                      )
+    seawulf.run(num_districtPlans=num_districtPlans, iterations=iterations)
+                                                                                                             162,5         Bot
+

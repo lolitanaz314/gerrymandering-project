@@ -2,13 +2,13 @@
 CSE 416 Project
 
 <hr />
-Run server: <br/>
+<b>Run server:</b> <br/>
 mvn clean install <br />
 mvn spring-boot:run
 
 
 <hr />
-In client:
+<b>In client:</b>
 npm install axios
 
 Navbar options: "npm install react react-dom"<br/>
@@ -31,7 +31,7 @@ Routes: "npm install browser-router" <br/>
 
 
 <hr />
-In data:
+<b>In data:</b>
 
 MGGG algorithm: pip install gerrychain
 
