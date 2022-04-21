@@ -21,9 +21,13 @@ Recharts: "npm install recharts"
 
 Plotly: "npm install react-plotly.js plotly.js"
 
+Centroid: "npm install @turf/centroid"
+
 Routes: "npm install browser-router"
 
 
 In data:
 
-pip install gerrychain
+MGGG algorithm: pip install gerrychain
+
+Mapping geographies (precinct to block, block to district): pip install maup
