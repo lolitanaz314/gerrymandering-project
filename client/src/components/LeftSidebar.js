@@ -4,7 +4,7 @@ import React from 'react';
 const sidebarStyle = {
     margin: '56px 0px 0px 0px',
     width: '20%',
-    zIndex: '400'
+    zIndex: '1050'
 }
 
 const titleStyle = {
