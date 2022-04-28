@@ -1,4 +1,7 @@
 import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
+import {useState} from 'react';
+import LeftSidebar from './LeftSidebar';
+
 import tennesseeOutline from "../assets/json/tennessee.json";
 import southcarolinaOutline from "../assets/json/southcarolina.json";
 import coloradoOutline from "../assets/json/colorado.json";
@@ -41,10 +44,14 @@ const Navigation = (props) => {
   let stateTitle = "Choose State";
   if(props.name !== 'USA') stateTitle = props.name;
 
+  //sidebar
+  const [show, setShow] = useState(false);
+  const handleShow = (val) => setShow(val);
+
   return (
     <>
       <Navbar bg="primary" variant="dark" fixed="top">
-          <HiMenu className='menu-icon' style={menuStyle} />
+          <HiMenu className='menu-icon' style={menuStyle} onClick={() => handleShow(true)} />
         <Container>
           <Navbar.Brand href="/">CSE 416 Lynx</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -105,6 +112,8 @@ const Navigation = (props) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <LeftSidebar show={show} handleClose={() => handleShow(false)} />
     </>
   )
 }
