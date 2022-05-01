@@ -25,6 +25,24 @@
   color: darkgray;
 }
 
+/* LEFT SIDEBAR CIRCLES */
+.state-proposed{
+  background-color: blanchedalmond;
+}
+
+.state-approved{
+  background-color: green;
+}
+
+.circle {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: solid 1px;
+  padding: 2%;
+}
+
 /* HOVER INFO BOXES */
 .census-info {
   display: flex;
