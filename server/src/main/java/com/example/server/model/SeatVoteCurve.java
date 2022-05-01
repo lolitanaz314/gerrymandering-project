@@ -5,6 +5,8 @@ import com.example.server.model.id.DistrictPlanId;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -12,9 +14,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "seat_vote")
+@Table(name = "seat_vote_curve")
 @IdClass(DistrictPlanId.class)
-public class SeatVote {
+public class SeatVoteCurve {
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
@@ -30,5 +32,5 @@ public class SeatVote {
     double seatBias;
 
     @Transient
-    double[][] curve;
+    List<Tuple> seatVotePoints;
 }

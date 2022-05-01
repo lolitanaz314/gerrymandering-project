@@ -6,7 +6,10 @@ public enum RacialCategory {
     BLACK,
     ASIAN,
     NATIVE,
-    PACIFIC;
+    MIXED   // two_or_more
+    // PACIFIC;
+
+
 
 //    WHITE(0),
 //    HISPANIC(1),

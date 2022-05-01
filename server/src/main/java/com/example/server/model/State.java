@@ -14,13 +14,14 @@ import java.util.Map;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "State")
+@Table(name = "state")
 public class State {
     @Id
     @Column(name="state_id")
     private StateCode stateId;
 
-    @Column(name="total_pop") // total population
+    @Transient
+    // @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient
