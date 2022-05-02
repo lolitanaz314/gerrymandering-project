@@ -9,7 +9,13 @@ const getStateById = (state_id) => {
     return httpClient.get("/states/"+state_id)
 }
 
+const getBoxAndWhisker = (state_id, demographic) => {
+    // console.log(httpClient.get("/states/"+state_id))
+    return httpClient.get("/states/"+state_id+"/box-and-whisker/"+demographic)
+}
+
 export default {
     getStates, 
-    getStateById
+    getStateById,
+    getBoxAndWhisker
 };
