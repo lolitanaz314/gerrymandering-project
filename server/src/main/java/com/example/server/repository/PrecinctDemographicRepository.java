@@ -4,7 +4,9 @@ import com.example.server.model.PrecinctDemographic;
 import com.example.server.model.id.PrecinctId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PrecinctDemographicRepository extends JpaRepository<PrecinctDemographic, PrecinctId> {
     // get demographic of precinct
     @Query(value = "SELECT * FROM precinct_demographic " +
