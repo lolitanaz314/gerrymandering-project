@@ -30,12 +30,12 @@ const teamStates = [ //status: 0 for proposed, 1 for approved
     {
         name: 'Florida',
         status: 1,
-        teams: ['Dream']
+        teams: ['Dreams']
     },
     {
         name: 'Georgia',
         status: 1,
-        teams: ['Dream']
+        teams: ['Dreams']
     },
     {
         name: 'Illinois',
@@ -60,7 +60,7 @@ const teamStates = [ //status: 0 for proposed, 1 for approved
     {
         name: 'Mississippi',
         status: 1,
-        teams: ['Dream', 'Mystics']
+        teams: ['Dreams', 'Mystics']
     },
     {
         name: 'Nevada',
