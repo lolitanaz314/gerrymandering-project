@@ -32,5 +32,5 @@ public class SeatVoteCurve {
     double seatBias;
 
     @Transient
-    List<Tuple> seatVotePoints;
+    List<SeatVoteData> seatVotePoints;
 }

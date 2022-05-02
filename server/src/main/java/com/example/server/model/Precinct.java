@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "Precinct")
+@Table(name = "precinct")
 @IdClass(PrecinctId.class)
 public class Precinct {
     @Id
@@ -25,6 +25,9 @@ public class Precinct {
     @Id
     @Column(name="precinct_id", nullable = false)
     private int precinctId;
+
+//    @ManyToOne
+//    private State state;
 
     @Column(name="total_pop") // total population
     private int totalPop;

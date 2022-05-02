@@ -1,6 +1,7 @@
 package com.example.server.service;
 
 import com.example.server.model.BoxAndWhisker;
+import com.example.server.model.BoxAndWhiskerData;
 import com.example.server.model.BoxAndWhiskerPlot;
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
@@ -28,12 +29,17 @@ public class BoxAndWhiskerService {
         try {
             boxAndWhiskerPlot.setRace(demographic);
 
+            // TODO: make change to this block
+            List<BoxAndWhiskerData> data = bwRepository.findPoints(demographic.ordinal(), stateId.ordinal());
             List<BoxAndWhisker> boxAndWhiskers = new ArrayList<>();
-            for (int i = 1; i <= 9; i++){
-                List<Double> points = bwRepository.findPoints(demographic.ordinal(), stateId.ordinal(), i);
-                BoxAndWhisker bw = new BoxAndWhisker(i, points);
+            for (BoxAndWhiskerData datum : data) {
+                String id = Integer.toString(datum.getDistrictId());
+                double[] points = new double[]{datum.getMin(), datum.getQ1(),
+                        datum.getMed(), datum.getQ3(), datum.getMax()};
+                BoxAndWhisker bw = new BoxAndWhisker(id, points);
                 boxAndWhiskers.add(bw);
             }
+            System.out.println(boxAndWhiskers.size());
             boxAndWhiskerPlot.setBoxAndWhiskers(boxAndWhiskers);
 
             return boxAndWhiskerPlot;

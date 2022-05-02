@@ -21,7 +21,6 @@ public class State {
     private StateCode stateId;
 
     @Transient
-    // @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient
@@ -29,5 +28,6 @@ public class State {
     private Map<RacialCategory, Integer> demographic;
 
     @Transient
+    @OneToMany
     private List<DistrictPlan> districtPlans;
 }

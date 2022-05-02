@@ -29,6 +29,18 @@ public class BoxAndWhiskerData {
     @Column(name="district_id")
     private Integer districtId;
 
-    @Column(name="percent")
-    private Double percent;
+    @Column(name="min")
+    private Double min;
+
+    @Column(name="q1")
+    private Double q1;
+
+    @Column(name="med")
+    private Double med;
+
+    @Column(name="q3")
+    private Double q3;
+
+    @Column(name="max")
+    private Double max;
 }

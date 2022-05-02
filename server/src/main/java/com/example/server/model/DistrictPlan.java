@@ -15,12 +15,15 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "DistrictPlan")
+@Table(name = "district_plan")
 @IdClass(DistrictPlanId.class)
 public class DistrictPlan {
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
+
+//    @ManyToOne
+//    private State state;
 
     @Id
     @Column(name="district_plan_id", nullable = false)

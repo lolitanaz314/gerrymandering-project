@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "District")
+@Table(name = "district")
 @IdClass(DistrictId.class)
 public class District {
     @Id
@@ -30,11 +30,13 @@ public class District {
     @Column(name="district_id", nullable = false)
     private int districtId;
 
+//    @ManyToOne
+//    private DistrictPlan districtPlan;
+
     @Column(name="incumbent")
     private String incumbent;
 
     @Transient
-    // @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient
@@ -51,6 +53,7 @@ public class District {
     private int[] votes;
 
     @Transient
+    @OneToMany
     private Set<Precinct> precincts;
 
     // Recently added measures
