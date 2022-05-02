@@ -2,7 +2,6 @@ package com.example.server.model;
 
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
-
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -14,20 +13,22 @@ import java.util.Map;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "state")
-public class State {
+@Table(name = "box_and_whisker_data")
+public class BoxAndWhiskerData {
     @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name="demographic")
+    private RacialCategory race;
+
     @Column(name="state_id")
     private StateCode stateId;
 
-    @Transient
-    // @Column(name="total_pop") // total population
-    private int totalPop;
+    @Column(name="district_id")
+    private Integer districtId;
 
-    @Transient
-    @MapKeyEnumerated(EnumType.STRING)
-    private Map<RacialCategory, Integer> demographic;
-
-    @Transient
-    private List<DistrictPlan> districtPlans;
+    @Column(name="percent")
+    private Double percent;
 }

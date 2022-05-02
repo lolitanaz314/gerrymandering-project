@@ -14,6 +14,8 @@ public interface DistrictPlanRepository extends JpaRepository<DistrictPlan, Dist
 
     Optional<DistrictPlan> findByStateIdAndPlanId(StateCode state_id, int id);
 
+}
+
 //    @Query(value = "SELECT * FROM Lynx.district_plan L " +
 //            "WHERE L.state_id = ?1", nativeQuery = true)
 //    Iterable<DistrictPlan> getDistrictPlanByStateId(StateCode state_id);
@@ -21,5 +23,3 @@ public interface DistrictPlanRepository extends JpaRepository<DistrictPlan, Dist
 //    @Query(value = "SELECT * FROM Lynx.district_plan L " +
 //            "WHERE L.state_id = ?1 AND L.id = ?2", nativeQuery = true)
 //    Optional<DistrictPlan> getDistrictPlanById(StateCode state_id, long id);
-
-}

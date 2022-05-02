@@ -17,6 +17,7 @@ public class PrecinctService {
     @Autowired
     private final PrecinctRepository pRepository;
     private final DemographicService dmService;
+
     public PrecinctService(PrecinctRepository pRepository, DemographicService dmService) {
         this.pRepository = pRepository;
         this.dmService = dmService;

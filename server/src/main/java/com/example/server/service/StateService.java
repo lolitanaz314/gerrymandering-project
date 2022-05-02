@@ -17,6 +17,7 @@ public class StateService {
     private final StateRepository sRepository;
     private final DistrictPlanService dpService;
     private final DemographicService dmService;
+
     public StateService(StateRepository sRepository, DistrictPlanService dpService, DemographicService dmService) {
         this.sRepository = sRepository;
         this.dpService = dpService;

@@ -1,5 +1,8 @@
 package com.example.server.controller;
 
+import com.example.server.model.BoxAndWhiskerPlot;
+import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.service.BoxAndWhiskerService;
 import com.example.server.service.StateService;
 import com.example.server.model.State;
 import com.example.server.model.enumeration.StateCode;
@@ -22,7 +25,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @CrossOrigin("*")
 public class StateController {
     final StateService sService;
-    public StateController (StateService sService) { this.sService = sService; }
+     final BoxAndWhiskerService bwService;
+    public StateController(StateService sService, BoxAndWhiskerService bwService) {
+        this.sService = sService;
+         this.bwService = bwService;
+    }
 
     @GetMapping("/api/states")
     public CollectionModel<EntityModel<State>> getStates() {
@@ -36,6 +43,12 @@ public class StateController {
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
         State state = sService.getStateByStateId(stateId);
         return assembleState(state);
+    }
+
+    @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
+    public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
+                                                                    @PathVariable("demographic") RacialCategory demographic) {
+        return EntityModel.of(bwService.getBoxAndWhiskerByStateId(stateId, demographic));
     }
 
     public Set<EntityModel<State>> assembleStates(List<State> states){

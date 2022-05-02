@@ -33,7 +33,8 @@ public class District {
     @Column(name="incumbent")
     private String incumbent;
 
-    @Column(name="total_pop") // total population
+    @Transient
+    // @Column(name="total_pop") // total population
     private int totalPop;
 
     @Transient
