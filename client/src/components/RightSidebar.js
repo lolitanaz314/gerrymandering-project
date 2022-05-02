@@ -1,6 +1,5 @@
 import { Offcanvas } from 'react-bootstrap';
-import { useState } from 'react'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,6 +11,8 @@ import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
 import BoxAndWhisker from './BoxAndWhisker';
+
+import State from '../api/service/StateService';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -173,6 +174,47 @@ const titleStyle = {
 }
 
 const RightSidebar = (props) => {
+
+    const [box, setBox] = useState({})
+    const [plotPara, setPlotPara] = useState({"state": undefined, "demographic": undefined})
+    // onClick={() => setPlotPara({"demographic": props.demographic, "state": props.state})}
+
+    // Gets box and whisker data from server.
+    // Adds additional attribute per object since "type" and "marker" is not included
+
+    // You can check what data is returned from server by typing:
+    // http://localhost:8080/api/states/TN/box-and-whisker/<demographic>
+
+    // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
+    // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
+    // there is also ASIAN, HISPANIC, MIXED, NATIVE
+    useEffect(() => {
+        if (plotPara.state !== undefined && plotPara.demographic !== undefined){
+            console.log(plotPara.state + " " + plotPara.demographic)
+            State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
+            .then(response => {
+                setBox(response.data);
+
+                // I need to remove 9. How does one get length of an array of objects???
+                for (let i = 0; i < 9; i++){
+                    box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+                    delete box.boxAndWhiskers[i]["boxAndWhisker"];
+    
+                    box.boxAndWhiskers[i]["type"] = "box";
+                    
+                    box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+                    delete box.boxAndWhiskers[i]["districtId"];
+
+                    box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+                        
+                }
+            })
+            .catch(error => {console.log('Something went wrong', error);
+            })  
+            console.log(box.boxAndWhiskers)
+        }
+    }, [plotPara]);
+
     //set default tab
     const [key, setKey] = useState('summary');
 
@@ -299,10 +341,13 @@ const RightSidebar = (props) => {
                                     <div>Current District Plan Selected: #{props.currentDp}</div>
                                     <div>Current Demographic Selected: {props.demographic}</div>
                                 </p>
-                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" onClick={showBW} />
+                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" onClick={() => showBW()} />
+                                {/* onClick={() => { setPlotPara({"state": props.code, "demographic": props.demographic.toUpperCase()}); setTimeout(() => {  showBW(); }, 2000);}} /> */}
                             </div>
+                           
+
                             <div id='bw' className='hidden'>
-                                <BoxAndWhisker />
+                                <BoxAndWhisker box={box.boxAndWhiskers}/>
                             </div>
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>

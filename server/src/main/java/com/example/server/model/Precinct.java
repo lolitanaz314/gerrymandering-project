@@ -29,6 +29,7 @@ public class Precinct {
 //    @ManyToOne
 //    private State state;
 
+    @Transient
     @Column(name="total_pop") // total population
     private int totalPop;
 
