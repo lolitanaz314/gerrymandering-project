@@ -36,3 +36,9 @@ Routes: "npm install browser-router" <br/>
 MGGG algorithm: pip install gerrychain
 
 Mapping geographies (precinct to block, block to district): pip install maup
+
+<hr />
+Terminal command used to compress geojson file:
+"npm install -g mapshaper"
+<>mapshaper old_file.geojson -simplify dp 10% keep-shapes -o format=geojson new_file.geojson</>
+File is 10% smaller than the original file
