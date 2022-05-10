@@ -13,6 +13,10 @@ import coloradoOutline from "../assets/json/colorado.json";
 
 // components
 import Navigation from './Navigation';
+import Base from './Base';
+import Plans from './Plans';
+import Counties from './Counties';
+import Precincts from './Precincts';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
 import HoverBox from './HoverBox';
@@ -31,13 +35,13 @@ const MapView = (props) => {
     zoom: 5,
     name: 'USA',
     code: 'TN',
+    jsonCode: 'USA',
     view: 'election'
   });
 
   //get state object from server
   const [state, setState] = useState({});
   useEffect(() => {
-    if (currentLocation.code !== 'USA') {
       State.getStateById(currentLocation.code)
         .then(response => {
           setState(response.data);
@@ -45,8 +49,19 @@ const MapView = (props) => {
         .catch(error => {
           console.log('Something went wrong', error);
         })
-    }
   }, [currentLocation.code]);
+
+  //change view (border lines)
+  const [view, setBorder] = useState({
+    district: true,
+    county: false,
+    precinct: false
+  });
+  //toggles value of item in object state
+  const toggleBorder = (key) => setBorder((prevValue) => ({
+    ...prevValue,
+    [key]: !prevValue[key]
+  }))
 
   //state to store selected dp and pinned dp from scroll menu
   const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
@@ -115,6 +130,11 @@ const MapView = (props) => {
 
     //resets comparison view
     handleCompare(false);
+    setBorder({
+      district: true,
+      precinct: false,
+      county: false
+    });
 
     let polygon = new L.Polygon(feature.geometry.coordinates);
     let bounds = polygon.getBounds();
@@ -128,13 +148,14 @@ const MapView = (props) => {
       zoom: 6.7,
       name: feature.properties.name,
       code: feature.properties.abbreviation,
+      jsonCode: feature.properties.abbreviation,
       view: currentLocation.view
     });
 
-    if (layers.current !== layer) {
-      let pre = layers.current;
-      setLayers({ current: layer, prev: pre })
-    }
+    // if (layers.current !== layer) {
+    //   let pre = layers.current;
+    //   setLayers({ current: layer, prev: pre })
+    // }
 
     //shows sidebar
     handleShow();
@@ -186,23 +207,11 @@ const MapView = (props) => {
     return null;
   }
 
-  function changeView(view) {
-    setOnselect({});
-    setLocation({
-      center: currentLocation.center,
-      zoom: currentLocation.zoom,
-      name: currentLocation.name,
-      code: currentLocation.code,
-      view: view
-    });
-    console.log("change view to: " + currentLocation.view)
-  }
-
   function setStyle(feature) {
     let style = currentLocation.view;
     return {
       //fill property shows 'red' or 'blue' based on republican/democratic district
-      fillColor: feature.fill[style],
+      fillColor: 'orange',
       color: 'black',
       weight: '1',
       fillOpacity: 0.6
@@ -284,10 +293,17 @@ const MapView = (props) => {
     })
   }
 
+  // let districts = <></>;
+  // let counties = <></>;
+  // let precincts = <></>;
+  // if(currentLocation.jsonCode !== 'USA') districts = <Plans currentLocation={currentLocation} view={view}/>;
+  // if(view.county) county = <Counties currentLocation={currentLocation} view={view} />;
+  // if(view.precinct) precinct = <Precincts currentLocation={currentLocation} view={view} />;
+
   return (
     <div>
-      <Navigation className='google-maps' changeView={changeView} zoomState={zoomState}  name={currentLocation.name}
-        changeDemographic={(demo) => changeDemographic(demo)} demographic={demographic} />
+      <Navigation className='google-maps' zoomState={zoomState} name={currentLocation.name} demographic={demographic} view={view}
+        changeDemographic={(demo) => changeDemographic(demo)} show={show} toggleBorder={(line) => toggleBorder(line)} />
 
       <div id='map'>
         <MapContainer center={currentLocation.center} zoom={currentLocation.zoom} zoomSnap={0.1} zoomControl={false} minZoom={5} maxZoom={15}
@@ -296,13 +312,19 @@ const MapView = (props) => {
           <ZoomComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
+          {/* <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
           <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle} />
           <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />
 
           <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
           <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-          <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} />
+          <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} /> */}
+
+          <Base zoomState={zoomState} currentLocation={currentLocation}/>
+          <Plans currentLocation={currentLocation} view={view}/>
+          <Counties currentLocation={currentLocation} view={view} />
+          <Precincts currentLocation={currentLocation} view={view} />
+          {/* {districts} {counties} {precincts} */}
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} name={currentLocation.name} pinned={districtPlans.pinned} demographic={demographic}

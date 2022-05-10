@@ -1,7 +1,6 @@
 {
     "type": "FeatureCollection",
-    "name": "colorado-counties",
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "abbreviation": "CO",
     "features": [
     { "type": "Feature", "properties": { "statefp": "08", "countyfp": "035", "countyns": "00198133", "affgeoid": "0500000US08035", "geoid": "08035", "name": "Douglas", "lsad": "06", "aland": 2176272717.0, "awater": 6752511.0, "state_name": "Colorado", "state_abbr": "CO", "jurisdiction_type": "state" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -105.217833, 39.260115 ], [ -105.171278, 39.406854 ], [ -105.073045, 39.545265 ], [ -105.05306, 39.563109 ], [ -105.04874, 39.566088 ], [ -104.904415, 39.565982 ], [ -104.660626, 39.565909 ], [ -104.662896, 39.129527 ], [ -105.033544, 39.129819 ], [ -105.32922, 39.129689 ], [ -105.217833, 39.260115 ] ] ] } },
     { "type": "Feature", "properties": { "statefp": "08", "countyfp": "095", "countyns": "00198163", "affgeoid": "0500000US08095", "geoid": "08095", "name": "Phillips", "lsad": "06", "aland": 1781724973.0, "awater": 301808.0, "state_name": "Colorado", "state_abbr": "CO", "jurisdiction_type": "state" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -102.664689, 40.705189 ], [ -102.65131, 40.749402 ], [ -102.051292000207013, 40.749585994873691 ], [ -102.051294151579, 40.697546832389008 ], [ -102.051304798597016, 40.440007993377002 ], [ -102.664804, 40.438473 ], [ -102.664689, 40.705189 ] ] ] } },
