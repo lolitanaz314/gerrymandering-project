@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# THIS is going to pull JSONS from directory processed_districtplan_path/...percents
+
 def flipPoints(a_votes, b_votes):
     """
     Returns the array of points where the step function of the Seats-Vote plot steps
