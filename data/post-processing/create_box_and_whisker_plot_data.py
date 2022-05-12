@@ -4,83 +4,104 @@ import os
 from decimal import *
 import numpy as np
 
-def reject_outliers(data): # this is going to come in the form of a list of numbers
+# this would be happening while running MGGG 
+def reject_outliers(data, m=2.):
+    data=np.array(data)
     d = np.abs(data - np.median(data))
     mdev = np.median(d)
-    s = d/mdev if mdev else 0
-    return data [s<m]
+    s = d / (mdev if mdev else 1.)
+    return data[s <= m]
     
-def getPlotPoints(basis): # FOr ONE category (white, af american, republican , etc)
-    for dist in basis:
+def getBoxAndWhiskerPoints(districtNestedList): # array of all districts for 1 category
+    newDistrictNestedList=[]
+    for district in districtNestedList:
         # print(dist)
-        arr = np.array(dist)
+        arr = np.array(district)
         arr = reject_outliers(arr)
         stats = list(arr)
+        
+        mini = min(stats)
+        first = np.percentile(stats, 25)
         med = np.percentile(stats, 50)
         third = np.percentile(stats, 75)
-        first = np.percentile(stats, 25)
-        mini = min(stats)
         maxi = max(stats)
+        
         stats.clear()
+        stats.append(mini)
+        stats.append(first)
         stats.append(med)
         stats.append(third)
-        stats.append(first)
-        stats.append(mini)
         stats.append(maxi)
-    return stats # returns a length 5 list
+        newDistrictNestedList.append(stats)
+    return newDistrictNestedList
 
-# this is going to iterate through the JSON 
+    processed_path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/processed_districtplan_path/co_processed_DPs_percents'
 
-# need some way of getting all the 10,000 district plans and 
-def populateTheDistrictPlanStats(numDistrictsInThePlan, processedDistrictPlanJSON):
-    democratPres=[ [] * 68] # this is going to be a nested arr, by district 
-    republicanPres= [[] * 68] 
-    democraticSen = [ [] * 68]
-    republicanSen = [ [] * 68]
-
-    af_amer=[ [] * 68] 
-    white=[ [] * 68] 
-    asian=[ [] * 68] 
-    hispanic=[ [] * 68] 
-    two_or_more=[ [] * 68]
-
-    # Loading all the JSONS
-    # need to iterate through all the district plan JSONS
-
-    for item in os.listdir(""): # for each processed plan (AFTER converting from graph to GeoJSON)
+    # count how many districts are in 1 district Plan, that's the number of districts for all district Plans FOR THIS STATE
+numDistricts=0
+for item in os.listdir(processed_path):
+    if (item.endswith('.json')):
+        #print(item)
         plan_file = open(os.path.join(processed_path, item), "r")
         plan_data = json.load(plan_file)
-        for i in range(len(plan_data['PresD'])): # for each district in this plan 
-            democratPres[i].append(float(plan_data['democratPres'][i])) # add the percent to the PresD arr at its index i.e. district
-            republicanPres[i].append(float(plan_data['republicanPres'][i])) 
-            democraticSen[i].append(float(plan_data['democraticSen'][i])) 
-            republicanSen[i].append(float(plan_data['republicanSen'][i]))
+        print(plan_data['Percents'].keys())
+        numDistricts=len(plan_data['Percents']['white'])
+        break
 
-            af_amer[i].append(float(plan_data['af_amer'][i])) # add the percent to the PresD arr at its index i.e. district
-            white[i].append(float(plan_data['white'][i]))
-            asian[i].append(float(plan_data['asian'][i])) 
-            hispanic[i].append(float(plan_data['hispanic'][i]))
-            two_or_more[i].append(float(plan_data['two_or_more'][i]))
+# [10,000 district plan points for district 1], [10,000 district plan points for district 2], [10,000 points for district 3], etc
+white_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+af_amer_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+asian_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+hispanic_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+native_hawaiian_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+two_or_more_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+democraticPres_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+republicanPres_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+democraticSen_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
+republicanSen_districts= [[] for _ in range(numDistricts)] # nested arr, by district 
 
-    # Call getPlotPoints() for all the the districts' categories
+for item in os.listdir(processed_path): # iterating through every single district plan
+    if (item.endswith('.json')):
+        #print(item)
+        plan_file = open(os.path.join(processed_path, item), "r")
+        plan_data = json.load(plan_file)
+        
+        for i in range(numDistricts): # iterating through every number in each district
+            white_districts[i].append(float(plan_data["Percents"]['white'][i]))
+            af_amer_districts[i].append(float(plan_data["Percents"]['af_amer'][i]))
+            asian_districts[i].append(float(plan_data["Percents"]['asian'][i]))
+            hispanic_districts[i].append(float(plan_data["Percents"]['hispanic'][i]))
+            native_hawaiian_districts[i].append(float(plan_data["Percents"]['native_hawaiian'][i]))
+            two_or_more_districts[i].append(float(plan_data["Percents"]['two_or_more'][i]))
+            democraticPres_districts[i].append(float(plan_data["Percents"]['democraticPres'][i]))
+            republicanPres_districts[i].append(float(plan_data["Percents"]['republicanPres'][i]))
+            democraticSen_districts[i].append(float(plan_data["Percents"]['democraticSen'][i]))
+            republicanSen_districts[i].append(float(plan_data["Percents"]['republicanSen'][i]))
 
-    return democratPres, republicanPres, democraticSen, republicanSen, af_amer, white, asian, hispanic, two_or_more
-
-democratPres, republicanPres, democraticSen, republicanSen, af_amer, white, asian, hispanic, two_or_more  = populateTheDistrictPlanStats(68, "path_to_district_plan_json")
+white_districts_bw=getBoxAndWhiskerPoints(white_districts)
+af_amer_districts_bw=getBoxAndWhiskerPoints(af_amer_districts)
+asian_districts_bw=getBoxAndWhiskerPoints(asian_districts)
+hispanic_districts_bw=getBoxAndWhiskerPoints(hispanic_districts)
+native_hawaiian_districts_bw=getBoxAndWhiskerPoints(native_hawaiian_districts)
+two_or_more_districts_bw=getBoxAndWhiskerPoints(two_or_more_districts)
+democraticPres_districts_bw=getBoxAndWhiskerPoints(democraticPres_districts)
+republicanPres_districts_bw=getBoxAndWhiskerPoints(republicanPres_districts)
+democraticSen_districts_bw=getBoxAndWhiskerPoints(democraticSen_districts)
+republicanSen_districts_bw=getBoxAndWhiskerPoints(republicanSen_districts)
 
 boxWhisk = {}
-boxWhisk['democratPres'] = democratPres
-boxWhisk['republicanPres'] = republicanPres
-boxWhisk['democraticSen'] = democraticSen
-boxWhisk['republicanSen'] = republicanSen
-boxWhisk['af_amer'] = af_amer
-boxWhisk['white'] = white
-boxWhisk['asian'] = asian
-boxWhisk['hispanic'] = hispanic
-boxWhisk['two_or_more'] = two_or_more
+boxWhisk['white'] = white_districts_bw
+boxWhisk['af_amer'] = af_amer_districts_bw
+boxWhisk['asian'] = asian_districts_bw
+boxWhisk['hispanic'] = hispanic_districts_bw
+boxWhisk['native_hawaiian'] = native_hawaiian_districts_bw
+boxWhisk['two_or_more'] = two_or_more_districts_bw
+boxWhisk['democraticPres'] = democraticPres_districts_bw
+boxWhisk['republicanPres'] = republicanPres_districts_bw
+boxWhisk['democraticSen'] = democraticSen_districts_bw
+boxWhisk['republicanSen'] = republicanSen_districts_bw
 
-
-# THIS ENTIRE FILE WOULD OUTPUT THE BOX AND WHISKER DATA
-file_name = "./boxWhisk.json"
+file_name = "/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/box_whisk.json"
 file1 = open(file_name, "w")
 json.dump(boxWhisk, file1)
+
