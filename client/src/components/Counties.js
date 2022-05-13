@@ -19,7 +19,7 @@ const Counties = (props) => {
             
             return (
               <>
-                <LayersControl.Overlay checked={check} name={state_name}>
+                <LayersControl.Overlay checked={check} name={state_name+'_counties'}>
                     <GeoJSON key={state_name} data={data} pathOptions={{ color: 'green' }} />
                 </LayersControl.Overlay>
               </>

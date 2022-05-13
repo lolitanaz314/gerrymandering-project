@@ -6,7 +6,11 @@ import TN from "../assets/json/tn/tennessee_congressional.json";
 const Tennessee = (props) => {
   // Set all the border data to state array:
   const borderData = [TN]; 
-  const colorings = ['orange', 'pink', 'black', 'white'];
+  const colorings = ['orange', 'purple', 'black', 'white'];
+
+  const highlight = (feature, layer) => {
+    layer.on('mouseover', props.highlightFeature );
+  }
 
   return (
     <>
@@ -22,8 +26,9 @@ const Tennessee = (props) => {
             
             return (
               <>
-                <LayersControl.Overlay checked={check} name={state_name}>
-                    <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }} />
+                <LayersControl.Overlay checked={check} name={state_name+index}>
+                    <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }}
+                    onEachFeature={highlight} />
                 </LayersControl.Overlay>
               </>
             )

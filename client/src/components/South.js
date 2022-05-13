@@ -6,7 +6,13 @@ import SC from "../assets/json/sc/southcarolina_congressional.json";
 const South = (props) => {
   // Set all the border data to state array:
   const borderData = [SC];
-  const colorings = ['orange', 'pink', 'black', 'white'];
+  const colorings = ['orange', 'purple', 'black', 'white'];
+
+  const highlight = (feature, layer) => {
+    layer.on({
+      mouseover: props.highlightFeature
+    });
+  }
 
   return (
     <>
@@ -22,8 +28,9 @@ const South = (props) => {
             
             return (
               <>
-                <LayersControl.Overlay checked={check} name={state_name}>
-                    <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }} />
+                <LayersControl.Overlay checked={check} name={state_name+index}>
+                    <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }}
+                    onEachFeature={highlight} />
                 </LayersControl.Overlay>
               </>
             )

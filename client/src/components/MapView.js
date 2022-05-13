@@ -59,8 +59,6 @@ const MapView = (props) => {
 
   //state to store selected dp and pinned dp from scroll menu
   const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
-  //used to remove layer, might need to delete later
-  const [layers, setLayers] = useState({ current: null, prev: null });
 
   //change demographic
   const [demographic, setDemographic] = useState("None");
@@ -76,13 +74,6 @@ const MapView = (props) => {
 
   //district hovering
   const [onselect, setOnselect] = useState({});
-  const highlight = (feature, layer) => {
-    layer.on({
-      mouseover: highlightFeature
-      // ,click: () => zoomState(feature, layer)
-      // ,mouseout: resetHighlight
-    });
-  }
 
   const highlightFeature = (e => {
     let layer = e.target;
@@ -140,11 +131,6 @@ const MapView = (props) => {
       view: currentLocation.view
     });
 
-    // if (layers.current !== layer) {
-    //   let pre = layers.current;
-    //   setLayers({ current: layer, prev: pre })
-    // }
-
     //shows sidebar
     handleShow();
 
@@ -189,28 +175,7 @@ const MapView = (props) => {
 
     //set center & zoom
     map.setView(currentLocation.center, currentLocation.zoom);
-
-    if (layers.current && map.hasLayer(layers.current)) map.removeLayer(layers.current);
-    else if (layers.prev) map.addLayer(layers.prev);
     return null;
-  }
-
-  function setStyle(feature) {
-    let style = currentLocation.view;
-    return {
-      //fill property shows 'red' or 'blue' based on republican/democratic district
-      fillColor: 'orange',
-      color: 'black',
-      weight: '1',
-      fillOpacity: 0.6
-    }
-  }
-
-  function outlineStyle() {
-    return {
-      opacity: 0,
-      fillOpacity: 0
-    }
   }
 
   //scrolling menu functions
@@ -293,14 +258,10 @@ const MapView = (props) => {
           <ZoomComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          {/* <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
-          <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle} />
-          <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />  */}
-
           <Base zoomState={zoomState} currentLocation={currentLocation} />
-          <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
-          <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
-          <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
+          <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
+          <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
+          <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
 
           <Counties currentLocation={currentLocation} view={view} />
           <Precincts currentLocation={currentLocation} view={view} />
