@@ -16,7 +16,7 @@ const Base = (props) => {
 
   return (
     <>
-      <LayersControl position="bottomright" >
+      <LayersControl position="bottomleft" >
         {
           borderData.map((data) => {
             let state_name = data.properties.name;

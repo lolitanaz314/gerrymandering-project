@@ -109,44 +109,24 @@
 
 /* SCROLL MENU */
 .scroll-menu{
-  height: 200px;
-}
-
-.left-arrow{
-  width: 50px;
-  padding: 81px 0px 81px 0px;
-  text-align: center;
-  font-weight: bolder;
-  font-size: x-large;
-  float: left;
-  display: block;
-  cursor: pointer;
-}
-
-.right-arrow{
-  width: 50px;
-  padding: 81px 0px 81px 0px;
-  text-align: center;
-  font-weight: bolder;
-  font-size: x-large;
-  float: right;
-  display: block;
-  cursor: pointer;
+  height: 150px;
 }
 
 #dp-container{
-  overflow-x: scroll;
   position: relative;
   display: inline-flex;
-  width: 85.5%;
-  height: 200px;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  text-align: left;
 }
 
 .dp-item{
+  margin: 5px;
   padding: 2%;
-  height: 85%;
-  /* width: 100%; */
+  border: black solid 2px;
+  background-color: orange;
+  width: 185px;
+  height: 100%;
 }
 
 .dp-item:hover{

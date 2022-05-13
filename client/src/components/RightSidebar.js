@@ -230,14 +230,6 @@ const RightSidebar = (props) => {
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None";
 
-    function scrollRight() {
-        menu.scrollLeft += 100;
-    }
-
-    function scrollLeft() {
-        menu.scrollLeft -= 100;
-    }
-
     function showBW() {
         document.getElementById('seawulf').classList.add('hidden');
         document.getElementById('bw').classList.remove('hidden');
@@ -258,8 +250,6 @@ const RightSidebar = (props) => {
                     </div>
                 </div>
                 <div className='scroll-menu'>
-                    <div className='left-arrow' onClick={scrollLeft}> &lt; </div>
-                    <div className='right-arrow' onClick={scrollRight}> &gt; </div>
                     <div id='dp-container'>
                         {testData[stateID].map(obj =>
                             <DistrictPlan

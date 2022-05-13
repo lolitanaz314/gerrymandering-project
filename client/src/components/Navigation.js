@@ -1,5 +1,5 @@
-import { Nav, Container, Navbar, NavDropdown  } from 'react-bootstrap';
-import {useState} from 'react';
+import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
+import { useState } from 'react';
 import LeftSidebar from './LeftSidebar';
 
 import tennesseeOutline from "../assets/json/tennessee.json";
@@ -35,9 +35,9 @@ const menuStyle = {
 const Navigation = (props) => {
 
   let demographicTitle = 'Choose Demographic';
-  if(props.demographic !== 'None') demographicTitle = props.demographic;
+  if (props.demographic !== 'None') demographicTitle = props.demographic;
   let stateTitle = "Choose State";
-  if(props.name !== 'USA') stateTitle = props.name;
+  if (props.name !== 'USA') stateTitle = props.name;
 
   //sidebar
   const [show, setShow] = useState(false);
@@ -46,7 +46,7 @@ const Navigation = (props) => {
   return (
     <>
       <Navbar bg="primary" variant="dark" fixed="top">
-          <HiMenu className='menu-icon' style={menuStyle} onClick={() => handleShow(true)} />
+        <HiMenu className='menu-icon' style={menuStyle} onClick={() => handleShow(true)} />
         <Container>
           <Navbar.Brand href="/">CSE 416 Lynx</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -60,27 +60,30 @@ const Navigation = (props) => {
             </Nav>
           </Navbar.Collapse>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className={`me-auto ${props.show ? "" : "hidden"}`} >
               <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style={borderStyle}>
-              <li className="checkbox form-group" onClick = {() => props.toggleBorder('district')}>
-                <input type="checkbox" value="district" name="district" checked={props.view.district} />
-                <label htmlFor="district"> District Plan </label>
-              </li>
-              <li className="checkbox form-group" onClick = {() => props.toggleBorder('precinct')}>
-                <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct}/>
-                <label htmlFor="precinct"> Precinct </label>
-              </li>
-              <li className="checkbox form-group" onClick = {() => props.toggleBorder('county')}>
-                <input type="checkbox" value="county" name="county" checked={props.view.county} />
-                <label htmlFor="county"> County </label>
-              </li>
+                <li className="checkbox form-group" onClick={() => props.toggleBorder('district')}>
+                  <label htmlFor="district">
+                    <input type="checkbox" value="district" name="district" checked={props.view.district} /> District
+                  </label>
+                </li>
+                <li className="checkbox form-group" onClick={() => props.toggleBorder('county')}>
+                  <label htmlFor="county">
+                    <input type="checkbox" value="county" name="county" checked={props.view.county} /> County
+                  </label>
+                </li>
+                <li className="checkbox form-group" onClick={() => props.toggleBorder('precinct')}>
+                  <label htmlFor="precinct">
+                    <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct} /> Precinct
+                  </label>
+                </li>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <NavDropdown title={demographicTitle} id="basic-nav-dropdown" style={demographicStyle}>

@@ -17,7 +17,7 @@ const Plans = (props) => {
           borderData.map((data) => {
             let state_name = data.name;
             let check = false;
-            if(props.view.district && props.currentLocation.jsonCode === data.abbreviation) check = true;
+            if(props.currentLocation.jsonCode === data.abbreviation) check = true;
             
             return (
               <>

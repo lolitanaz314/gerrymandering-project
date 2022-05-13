@@ -10,9 +10,12 @@ const DistrictPlan = (props) => {
                 onClick={() => props.pinDP(props.id)} />
             <AiFillPushpin className='pin-icon icon-filled hidden' id={props.state + '-fill-' + props.id} 
                 onClick={() => props.unpinDP(props.id)} />
-            <img src={path + props.code + '-' + props.id + '.png'} id={props.state + "-" + props.id}
-                className='dp-item' onClick={() => props.selectDP(props.id)} />
-            <span>{props.plan.status}</span>
+            <div id={props.state + "-" + props.id} className='dp-item' onClick={() => props.selectDP(props.id)}>
+                <span><b>District plan #{props.id}</b></span><br/>
+                <span>Status: {props.plan.status}</span><br/>
+                <span>Major-Minority Districts: X</span><br/>
+                <span>Split Counties: X</span>
+            </div>
         </div>
     );
 
