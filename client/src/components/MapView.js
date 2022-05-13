@@ -3,14 +3,6 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// assets
-// import tennessee from "../assets/json/tennessee_congressional.json";
-// import southcarolina from "../assets/json/southcarolina_congressional.json";
-// import colorado from "../assets/json/colorado_congressional.json";
-// import tennesseeOutline from "../assets/json/tennessee.json";
-// import southcarolinaOutline from "../assets/json/southcarolina.json";
-// import coloradoOutline from "../assets/json/colorado.json";
-
 // components
 import Navigation from './Navigation';
 import Base from './Base';
@@ -43,15 +35,15 @@ const MapView = (props) => {
 
   //get state object from server
   const [state, setState] = useState({});
-  // useEffect(() => {
-  //     State.getStateById(currentLocation.code)
-  //       .then(response => {
-  //         setState(response.data);
-  //       })
-  //       .catch(error => {
-  //         console.log('Something went wrong', error);
-  //       })
-  // }, [currentLocation.code]);
+  useEffect(() => {
+      State.getStateById(currentLocation.code)
+        .then(response => {
+          setState(response.data);
+        })
+        .catch(error => {
+          console.log('Something went wrong', error);
+        })
+  }, [currentLocation.code]);
 
   //change view (border lines)
   const [view, setBorder] = useState({
@@ -303,16 +295,13 @@ const MapView = (props) => {
 
           {/* <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
           <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle} />
-          <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />
-
-          <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
-          <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-          <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} /> */}
+          <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />  */}
 
           <Base zoomState={zoomState} currentLocation={currentLocation} />
           <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
           <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
           <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} />
+
           <Counties currentLocation={currentLocation} view={view} />
           <Precincts currentLocation={currentLocation} view={view} />
 

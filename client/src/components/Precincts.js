@@ -4,7 +4,7 @@ import CO from "../assets/json/co/co_precinct.json";
 import SC from '../assets/json/sc/sc_precinct.json';
 
 //used mapshaper to compress the geojson files -> 10%
-//precinct border for all states -> sc doesnt work for some reason, but json file is correct...
+//precinct border for all states -> sc doesnt work for some reason
 const Precincts = (props) => {
   // Set all the border data to state array:
   const borderData = [TN, SC, CO];
