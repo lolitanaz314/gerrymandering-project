@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { LayersControl, GeoJSON } from 'react-leaflet'
 import TN from "../assets/json/tn_precinct.json";
-import SC from "../assets/json/sc_precinct.json";
 import CO from "../assets/json/co_precinct.json";
+import SC from '../assets/json/sc_precinct.json';
 
 //used mapshaper to compress the geojson files -> 10%
 //precinct border for all states -> sc doesnt work for some reason, but json file is correct...
