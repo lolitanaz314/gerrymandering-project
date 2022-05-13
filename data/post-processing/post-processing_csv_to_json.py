@@ -16,8 +16,10 @@ import json
 # steps: 
 # read in giant CSV (every district Plan with every district)
 # obtain separate dataframe for every district Plan
+# turn dataframe into JSON and dump into geometry directory
 # get percentages of every category and measures for every district Plan
-# turn that into a JSON and dump into directory
+# turn that into a JSON and dump into percents directory
+
 
 df = pd.read_csv('/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_graph_path/CoSW4_districts.csv')
 df['geometry'] = df['geometry'].apply(wkt.loads)
