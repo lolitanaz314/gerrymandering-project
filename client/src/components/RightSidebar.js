@@ -94,7 +94,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-01-20',
+            date: '2022-04-29',
             compositeData: {
                 Democratic: 1478348,
                 Republican: 1253070,
@@ -104,7 +104,7 @@ const testData = [ //testData has data of all plans from all states
             id: 1,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-06-09',
+            date: '2021-09-15',
             compositeData: {
                 Democratic: 1135782,
                 Republican: 1009287,
@@ -114,7 +114,7 @@ const testData = [ //testData has data of all plans from all states
             id: 2,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-01-21',
+            date: '2021-09-03',
             compositeData: {
                 Democratic: 1348358,
                 Republican: 1153570,
@@ -122,9 +122,9 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 3,
-            status: "Generated",
+            status: "Approved",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-11-05',
+            date: '2021-09-28',
             compositeData: {
                 Democratic: 1476448,
                 Republican: 1053470,

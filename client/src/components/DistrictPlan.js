@@ -12,9 +12,9 @@ const DistrictPlan = (props) => {
                 onClick={() => props.unpinDP(props.id)} />
             <div id={props.state + "-" + props.id} className='dp-item' onClick={() => props.selectDP(props.id)}>
                 <span><b>District plan #{props.id}</b></span><br/>
-                <span>Status: {props.plan.status}</span><br/>
-                <span>Major-Minority Districts: X</span><br/>
-                <span>Split Counties: X</span>
+                <span className="summary-text">Status: {props.plan.status}</span><br/>
+                <span className="summary-text">Major-Minority Districts: X</span><br/>
+                <span className="summary-text">Split Counties: X</span>
             </div>
         </div>
     );

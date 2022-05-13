@@ -134,6 +134,11 @@
   cursor: pointer;
 }
 
+.summary-text{
+  font-size: 13px;
+}
+
+
 .dp-selected{
   background-color: grey!important;
 }

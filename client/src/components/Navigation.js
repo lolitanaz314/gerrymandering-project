@@ -2,9 +2,9 @@ import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
 import { useState } from 'react';
 import LeftSidebar from './LeftSidebar';
 
-import tennesseeOutline from "../assets/json/tennessee.json";
-import southcarolinaOutline from "../assets/json/southcarolina.json";
-import coloradoOutline from "../assets/json/colorado.json";
+import tennesseeOutline from "../assets/json/tn/tennessee.json";
+import southcarolinaOutline from "../assets/json/sc/southcarolina.json";
+import coloradoOutline from "../assets/json/co/colorado.json";
 import { HiMenu } from "react-icons/hi";
 
 const stateStyle = {

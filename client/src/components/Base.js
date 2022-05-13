@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { useMapEvents, TileLayer, LayersControl, GeoJSON } from 'react-leaflet'
-import TN from "../assets/json/tennessee.json";
-import SC from "../assets/json/southcarolina.json";
-import CO from "../assets/json/colorado.json";
+import { LayersControl, GeoJSON } from 'react-leaflet'
+import TN from "../assets/json/tn/tennessee.json";
+import SC from "../assets/json/sc/southcarolina.json";
+import CO from "../assets/json/co/colorado.json";
 
 const Base = (props) => {
   //zoom state functions
@@ -12,7 +11,7 @@ const Base = (props) => {
   }
   
   // Set all the border data to state array:
-  const [borderData, setBorderData] = useState([TN, SC, CO])
+  const borderData = [TN, SC, CO]
 
   return (
     <>

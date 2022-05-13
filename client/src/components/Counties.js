@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
 import { LayersControl, GeoJSON } from 'react-leaflet'
-import TN from "../assets/json/tennessee_counties.json";
-import SC from "../assets/json/southcarolina_counties.json";
-import CO from "../assets/json/colorado_counties.json";
+import TN from "../assets/json/tn/tennessee_counties.json";
+import SC from "../assets/json/sc/southcarolina_counties.json";
+import CO from "../assets/json/co/colorado_counties.json";
 
 //county border for all states
 const Counties = (props) => {
   // Set all the border data to state array:
-  const [borderData, setBorderData] = useState([TN, SC, CO])
+  const borderData = [TN, SC, CO];
 
   return (
     <>
