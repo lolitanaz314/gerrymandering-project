@@ -16,7 +16,6 @@ import Navigation from './Navigation';
 import Base from './Base';
 import Plans from './Plans';
 import Counties from './Counties';
-import Districts from './Districts';
 import Precincts from './Precincts';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
@@ -54,7 +53,7 @@ const MapView = (props) => {
 
   //change view (border lines)
   const [view, setBorder] = useState({
-    district: false,
+    district: true,
     county: false,
     precinct: false
   });
@@ -132,7 +131,7 @@ const MapView = (props) => {
     //resets comparison view
     handleCompare(false);
     setBorder({
-      district: false,
+      district: true,
       precinct: false,
       county: false
     });
@@ -316,8 +315,6 @@ const MapView = (props) => {
 
           <Base zoomState={zoomState} currentLocation={currentLocation}/>
           <Plans currentLocation={currentLocation} view={view}/>
-
-          <Districts currentLocation={currentLocation} view={view} />
           <Counties currentLocation={currentLocation} view={view} />
           <Precincts currentLocation={currentLocation} view={view} />
 

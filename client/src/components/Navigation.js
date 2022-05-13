@@ -66,17 +66,17 @@ const Navigation = (props) => {
               <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style={borderStyle}>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('district')}>
                   <label htmlFor="district">
-                    <input type="checkbox" value="district" name="district" checked={props.view.district} /> District
+                    <input type="checkbox" value="district" name="district" checked={props.view.district} /> Districts
                   </label>
                 </li>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('county')}>
                   <label htmlFor="county">
-                    <input type="checkbox" value="county" name="county" checked={props.view.county} /> County
+                    <input type="checkbox" value="county" name="county" checked={props.view.county} /> Counties
                   </label>
                 </li>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('precinct')}>
                   <label htmlFor="precinct">
-                    <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct} /> Precinct
+                    <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct} /> Precincts
                   </label>
                 </li>
               </NavDropdown>
