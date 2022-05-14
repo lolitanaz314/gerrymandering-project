@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -14,9 +13,9 @@ import java.util.Map;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "seat_vote_curve")
+@Table(name = "seat_vote_curve_data")
 @IdClass(DistrictPlanId.class)
-public class SeatVoteCurve {
+public class SeatVoteCurveData {
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;
@@ -25,12 +24,12 @@ public class SeatVoteCurve {
     @Column(name="district_plan_id", nullable = false)
     private int planId;
 
-    @Column(name = "vote_bias")
+    @Column(name = "vote_bias", columnDefinition = "double default 10.0")
     double voteBias;
 
-    @Column(name = "seat_bias")
+    @Column(name = "seat_bias", columnDefinition = "double default 10.0")
     double seatBias;
 
     @Transient
-    List<SeatVoteData> seatVotePoints;
+    List<SeatVoteCurvePoints> seatVotePoints;
 }

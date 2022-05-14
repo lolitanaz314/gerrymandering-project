@@ -1,6 +1,7 @@
 package com.example.server.model;
 
 import com.example.server.model.enumeration.StateCode;
+import com.example.server.model.id.DistrictId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +15,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "state_demographic")
-public class StateDemographic {
+@Table(name = "demographic_district")
+@IdClass(DistrictId.class)
+public class DemographicDistrict {
     @Id
-    @Column(name="state_id")
+    @Column(name="state_id", nullable = false)
     private StateCode stateId;
+
+    @Id
+    @Column(name="district_plan_id", nullable = false)
+    private int planId;
+
+    @Id
+    @Column(name="district_id", nullable = false)
+    private int districtId;
 
     @Column(name="white")
     private int white;

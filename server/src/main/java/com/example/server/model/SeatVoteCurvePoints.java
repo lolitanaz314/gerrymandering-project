@@ -14,8 +14,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "seat_vote_data")
-public class SeatVoteData {
+@Table(name = "seat_vote_curve_points")
+public class SeatVoteCurvePoints {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -1,15 +1,15 @@
 package com.example.server.service;
 
-import com.example.server.model.DistrictDemographic;
-import com.example.server.model.PrecinctDemographic;
+import com.example.server.model.DemographicDistrict;
+import com.example.server.model.DemographicPrecinct;
 import com.example.server.model.id.DistrictId;
 import com.example.server.model.id.PrecinctId;
 import com.example.server.model.enumeration.RacialCategory;
 import com.example.server.model.enumeration.StateCode;
-import com.example.server.model.StateDemographic;
-import com.example.server.repository.DistrictDemographicRepository;
-import com.example.server.repository.PrecinctDemographicRepository;
-import com.example.server.repository.StateDemographicRepository;
+import com.example.server.model.DemographicState;
+import com.example.server.repository.DemographicDistrictRepository;
+import com.example.server.repository.DemographicPrecinctRepository;
+import com.example.server.repository.DemographicStateRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ import java.util.NoSuchElementException;
 @Service
 public class DemographicService {
     @Autowired
-    private final StateDemographicRepository stateDemoRepository;
-    private final DistrictDemographicRepository distDemoRepository;
-    private final PrecinctDemographicRepository precDemoRepository;
+    private final DemographicStateRepository stateDemoRepository;
+    private final DemographicDistrictRepository distDemoRepository;
+    private final DemographicPrecinctRepository precDemoRepository;
 
-    public DemographicService(StateDemographicRepository dmRepository, DistrictDemographicRepository distDemoRepository, PrecinctDemographicRepository precDemoRepository) {
+    public DemographicService(DemographicStateRepository dmRepository, DemographicDistrictRepository distDemoRepository, DemographicPrecinctRepository precDemoRepository) {
         this.stateDemoRepository = dmRepository;
         this.distDemoRepository = distDemoRepository;
         this.precDemoRepository = precDemoRepository;
@@ -37,7 +37,7 @@ public class DemographicService {
 
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
-            StateDemographic demo = stateDemoRepository.findStateDemographic(state);
+            DemographicState demo = stateDemoRepository.findStateDemographic(state);
 
             demographic.put(RacialCategory.WHITE, demo.getWhite());
             demographic.put(RacialCategory.BLACK, demo.getAfricanAmerican());
@@ -60,7 +60,7 @@ public class DemographicService {
 
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
-            DistrictDemographic s = distDemoRepository.findDistrictDemographic(state, districtPlan, district);
+            DemographicDistrict s = distDemoRepository.findDistrictDemographic(state, districtPlan, district);
 
             demographic.put(RacialCategory.WHITE, s.getWhite());
             demographic.put(RacialCategory.BLACK, s.getAfricanAmerican());
@@ -82,7 +82,7 @@ public class DemographicService {
 
         Map<RacialCategory, Integer> demographic = new HashMap<>();
         try {
-            PrecinctDemographic p = precDemoRepository.findPrecinctDemographic(state, precinct);
+            DemographicPrecinct p = precDemoRepository.findPrecinctDemographic(state, precinct);
 
             demographic.put(RacialCategory.WHITE, p.getWhite());
             demographic.put(RacialCategory.BLACK, p.getAfricanAmerican());
