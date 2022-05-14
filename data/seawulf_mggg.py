@@ -1,4 +1,8 @@
 from shapely.ops import unary_union
+from shapely import wkt
+import pandas as pd
+import geopandas as gpd
+
 from gerrychain.accept import always_accept
 import numpy as np
 from gerrychain import (Partition, Graph, MarkovChain, updaters, constraints)
@@ -7,12 +11,12 @@ from functools import partial
 from gerrychain import tree
 
 class Seawulf:
-    def __init__(self, precincts_path, state,
+    def __init__(self, precincts_df, state,
                  target_metric='total_pop',
                  assignment_criteria='districtId', random_initial_partition=True, epsilon=0.02, node_repeats=2,
                  cut_edges_multiplier=2, population_deviation=0.1, output_path=''):
         
-        self.precincts = final_precincts_co # geopandas.read_file(precincts_path)  
+        self.precincts = precincts_df # geopandas.read_file(precincts_path)  
         self.district_list = list(self.precincts['districtId'].unique())
         self.state = state
         self.districts = None
@@ -22,7 +26,7 @@ class Seawulf:
         self.assignment_criteria = assignment_criteria
         self.seawulf_updaters = self.create_updaters()
         
-        print("the updaters: ", self.seawulf_updaters)
+        #print("the updaters: ", self.seawulf_updaters)
         self.epsilon = epsilon
         self.ideal_metric = self.precincts[self.target_metric].sum() / len(self.district_list)
         self.initial_partition = self.create_partition()
@@ -31,7 +35,7 @@ class Seawulf:
         self.seawulf_districtPlans = pd.DataFrame(columns=['districtPlanId', 'state'])
         self.seawulf_districts = pd.DataFrame(
             columns=['districtId', 'districtPlanId', 'total_pop', 'white', 'af_amer', 'asian', 'hispanic', 'native_hawaiian', 'two_or_more',
-                     'democraticPres', 'republicanPres', 'democraticSen', 'republicanSen',
+                     'democraticPres', 'republicanPres', 'democraticSen', 'republicanSen', 
                      'geometry'])
         self.output_path = output_path
 
@@ -105,6 +109,7 @@ class Seawulf:
         return districtPlan, districts
     
     def run(self, num_districtPlans, iterations):
+        
         for i in range(num_districtPlans):
             chain = MarkovChain(
                 proposal=self.proposal,
@@ -126,10 +131,19 @@ class Seawulf:
         self.seawulf_districts.to_csv("".join([self.output_path, id, '_districts.csv']), index=False)
 
 if __name__ == '__main__':
-    precincts_path = "/Users/cherrypi/cse416/processed_preseawulf_precincts_path/final_precinct_co.json"
+    # load from csv to DataFrame for SeaWulf to run
+    df = pd.read_csv("/Users/cherrypi/Desktop/gerrymandering-project/data/pre-processing/preseawulf_precincts_path/final_precincts_preseawulf_co.csv")
+    df['geometry'] = df['geometry'].apply(wkt.loads)
+    precincts_gdf = gpd.GeoDataFrame(df, crs='epsg:4326')
+    
+    if "Unnamed: 0" in precincts.columns:
+        precincts_gdf.drop(["Unnamed: 0"], axis=1, inplace=True)
+
+    # insert code here
+    precincts_df = precincts_gdf
     state = "Co"
-    num_districtPlans = 5
-    iterations = 5
+    num_districtPlans = 10
+    iterations = 10
     assignment_criteria = 'districtId'
     random_initial_partition = True
     epsilon = 0.02
@@ -138,8 +152,9 @@ if __name__ == '__main__':
     population_deviation = 0.1
     output_path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_graph_path/'
     
-    seawulf = Seawulf(precincts_path=precincts_path, state=state, assignment_criteria=assignment_criteria,
+    seawulf = Seawulf(precincts_df=precincts_gdf, state=state, assignment_criteria=assignment_criteria,
                       random_initial_partition=random_initial_partition, epsilon=epsilon, node_repeats=node_repeats,
                       cut_edges_multiplier=cut_edges_multiplier, population_deviation=population_deviation,
                       output_path=output_path)
+    
     seawulf.run(num_districtPlans=num_districtPlans, iterations=iterations)
