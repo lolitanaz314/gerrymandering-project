@@ -1,7 +1,7 @@
 package com.example.server.controller;
 
 import com.example.server.model.BoxAndWhiskerPlot;
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.service.BoxAndWhiskerService;
 import com.example.server.service.StateService;
 import com.example.server.model.State;
@@ -47,7 +47,7 @@ public class StateController {
 
     @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
     public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
-                                                                    @PathVariable("demographic") RacialCategory demographic) {
+                                                                    @PathVariable("demographic") Category demographic) {
         return EntityModel.of(bwService.getBoxAndWhiskerByStateId(stateId, demographic));
     }
 

@@ -4,7 +4,7 @@ import com.example.server.model.DemographicDistrict;
 import com.example.server.model.DemographicPrecinct;
 import com.example.server.model.id.DistrictId;
 import com.example.server.model.id.PrecinctId;
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.DemographicState;
 import com.example.server.repository.DemographicDistrictRepository;
@@ -32,19 +32,19 @@ public class DemographicService {
     }
 
     // get demographic of state
-    public Map<RacialCategory, Integer> getDemographicByStateId(StateCode id) {
+    public Map<Category, Integer> getDemographicByStateId(StateCode id) {
         int state = id.ordinal();
 
-        Map<RacialCategory, Integer> demographic = new HashMap<>();
+        Map<Category, Integer> demographic = new HashMap<>();
         try {
             DemographicState demo = stateDemoRepository.findStateDemographic(state);
 
-            demographic.put(RacialCategory.WHITE, demo.getWhite());
-            demographic.put(RacialCategory.BLACK, demo.getAfricanAmerican());
-            demographic.put(RacialCategory.HISPANIC, demo.getHispanic());
-            demographic.put(RacialCategory.ASIAN, demo.getAsian());
-            demographic.put(RacialCategory.NATIVE, demo.getNativeHawaiian());
-            demographic.put(RacialCategory.MIXED, demo.getTwoOrMore());
+            demographic.put(Category.WHITE, demo.getWhite());
+            demographic.put(Category.BLACK, demo.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, demo.getHispanic());
+            demographic.put(Category.ASIAN, demo.getAsian());
+            demographic.put(Category.NATIVE, demo.getNativeHawaiian());
+            demographic.put(Category.MIXED, demo.getTwoOrMore());
 
             return demographic;
         } catch (NoSuchElementException ex){
@@ -53,21 +53,23 @@ public class DemographicService {
     }
 
     // get demographic of district
-    public Map<RacialCategory, Integer> getDemographicByDistrictId(DistrictId id) {
+    public Map<Category, Integer> getDemographicByDistrictId(DistrictId id) {
         int state = id.getStateId().ordinal();
-        int districtPlan = id.getPlanId();
+        String districtPlan = id.getPlanId();
         int district = id.getDistrictId();
 
-        Map<RacialCategory, Integer> demographic = new HashMap<>();
+        Map<Category, Integer> demographic = new HashMap<>();
         try {
             DemographicDistrict s = distDemoRepository.findDistrictDemographic(state, districtPlan, district);
 
-            demographic.put(RacialCategory.WHITE, s.getWhite());
-            demographic.put(RacialCategory.BLACK, s.getAfricanAmerican());
-            demographic.put(RacialCategory.HISPANIC, s.getHispanic());
-            demographic.put(RacialCategory.ASIAN, s.getAsian());
-            demographic.put(RacialCategory.NATIVE, s.getNativeHawaiian());
-            demographic.put(RacialCategory.MIXED, s.getTwoOrMore());
+            demographic.put(Category.WHITE, s.getWhite());
+            demographic.put(Category.BLACK, s.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, s.getHispanic());
+            demographic.put(Category.ASIAN, s.getAsian());
+            demographic.put(Category.NATIVE, s.getNativeHawaiian());
+            demographic.put(Category.MIXED, s.getTwoOrMore());
+//            demographic.put(RacialCategory.DEMOCRATIC_PARTY, s.());
+//            demographic.put(RacialCategory.REPUBLICAN_PARTY, s.());
 
             return demographic;
         } catch (NoSuchElementException ex){
@@ -76,20 +78,20 @@ public class DemographicService {
     }
 
     // get demographic of precinct
-    public Map<RacialCategory, Integer> getDemographicByPrecinctId(PrecinctId id) {
+    public Map<Category, Integer> getDemographicByPrecinctId(PrecinctId id) {
         int state = id.getStateId().ordinal();
         int precinct = id.getPrecinctId();
 
-        Map<RacialCategory, Integer> demographic = new HashMap<>();
+        Map<Category, Integer> demographic = new HashMap<>();
         try {
             DemographicPrecinct p = precDemoRepository.findPrecinctDemographic(state, precinct);
 
-            demographic.put(RacialCategory.WHITE, p.getWhite());
-            demographic.put(RacialCategory.BLACK, p.getAfricanAmerican());
-            demographic.put(RacialCategory.HISPANIC, p.getHispanic());
-            demographic.put(RacialCategory.ASIAN, p.getAsian());
-            demographic.put(RacialCategory.NATIVE, p.getNativeHawaiian());
-            demographic.put(RacialCategory.MIXED, p.getTwoOrMore());
+            demographic.put(Category.WHITE, p.getWhite());
+            demographic.put(Category.BLACK, p.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, p.getHispanic());
+            demographic.put(Category.ASIAN, p.getAsian());
+            demographic.put(Category.NATIVE, p.getNativeHawaiian());
+            demographic.put(Category.MIXED, p.getTwoOrMore());
 
             return demographic;
         } catch (NoSuchElementException ex){

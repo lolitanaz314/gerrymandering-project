@@ -3,7 +3,7 @@ package com.example.server.service;
 import com.example.server.model.BoxAndWhisker;
 import com.example.server.model.BoxAndWhiskerData;
 import com.example.server.model.BoxAndWhiskerPlot;
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.repository.BoxAndWhiskerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +24,17 @@ public class BoxAndWhiskerService {
         this.sService = sService;
     }
 
-    public BoxAndWhiskerPlot getBoxAndWhiskerByStateId(StateCode stateId, RacialCategory demographic) {
+    public BoxAndWhiskerPlot getBoxAndWhiskerByStateId(StateCode stateId, Category demographic) {
         BoxAndWhiskerPlot boxAndWhiskerPlot = new BoxAndWhiskerPlot();
         try {
-            boxAndWhiskerPlot.setRace(demographic);
+            boxAndWhiskerPlot.setDemographic(demographic);
 
             // TODO: make change to this block
             List<BoxAndWhiskerData> data = bwRepository.findPoints(demographic.ordinal(), stateId.ordinal());
             List<BoxAndWhisker> boxAndWhiskers = new ArrayList<>();
             for (BoxAndWhiskerData datum : data) {
                 String id = Integer.toString(datum.getDistrictId());
+//                String id = datum.getDistrictPlanId();
                 double[] points = new double[]{datum.getMin(), datum.getQ1(),
                         datum.getMed(), datum.getQ3(), datum.getMax()};
                 BoxAndWhisker bw = new BoxAndWhisker(id, points);
