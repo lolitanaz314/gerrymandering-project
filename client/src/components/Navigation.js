@@ -2,9 +2,9 @@ import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
 import { useState } from 'react';
 import LeftSidebar from './LeftSidebar';
 
-import tennesseeOutline from "../assets/json/tennessee.json";
-import southcarolinaOutline from "../assets/json/southcarolina.json";
-import coloradoOutline from "../assets/json/colorado.json";
+import tennesseeOutline from "../assets/json/tn/tennessee.json";
+import southcarolinaOutline from "../assets/json/sc/southcarolina.json";
+import coloradoOutline from "../assets/json/co/colorado.json";
 import { HiMenu } from "react-icons/hi";
 
 const stateStyle = {
@@ -22,7 +22,7 @@ const demographicStyle = {
 
 const borderStyle = {
   position: 'relative',
-  left: 200
+  left: 350
 }
 
 const menuStyle = {
@@ -66,17 +66,17 @@ const Navigation = (props) => {
               <NavDropdown title="Choose Border Lines" id="basic-nav-dropdown" style={borderStyle}>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('district')}>
                   <label htmlFor="district">
-                    <input type="checkbox" value="district" name="district" checked={props.view.district} /> District
+                    <input type="checkbox" value="district" name="district" checked={props.view.district} /> Districts
                   </label>
                 </li>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('county')}>
                   <label htmlFor="county">
-                    <input type="checkbox" value="county" name="county" checked={props.view.county} /> County
+                    <input type="checkbox" value="county" name="county" checked={props.view.county} /> Counties
                   </label>
                 </li>
                 <li className="checkbox form-group" onClick={() => props.toggleBorder('precinct')}>
                   <label htmlFor="precinct">
-                    <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct} /> Precinct
+                    <input type="checkbox" value="precinct" name="precinct" checked={props.view.precinct} /> Precincts
                   </label>
                 </li>
               </NavDropdown>
@@ -85,7 +85,7 @@ const Navigation = (props) => {
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className={`me-auto ${props.show ? "" : "hidden"}`} >
               <NavDropdown title={demographicTitle} id="basic-nav-dropdown" style={demographicStyle}>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Republican')}>Republican</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Democratic')}>Democratic</NavDropdown.Item>

@@ -117,25 +117,41 @@
   display: inline-flex;
   width: 100%;
   height: 100%;
-  text-align: left;
+  /* text-align: left; */
+  justify-content: center;
 }
 
 .dp-item{
   margin: 5px;
   padding: 2%;
-  border: black solid 2px;
-  background-color: orange;
   width: 185px;
   height: 100%;
 }
 
 .dp-item:hover{
-  background-color: lightgrey;
+  background-color: gainsboro;
   cursor: pointer;
 }
 
+.summary-text{
+  font-size: 13px;
+}
+
+#dp-0{
+  border: orange solid 2px;
+}
+#dp-1{
+  border: purple solid 2px;
+}
+#dp-2{
+  border: black solid 2px;
+}
+#dp-3{
+  border: pink solid 2px;
+}
+
 .dp-selected{
-  background-color: grey!important;
+  background-color: silver!important;
 }
 
 .pin-icon{

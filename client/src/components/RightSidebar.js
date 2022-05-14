@@ -20,7 +20,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Republican Party',
-            date: '2021-05-03',
+            date: '2022-02-07',
             compositeData: {
                 Democratic: 960129,
                 Republican: 1516348,
@@ -29,8 +29,8 @@ const testData = [ //testData has data of all plans from all states
         }, {
             id: 1,
             status: "Proposed",
-            proposedBy: 'Republican Party',
-            date: '2021-10-20',
+            proposedBy: 'Tennessee House Select Committee on Redistricting & Senate Ad Hoc Committee on Redistricting',
+            date: '2022-01-12',
             compositeData: {
                 Democratic: 980139,
                 Republican: 1618378,
@@ -38,9 +38,9 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 2,
-            status: "Generated",
-            proposedBy: 'Democratic Party',
-            date: '2021-02-10',
+            status: "Proposed",
+            proposedBy: 'Tennessee Democrats',
+            date: '2021-11-15',
             compositeData: {
                 Democratic: 100129,
                 Republican: 1246338,
@@ -50,9 +50,9 @@ const testData = [ //testData has data of all plans from all states
     ], [ //district plans for south carolina
         {
             id: 0,
-            status: "Enacted",
-            proposedBy: 'Republican Party',
-            date: '2021-05-30',
+            status: "In Litigation",
+            proposedBy: 'South Carolina State House',
+            date: '2022-01-26',
             compositeData: {
                 Democratic: 887132,
                 Republican: 1046758,
@@ -62,7 +62,7 @@ const testData = [ //testData has data of all plans from all states
             id: 1,
             status: "Proposed",
             proposedBy: 'South Carolina State Senate',
-            date: '2021-02-31',
+            date: '2022-01-11',
             compositeData: {
                 Democratic: 987232,
                 Republican: 946738,
@@ -72,7 +72,7 @@ const testData = [ //testData has data of all plans from all states
             id: 2,
             status: "Proposed",
             proposedBy: 'South Carolina State House',
-            date: '2021-12-31',
+            date: '2021-12-22',
             compositeData: {
                 Democratic: 782132,
                 Republican: 1240734,
@@ -80,8 +80,8 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 3,
-            status: "Generated",
-            proposedBy: 'South Carolina State House',
+            status: "Proposed",
+            proposedBy: 'South Carolina State Senate',
             date: '2021-10-09',
             compositeData: {
                 Democratic: 801922,
@@ -94,7 +94,7 @@ const testData = [ //testData has data of all plans from all states
             id: 0,
             status: "Enacted",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-01-20',
+            date: '2021-11-21',
             compositeData: {
                 Democratic: 1478348,
                 Republican: 1253070,
@@ -104,7 +104,7 @@ const testData = [ //testData has data of all plans from all states
             id: 1,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-06-09',
+            date: '2021-09-15',
             compositeData: {
                 Democratic: 1135782,
                 Republican: 1009287,
@@ -114,7 +114,7 @@ const testData = [ //testData has data of all plans from all states
             id: 2,
             status: "Proposed",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-01-21',
+            date: '2021-09-03',
             compositeData: {
                 Democratic: 1348358,
                 Republican: 1153570,
@@ -122,9 +122,9 @@ const testData = [ //testData has data of all plans from all states
             }
         }, {
             id: 3,
-            status: "Generated",
+            status: "Approved",
             proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-11-05',
+            date: '2021-09-28',
             compositeData: {
                 Democratic: 1476448,
                 Republican: 1053470,
@@ -225,7 +225,7 @@ const RightSidebar = (props) => {
     if (props.code === "SC") stateID = 1;
     else if (props.code === "CO") stateID = 2;
 
-    //scorllbar menu functions
+    //scrollbar menu functions
     let menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None";
@@ -292,6 +292,7 @@ const RightSidebar = (props) => {
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>
+
                         <Tab eventKey="measures" title="District Plan Measures">
                             <Navbar bg="light" expand="lg">
                                 <Container>
@@ -299,7 +300,7 @@ const RightSidebar = (props) => {
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
-                                                <Nav.Link href="#more-measures"> Measures</Nav.Link>
+                                                <Nav.Link href="#more-measures">Measures</Nav.Link>
                                             </span> 
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#political-fairness">Political Fairness</Nav.Link>
@@ -317,6 +318,31 @@ const RightSidebar = (props) => {
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
                         </Tab>
+
+                        <Tab eventKey="ensemble" title="SeaWulf Ensemble">
+                            <Navbar bg="light" expand="lg">
+                                <Container>
+                                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                    <Navbar.Collapse id="basic-navbar-nav">
+                                        <Nav className="me-auto">
+                                            <span className="underline-on-hover">
+                                                <Nav.Link href="#maj-min">Majority-Minority Districts</Nav.Link>
+                                            </span> 
+                                            <span className="underline-on-hover">
+                                                <Nav.Link href="#repdem-split">Republican/Democratic Split</Nav.Link>
+                                            </span>
+                                            <span className="underline-on-hover">
+                                                <Nav.Link href="#equal-pop">Equal Population</Nav.Link>
+                                            </span>
+                                        </Nav>
+                                    </Navbar.Collapse>
+                                </Container>
+                            </Navbar>
+                            <div className="jump-link-top">
+                                <Button variant="link" href="#above-tab">Back to Top</Button>
+                            </div>
+                        </Tab>
+
                         <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <div id='seawulf'>
                                 <p className='seawulf-desc'>

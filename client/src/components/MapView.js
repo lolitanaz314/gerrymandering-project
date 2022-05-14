@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-// assets
-import tennessee from "../assets/json/tennessee_congressional.json";
-import southcarolina from "../assets/json/southcarolina_congressional.json";
-import colorado from "../assets/json/colorado_congressional.json";
-import tennesseeOutline from "../assets/json/tennessee.json";
-import southcarolinaOutline from "../assets/json/southcarolina.json";
-import coloradoOutline from "../assets/json/colorado.json";
 
 // components
 import Navigation from './Navigation';
 import Base from './Base';
-import Plans from './Plans';
 import Counties from './Counties';
-import Districts from './Districts';
 import Precincts from './Precincts';
+import Tennessee from './Tennessee';
+import South from './South';
+import Colorado from './Colorado';
 import RightSidebar from './RightSidebar';
 import Legend from './Legend';
 import HoverBox from './HoverBox';
@@ -54,7 +47,7 @@ const MapView = (props) => {
 
   //change view (border lines)
   const [view, setBorder] = useState({
-    district: false,
+    district: true,
     county: false,
     precinct: false
   });
@@ -66,8 +59,6 @@ const MapView = (props) => {
 
   //state to store selected dp and pinned dp from scroll menu
   const [districtPlans, setDps] = useState({ currentDp: 0, pinned: null });
-  //used to remove layer, might need to delete later
-  const [layers, setLayers] = useState({ current: null, prev: null });
 
   //change demographic
   const [demographic, setDemographic] = useState("None");
@@ -83,13 +74,6 @@ const MapView = (props) => {
 
   //district hovering
   const [onselect, setOnselect] = useState({});
-  const highlight = (feature, layer) => {
-    layer.on({
-      mouseover: highlightFeature
-      // ,click: () => zoomState(feature, layer)
-      // ,mouseout: resetHighlight
-    });
-  }
 
   const highlightFeature = (e => {
     let layer = e.target;
@@ -118,12 +102,6 @@ const MapView = (props) => {
     });
   })
 
-  //zoom state functions
-  function clicked(feature, layer) {
-    // bind click to geojson
-    layer.on('click', () => zoomState(feature, layer));
-  }
-
   function zoomState(feature, layer) {
     //changes the leaflet map sizing
     let map = document.getElementById('leaflet-map');
@@ -132,7 +110,7 @@ const MapView = (props) => {
     //resets comparison view
     handleCompare(false);
     setBorder({
-      district: false,
+      district: true,
       precinct: false,
       county: false
     });
@@ -152,11 +130,6 @@ const MapView = (props) => {
       jsonCode: feature.properties.abbreviation,
       view: currentLocation.view
     });
-
-    // if (layers.current !== layer) {
-    //   let pre = layers.current;
-    //   setLayers({ current: layer, prev: pre })
-    // }
 
     //shows sidebar
     handleShow();
@@ -202,28 +175,7 @@ const MapView = (props) => {
 
     //set center & zoom
     map.setView(currentLocation.center, currentLocation.zoom);
-
-    if (layers.current && map.hasLayer(layers.current)) map.removeLayer(layers.current);
-    else if (layers.prev) map.addLayer(layers.prev);
     return null;
-  }
-
-  function setStyle(feature) {
-    let style = currentLocation.view;
-    return {
-      //fill property shows 'red' or 'blue' based on republican/democratic district
-      fillColor: 'orange',
-      color: 'black',
-      weight: '1',
-      fillOpacity: 0.6
-    }
-  }
-
-  function outlineStyle() {
-    return {
-      opacity: 0,
-      fillOpacity: 0
-    }
   }
 
   //scrolling menu functions
@@ -306,26 +258,18 @@ const MapView = (props) => {
           <ZoomComponent />
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          {/* <GeoJSON data={tennessee} onEachFeature={highlight} style={setStyle} />
-          <GeoJSON data={southcarolina} onEachFeature={highlight} style={setStyle} />
-          <GeoJSON data={colorado} onEachFeature={highlight} style={setStyle} />
+          <Base zoomState={zoomState} currentLocation={currentLocation} />
+          <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
+          <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
+          <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
 
-          <GeoJSON data={southcarolinaOutline} onEachFeature={clicked} style={outlineStyle} />
-          <GeoJSON data={tennesseeOutline} onEachFeature={clicked} style={outlineStyle} />
-          <GeoJSON data={coloradoOutline} onEachFeature={clicked} style={outlineStyle} /> */}
-
-          <Base zoomState={zoomState} currentLocation={currentLocation}/>
-          <Plans currentLocation={currentLocation} view={view}/>
-
-          <Districts currentLocation={currentLocation} view={view} />
           <Counties currentLocation={currentLocation} view={view} />
           <Precincts currentLocation={currentLocation} view={view} />
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} name={currentLocation.name} pinned={districtPlans.pinned} demographic={demographic}
             currentState={currentLocation.name} currentDp={districtPlans.currentDp} state={state}
-            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
-          />
+            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code} />
 
           <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />
           <Legend view={currentLocation.view} />
