@@ -28,31 +28,23 @@ public class DistrictController {
     public List<District> getDistricts() { return dService.findAll(); }*/
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")
-    public CollectionModel<EntityModel<District>> getDistrictsByPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId) {
+    public CollectionModel<EntityModel<District>> getDistrictsByPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId) {
         Set<District> districts = dService.getDistrictsByPlanId(stateId, planId);
-        Set<EntityModel<District>> districtSet = assembleDistricts(districts);
+        Set<EntityModel<District>> districtSet = districts.stream().map(d ->
+            EntityModel.of(d,
+                linkTo(methodOn(DistrictController.class).getDistrictByPlanIdAndDistrictId(d.getStateId(), d.getPlanId(), d.getDistrictId())).withSelfRel(),
+                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(d.getStateId(), d.getPlanId())).withRel("districts")))
+            .collect(Collectors.toSet());
         return CollectionModel.of(districtSet,
                 linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(stateId, planId)).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts/{id}")
     public EntityModel<District> getDistrictByPlanIdAndDistrictId(
-            @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") int planId, @PathVariable("id") int districtId) {
+            @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId, @PathVariable("id") int districtId) {
         District district = dService.getDistrictByPlanIdAndDistrictId(stateId, planId, districtId);
-        return assembleDistrict(district);
-    }
-
-    public Set<EntityModel<District>> assembleDistricts(Set<District> districts){
-        return districts.stream().map(d ->
-                EntityModel.of(d,
-                linkTo(methodOn(DistrictController.class).getDistrictByPlanIdAndDistrictId(d.getStateId(), d.getPlanId(), d.getDistrictId())).withSelfRel(),
-                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(d.getStateId(), d.getPlanId())).withRel("districts")))
-                .collect(Collectors.toSet());
-    }
-
-    public EntityModel<District> assembleDistrict(District d){
-        return EntityModel.of(d,
-                linkTo(methodOn(DistrictController.class).getDistrictByPlanIdAndDistrictId(d.getStateId(), d.getPlanId(), d.getDistrictId())).withSelfRel(),
-                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(d.getStateId(), d.getPlanId())).withRel("districts"));
+        return EntityModel.of(district,
+                linkTo(methodOn(DistrictController.class).getDistrictByPlanIdAndDistrictId(district.getStateId(), district.getPlanId(), district.getDistrictId())).withSelfRel(),
+                linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(district.getStateId(), district.getPlanId())).withRel("districts"));
     }
 }

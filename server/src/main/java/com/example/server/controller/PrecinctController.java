@@ -30,7 +30,11 @@ public class PrecinctController {
     @GetMapping("/api/states/{state_id}/precincts")
     public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(@PathVariable("state_id") StateCode stateId) {
         Set<Precinct> precincts = pService.getPrecinctsByStateId(stateId);
-        Set<EntityModel<Precinct>> precinctSet = assemblePrecincts(precincts);
+        Set<EntityModel<Precinct>> precinctSet = precincts.stream().map(p ->
+            EntityModel.of(p,
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
+            .collect(Collectors.toSet());
         return CollectionModel.of(precinctSet,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(stateId)).withSelfRel());
     }
@@ -38,20 +42,8 @@ public class PrecinctController {
     @GetMapping("/api/states/{state_id}/precincts/{id}")
     public EntityModel<Precinct> getPrecinctsByStateIdAndPrecinctId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int precinctId) {
         Precinct precinct = pService.getPrecinctsByStateIdAndPrecinctId(stateId, precinctId);
-        return assemblePrecinct(precinct);
-    }
-
-    public Set<EntityModel<Precinct>> assemblePrecincts(Set<Precinct> precincts){
-        return precincts.stream().map(p ->
-                EntityModel.of(p,
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
-                .collect(Collectors.toSet());
-    }
-
-    public EntityModel<Precinct> assemblePrecinct(Precinct p){
-        return EntityModel.of(p,
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
-                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts"));
+        return EntityModel.of(precinct,
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(precinct.getStateId(), precinct.getPrecinctId())).withSelfRel(),
+                linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(precinct.getStateId())).withRel("precincts"));
     }
 }

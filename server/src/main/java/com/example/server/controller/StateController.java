@@ -34,7 +34,11 @@ public class StateController {
     @GetMapping("/api/states")
     public CollectionModel<EntityModel<State>> getStates() {
         List<State> states = sService.getStates();
-        Set<EntityModel<State>> stateSet = assembleStates(states);
+        Set<EntityModel<State>> stateSet = states.stream().map(s ->
+            EntityModel.of(s,
+                linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStates()).withRel("states")))
+            .collect(Collectors.toSet());
         return CollectionModel.of(stateSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
@@ -42,26 +46,14 @@ public class StateController {
     @GetMapping("/api/states/{state_id}")
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
         State state = sService.getStateByStateId(stateId);
-        return assembleState(state);
+        return EntityModel.of(state,
+                linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
 
     @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
     public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
                                                                     @PathVariable("demographic") Category demographic) {
         return EntityModel.of(bwService.getBoxAndWhiskerByStateId(stateId, demographic));
-    }
-
-    public Set<EntityModel<State>> assembleStates(List<State> states){
-        return states.stream().map(s ->
-                EntityModel.of(s,
-                linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
-                linkTo(methodOn(StateController.class).getStates()).withRel("states")))
-                .collect(Collectors.toSet());
-    }
-
-    public EntityModel<State> assembleState(State state){
-        return EntityModel.of(state,
-                linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
-                linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
 }
