@@ -269,8 +269,7 @@ const MapView = (props) => {
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} name={currentLocation.name} pinned={districtPlans.pinned} demographic={demographic}
             currentState={currentLocation.name} currentDp={districtPlans.currentDp} state={state}
-            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code}
-          />
+            comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code} />
 
           <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />
           <Legend view={currentLocation.view} />

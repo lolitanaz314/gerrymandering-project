@@ -9,7 +9,7 @@ import CO3 from "../assets/json/co/co3.json";
 const Colorado = (props) => {
   // Set all the border data to state array:
   const borderData = [CO, CO1, CO2, CO3];
-  const colorings = ['orange', 'purple', 'black', 'white'];
+  const colorings = ['orange', 'purple', 'black', 'pink'];
 
   const highlight = (feature, layer) => {
     layer.on({
@@ -19,7 +19,7 @@ const Colorado = (props) => {
 
   return (
     <>
-      <LayersControl position="bottomleft" >
+      <LayersControl position="bottomleft">
         {
           borderData.map((data, index) => {
             let state_name = data.abbreviation;

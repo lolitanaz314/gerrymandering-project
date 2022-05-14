@@ -22,7 +22,7 @@ const demographicStyle = {
 
 const borderStyle = {
   position: 'relative',
-  left: 200
+  left: 350
 }
 
 const menuStyle = {
@@ -85,7 +85,7 @@ const Navigation = (props) => {
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className={`me-auto ${props.show ? "" : "hidden"}`} >
               <NavDropdown title={demographicTitle} id="basic-nav-dropdown" style={demographicStyle}>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Republican')}>Republican</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => props.changeDemographic('Democratic')}>Democratic</NavDropdown.Item>

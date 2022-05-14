@@ -6,7 +6,7 @@ import SC from "../assets/json/sc/southcarolina_congressional.json";
 const South = (props) => {
   // Set all the border data to state array:
   const borderData = [SC];
-  const colorings = ['orange', 'purple', 'black', 'white'];
+  const colorings = ['orange', 'purple', 'black', 'pink'];
 
   const highlight = (feature, layer) => {
     layer.on({
@@ -16,7 +16,7 @@ const South = (props) => {
 
   return (
     <>
-      <LayersControl position="bottomleft" >
+      <LayersControl position="bottomleft">
         {
           borderData.map((data, index) => {
             let state_name = data.abbreviation;
