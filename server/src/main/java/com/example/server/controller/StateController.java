@@ -39,6 +39,7 @@ public class StateController {
                 linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
             .collect(Collectors.toSet());
+        System.out.println("Controller States ...\n");
         return CollectionModel.of(stateSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
@@ -46,6 +47,7 @@ public class StateController {
     @GetMapping("/api/states/{state_id}")
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
         State state = sService.getStateByStateId(stateId);
+        System.out.println("Controller State ...\n");
         return EntityModel.of(state,
                 linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));

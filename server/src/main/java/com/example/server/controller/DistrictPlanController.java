@@ -42,6 +42,7 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(dp.getStateId(), dp.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
+        System.out.println("Controller districtPlans ...");
         return CollectionModel.of(districtPlanList,
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(stateId)).withSelfRel());
     }
@@ -49,6 +50,7 @@ public class DistrictPlanController {
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}")
     public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId) {
         DistrictPlan districtPlan = dpService.getPlanByStateIdAndDistrictId(stateId, planId);
+        System.out.println("Controller districtPlan ...\n");
         return EntityModel.of(districtPlan,
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(districtPlan.getStateId(), districtPlan.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(districtPlan.getStateId())).withRel("districtPlans"));
@@ -69,6 +71,8 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(dp.getStateId(), dp.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
+
+        System.out.println("Controller comparePlans ...\n");
         return CollectionModel.of(twoPlansList);
     }
 

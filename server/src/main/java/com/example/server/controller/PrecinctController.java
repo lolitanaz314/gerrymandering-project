@@ -35,6 +35,7 @@ public class PrecinctController {
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(p.getStateId(), p.getPrecinctId())).withSelfRel(),
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(p.getStateId())).withRel("precincts")))
             .collect(Collectors.toSet());
+        System.out.println("Controller Precincts ...\n");
         return CollectionModel.of(precinctSet,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(stateId)).withSelfRel());
     }
@@ -42,6 +43,7 @@ public class PrecinctController {
     @GetMapping("/api/states/{state_id}/precincts/{id}")
     public EntityModel<Precinct> getPrecinctsByStateIdAndPrecinctId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int precinctId) {
         Precinct precinct = pService.getPrecinctsByStateIdAndPrecinctId(stateId, precinctId);
+        System.out.println("Controller Precinct ...\n");
         return EntityModel.of(precinct,
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateIdAndPrecinctId(precinct.getStateId(), precinct.getPrecinctId())).withSelfRel(),
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(precinct.getStateId())).withRel("precincts"));
