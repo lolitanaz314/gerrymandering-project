@@ -175,8 +175,15 @@ const titleStyle = {
 
 const RightSidebar = (props) => {
 
-    const [box, setBox] = useState({})
-    const [plotPara, setPlotPara] = useState({"state": undefined, "demographic": undefined})
+    const [box, setBox] = useState({boxAndWhiskers: [{
+        y: [0],
+        type: 'box',
+        name: '0',
+        marker: {
+          color: 'rgb(107,174,214)'
+        }}]
+    });
+    // const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
     // onClick={() => setPlotPara({"demographic": props.demographic, "state": props.state})}
 
     // Gets box and whisker data from server.
@@ -188,38 +195,38 @@ const RightSidebar = (props) => {
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
     // there is also ASIAN, HISPANIC, MIXED, NATIVE
-    useEffect(() => {
-        if (plotPara.state !== undefined && plotPara.demographic !== undefined){
-            console.log(plotPara.state + " " + plotPara.demographic)
-            State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
-            .then(response => {
-                setBox(response.data);
+    // useEffect(() => {
+    //     if (plotPara.state !== undefined && plotPara.demographic !== undefined){
+    //         console.log(plotPara.state + " " + plotPara.demographic)
+    //         State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
+    //         .then(response => {
+    //             setBox(response.data);
 
-                // I need to remove 9. How does one get length of an array of objects???
-                for (let i = 0; i < 9; i++){
-                    box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-                    delete box.boxAndWhiskers[i]["boxAndWhisker"];
-    
-                    box.boxAndWhiskers[i]["type"] = "box";
-                    
-                    box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-                    delete box.boxAndWhiskers[i]["districtId"];
+    //             // I need to remove 9. How does one get length of an array of objects???
+    //             for (let i = 0; i < 9; i++){
+    //                 box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+    //                 delete box.boxAndWhiskers[i]["boxAndWhisker"];
 
-                    box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
-                        
-                }
-            })
-            .catch(error => {console.log('Something went wrong', error);
-            })  
-            console.log(box.boxAndWhiskers)
-        }
-    }, [plotPara]);
+    //                 box.boxAndWhiskers[i]["type"] = "box";
+
+    //                 box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+    //                 delete box.boxAndWhiskers[i]["districtId"];
+
+    //                 box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+
+    //             }
+    //         })
+    //         .catch(error => {console.log('Something went wrong', error);
+    //         })  
+    //         console.log(box.boxAndWhiskers)
+    //     }
+    // }, [plotPara]);
 
     //set default tab
     const [key, setKey] = useState('summary');
 
     let demo = false;
-    if(props.demographic !== 'None') demo = true;
+    if (props.demographic !== 'None') demo = true;
 
     let stateID = 0;
     if (props.code === "SC") stateID = 1;
@@ -230,9 +237,34 @@ const RightSidebar = (props) => {
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None";
 
+    function getInfo() {
+        State.getBoxAndWhisker(props.code, props.demographic)
+            .then(response => {
+                setBox(response.data);
+            })
+            .catch(error => {
+                console.log('Something went wrong', error);
+            });
+            if(box.boxAndWhiskers){
+            for (let i = 0; i < Object.keys(box).length; i++){
+                box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+                delete box.boxAndWhiskers[i]["boxAndWhisker"];
+
+                box.boxAndWhiskers[i]["type"] = "box";
+                
+                box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+                delete box.boxAndWhiskers[i]["districtId"];
+
+                box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+                    
+            }
+        }
+    }
+
     function showBW() {
         document.getElementById('seawulf').classList.add('hidden');
         document.getElementById('bw').classList.remove('hidden');
+        getInfo();
     }
 
     return (
@@ -301,7 +333,7 @@ const RightSidebar = (props) => {
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#more-measures">Measures</Nav.Link>
-                                            </span> 
+                                            </span>
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#political-fairness">Political Fairness</Nav.Link>
                                             </span>
@@ -327,7 +359,7 @@ const RightSidebar = (props) => {
                                         <Nav className="me-auto">
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#maj-min">Majority-Minority Districts</Nav.Link>
-                                            </span> 
+                                            </span>
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#repdem-split">Republican/Democratic Split</Nav.Link>
                                             </span>
@@ -357,13 +389,13 @@ const RightSidebar = (props) => {
                                     <div>Current District Plan Selected: #{props.currentDp}</div>
                                     <div>Current Demographic Selected: {props.demographic}</div>
                                 </p>
-                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" onClick={() => showBW()} />
-                                {/* onClick={() => { setPlotPara({"state": props.code, "demographic": props.demographic.toUpperCase()}); setTimeout(() => {  showBW(); }, 2000);}} /> */}
+                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate"
+                                    onClick={() => showBW()} />
+                                {/* onClick={() => { setPlotPara({"state": props.code, "demographic": props.demographic}); setTimeout(() => {  showBW(); }, 2000);}} /> */}
                             </div>
-                           
 
                             <div id='bw' className='hidden'>
-                                <BoxAndWhisker box={box.boxAndWhiskers}/>
+                                <BoxAndWhisker box={box.boxAndWhiskers} />
                             </div>
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
