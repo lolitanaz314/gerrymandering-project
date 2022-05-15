@@ -9,9 +9,13 @@ const curveStyle = { //style for graphs
 const SeawulfEnsemble = (props) => {
 
     return (<>
-    <div id='repdem-split' style={curveStyle} >
-        <RepDemSplit />
+    <div id='maj-min' >
+        
     </div>
+        <div id='repdem-split' style={curveStyle} >
+            <h5>Republican/Democratic Split</h5>
+            <RepDemSplit />
+        </div>
     </>);
 }
 

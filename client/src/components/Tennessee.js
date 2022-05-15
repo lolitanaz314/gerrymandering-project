@@ -1,11 +1,13 @@
 import { LayersControl, GeoJSON } from 'react-leaflet'
 import TN from "../assets/json/tn/tennessee_congressional.json";
+import TN1 from "../assets/json/tn/tn1.json";
 
 // currently used for the congressional districts for each state
 // hopefully would want to add each dp for each state in an array etc etc
 const Tennessee = (props) => {
   // Set all the border data to state array:
-  const borderData = [TN]; 
+  // TN is same as TN1
+  const borderData = [TN, TN1]; 
   const colorings = ['orange', 'purple', 'black', 'pink'];
 
   const highlight = (feature, layer) => {
