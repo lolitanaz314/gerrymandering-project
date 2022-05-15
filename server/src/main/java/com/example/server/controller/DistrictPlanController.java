@@ -1,7 +1,7 @@
 package com.example.server.controller;
 
-import com.example.server.json.DistrictPlanJson;
-import com.example.server.json.User;
+//import com.example.server.json.DistrictPlanJson;
+//import com.example.server.json.User;
 import com.example.server.service.DistrictPlanService;
 import com.example.server.model.DistrictPlan;
 import com.example.server.model.enumeration.StateCode;
