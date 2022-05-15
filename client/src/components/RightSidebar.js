@@ -183,7 +183,7 @@ const RightSidebar = (props) => {
           color: 'rgb(107,174,214)'
         }}]
     });
-    // const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
+    const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
     // onClick={() => setPlotPara({"demographic": props.demographic, "state": props.state})}
 
     // Gets box and whisker data from server.

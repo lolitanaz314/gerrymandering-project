@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/json/
+/src/main/java/com/example/server/json/DistrictPlanJson.java

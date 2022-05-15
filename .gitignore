@@ -30,3 +30,8 @@ data/co_data
 data/sc_data
 data/tn_data
 data/sample_data
+server/src/main/java/com/example/server/repository/UserRepository.java
+server/src/main/java/com/example/server/service/UserService.java
+server/src/main/java/com/example/server/controller/UserController.java
+server/src/main/java/com/example/server/json/User.java
+client/src/api/service/User.js
