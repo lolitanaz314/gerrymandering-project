@@ -195,32 +195,28 @@ const RightSidebar = (props) => {
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
     // there is also ASIAN, HISPANIC, MIXED, NATIVE
-    // useEffect(() => {
-    //     if (plotPara.state !== undefined && plotPara.demographic !== undefined){
-    //         console.log(plotPara.state + " " + plotPara.demographic)
-    //         State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
-    //         .then(response => {
-    //             setBox(response.data);
+    useEffect(() => {
+        console.log(plotPara.state + " " + plotPara.demographic)
+        State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
+        .then(response => {
+            setBox(response.data);
 
-    //             // I need to remove 9. How does one get length of an array of objects???
-    //             for (let i = 0; i < 9; i++){
-    //                 box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-    //                 delete box.boxAndWhiskers[i]["boxAndWhisker"];
+            for (let i = 0; i < box.boxAndWhiskers.length; i++){
+                box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+                delete box.boxAndWhiskers[i]["boxAndWhisker"];
 
-    //                 box.boxAndWhiskers[i]["type"] = "box";
+                box.boxAndWhiskers[i]["type"] = "box";
+                
+                box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+                delete box.boxAndWhiskers[i]["districtId"];
 
-    //                 box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-    //                 delete box.boxAndWhiskers[i]["districtId"];
-
-    //                 box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
-
-    //             }
-    //         })
-    //         .catch(error => {console.log('Something went wrong', error);
-    //         })  
-    //         console.log(box.boxAndWhiskers)
-    //     }
-    // }, [plotPara]);
+                box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+            }
+        })
+        .catch(error => {console.log('Something went wrong', error);
+        })  
+        console.log(box)
+    }, [plotPara]);
 
     //set default tab
     const [key, setKey] = useState('summary');
@@ -237,34 +233,34 @@ const RightSidebar = (props) => {
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None";
 
-    function getInfo() {
-        State.getBoxAndWhisker(props.code, props.demographic)
-            .then(response => {
-                setBox(response.data);
-            })
-            .catch(error => {
-                console.log('Something went wrong', error);
-            });
-            if(box.boxAndWhiskers){
-            for (let i = 0; i < Object.keys(box).length; i++){
-                box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-                delete box.boxAndWhiskers[i]["boxAndWhisker"];
+    // function getInfo() {
+    //     State.getBoxAndWhisker(props.code, props.demographic)
+    //         .then(response => {
+    //             setBox(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log('Something went wrong', error);
+    //         });
+    //         if(box.boxAndWhiskers){
+    //         for (let i = 0; i < Object.keys(box).length; i++){
+    //             box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+    //             delete box.boxAndWhiskers[i]["boxAndWhisker"];
 
-                box.boxAndWhiskers[i]["type"] = "box";
+    //             box.boxAndWhiskers[i]["type"] = "box";
                 
-                box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-                delete box.boxAndWhiskers[i]["districtId"];
+    //             box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+    //             delete box.boxAndWhiskers[i]["districtId"];
 
-                box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+    //             box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
                     
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     function showBW() {
         document.getElementById('seawulf').classList.add('hidden');
         document.getElementById('bw').classList.remove('hidden');
-        getInfo();
+        // getInfo();
     }
 
     return (
@@ -389,9 +385,11 @@ const RightSidebar = (props) => {
                                     <div>Current District Plan Selected: #{props.currentDp}</div>
                                     <div>Current Demographic Selected: {props.demographic}</div>
                                 </p>
-                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate"
-                                    onClick={() => showBW()} />
-                                {/* onClick={() => { setPlotPara({"state": props.code, "demographic": props.demographic}); setTimeout(() => {  showBW(); }, 2000);}} /> */}
+                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" 
+                                    onClick={() => { 
+                                        setPlotPara({"state": props.code, "demographic": props.demographic}); 
+                                        showBW();
+                                }} />
                             </div>
 
                             <div id='bw' className='hidden'>
