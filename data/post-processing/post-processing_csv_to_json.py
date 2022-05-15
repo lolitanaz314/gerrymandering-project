@@ -13,120 +13,213 @@ from shapely import wkt
 import geopandas as gpd
 import json
 
-# steps: 
-# read in giant CSV (every district Plan with every district)
-# obtain separate dataframe for every district Plan
-# turn dataframe into JSON and dump into geometry directory
-# get percentages of every category and measures for every district Plan
-# turn that into a JSON and dump into percents directory
+# DO NOT CELEBRATE YET!!!!!!
 
+# this would be for all the district Plans and district data 
 
-df = pd.read_csv('/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_graph_path/CoSW4_districts.csv')
+df = pd.read_csv('/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_CSV_path/CoSW9_districts.csv')
 df['geometry'] = df['geometry'].apply(wkt.loads)
-gdf = gpd.GeoDataFrame(df, crs='epsg:4326')
+gdf_co = gpd.GeoDataFrame(df, crs='epsg:4326')
 
-districtPlanIdSet=set(gdf['districtPlanId'])
+df = pd.read_csv('/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_CSV_path/TnSW9_districts.csv')
+df['geometry'] = df['geometry'].apply(wkt.loads)
+gdf_tn = gpd.GeoDataFrame(df, crs='epsg:4326')
 
-districtPlanDfs=[] # list of districtPlanDataframes
+df = pd.read_csv('/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/postseawulf_CSV_path/ScSW9_districts.csv')
+df['geometry'] = df['geometry'].apply(wkt.loads)
+gdf_sc = gpd.GeoDataFrame(df, crs='epsg:4326')
 
-for planId in districtPlanIdSet:
-    dpDF = gdf.loc[gdf['districtPlanId'] == planId]
-    #display(dpDF.head())
-    districtPlanDfs.append(dpDF)
-
-categories=['white' , 'af_amer', 'asian', 'hispanic', 'native_hawaiian', 'two_or_more', 'democraticPres', 'republicanPres','democraticSen', 'republicanSen']
-
-# measures: Measures such as number of majority-minority districts,
-# efficiency-gap, competitive districts, projected political fairness, and compactness
-
-# for one district plan dataframe
-
-for districtPlanDF in districtPlanDfs:
-
-    districtPlan = {'districtPlanID': districtPlanDF['districtPlanId'].iloc[0], 'Plan_Measures':{}, 'Percents':{}, 'Seat_Vote_Input': {}}
-
-    plan_measures={}
-    plan_measures['polsby_popper']=0
-    plan_measures['efficiency_gap']=0
-    plan_measures['num_majority_minority_districts']=0
-    plan_measures['vote_split_democrats_pres']=0
-    plan_measures['vote_split_republicans_pres'] = 0
-    plan_measures['vote_split_republicans_sen'] = 0
-    plan_measures['vote_split_republicans_sen'] = 0
-
-    percents={}
-    percents['white']=[] # list of percentages 
-    percents['af_amer']=[]
-    percents['asian']=[]
-    percents['hispanic']=[]
-    percents['native_hawaiian']=[]
-    percents['two_or_more']=[]
-    percents['democraticPres']=[]
-    percents['republicanPres']=[]
-    percents['democraticSen']=[]
-    percents['republicanSen']=[]
-    
-    seat_vote_input={}
-    seat_vote_input['democraticPres'] = []
-    seat_vote_input['republicanPres'] = []
-    seat_vote_input['democraticSen'] = []
-    seat_vote_input['republicanSen'] = []
-    
-    # iterate through all districts in the district Plan and collect the percentages of every category
-    for i in range(len(districtPlanDF)):  
-        white_perc =float(districtPlanDF['white'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-        af_amer_perc=float(districtPlanDF['af_amer'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-        asian_perc=float(districtPlanDF['asian'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-        hispanic_perc=float(districtPlanDF['hispanic'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-        native_hawaiian_perc=float(districtPlanDF['native_hawaiian'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-        two_or_more_perc=float(districtPlanDF['two_or_more'].iloc[i] / districtPlanDF['total_pop'].iloc[i])
-
-        totalPres= districtPlanDF["democraticPres"].iloc[i]+districtPlanDF["republicanPres"].iloc[i]
-        totalSen =  districtPlanDF["democraticSen"].iloc[i]+districtPlanDF["republicanSen"].iloc[i]
-
-        democraticPres = float(districtPlanDF['democraticPres'].iloc[i] / totalPres) 
-        republicanPres = float(districtPlanDF['republicanPres'].iloc[i] / totalPres) 
-        democraticSen = float(districtPlanDF['democraticSen'].iloc[i] / totalSen) 
-        republicanSen = float(districtPlanDF['republicanSen'].iloc[i] / totalSen) 
-
-        percents['white'].append(white_perc)
-        percents['af_amer'].append(af_amer_perc)
-        percents['asian'].append(asian_perc)
-        percents['hispanic'].append(hispanic_perc)
-        percents['native_hawaiian'].append(native_hawaiian_perc)
-        percents['two_or_more'].append(two_or_more_perc)
-        percents['democraticPres'].append(democraticPres)
-        percents['republicanPres'].append(republicanPres)
-        percents['democraticSen'].append(democraticSen)
-        percents['republicanSen'].append(republicanSen)
+def createDistrictPlanDfList(districtPlanDf):
+    districtPlanDfs=[] # list of districtPlanDataframes
+    districtPlanIdSet= list(set(districtPlanDf['districtPlanId']))
+    for planId in districtPlanIdSet:
+        dpDF = districtPlanDf.loc[districtPlanDf['districtPlanId'] == planId]
+        stateId = dpDF['districtId'].iloc[0][:2]
+        stateIdList=[]
         
-        seat_vote_input['democraticPres'].append(int(districtPlanDF['democraticPres'].iloc[i]))
-        seat_vote_input['republicanPres'].append(int(districtPlanDF['republicanPres'].iloc[i]))
-        seat_vote_input['democraticSen'].append(int(districtPlanDF['democraticSen'].iloc[i]))
-        seat_vote_input['republicanSen'].append(int(districtPlanDF['republicanSen'].iloc[i]))
+        #state ID got NAN'd in the process somehow so we're doing it here
+        if stateId == "Co":
+            stateIdList=[5 for i in range(len(dpDF))]
+        elif stateId == "Tn":
+            stateIdList=[41 for i in range(len(dpDF))]
+        elif stateId == "Sc":
+            stateIdList=[39 for i in range(len(dpDF))]
+        
+        dpDF["stateId"] = stateIdList
+        
+        districtPlanDfs.append(dpDF)
+    return districtPlanDfs
 
-    for k, v in percents.items():
-        percents[k] = sorted(v)
+districtPlanDfs_co = createDistrictPlanDfList(gdf_co)
+districtPlanDfs_tn = createDistrictPlanDfList(gdf_tn)
+districtPlanDfs_sc = createDistrictPlanDfList(gdf_sc)
 
-    districtPlan['Plan_Measures'] = plan_measures
-    districtPlan['Percents'] = percents
-    districtPlan['Seat_Vote_Input'] = seat_vote_input
-    districtPlanID = districtPlanDF['districtPlanId'].iloc[0]
-    print("district Plan ", districtPlanID)
-    print(districtPlan)
+def population_equality(districts) -> float: # the gini index, 1 means perfect equality
+        return 1 - (districts['total_pop'].max() - districts['total_pop'].min()) / districts['total_pop'].sum()
+
+def majority_minority(districts) -> float:  # count how many majority minority districts are in a given district Plan
+        mm = 0   #
+        for index, row in districts.iterrows():
+            if row['af_amer'] > (row['total_pop'] / 2) or (row['asian'] > row['total_pop'] / 2) or (row['hispanic'] > row['total_pop'] / 2):
+                mm += 1
+        return mm
+
+def is_majority_minority_district(districtRow): # 
+    if districtRow['af_amer'] > (districtRow['total_pop'] / 2) or (districtRow['asian'] > districtRow['total_pop'] / 2) or (districtRow['hispanic'] > districtRow['total_pop'] / 2):
+        return districtRow
+    else:
+        return False
     
-    print("\n")
-    path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/processed_districtplan_path/co_processed_DPs_percents/district_plan_percent_and_measures_' + str(districtPlanID) + '.json'
-    with open(path, 'w') as f:
-        json.dump(districtPlan, f)
-
-
-# Dumping district plans WITH GEOMETRY!!!!!!! THIS IS WITH!!!! GEOMETRY!!!!
-for i, _ in enumerate(districtPlanDfs):
-    districtplan = districtPlanDfs[i]
-    #print(districtplan['districtPlanId'].iloc[0])
-    districtPlanID = districtplan['districtPlanId'].iloc[0]
+def geometric_compactness(districts) -> float:
+        pp_dp = 0
+        pp_list=[]
+        for geometry in districts['geometry'].values:
+            
+            pp = 4 * np.pi * geometry.area / (geometry.length ** 2)
+            pp_dp+=pp
+            pp_list.append(pp)
+            
+        pp_dp /= len(districts)
+        return pp_list, pp_dp
     
-    path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/processed_districtplan_path/districtPlan_w_geometry_' + str(districtPlanID) + ".json"
+def EfficiencyGap(a_votes, b_votes):
+    # Initialize the variables as zero 
+    EG = 0
+    wasted_a = 0
+    wasted_b = 0
+    
+    # for each district, calculate the wasted votes for each party 
+    for i in range(len(a_votes)):
+        if a_votes[i] > b_votes[i]: # if party a wins district i 
+            wasted_b += b_votes[i]
+            wasted_a += a_votes[i] - ((a_votes[i]+b_votes[i]) / 2)
+        else:                       # if party b wins district i
+            wasted_a += a_votes[i]
+            wasted_b += b_votes[i] - ((a_votes[i]+b_votes[i]) / 2)
+    
+    # Calculate the Efficiency Gap
+    EG = abs((wasted_a - wasted_b) / (sum(a_votes) + sum(b_votes)))
+    
+    return EG
+
+def create_district_plan_JSON(districtPlanDFList): # this contains 10,000 district plans per STATE
+    
+    stateId=districtPlanDFList[0].iloc[0]['stateId']
+    stateIdName=""  # for naming the files
+    
+    if stateId==5: stateIdName="co"
+    elif stateId ==39: stateIdName="sc"
+    elif stateId ==41: stateIdName="tn"
+    
+    HistogramJSON = {'stateId': stateIdName, 'frequency_maj_minority_dps': [], 'frequency_republicans_pres_dps': [], 
+                     'frequency_democrat_pres_dps':[],
+                    'frequency_republicans_sen_dps': [], 'frequency_democrat_sen_dps':[]}
+    
+    freq_maj_minority_DP_li=[]
+    freq_republicans_pres_DP_li=[]
+    freq_democrats_pres_DP_li=[]
+    freq_republicans_sen_DP_li=[]
+    freq_democrats_sen_DP_li=[]
+    
+    for i, districtPlan in enumerate(districtPlanDFList): 
+        districtPlanJSON = {'Box_Whisker_Percents':{}, 'Seat_Vote_Input': {}, 'Majority_Minority_Districts':[]}
+        freq_maj_minority_DP_li.append(majority_minority(districtPlan))
+        
+        for index, row in districtPlan.iterrows():
+            '''
+            if (is_majority_minority_district(row) == False):
+                print(row['districtId'])
+            else:
+                districtPlanJSON['Majority_Minority_Districts'].append(row)'''
+                
+            freq_republicans_pres_DP_li.append(row['republicanPres'] / (row['democraticPres']+row['republicanPres']))
+            freq_democrats_pres_DP_li.append(row['democraticPres'] / (row['democraticPres']+row['republicanPres']))
+            freq_republicans_sen_DP_li.append(row['republicanSen'] / (row['democraticSen']+row['republicanSen']))
+            freq_democrats_sen_DP_li.append(row['democraticSen'] / (row['democraticSen']+row['republicanSen']))
+
+        # single measure values for entire district plan
+        districtPlanJSON['districtPlanId']=str(districtPlan['districtPlanId'].iloc[0])
+        districtPlanJSON['stateId']=str(districtPlan['stateId'].iloc[0])
+        districtPlanJSON['proposedBy']= "MGGG-generated" 
+        districtPlanJSON['total_pop']=int(districtPlan['total_pop'].sum())
+        districtPlanJSON['white']=int(districtPlan['white'].sum())
+        districtPlanJSON['af_amer']=int(districtPlan['af_amer'].sum())
+        districtPlanJSON['asian']=int(districtPlan['asian'].sum())
+        districtPlanJSON['hispanic']=int(districtPlan['hispanic'].sum())
+        districtPlanJSON['native_hawaiian']=int(districtPlan['native_hawaiian'].sum())
+        districtPlanJSON['two_or_more']=int(districtPlan['two_or_more'].sum())
+
+        districtPlanJSON['democraticPres']=int(districtPlan['democraticPres'].sum())
+        districtPlanJSON['democraticSen']=int(districtPlan['democraticSen'].sum())
+        districtPlanJSON['republicanPres']=int(districtPlan['republicanPres'].sum())
+        districtPlanJSON['republicanSen']=int(districtPlan['republicanSen'].sum())
+
+        districtPlanJSON['polsby_popper']=float(geometric_compactness(districtPlan)[1])
+        districtPlanJSON['efficiency_gap']= float(EfficiencyGap(list(districtPlan['democraticPres']), list(districtPlan['republicanPres'])))
+        districtPlanJSON['num_majority_minority_districts']=int(majority_minority(districtPlan))
+
+        districtPlanJSON['vote_split_democrats_pres']=float(districtPlan['democraticPres'].sum() / (float(districtPlan['democraticPres'].sum() + float(districtPlan['republicanPres'].sum() ))))
+        districtPlanJSON['vote_split_republicans_pres']=float(districtPlan['republicanPres'].sum() / (float(districtPlan['democraticPres'].sum() + float(districtPlan['republicanPres'].sum() ))))
+        districtPlanJSON['vote_split_democrats_sen']=float(districtPlan['democraticSen'].sum() / (float(districtPlan['democraticSen'].sum() + float(districtPlan['republicanSen'].sum() ))))
+        districtPlanJSON['vote_split_republicans_sen']=float(districtPlan['republicanSen'].sum() / (float(districtPlan['democraticSen'].sum() + float(districtPlan['republicanSen'].sum() ))))
+
+        # list data
+        white_perc = sorted(list(districtPlan['white'] / districtPlan['total_pop'] ))
+        af_amer_perc = sorted(list(districtPlan['af_amer'] / districtPlan['total_pop'] ))
+        asian_perc = sorted(list(districtPlan['asian'] / districtPlan['total_pop'] ))
+        native_hawaiian_perc = sorted(list(districtPlan['native_hawaiian'] / districtPlan['total_pop'] ))
+        two_or_more_perc = sorted(list(districtPlan['two_or_more'] / districtPlan['total_pop'] ))
+        hispanic_perc= sorted(list(districtPlan['hispanic'] / districtPlan['total_pop'] ))
+
+        democraticPres_perc=sorted(list(districtPlan['democraticPres'] / (districtPlan['democraticPres']+districtPlan['republicanPres']) ) )
+        republicanPres_perc=sorted(list(districtPlan['republicanPres'] / (districtPlan['democraticPres']+districtPlan['republicanPres']) ) )
+        democraticSen_perc=sorted(list(districtPlan['democraticSen']  / (districtPlan['democraticSen']+districtPlan['republicanSen'])    ) )
+        republicanSen_perc=sorted(list(districtPlan['republicanSen'] / (districtPlan['democraticSen']+districtPlan['republicanSen'])  ))
+
+        BW={}
+        BW['white'] = white_perc
+        BW['af_amer'] = af_amer_perc
+        BW['asian'] = asian_perc
+        BW['hispanic'] = hispanic_perc
+        BW['native_hawaiian'] = native_hawaiian_perc
+        BW['two_or_more'] = two_or_more_perc
+        BW['democraticPres'] = democraticPres_perc
+        BW['republicanPres'] = republicanPres_perc
+        BW['democraticSen'] = democraticSen_perc
+        BW['republicanSen'] = republicanSen_perc
+        
+        seat_vote_input={}
+        seat_vote_input['democraticPres']=list(districtPlan['democraticPres'])
+        seat_vote_input['republicanPres']=list(districtPlan['republicanPres'])
+        seat_vote_input['democraticSen']=list(districtPlan['democraticSen'])
+        seat_vote_input['republicanSen']=list(districtPlan['republicanSen'])
+        
+        districtPlanJSON['Box_Whisker_Percents'] = BW
+        districtPlanJSON['Seat_Vote_Input'] = seat_vote_input
+        
+        #print(districtPlanJSON)
+       
+        # dump district plan file
+        path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/processed_districtplan_path_seawulf/' + stateIdName + '_processed_plans/district_plan_measures_' + str(districtPlan['districtPlanId'].iloc[0]) + '.json'
+        with open(path, 'w') as f:
+            json.dump(districtPlanJSON, f)
+            
+    HistogramJSON['frequency_maj_minority_dps'] = freq_maj_minority_DP_li
+    HistogramJSON['frequency_republicans_pres_dps'] = freq_republicans_pres_DP_li
+    HistogramJSON['frequency_democrat_pres_dps'] = freq_democrats_pres_DP_li
+    HistogramJSON['frequency_republicans_sen_dps'] = freq_republicans_sen_DP_li
+    HistogramJSON['frequency_democrat_sen_dps'] = freq_democrats_sen_DP_li
+    
+    #print(HistogramJSON)
+    # dump histogram file 
+    path = '/Users/cherrypi/Desktop/gerrymandering-project/data/post-processing/processed_districtplan_path_seawulf/histogram_ensemble_data/' + stateIdName + '_histogram_data_seawulf_ensemble.json'
     with open(path, 'w') as f:
-        f.write(districtPlanDf.to_json())
+        json.dump(HistogramJSON, f)
+
+
+if __name__ == "__main__":
+    # creates 10,000 district Plan JSONS and 1 histogram JSON per state
+    create_district_plan_JSON(districtPlanDfs_co)
+    create_district_plan_JSON(districtPlanDfs_tn)
+    create_district_plan_JSON(districtPlanDfs_sc)
+
