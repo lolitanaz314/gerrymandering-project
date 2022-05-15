@@ -1,6 +1,6 @@
 package com.example.server.model;
 
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.id.PrecinctId;
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "precinct")
+@Table(name = "test_precinct")
 @IdClass(PrecinctId.class)
 public class Precinct {
     @Id
@@ -29,13 +29,31 @@ public class Precinct {
 //    @ManyToOne
 //    private State state;
 
-    @Transient
-    @Column(name="total_pop") // total population
+    // demographic
+    @Column(name="total_pop")
     private int totalPop;
+
+    @Column(name="white")
+    private int white;
+
+    @Column(name="hispanic")
+    private int hispanic;
+
+    @Column(name="af_amer")
+    private int africanAmerican;
+
+    @Column(name="asian")
+    private int asian;
+
+    @Column(name="native_hawaiian")
+    private int nativeHawaiian;
+
+    @Column(name="two_or_more")
+    private int twoOrMore;
 
     @Transient
     @MapKeyEnumerated(EnumType.STRING)
-    private Map<RacialCategory, Integer> demographic;
+    private Map<Category, Integer> demographic;
 
     @Transient
     private Set<Precinct> precinctNeighbors;

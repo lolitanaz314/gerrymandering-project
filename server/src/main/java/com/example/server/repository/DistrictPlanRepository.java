@@ -14,6 +14,6 @@ public interface DistrictPlanRepository extends JpaRepository<DistrictPlan, Dist
 
     List<DistrictPlan> findByStateId(StateCode state_id);
 
-    Optional<DistrictPlan> findByStateIdAndPlanId(StateCode state_id, int id);
+    Optional<DistrictPlan> findByStateIdAndPlanId(StateCode state_id, String id);
 
 }

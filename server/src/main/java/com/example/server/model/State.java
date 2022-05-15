@@ -1,6 +1,6 @@
 package com.example.server.model;
 
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 
 import lombok.*;
@@ -14,18 +14,11 @@ import java.util.Map;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "state")
+@Table(name = "test_state")
 public class State {
     @Id
     @Column(name="state_id")
     private StateCode stateId;
-
-    @Transient
-    private int totalPop;
-
-    @Transient
-    @MapKeyEnumerated(EnumType.STRING)
-    private Map<RacialCategory, Integer> demographic;
 
     @Transient
     @OneToMany

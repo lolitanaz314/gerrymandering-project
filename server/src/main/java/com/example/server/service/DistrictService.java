@@ -1,5 +1,7 @@
 package com.example.server.service;
 
+import com.example.server.model.State;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.id.DistrictId;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.District;
@@ -8,43 +10,58 @@ import com.example.server.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.Optional;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class DistrictService {
     @Autowired
     private final DistrictRepository dRepository;
     // private final PrecinctService pService;
-    private final DemographicService dmService;
+//    private final DemographicService dmService;
 
-    public DistrictService(DistrictRepository dRepository, DemographicService dmService) {
+    public DistrictService(DistrictRepository dRepository) {
         this.dRepository = dRepository;
         // this.pService = pService;
-        this.dmService = dmService;
     }
 
     // public List<District> findAll() {return dRepository.findAll(); }
 
-    public Set<District> getDistrictsByPlanId(StateCode stateId, int planId){
+    public Set<District> getDistrictsByPlanId(StateCode stateId, String planId){
         Set<District> districts = dRepository.findByStateIdAndPlanId(stateId, planId);
         for (District d : districts){
-            d.setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, planId, d.getDistrictId())));
+            d.setDemographic(packDemographic(d));
             // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
         }
+        System.out.println("Service districts ...");
         return districts;
     }
 
-    public District getDistrictByPlanIdAndDistrictId(StateCode stateId, int planId, int districtId) {
+    public District getDistrictByPlanIdAndDistrictId(StateCode stateId, String planId, int districtId) {
         try{
             Optional<District> d = dRepository.findByStateIdAndPlanIdAndDistrictId(stateId, planId, districtId);
             if(d.isPresent()){
-                d.get().setDemographic(dmService.getDemographicByDistrictId(new DistrictId(stateId, planId, districtId)));
+                 d.get().setDemographic(packDemographic(d.get()));
+                System.out.println("Service district ...");
                 return d.get();
             } else{
                 throw new NoSuchElementException();
             }
+        } catch (NoSuchElementException ex){
+            return null;
+        }
+    }
+
+    public Map<Category, Integer> packDemographic(District d) {
+        Map<Category, Integer> demographic = new HashMap<>();
+        try {
+            demographic.put(Category.WHITE, d.getWhite());
+            demographic.put(Category.BLACK, d.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, d.getHispanic());
+            demographic.put(Category.ASIAN, d.getAsian());
+            demographic.put(Category.NATIVE, d.getNativeHawaiian());
+            demographic.put(Category.MIXED, d.getTwoOrMore());
+//            System.out.println("SIZE: " + demographic.size());
+            return demographic;
         } catch (NoSuchElementException ex){
             return null;
         }

@@ -12,7 +12,7 @@ import java.util.Set;
 @Repository
 public interface DistrictRepository extends JpaRepository<District, DistrictId> {
 
-    Set<District> findByStateIdAndPlanId(StateCode stateId, int dpId);
+    Set<District> findByStateIdAndPlanId(StateCode stateId, String dpId);
 
-    Optional<District> findByStateIdAndPlanIdAndDistrictId(StateCode stateId, int dpId, int id);
+    Optional<District> findByStateIdAndPlanIdAndDistrictId(StateCode stateId, String dpId, int id);
 }
