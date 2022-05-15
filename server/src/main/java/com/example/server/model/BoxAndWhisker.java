@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class BoxAndWhisker {
-    private String districtId;
+    private String districtId; // name
 
-    private double[] boxAndWhisker;
+    private double[] boxAndWhisker; // y
 }

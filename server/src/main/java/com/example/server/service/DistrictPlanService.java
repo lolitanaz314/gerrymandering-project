@@ -2,15 +2,15 @@ package com.example.server.service;
 
 import com.example.server.model.District;
 import com.example.server.model.DistrictPlan;
+import com.example.server.model.State;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.repository.DistrictPlanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class DistrictPlanService {
@@ -28,21 +28,41 @@ public class DistrictPlanService {
     public List<DistrictPlan> getPlansByStateId(StateCode stateId) {
         List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId);
         for (DistrictPlan dp : districtPlans){
+            dp.setDemographic(packDemographic(dp));
             dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getPlanId()));
             // dp.setPopulationEquality(getPopulationEqualityMeasure(dp));
         }
+        System.out.println("Service districtPlans ...");
         return dpRepository.findByStateId(stateId);
     }
 
-    public DistrictPlan getPlanByStateIdAndDistrictId(StateCode stateId, int planId) {
+    public DistrictPlan getPlanByStateIdAndDistrictId(StateCode stateId, String planId) {
         try{
             Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId, planId);
             if(dp.isPresent()){
+                dp.get().setDemographic(packDemographic(dp.get()));
                 dp.get().setDistricts(dService.getDistrictsByPlanId(stateId, planId));
+                System.out.println("Service districtPlan ...");
                 return dp.get();
             } else{
                 throw new NoSuchElementException();
             }
+        } catch (NoSuchElementException ex){
+            return null;
+        }
+    }
+
+    public Map<Category, Integer> packDemographic(DistrictPlan s) {
+        Map<Category, Integer> demographic = new HashMap<>();
+        try {
+            demographic.put(Category.WHITE, s.getWhite());
+            demographic.put(Category.BLACK, s.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, s.getHispanic());
+            demographic.put(Category.ASIAN, s.getAsian());
+            demographic.put(Category.NATIVE, s.getNativeHawaiian());
+            demographic.put(Category.MIXED, s.getTwoOrMore());
+//            System.out.println("SIZE: " + demographic.size());
+            return demographic;
         } catch (NoSuchElementException ex){
             return null;
         }

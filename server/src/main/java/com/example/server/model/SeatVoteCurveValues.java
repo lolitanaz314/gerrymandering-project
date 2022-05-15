@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "seat_vote_curve_data")
+@Table(name = "seat_vote_curve_values")
 @IdClass(DistrictPlanId.class)
-public class SeatVoteCurveData {
+public class SeatVoteCurveValues {
     @Id
     @Column(name="state_id", nullable = false)
     private StateCode stateId;

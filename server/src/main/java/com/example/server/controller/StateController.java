@@ -1,7 +1,7 @@
 package com.example.server.controller;
 
 import com.example.server.model.BoxAndWhiskerPlot;
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.service.BoxAndWhiskerService;
 import com.example.server.service.StateService;
 import com.example.server.model.State;
@@ -33,35 +33,34 @@ public class StateController {
 
     @GetMapping("/api/states")
     public CollectionModel<EntityModel<State>> getStates() {
+        System.out.println("Controller States ...");
         List<State> states = sService.getStates();
-        Set<EntityModel<State>> stateSet = assembleStates(states);
+        Set<EntityModel<State>> stateSet = states.stream().map(s ->
+            EntityModel.of(s,
+                linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStates()).withRel("states")))
+            .collect(Collectors.toSet());
+        System.out.println("Returning States ...\n");
         return CollectionModel.of(stateSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}")
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
+        System.out.println("Controller State ...");
         State state = sService.getStateByStateId(stateId);
-        return assembleState(state);
+        System.out.println("Returning State ...\n");
+        return EntityModel.of(state,
+                linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
+                linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
 
     @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
     public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
-                                                                    @PathVariable("demographic") RacialCategory demographic) {
-        return EntityModel.of(bwService.getBoxAndWhiskerByStateId(stateId, demographic));
-    }
-
-    public Set<EntityModel<State>> assembleStates(List<State> states){
-        return states.stream().map(s ->
-                EntityModel.of(s,
-                linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
-                linkTo(methodOn(StateController.class).getStates()).withRel("states")))
-                .collect(Collectors.toSet());
-    }
-
-    public EntityModel<State> assembleState(State state){
-        return EntityModel.of(state,
-                linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
-                linkTo(methodOn(StateController.class).getStates()).withRel("states"));
+                                                                    @PathVariable("demographic") Category demographic) {
+        System.out.println("Controller BoxAndWhiskerPlot ...");
+        BoxAndWhiskerPlot bw = bwService.getBoxAndWhiskerByStateId(stateId, demographic);
+        System.out.println("Returning BoxAndWhiskerPlot ...\n");
+        return EntityModel.of(bw);
     }
 }

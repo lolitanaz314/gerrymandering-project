@@ -12,5 +12,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class DistrictPlanId implements Serializable {
     private StateCode stateId;
-    private int planId;
+    private String planId;
 }

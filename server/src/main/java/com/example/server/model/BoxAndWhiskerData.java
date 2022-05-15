@@ -1,11 +1,9 @@
 package com.example.server.model;
 
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import lombok.*;
 import javax.persistence.*;
-import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -21,7 +19,7 @@ public class BoxAndWhiskerData {
     private int id;
 
     @Column(name="demographic")
-    private RacialCategory race;
+    private Category demographic;
 
     @Column(name="state_id")
     private StateCode stateId;

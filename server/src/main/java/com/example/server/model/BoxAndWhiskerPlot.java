@@ -1,6 +1,6 @@
 package com.example.server.model;
 
-import com.example.server.model.enumeration.RacialCategory;
+import com.example.server.model.enumeration.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class BoxAndWhiskerPlot {
-    private RacialCategory race;
+    private Category demographic;
 
     private List<BoxAndWhisker> boxAndWhiskers;
 }

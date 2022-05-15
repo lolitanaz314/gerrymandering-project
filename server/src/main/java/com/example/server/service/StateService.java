@@ -1,35 +1,34 @@
 package com.example.server.service;
 
+import com.example.server.model.District;
 import com.example.server.model.State;
+import com.example.server.model.enumeration.Category;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.repository.StateRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class StateService {
     @Autowired
     private final StateRepository sRepository;
     private final DistrictPlanService dpService;
-    private final DemographicService dmService;
 
-    public StateService(StateRepository sRepository, DistrictPlanService dpService, DemographicService dmService) {
+    public StateService(StateRepository sRepository, DistrictPlanService dpService) {
         this.sRepository = sRepository;
         this.dpService = dpService;
-        this.dmService = dmService;
     }
 
     public List<State> getStates() {
         List<State> states = sRepository.findAll();
         for (State s : states){
-            s.setDemographic(dmService.getDemographicByStateId(s.getStateId()));
+//            s.setDemographic(dmService.getDemographicByStateId(s.getStateId()));
             s.setDistrictPlans(dpService.getPlansByStateId(s.getStateId()));
         }
+        System.out.println("Service States ...");
         return states;
     }
 
@@ -37,12 +36,29 @@ public class StateService {
         try {
             Optional<State> s = sRepository.findById(stateId);
             if (s.isPresent()){
-                s.get().setDemographic(dmService.getDemographicByStateId(stateId));
+                s.get().setDemographic(packDemographic(s.get()));
                 s.get().setDistrictPlans(dpService.getPlansByStateId(stateId));
+                System.out.println("Service State ...");
                 return s.get();
             } else{
                 throw new NoSuchElementException();
             }
+        } catch (NoSuchElementException ex){
+            return null;
+        }
+    }
+
+    public Map<Category, Integer> packDemographic(State d) {
+        Map<Category, Integer> demographic = new HashMap<>();
+        try {
+            demographic.put(Category.WHITE, d.getWhite());
+            demographic.put(Category.BLACK, d.getAfricanAmerican());
+            demographic.put(Category.HISPANIC, d.getHispanic());
+            demographic.put(Category.ASIAN, d.getAsian());
+            demographic.put(Category.NATIVE, d.getNativeHawaiian());
+            demographic.put(Category.MIXED, d.getTwoOrMore());
+//            System.out.println("SIZE: " + demographic.size());
+            return demographic;
         } catch (NoSuchElementException ex){
             return null;
         }
