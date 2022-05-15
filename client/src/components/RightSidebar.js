@@ -11,6 +11,7 @@ import DistrictPlan from './DistrictPlan';
 import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
 import BoxAndWhisker from './BoxAndWhisker';
+import SeawulfEnsemble from './SeawulfEnsemble';
 
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
@@ -280,13 +281,11 @@ const RightSidebar = (props) => {
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#repdem-split">Republican/Democratic Split</Nav.Link>
                                             </span>
-                                            <span className="underline-on-hover">
-                                                <Nav.Link href="#equal-pop">Equal Population</Nav.Link>
-                                            </span>
                                         </Nav>
                                     </Navbar.Collapse>
                                 </Container>
                             </Navbar>
+                            <br></br> <SeawulfEnsemble />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
