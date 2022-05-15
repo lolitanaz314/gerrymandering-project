@@ -12,8 +12,6 @@ import DistrictMeasureInfo from './DistrictMeasureInfo';
 import StateInfo from './StateInfo';
 import BoxAndWhisker from './BoxAndWhisker';
 
-import State from '../api/service/StateService';
-
 const testData = [ //testData has data of all plans from all states
     [ //district plans for tennessee
         { //array of dps with info
@@ -175,15 +173,15 @@ const titleStyle = {
 
 const RightSidebar = (props) => {
 
-    const [box, setBox] = useState({boxAndWhiskers: [{
-        y: [0],
-        type: 'box',
-        name: '0',
-        marker: {
-          color: 'rgb(107,174,214)'
-        }}]
-    });
-    const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
+    // const [box, setBox] = useState({boxAndWhiskers: [{
+    //     y: [0],
+    //     type: 'box',
+    //     name: '0',
+    //     marker: {
+    //       color: 'rgb(107,174,214)'
+    //     }}]
+    // });
+    // const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
     // onClick={() => setPlotPara({"demographic": props.demographic, "state": props.state})}
 
     // Gets box and whisker data from server.
@@ -195,73 +193,40 @@ const RightSidebar = (props) => {
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
     // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
     // there is also ASIAN, HISPANIC, MIXED, NATIVE
-    useEffect(() => {
-        console.log(plotPara.state + " " + plotPara.demographic)
-        State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
-        .then(response => {
-            setBox(response.data);
+    // useEffect(() => {
+    //     console.log(plotPara.state + " " + plotPara.demographic)
+    //     State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
+    //     .then(response => {
+    //         setBox(response.data);
 
-            for (let i = 0; i < box.boxAndWhiskers.length; i++){
-                box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-                delete box.boxAndWhiskers[i]["boxAndWhisker"];
+    //         for (let i = 0; i < box.boxAndWhiskers.length; i++){
+    //             box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
+    //             delete box.boxAndWhiskers[i]["boxAndWhisker"];
 
-                box.boxAndWhiskers[i]["type"] = "box";
-                
-                box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-                delete box.boxAndWhiskers[i]["districtId"];
+    //             box.boxAndWhiskers[i]["type"] = "box";
 
-                box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
-            }
-        })
-        .catch(error => {console.log('Something went wrong', error);
-        })  
-        console.log(box)
-    }, [plotPara]);
+    //             box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
+    //             delete box.boxAndWhiskers[i]["districtId"];
+
+    //             box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
+    //         }
+    //     })
+    //     .catch(error => {console.log('Something went wrong', error);
+    //     })  
+    //     console.log(box)
+    // }, [plotPara]);
 
     //set default tab
     const [key, setKey] = useState('summary');
 
-    let demo = false;
-    if (props.demographic !== 'None') demo = true;
-
+    //used for the fake data
     let stateID = 0;
     if (props.code === "SC") stateID = 1;
     else if (props.code === "CO") stateID = 2;
 
     //scrollbar menu functions
-    let menu = document.getElementById('dp-container');
     let pinnedDP = 'District Plan #' + props.pinned;
     if (props.pinned === null) pinnedDP = "None";
-
-    // function getInfo() {
-    //     State.getBoxAndWhisker(props.code, props.demographic)
-    //         .then(response => {
-    //             setBox(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.log('Something went wrong', error);
-    //         });
-    //         if(box.boxAndWhiskers){
-    //         for (let i = 0; i < Object.keys(box).length; i++){
-    //             box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-    //             delete box.boxAndWhiskers[i]["boxAndWhisker"];
-
-    //             box.boxAndWhiskers[i]["type"] = "box";
-                
-    //             box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-    //             delete box.boxAndWhiskers[i]["districtId"];
-
-    //             box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
-                    
-    //         }
-    //     }
-    // }
-
-    function showBW() {
-        document.getElementById('seawulf').classList.add('hidden');
-        document.getElementById('bw').classList.remove('hidden');
-        // getInfo();
-    }
 
     return (
         <>
@@ -372,29 +337,8 @@ const RightSidebar = (props) => {
                         </Tab>
 
                         <Tab eventKey="fairness" title="SeaWulf Fairness">
-                            <div id='seawulf'>
-                                <p className='seawulf-desc'>
-                                    This fairness measure will be calculated using <b>SeaWulf</b>, a High Performance Computing (HPC)
-                                    cluster dedicated to research applications for Stony Brook faculty, staff, and students.
-                                    We will be randomly generating <b>10,000 district plans</b> from a given <b>state</b>, <b>basis
-                                        for comparision</b> (ex. African American population percent), and <b>selected district plan</b>
-                                    .These plans will be displayed in a <b>box &#38; whisker plot</b>,
-                                    with the selected district plan shown for comparision.
-                                    <br></br> <br></br>
-                                    <div>Current State Selected: {props.currentState}</div>
-                                    <div>Current District Plan Selected: #{props.currentDp}</div>
-                                    <div>Current Demographic Selected: {props.demographic}</div>
-                                </p>
-                                <input className={`${demo ? "" : "disabled"}`} type="button" value="Generate" 
-                                    onClick={() => { 
-                                        setPlotPara({"state": props.code, "demographic": props.demographic}); 
-                                        showBW();
-                                }} />
-                            </div>
-
-                            <div id='bw' className='hidden'>
-                                <BoxAndWhisker box={box.boxAndWhiskers} />
-                            </div>
+                            <BoxAndWhisker code={props.code} currentState={props.currentState} currentDp={props.currentDp}
+                                demographic={props.demographic} />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
