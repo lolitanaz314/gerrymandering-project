@@ -58,26 +58,26 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(districtPlan.getStateId())).withRel("districtPlans"));
     }
 
-    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id1}/{dp_id2}")
-    public CollectionModel<EntityModel<DistrictPlan>> comparePlans(
-            @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id1") String planId1, @PathVariable("dp_id2") String planId2) {
-        System.out.println("Controller comparePlans ...");
-        DistrictPlan districtPlan1 = dpService.getPlanByStateIdAndDistrictId(stateId, planId1);
-        DistrictPlan districtPlan2 = dpService.getPlanByStateIdAndDistrictId(stateId, planId2);
-
-        List<DistrictPlan> twoPlans = new ArrayList<>();
-        twoPlans.add(districtPlan1);
-        twoPlans.add(districtPlan2);
-
-        List<EntityModel<DistrictPlan>> twoPlansList = twoPlans.stream().map(dp ->
-            EntityModel.of(dp,
-                linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(dp.getStateId(), dp.getPlanId())).withSelfRel(),
-                linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
-            .collect(Collectors.toList());
-
-        System.out.println("Returning comparePlans ...\n");
-        return CollectionModel.of(twoPlansList);
-    }
+//    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id1}/{dp_id2}")
+//    public CollectionModel<EntityModel<DistrictPlan>> comparePlans(
+//            @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id1") String planId1, @PathVariable("dp_id2") String planId2) {
+//        System.out.println("Controller comparePlans ...");
+//        DistrictPlan districtPlan1 = dpService.getPlanByStateIdAndDistrictId(stateId, planId1);
+//        DistrictPlan districtPlan2 = dpService.getPlanByStateIdAndDistrictId(stateId, planId2);
+//
+//        List<DistrictPlan> twoPlans = new ArrayList<>();
+//        twoPlans.add(districtPlan1);
+//        twoPlans.add(districtPlan2);
+//
+//        List<EntityModel<DistrictPlan>> twoPlansList = twoPlans.stream().map(dp ->
+//            EntityModel.of(dp,
+//                linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(dp.getStateId(), dp.getPlanId())).withSelfRel(),
+//                linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
+//            .collect(Collectors.toList());
+//
+//        System.out.println("Returning comparePlans ...\n");
+//        return CollectionModel.of(twoPlansList);
+//    }
 
 //    @GetMapping("/api/states/{state_id}/districtPlansJson/{id}")
 //    public EntityModel<List<DistrictPlanJson>> list(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int id) {

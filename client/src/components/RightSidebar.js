@@ -172,50 +172,6 @@ const titleStyle = {
 }
 
 const RightSidebar = (props) => {
-
-    // const [box, setBox] = useState({boxAndWhiskers: [{
-    //     y: [0],
-    //     type: 'box',
-    //     name: '0',
-    //     marker: {
-    //       color: 'rgb(107,174,214)'
-    //     }}]
-    // });
-    // const [plotPara, setPlotPara] = useState({ "state": undefined, "demographic": undefined });
-    // onClick={() => setPlotPara({"demographic": props.demographic, "state": props.state})}
-
-    // Gets box and whisker data from server.
-    // Adds additional attribute per object since "type" and "marker" is not included
-
-    // You can check what data is returned from server by typing:
-    // http://localhost:8080/api/states/TN/box-and-whisker/<demographic>
-
-    // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
-    // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
-    // there is also ASIAN, HISPANIC, MIXED, NATIVE
-    // useEffect(() => {
-    //     console.log(plotPara.state + " " + plotPara.demographic)
-    //     State.getBoxAndWhisker(plotPara.state, plotPara.demographic)
-    //     .then(response => {
-    //         setBox(response.data);
-
-    //         for (let i = 0; i < box.boxAndWhiskers.length; i++){
-    //             box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-    //             delete box.boxAndWhiskers[i]["boxAndWhisker"];
-
-    //             box.boxAndWhiskers[i]["type"] = "box";
-
-    //             box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-    //             delete box.boxAndWhiskers[i]["districtId"];
-
-    //             box.boxAndWhiskers[i]["marker"] = {"color": "rgb(107,174,214)"};  
-    //         }
-    //     })
-    //     .catch(error => {console.log('Something went wrong', error);
-    //     })  
-    //     console.log(box)
-    // }, [plotPara]);
-
     //set default tab
     const [key, setKey] = useState('summary');
 
