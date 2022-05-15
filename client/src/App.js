@@ -8,7 +8,6 @@ import './components/style/Legend.css';
 THIS is the starting point of the react app. 
 */
 function App() {
-  
   return (
     <div className="App">
       <MapView/>
