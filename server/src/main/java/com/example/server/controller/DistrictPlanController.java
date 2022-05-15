@@ -36,21 +36,23 @@ public class DistrictPlanController {
 
     @GetMapping("/api/states/{state_id}/districtPlans")
     public CollectionModel<EntityModel<DistrictPlan>> getPlansByStateId(@PathVariable("state_id") StateCode stateId) {
+        System.out.println("Controller districtPlans ...");
         List<DistrictPlan> districtPlans = dpService.getPlansByStateId(stateId);
         List<EntityModel<DistrictPlan>> districtPlanList = districtPlans.stream().map(dp ->
             EntityModel.of(dp,
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(dp.getStateId(), dp.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
-        System.out.println("Controller districtPlans ...");
+        System.out.println("Returning districtPlans ...\n");
         return CollectionModel.of(districtPlanList,
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(stateId)).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}")
     public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId) {
+        System.out.println("Controller districtPlan ...");
         DistrictPlan districtPlan = dpService.getPlanByStateIdAndDistrictId(stateId, planId);
-        System.out.println("Controller districtPlan ...\n");
+        System.out.println("Returning districtPlan ...\n");
         return EntityModel.of(districtPlan,
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(districtPlan.getStateId(), districtPlan.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(districtPlan.getStateId())).withRel("districtPlans"));
@@ -59,6 +61,7 @@ public class DistrictPlanController {
     @GetMapping("/api/states/{state_id}/districtPlans/{dp_id1}/{dp_id2}")
     public CollectionModel<EntityModel<DistrictPlan>> comparePlans(
             @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id1") String planId1, @PathVariable("dp_id2") String planId2) {
+        System.out.println("Controller comparePlans ...");
         DistrictPlan districtPlan1 = dpService.getPlanByStateIdAndDistrictId(stateId, planId1);
         DistrictPlan districtPlan2 = dpService.getPlanByStateIdAndDistrictId(stateId, planId2);
 
@@ -72,7 +75,7 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(dp.getStateId())).withRel("districtPlans")))
             .collect(Collectors.toList());
 
-        System.out.println("Controller comparePlans ...\n");
+        System.out.println("Returning comparePlans ...\n");
         return CollectionModel.of(twoPlansList);
     }
 

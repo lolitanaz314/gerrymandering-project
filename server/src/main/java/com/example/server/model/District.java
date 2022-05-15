@@ -16,7 +16,7 @@ import java.util.Map;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "test_district")
+@Table(name = "district")
 @IdClass(DistrictId.class)
 public class District {
     @Id
@@ -38,8 +38,9 @@ public class District {
 //    @Column(name="lean", columnDefinition = "int default 10")
 //    private int lean;
 
-//    @Column(name="incumbent", columnDefinition = "varchar(255) default 'Hi'")
-//    private String incumbent;
+    // not used in production
+    @Column(name="incumbent", columnDefinition = "varchar(255) default 'Hi'")
+    private String incumbent;
 
     // demographic
     @Column(name="total_pop")

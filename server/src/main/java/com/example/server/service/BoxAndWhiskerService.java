@@ -40,7 +40,7 @@ public class BoxAndWhiskerService {
                 BoxAndWhisker bw = new BoxAndWhisker(id, points);
                 boxAndWhiskers.add(bw);
             }
-            System.out.println(boxAndWhiskers.size());
+            System.out.println("Service boxAndWhisker ... size: " + boxAndWhiskers.size());
             boxAndWhiskerPlot.setBoxAndWhiskers(boxAndWhiskers);
 
             return boxAndWhiskerPlot;

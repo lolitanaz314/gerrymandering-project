@@ -33,21 +33,23 @@ public class StateController {
 
     @GetMapping("/api/states")
     public CollectionModel<EntityModel<State>> getStates() {
+        System.out.println("Controller States ...");
         List<State> states = sService.getStates();
         Set<EntityModel<State>> stateSet = states.stream().map(s ->
             EntityModel.of(s,
                 linkTo(methodOn(StateController.class).getStateByStateId(s.getStateId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states")))
             .collect(Collectors.toSet());
-        System.out.println("Controller States ...\n");
+        System.out.println("Returning States ...\n");
         return CollectionModel.of(stateSet,
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
 
     @GetMapping("/api/states/{state_id}")
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
+        System.out.println("Controller State ...");
         State state = sService.getStateByStateId(stateId);
-        System.out.println("Controller State ...\n");
+        System.out.println("Returning State ...\n");
         return EntityModel.of(state,
                 linkTo(methodOn(StateController.class).getStateByStateId(state.getStateId())).withSelfRel(),
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));
@@ -56,6 +58,9 @@ public class StateController {
     @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
     public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
                                                                     @PathVariable("demographic") Category demographic) {
-        return EntityModel.of(bwService.getBoxAndWhiskerByStateId(stateId, demographic));
+        System.out.println("Controller BoxAndWhiskerPlot ...");
+        BoxAndWhiskerPlot bw = bwService.getBoxAndWhiskerByStateId(stateId, demographic);
+        System.out.println("Returning BoxAndWhiskerPlot ...\n");
+        return EntityModel.of(bw);
     }
 }

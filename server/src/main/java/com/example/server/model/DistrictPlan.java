@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "test_district_plan")
+@Table(name = "district_plan")
 @IdClass(DistrictPlanId.class)
 public class DistrictPlan {
 //    @ManyToOne
@@ -45,25 +45,25 @@ public class DistrictPlan {
     private String proposedBy;
 
     // demographic
-    @Column(name="total_pop")
-    private int totalPop;
+    @Column(name="total_pop", columnDefinition = "integer default 10")
+    private Integer totalPop;
 
-    @Column(name="white")
-    private int white;
+    @Column(name="white", columnDefinition = "integer default 10")
+    private Integer white;
 
-    @Column(name="hispanic")
+    @Column(name="hispanic", columnDefinition = "integer default 10")
     private int hispanic;
 
-    @Column(name="af_amer")
+    @Column(name="af_amer", columnDefinition = "integer default 10")
     private int africanAmerican;
 
-    @Column(name="asian")
+    @Column(name="asian", columnDefinition = "integer default 10")
     private int asian;
 
-    @Column(name="native_hawaiian")
+    @Column(name="native_hawaiian", columnDefinition = "integer default 10")
     private int nativeHawaiian;
 
-    @Column(name="two_or_more")
+    @Column(name="two_or_more", columnDefinition = "integer default 10")
     private int twoOrMore;
 
     @Transient
@@ -103,8 +103,9 @@ public class DistrictPlan {
     @Column(name="efficiency_gap", columnDefinition = "double default 10.0")
     private double efficiencyGap;
 
-//    @Column(name="mean_median_diff", columnDefinition = "double default 10.0")
-//    private double meanMedianDiff;
+    // not used in production
+    @Column(name="mean_median_diff", columnDefinition = "double default 10.0")
+    private double meanMedianDiff;
 
     @Column(name="population_equality", columnDefinition = "double default 10.0")
     private double populationEquality;

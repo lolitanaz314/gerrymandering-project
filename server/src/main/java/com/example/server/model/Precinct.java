@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "test_precinct")
+@Table(name = "precinct")
 @IdClass(PrecinctId.class)
 public class Precinct {
     @Id
