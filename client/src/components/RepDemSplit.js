@@ -1,4 +1,4 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
     {
@@ -48,8 +48,8 @@ export default function RepDemSplit() {
                 <YAxis yAxisId="left" orientation="left" label={{ value: 'Number of District Plans', angle: -90, position: "outsideLeft", dx: -15 }} />
                 <Tooltip />
                 <Legend />
-                <Bar yAxisId="left" dataKey="Republican" fill="red" />
-                <Bar yAxisId="left" dataKey="Democratic" fill="blue" />
+                <Bar yAxisId="left" dataKey="Republican" fill="#0F4392" />
+                <Bar yAxisId="left" dataKey="Democratic" fill="#FF4949" />
             </BarChart>
         </ResponsiveContainer>
     );
