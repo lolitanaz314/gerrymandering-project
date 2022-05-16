@@ -147,48 +147,38 @@ const BoxAndWhisker = (props) => {
     let demo = false;
     if (props.demographic !== 'None') demo = true;
 
-    const [box, setGraphData] = useState(
-        // {boxAndWhiskers: [{
-        //     y: [0],
-        //     type: 'box',
-        //     name: '0',
-        //     marker: {
-        //         color: 'rgb(107,174,214)'
-        //     }
-        // }]}
-        [d1]
-    );
+    const [clicked, setCheck] = useState(false);
+    const toggleState = () => setCheck(prevCheck => !prevCheck);
 
-    // ex: http://localhost:8080/api/states/TN/box-and-whisker/WHITE
-    // ex: http://localhost:8080/api/states/TN/box-and-whisker/BLACK
-    // there is also ASIAN, HISPANIC, MIXED, NATIVE
-    
-    const getData = (event) => {
-        // State.getBoxAndWhisker(props.code, props.demographic)
-        //     .then(response => {
-        //         setGraphData(response.data);
-        //         console.log(response.data);
-        //         filterBW();
-        //     }).catch(error => { console.log('Something went wrong', error); })
-        setGraphData(bwAsianTN);
-        showBW();
-    }
-
-    function filterBW() {
-        console.log(box);
-        for (let i = 0; i < Object.keys(box).length; i++) {
-            box.boxAndWhiskers[i]["y"] = box.boxAndWhiskers[i]["boxAndWhisker"];
-            delete box.boxAndWhiskers[i]["boxAndWhisker"];
-
-            box.boxAndWhiskers[i]["type"] = "box";
-
-            box.boxAndWhiskers[i]["name"] = box.boxAndWhiskers[i]["districtId"];
-            delete box.boxAndWhiskers[i]["districtId"];
-
-            box.boxAndWhiskers[i]["marker"] = { "color": "rgb(107,174,214)" };
+    const [box, setGraphData] = useState({
+        y: [0],
+        type: 'box',
+        name: '0',
+        marker: {
+            color: 'rgb(107,174,214)'
         }
-        showBW();
     }
+    );
+    useEffect(() => {
+        let filter = [];
+        State.getBoxAndWhisker(props.code, props.demographic)
+            .then(response => {
+                let data = response.data.boxAndWhiskers;
+                for (let i = 0; i < Object.keys(data).length; i++) {
+                    let obj = {
+                        y: data[i]["boxAndWhisker"],
+                        type: 'box',
+                        name: data[i]["districtId"],
+                        marker: {
+                            color: 'rgb(107,174,214)'
+                        }
+                    }
+                    filter.push(obj);
+                }
+                setGraphData(filter);
+                showBW();
+            }).catch(error => { console.log('Something went wrong', error); })
+    }, [clicked])
 
     function showBW() {
         document.getElementById('seawulf').classList.add('hidden');
@@ -204,11 +194,11 @@ const BoxAndWhisker = (props) => {
                     for comparision</b> (ex. African American population percent), and <b>selected district plan</b>
                 .These plans will be displayed in a <b>box &#38; whisker plot</b>,
                 with the selected district plan shown for comparision.
-            </p> <br/>
+            </p> <br />
             <div>Current District Plan Selected: #{props.currentDp}</div>
-            <div>Current Demographic Selected: {props.demographic}</div> <br/>
-            <Button className={`${demo ? "" : "disabled"}`} onClick={getData}> Generate </Button>
-        </div> <br/>
+            <div>Current Demographic Selected: {props.demographic}</div> <br />
+            <Button className={`${demo ? "" : "disabled"}`} onClick={toggleState}> Generate </Button>
+        </div> <br />
         <div id='bw' className='hidden'>
             <Plot data={box}
                 layout={{ width: 700, height: 500, title: 'Average Districting Box and Whisker Plot' }} />

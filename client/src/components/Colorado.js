@@ -8,6 +8,7 @@ import CO3 from "../assets/json/co/co3.json";
 // hopefully would want to add each dp for each state in an array etc etc
 const Colorado = (props) => {
   // Set all the border data to state array:
+  // CO and CO3 are the same
   const borderData = [CO, CO1, CO2, CO3];
   const colorings = ['orange', 'purple', 'black', 'pink'];
 
