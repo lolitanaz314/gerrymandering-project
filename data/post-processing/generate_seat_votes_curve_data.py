@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
-# THIS is going to pull JSONS from directory processed_districtplan_path/...percents
+import os
+import json
 
 def flipPoints(a_votes, b_votes):
     """
@@ -58,7 +58,9 @@ def flipPoints(a_votes, b_votes):
     # Return the flip points
     return np.sort(flip_points)
 
-def SeatsVotePlot(a_votes, b_votes, plot_reverse = True):
+
+
+def SeatsVotePlot(a_votes, b_votes, party_label, line_color, plot_reverse = False):
     """
     Constructs a Vote-Seat Plot for the given election results
     a_votes: an array of votes for party A indexed by district
@@ -67,8 +69,8 @@ def SeatsVotePlot(a_votes, b_votes, plot_reverse = True):
     
     # Calculation
     once = 0
-    color1 = 'b'
-    Label1 = 'Democrats' 
+    color1 = line_color
+    Label1 = party_label
     num_districts = len(a_votes)
     a_votes_sum = np.sum(a_votes)
     b_votes_sum = np.sum(b_votes)
@@ -109,6 +111,8 @@ def SeatsVotePlot(a_votes, b_votes, plot_reverse = True):
     flips = flipPoints(a_votes, b_votes)
     flips.sort()
     
+    print("length of flips:", len(flips))
+    
     # For each of the flip points plot the seats-vote curve
     for i in range(len(flips)-1):
         constant = np.empty(1000)
@@ -127,89 +131,46 @@ def SeatsVotePlot(a_votes, b_votes, plot_reverse = True):
     zeros.fill(0)
     last_verticle.fill(flips[-1])
     
+    plt.plot(last_verticle,np.linspace((num_districts-1)/num_districts,1,1000) ,color1)
+    plt.plot(np.linspace(0,flips[0],1000),zeros, color1)
+    plt.plot(np.linspace(flips[-1],1,1000),ones, color1, label=Label1)
+    '''
     thing1=last_verticle
     thing2=np.linspace((num_districts-1)/num_districts,1,1000)
-    
     thing3=np.linspace(0,flips[0],1000)
     thing4=zeros
-    
     thing5=np.linspace(flips[-1],1,1000)
     thing6=ones
-    '''
-    print("first curve X:", thing1)
-    print("first curve Y:", thing2)
     
-    print("second curve X:", thing3)
-    print("second curve Y:", thing4)
+    X=[]
+    Y=[]
+    X.extend(thing1)
+    X.extend(thing3)
+    X.extend(thing5)
     
-    print("third curve X:", thing5)
-    print("third curve Y:", thing6)
-    '''
+    Y.extend(thing2)
+    Y.extend(thing4)
+    Y.extend(thing6)
     
-    thingXlist=[]
-    thingXlist.append(thing1)
-    thingXlist.append(thing3)
-    thingXlist.append(thing5)
+    plt.plot(X,Y, color1)'''
     
-    thingXlist_flattened = [item for sublist in thingXlist for item in sublist]
-    
-    thingYlist=[]
-    thingYlist.append(thing2)
-    thingYlist.append(thing4)
-    thingYlist.append(thing6)
-    
-    thingYlist_flattened = [item for sublist in thingYlist for item in sublist]
-    
-    print(len(thingXlist_flattened))
-    print(len(thingYlist_flattened))
-    
-    #plt.plot(thingXlist_flattened, thingYlist_flattened ,color1)
-    
-    
-    plt.plot(thing1, thing2 ,color1)
-    plt.plot(thing3, thing4, color1)
-    plt.plot(thing5, thing6, color1, label=Label1)
-   
-    
-    zipped_dems = zip(thing5, thing3)
-
     # If plot_reverse is true, run the function again to plot the republican
     # seats-vote curve
     if plot_reverse:
+        print('republican')
         if once == 0:
             once += 1
             color1 = 'r'
-            Label1 = 'Republicans'
-            SeatsVotePlot(b_votes,a_votes)
+            Label1 = 'Republican'
+            SeatsVotePlot(b_votes,a_votes, Label1, color1)
     
     # Add a title and legend
     plt.title(Title)
     plt.legend()
-    return zipped_dems
+    #return zipped_dems
 
-def EfficiencyGap(a_votes, b_votes):
-    # Initialize the variables as zero 
-    EG = 0
-    wasted_a = 0
-    wasted_b = 0
-    
-    # for each district, calculate the wasted votes for each party 
-    for i in range(len(a_votes)):
-        if a_votes[i] > b_votes[i]: # if party a wins district i 
-            wasted_b += b_votes[i]
-            wasted_a += a_votes[i] - ((a_votes[i]+b_votes[i]) / 2)
-        else:                       # if party b wins district i
-            wasted_a += a_votes[i]
-            wasted_b += b_votes[i] - ((a_votes[i]+b_votes[i]) / 2)
-    
-    # Calculate the Efficiency Gap
-    EG = (wasted_a - wasted_b) / (sum(a_votes) + sum(b_votes))
-    
-    return EG
 
 if __name__ == '__main__':
-
-    # SAMPLE DATA
     Title = 'Tennessee 2020'
     a_votes = np.array([185180,114967,104762,112984,191226,91103,176422,95691,122566])
     b_votes = np.array([132247,183601,220989,225531,208212,225318,106146,214643,222057])   
@@ -219,6 +180,4 @@ if __name__ == '__main__':
     a_votes_2018 = np.array([159611,103363,86610,87824,137142,79430,141139,86895,118090])
     b_votes_2018 = np.array([85594,125499,158927,156539,180035,154260,76457,157396,153271])
     
-    zipped=SeatsVotePlot(a_votes, b_votes, plot_reverse = False)
-    
-    
+    zipped=SeatsVotePlot(a_votes_2018, b_votes_2018, "Democrat", "b",  plot_reverse = True)
