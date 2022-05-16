@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.leaflet-control {
+  visibility: hidden;
+}
+
 /* .google-maps{
   z-index: 1;
 } */

@@ -35,15 +35,15 @@ const MapView = (props) => {
 
   //get state object from server
   const [state, setState] = useState({});
-  // useEffect(() => {
-  //     State.getStateById(currentLocation.code)
-  //       .then(response => {
-  //         setState(response.data);
-  //       })
-  //       .catch(error => {
-  //         console.log('Something went wrong', error);
-  //       })
-  // }, [currentLocation.code]);
+  useEffect(() => {
+      State.getStateById(currentLocation.code)
+        .then(response => {
+          setState(response.data);
+        })
+        .catch(error => {
+          console.log('Something went wrong', error);
+        })
+  }, [currentLocation.code]);
 
   //change view (border lines)
   const [view, setBorder] = useState({
