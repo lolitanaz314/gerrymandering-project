@@ -68,7 +68,7 @@ const DistrictMeasureInfo = (props) => {
     }
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
-    if (props.compare) {splitCounty
+    if (props.compare) {
 
         let dataA = {
             type: 'scatterpolar',
