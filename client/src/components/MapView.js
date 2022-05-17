@@ -34,7 +34,7 @@ const MapView = (props) => {
   });
 
   //get state object from server
-  const [state, setState] = useState({});
+  const [state, setState] = useState(null);
   useEffect(() => {
     State.getStateById(currentLocation.code)
       .then(response => {

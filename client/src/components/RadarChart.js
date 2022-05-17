@@ -10,7 +10,7 @@ const RadarCharting = (props) => {
             layout={{
                 polar: {
                     radialaxis: {
-                        visible: true, range: [0, 50]
+                        visible: true, range: [0, 15]
                     }
                 }, 
                 showlegend: true, 

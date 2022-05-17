@@ -19,29 +19,27 @@ const tableStyle = { //style for compare view (measure table)
 }
 
 const DistrictMeasureInfo = (props) => {
-    // fake data for radar chart
-    const dataA = {
-        type: 'scatterpolar',
-        r: [3, 10, 39, 31, 15, 4],
-        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
-        fill: 'toself',
-        name: "District Plan #" + props.currentDp + "       "
-    };
+    let basic = <></>;
+    let plan;
+    let comparing;
+    if (props.plans) {
+        plan = props.plans[props.currentDp];
+        comparing = props.plans[props.pinned];
 
-    const dataB = {
-        type: 'scatterpolar',
-        r: [15, 28, 18, 6, 29, 24],
-        theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
-        fill: 'toself',
-        name: "District Plan #" + props.pinned + "       "
-    };
+        let dataA = {
+            type: 'scatterpolar',
+            r: [plan.numMajorityMinorityDistricts, plan.efficiencyGap, plan.competitiveDistrictCount, plan.splitCounty, plan.polsbyPopper],
+            theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
+            fill: 'toself',
+            name: "District Plan #" + props.currentDp + "       "
+        };
 
-    let basic = <>
-        <h5 id="more-measures">Measures</h5>
-        <div> <DistrictPlanMeasuresTable /> </div>
-        <br></br>
+        basic = <>
+            <h5 id="more-measures">Measures</h5>
+            <div> <DistrictPlanMeasuresTable plan={plan} /> </div>
+            <br></br>
 
-        <h5 id="political-fairness">Political Fairness</h5>
+            <h5 id="political-fairness">Political Fairness</h5>
             <h6>Seats to Vote Plot</h6>
             <div style={curveStyle}> <SeatVoteCurve /> </div>
             <br></br>
@@ -55,22 +53,38 @@ const DistrictMeasureInfo = (props) => {
                 <tbody>
                     <tr>
                         <td>Efficiency Gap</td>
-                        <td>X</td>
+                        <td>{plan.efficiencyGap}</td>
                     </tr>
                     <tr>
                         <td>Mean-Median Difference</td>
-                        <td>X</td>
+                        <td>{plan.meanMedianDiff}</td>
                     </tr>
                 </tbody>
             </Table>
-            
-        <hr />
-        <h5 id="radar-chart">Radar Chart</h5>
-        <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} />
-    </>;
+            <hr />
+            <h5 id="radar-chart">Radar Chart</h5>
+            <RadarCharting dataA={dataA} currentDp={props.currentDp} comparing={props.compare} />
+        </>;
+    }
 
     //IF USER CLICKS COMPARE BUTTON, CHANGE THE VIEW
-    if (props.compare) {
+    if (props.compare) {splitCounty
+
+        let dataA = {
+            type: 'scatterpolar',
+            r: [plan.numMajorityMinorityDistricts, plan.efficiencyGap, plan.competitiveDistrictCount, plan.splitCounty, plan.polsbyPopper],
+            theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
+            fill: 'toself',
+            name: "District Plan #" + props.currentDp + "       "
+        };
+
+        let dataB = {
+            type: 'scatterpolar',
+            r: [comparing.numMajorityMinorityDistricts, comparing.efficiencyGap, comparing.competitiveDistrictCount, comparing.splitCounty, comparing.polsbyPopper],
+            theta: ['Majority-Minority Districts', 'Efficiency Gap', 'Competitive Districts', 'Split Counties', 'Compactness'],
+            fill: 'toself',
+            name: "District Plan #" + props.currentDp + "       "
+        };
         basic = <>
             <Table>
                 <thead>
@@ -84,62 +98,62 @@ const DistrictMeasureInfo = (props) => {
                     <Table className='column'>
                         <td>
                             <h5 id="more-measures">Measures</h5>
-                            <div style={tableStyle}> <DistrictPlanMeasuresTable /> </div>
+                            <div style={tableStyle}> <DistrictPlanMeasuresTable plan={plan} /> </div>
                             <br></br><br></br>
 
                             <h5 id="political-fairness">Political Fairness</h5>
-                                <h6>Seats to Vote Plot</h6>
-                                <div style={comparingStyle}> <SeatVoteCurve /> </div>
-                                <br></br>
-                                <Table striped responsive="sm" bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>Measure</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Efficiency Gap</td>
-                                            <td>X</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mean-Median Difference</td>
-                                            <td>X</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
+                            <h6>Seats to Vote Plot</h6>
+                            <div style={comparingStyle}> <SeatVoteCurve /> </div>
+                            <br></br>
+                            <Table striped responsive="sm" bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Measure</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Efficiency Gap</td>
+                                        <td>{plan.efficiencyGap}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mean-Median Difference</td>
+                                        <td>{plan.meanMedianDiff}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </td>
                     </Table>
 
                     <Table className='column'>
                         <td>
                             <h5 id="more-measures">Measures</h5>
-                            <div style={tableStyle}> <DistrictPlanMeasuresTable /> </div>
+                            <div style={tableStyle}> <DistrictPlanMeasuresTable plan={plan} /> </div>
                             <br></br><br></br>
 
                             <h5 id="political-fairness">Political Fairness</h5>
                             <h6>Seats to Vote Plot</h6>
                             <div style={comparingStyle}> <SeatVoteCurve /> </div>
-                                <br></br>
-                                <Table striped responsive="sm" bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>Measure</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Efficiency Gap</td>
-                                            <td>X</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mean-Median Difference</td>
-                                            <td>X</td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
+                            <br></br>
+                            <Table striped responsive="sm" bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Measure</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Efficiency Gap</td>
+                                        <td>{comparing.efficiencyGap}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mean-Median Difference</td>
+                                        <td>{comparing.meanMedianDiff}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
                         </td>
                     </Table>
                 </tbody>

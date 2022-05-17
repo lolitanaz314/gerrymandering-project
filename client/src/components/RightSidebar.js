@@ -165,6 +165,8 @@ const titleStyle = {
 const RightSidebar = (props) => {
     //set default tab
     const [key, setKey] = useState('summary');
+    let plans = [];
+    if(props.state) plans = props.state.districtPlans;
 
     //used for the fake data
     let stateID = 0;
@@ -191,11 +193,11 @@ const RightSidebar = (props) => {
                 </div>
                 <div className='scroll-menu'>
                     <div id='dp-container'>
-                        {testData[stateID].map(obj =>
+                        {(plans).map((obj, index) =>
                             <DistrictPlan
-                                key={obj.id} id={obj.id} state={props.currentState} code={props.code}
+                                key={index} id={index} state={props.currentState} code={props.code}
                                 pinDP={(id) => props.pinDP(id)} unpinDP={(id) => props.unpinDP(id)}
-                                selectDP={(id) => props.selectDP(id)} plan={testData[stateID][obj.id]}
+                                selectDP={(id) => props.selectDP(id)} plan={obj}
                             />)}
                     </div>
                 </div> <hr />
@@ -226,8 +228,8 @@ const RightSidebar = (props) => {
                                 </Container>
                             </Navbar>
                             <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
-                                pinned={props.pinned} currentDp={props.currentDp} plan={testData[stateID][props.currentDp]}
-                                comparing={testData[stateID][props.pinned]} votingData={votingData[stateID]} />
+                                pinned={props.pinned} currentDp={props.currentDp} plans={plans}
+                                votingData={votingData[stateID]} />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
@@ -253,7 +255,7 @@ const RightSidebar = (props) => {
                                 </Container>
                             </Navbar>
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
-                                compare={props.comparing} pinned={props.pinned} />
+                                compare={props.comparing} pinned={props.pinned} plans={plans}/>
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>

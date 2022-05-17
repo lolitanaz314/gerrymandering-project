@@ -10,8 +10,9 @@ const DistrictPlan = (props) => {
             <div id={"dp-" + props.id} className='dp-item' onClick={() => props.selectDP(props.id)}>
                 <div style={{textAlign:'right', width:'85%'}}><b>District plan #{props.id}</b></div>
                 <span className="summary-text">Status: {props.plan.status}</span><br/>
-                <span className="summary-text">Major-Minority Districts: X</span><br/>
-                <span className="summary-text">Split Counties: X</span>
+                <span className="summary-text">Majority-Minority Districts: {props.plan.numMajorityMinorityDistricts}</span><br/>
+                <span className="summary-text">Compactness: {props.plan.polsbyPopper}</span><br/>
+                <span className="summary-text">Efficiency Gap: {props.plan.efficiencyGap}</span>
             </div>
         </div>
     );
