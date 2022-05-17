@@ -9,10 +9,7 @@ import com.example.server.model.enumeration.StateCode;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -23,15 +20,16 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/api")
 public class StateController {
     final StateService sService;
-     final BoxAndWhiskerService bwService;
+    final BoxAndWhiskerService bwService;
     public StateController(StateService sService, BoxAndWhiskerService bwService) {
         this.sService = sService;
          this.bwService = bwService;
     }
 
-    @GetMapping("/api/states")
+    @GetMapping("/states")
     public CollectionModel<EntityModel<State>> getStates() {
         System.out.println("Controller States ...");
         List<State> states = sService.getStates();
@@ -45,7 +43,7 @@ public class StateController {
                 linkTo(methodOn(StateController.class).getStates()).withSelfRel());
     }
 
-    @GetMapping("/api/states/{state_id}")
+    @GetMapping("/states/{state_id}")
     public EntityModel<State> getStateByStateId(@PathVariable("state_id") StateCode stateId) {
         System.out.println("Controller State ...");
         State state = sService.getStateByStateId(stateId);
@@ -55,7 +53,7 @@ public class StateController {
                 linkTo(methodOn(StateController.class).getStates()).withRel("states"));
     }
 
-    @GetMapping("/api/states/{state_id}/box-and-whisker/{demographic}")
+    @GetMapping("/states/{state_id}/boxAndWhisker/{demographic}")
     public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
                                                                     @PathVariable("demographic") Category demographic) {
         System.out.println("Controller BoxAndWhiskerPlot ...");
