@@ -11,8 +11,8 @@ const DistrictPlan = (props) => {
                 <div style={{textAlign:'right', width:'85%'}}><b>District plan #{props.id}</b></div>
                 <span className="summary-text">Status: {props.plan.status}</span><br/>
                 <span className="summary-text">Majority-Minority Districts: {props.plan.numMajorityMinorityDistricts}</span><br/>
-                <span className="summary-text">Compactness: {props.plan.polsbyPopper}</span><br/>
-                <span className="summary-text">Efficiency Gap: {props.plan.efficiencyGap}</span>
+                <span className="summary-text">Compactness: {String(props.plan.polsbyPopper).slice(0,5)}</span><br/>
+                <span className="summary-text">Efficiency Gap: {String(props.plan.efficiencyGap).slice(0,5)}</span>
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import SC from "../assets/json/sc/southcarolina_congressional.json";
 // hopefully would want to add each dp for each state in an array etc etc
 const South = (props) => {
   // Set all the border data to state array:
-  const borderData = [SC];
+  const borderData = [SC, SC];
   const colorings = ['orange', 'purple', 'black', 'pink'];
 
   const highlight = (feature, layer) => {

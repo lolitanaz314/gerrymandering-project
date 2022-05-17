@@ -29,8 +29,7 @@ const MapView = (props) => {
     zoom: 5,
     name: 'USA',
     code: 'TN',
-    jsonCode: 'USA',
-    view: 'election'
+    jsonCode: 'USA'
   });
 
   //get state object from server
@@ -77,28 +76,28 @@ const MapView = (props) => {
 
   const highlightFeature = (e => {
     let layer = e.target;
-    const pop = layer.feature.properties.POPULATION;
-    const district = layer.feature.properties.DISTRICT;
-    const incumbent = layer.feature.properties.INCUMBENT;
-    const lean = layer.feature.properties.LEAN;
-    const white = layer.feature.race.white;
-    const black = layer.feature.race.black;
-    const native = layer.feature.race.native;
-    const asian = layer.feature.race.asian;
-    const islander = layer.feature.race.islander;
-    const hispanic = layer.feature.race.hispanic;
+    let districts = state.districtPlans[districtPlans.currentDp].districts;
+    let index = layer.feature.properties.DISTRICT;
+    const pop = districts[index-1].totalPop;
+    const district = index;
+    const white =  districts[index-1].demographic.White;
+    const black = districts[index-1].demographic.Black;
+    const native = districts[index-1].demographic.Native;
+    const asian = districts[index-1].demographic.Asian;
+    const hispanic = districts[index-1].demographic.Hispanic;
+    const mixed = districts[index-1].demographic.Mixed;
+    const comp = districts[index-1].polsbyPopper;
 
     setOnselect({
       population: pop,
       district: district,
-      incumbent: incumbent,
-      lean: lean,
       white: white,
       black: black,
       native: native,
       asian: asian,
-      islander: islander,
+      mixed: mixed,
       hispanic: hispanic,
+      compactness: comp
     });
   })
 
@@ -127,8 +126,7 @@ const MapView = (props) => {
       zoom: 6.7,
       name: feature.properties.name,
       code: feature.properties.abbreviation,
-      jsonCode: feature.properties.abbreviation,
-      view: currentLocation.view
+      jsonCode: feature.properties.abbreviation
     });
 
     //shows sidebar
@@ -254,7 +252,8 @@ const MapView = (props) => {
   else if (currentLocation.jsonCode === 'SC')
     districtPlan =
       <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />;
-  else if (currentLocation.jsonCode === 'CO')
+  else
+  if (currentLocation.jsonCode === 'CO')
     districtPlan =
       <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />;
 
@@ -280,8 +279,8 @@ const MapView = (props) => {
             currentState={currentLocation.name} currentDp={districtPlans.currentDp} state={state}
             comparing={comparing} setCompare={(val) => handleCompare(val)} code={currentLocation.code} />
 
-          <HoverBox name={currentLocation.name} view={currentLocation.view} onselect={onselect} />
-          <Legend view={currentLocation.view} />
+          <HoverBox name={currentLocation.name} onselect={onselect} />
+          {/* <Legend view={currentLocation.view} /> */}
 
         </MapContainer>
       </div>

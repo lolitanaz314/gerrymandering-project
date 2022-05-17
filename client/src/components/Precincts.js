@@ -21,7 +21,7 @@ const Precincts = (props) => {
             return (
               <>
                 <LayersControl.Overlay checked={check} name={state_name+'_precincts'}>
-                    <GeoJSON key={state_name} data={data.coordsToLatLng} pathOptions={{ color: 'red' }} />
+                    <GeoJSON key={state_name} data={data} pathOptions={{ color: 'red' }} />
                 </LayersControl.Overlay>
               </>
             )

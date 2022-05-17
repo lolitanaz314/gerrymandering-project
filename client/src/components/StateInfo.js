@@ -10,9 +10,9 @@ const StateInfo = (props) => {
     let basic = <></>;
     let plan;
     let comparing;
-    if (props.plans) {
-        plan = props.plans[props.currentDp]
-        comparing = props.plans[props.pinned]
+    if (props.plans.length !== 0) {
+        plan = props.plans[props.currentDp];
+        comparing = props.plans[props.pinned];
         basic = <>
             <h5 id="districting-sum">Overview</h5>
             <p>
@@ -25,7 +25,7 @@ const StateInfo = (props) => {
             <DemographicTable demographic={props.state.demographic} />
             <br></br>
 
-            <h5 id="voting-age">Voting Age Population 2020</h5>
+            {/* <h5 id="voting-age">Voting Age Population 2020</h5>
             <Table striped responsive="sm" bordered hover>
                 <thead>
                     <tr>
@@ -44,7 +44,7 @@ const StateInfo = (props) => {
                     })}
                 </tbody>
             </Table>
-            <br></br>
+            <br></br> */}
 
             <h5 id="composite">Composite 2020</h5>
             <Table striped responsive="sm" bordered hover>
@@ -93,7 +93,7 @@ const StateInfo = (props) => {
                         <DemographicTable demographic={props.state.demographic} />
                         <br></br>
 
-                        <h5 id="voting-age">Voting Age Population 2020</h5>
+                        {/* <h5 id="voting-age">Voting Age Population 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
@@ -112,7 +112,7 @@ const StateInfo = (props) => {
                                 })}
                             </tbody>
                         </Table>
-                        <br></br>
+                        <br></br> */}
 
                         <h5 id="composite">Composite 2020</h5>
                         <Table striped responsive="sm" bordered hover>
@@ -150,7 +150,7 @@ const StateInfo = (props) => {
                         <DemographicTable demographic={props.state.demographic} />
                         <br></br>
 
-                        <h5 id="voting-age">Voting Age Population 2020</h5>
+                        {/* <h5 id="voting-age">Voting Age Population 2020</h5>
                         <Table striped responsive="sm" bordered hover>
                             <thead>
                                 <tr>
@@ -169,7 +169,7 @@ const StateInfo = (props) => {
                                 })}
                             </tbody>
                         </Table>
-                        <br></br>
+                        <br></br> */}
 
                         <h5 id="composite">Composite 2020</h5>
                         <Table striped responsive="sm" bordered hover>

@@ -6,7 +6,7 @@ import TN from "../assets/json/tn/tennessee_congressional.json";
 const Tennessee = (props) => {
   // Set all the border data to state array:
   // TN is same as TN1
-  const borderData = [TN];
+  const borderData = [TN, TN];
   const colorings = ['orange', 'purple', 'black', 'pink'];
 
   const highlight = (feature, layer) => {

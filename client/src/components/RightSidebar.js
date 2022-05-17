@@ -13,143 +13,33 @@ import StateInfo from './StateInfo';
 import BoxAndWhisker from './BoxAndWhisker';
 import SeawulfEnsemble from './SeawulfEnsemble';
 
-const testData = [ //testData has data of all plans from all states
-    [ //district plans for tennessee
-        { //array of dps with info
-            id: 0,
-            status: "Enacted",
-            proposedBy: 'Republican Party',
-            date: '2022-02-07',
-            compositeData: {
-                Democratic: 960129,
-                Republican: 1516348,
-                Other: 52042
-            }
-        }, {
-            id: 1,
-            status: "Proposed",
-            proposedBy: 'Tennessee House Select Committee on Redistricting & Senate Ad Hoc Committee on Redistricting',
-            date: '2022-01-12',
-            compositeData: {
-                Democratic: 980139,
-                Republican: 1618378,
-                Other: 50793
-            }
-        }, {
-            id: 2,
-            status: "Proposed",
-            proposedBy: 'Tennessee Democrats',
-            date: '2021-11-15',
-            compositeData: {
-                Democratic: 100129,
-                Republican: 1246338,
-                Other: 42321
-            }
-        },
-    ], [ //district plans for south carolina
-        {
-            id: 0,
-            status: "In Litigation",
-            proposedBy: 'South Carolina State House',
-            date: '2022-01-26',
-            compositeData: {
-                Democratic: 887132,
-                Republican: 1046758,
-                Other: 40712
-            }
-        }, {
-            id: 1,
-            status: "Proposed",
-            proposedBy: 'South Carolina State Senate',
-            date: '2022-01-11',
-            compositeData: {
-                Democratic: 987232,
-                Republican: 946738,
-                Other: 42382
-            }
-        }, {
-            id: 2,
-            status: "Proposed",
-            proposedBy: 'South Carolina State House',
-            date: '2021-12-22',
-            compositeData: {
-                Democratic: 782132,
-                Republican: 1240734,
-                Other: 53012
-            }
-        }, {
-            id: 3,
-            status: "Proposed",
-            proposedBy: 'South Carolina State Senate',
-            date: '2021-10-09',
-            compositeData: {
-                Democratic: 801922,
-                Republican: 1349558,
-                Other: 30132
-            }
-        }
-    ], [ //district plans for colorado
-        {
-            id: 0,
-            status: "Enacted",
-            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-11-21',
-            compositeData: {
-                Democratic: 1478348,
-                Republican: 1253070,
-                Other: 120439
-            }
-        }, {
-            id: 1,
-            status: "Proposed",
-            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-09-15',
-            compositeData: {
-                Democratic: 1135782,
-                Republican: 1009287,
-                Other: 201921
-            }
-        }, {
-            id: 2,
-            status: "Proposed",
-            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-09-03',
-            compositeData: {
-                Democratic: 1348358,
-                Republican: 1153570,
-                Other: 140739
-            }
-        }
-    ]
-];
-
-const votingData = [
-    { //tenneesee voting data
-        Total: 5384473,
-        White: 3958294,
-        Hispanic: 305717,
-        Black: 864737,
-        Asian: 128329,
-        Native: 123641,
-        Pacific: 7254
-    }, { //sc voting data
-        Total: 4014460,
-        White: 2603421,
-        Hispanic: 231094,
-        Black: 1014792,
-        Asian: 88832,
-        Native: 79739,
-        Pacific: 5846
-    }, { //colorado voting data
-        Total: 4503234,
-        White: 3098236,
-        Hispanic: 864734,
-        Black: 219102,
-        Asian: 205832,
-        Native: 151772,
-        Pacific: 16320
-    }
-];
+// const votingData = [
+//     { //tenneesee voting data
+//         Total: 5384473,
+//         White: 3958294,
+//         Hispanic: 305717,
+//         Black: 864737,
+//         Asian: 128329,
+//         Native: 123641,
+//         Pacific: 7254
+//     }, { //sc voting data
+//         Total: 4014460,
+//         White: 2603421,
+//         Hispanic: 231094,
+//         Black: 1014792,
+//         Asian: 88832,
+//         Native: 79739,
+//         Pacific: 5846
+//     }, { //colorado voting data
+//         Total: 4503234,
+//         White: 3098236,
+//         Hispanic: 864734,
+//         Black: 219102,
+//         Asian: 205832,
+//         Native: 151772,
+//         Pacific: 16320
+//     }
+// ];
 
 const sidebarStyle = {
     margin: '56px 0px 0px 0px',
@@ -217,9 +107,9 @@ const RightSidebar = (props) => {
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#total-pop">Total Population</Nav.Link>
                                             </span>
-                                            <span className="underline-on-hover">
+                                            {/* <span className="underline-on-hover">
                                                 <Nav.Link href="#voting-age">Voting Age Population</Nav.Link>
-                                            </span>
+                                            </span> */}
                                             <span className="underline-on-hover">
                                                 <Nav.Link href="#composite">Composite</Nav.Link>
                                             </span>
@@ -228,8 +118,7 @@ const RightSidebar = (props) => {
                                 </Container>
                             </Navbar>
                             <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
-                                pinned={props.pinned} currentDp={props.currentDp} plans={plans}
-                                votingData={votingData[stateID]} />
+                                pinned={props.pinned} currentDp={props.currentDp} plans={plans} />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>

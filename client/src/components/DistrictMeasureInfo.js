@@ -14,7 +14,6 @@ const comparingStyle = { //style for compare view (seat plot)
 }
 
 const tableStyle = { //style for compare view (measure table)
-    // width: 300,
     height: 200
 }
 
@@ -85,6 +84,7 @@ const DistrictMeasureInfo = (props) => {
             fill: 'toself',
             name: "District Plan #" + props.currentDp + "       "
         };
+
         basic = <>
             <Table>
                 <thead>
