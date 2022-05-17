@@ -78,7 +78,7 @@ const teamStates = [ //status: 0 for proposed, 1 for approved
         teams: ['Mystics']
     },
     {
-        name: 'South Carolina',
+        name: 'South Carolina', //litigation
         status: 1,
         teams: ['Fever', 'Lynx']
     },
@@ -141,7 +141,7 @@ const LeftSidebar = (props) => {
                 <Offcanvas.Body>
                     {teamStates.map(obj => <>
                         <div className={`${obj.status ? "state-approved" : "state-proposed"} circle`}> </div>
-                        <div class ="underline-on-hover" style={stateStyle}> {obj.name}</div> 
+                        <div className="underline-on-hover" style={stateStyle}> {obj.name}</div> 
                         <div style={teamStyle}>
                             Team(s): {obj.teams.map(team => <> {team} </>)}
                         </div>
