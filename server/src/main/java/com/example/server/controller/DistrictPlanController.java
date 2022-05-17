@@ -2,22 +2,16 @@ package com.example.server.controller;
 
 //import com.example.server.json.DistrictPlanJson;
 //import com.example.server.json.User;
+import com.example.server.model.SeatVoteCurveMeasures;
 import com.example.server.service.DistrictPlanService;
 import com.example.server.model.DistrictPlan;
 import com.example.server.model.enumeration.StateCode;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.server.service.SeatVoteCurveService;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,15 +20,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/api")
 public class DistrictPlanController {
     final DistrictPlanService dpService;
-    public DistrictPlanController (DistrictPlanService dpService) {this.dpService = dpService; }
+    final SeatVoteCurveService svService;
+    public DistrictPlanController(DistrictPlanService dpService, SeatVoteCurveService svService) {
+        this.dpService = dpService;
+        this.svService = svService;
+    }
 
     // Test
     /* @GetMapping("/api/districtPlans")
     public List<DistrictPlan> getDistrictPlans() { return dpService.findAll(); }*/
 
-    @GetMapping("/api/states/{state_id}/districtPlans")
+    @GetMapping("/states/{state_id}/districtPlans")
     public CollectionModel<EntityModel<DistrictPlan>> getPlansByStateId(@PathVariable("state_id") StateCode stateId) {
         System.out.println("Controller districtPlans ...");
         List<DistrictPlan> districtPlans = dpService.getPlansByStateId(stateId);
@@ -48,7 +47,7 @@ public class DistrictPlanController {
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(stateId)).withSelfRel());
     }
 
-    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}")
+    @GetMapping("/states/{state_id}/districtPlans/{dp_id}")
     public EntityModel<DistrictPlan> getPlanByStateIdAndDistrictId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId) {
         System.out.println("Controller districtPlan ...");
         DistrictPlan districtPlan = dpService.getPlanByStateIdAndDistrictId(stateId, planId);
@@ -56,6 +55,14 @@ public class DistrictPlanController {
         return EntityModel.of(districtPlan,
                 linkTo(methodOn(DistrictPlanController.class).getPlanByStateIdAndDistrictId(districtPlan.getStateId(), districtPlan.getPlanId())).withSelfRel(),
                 linkTo(methodOn(DistrictPlanController.class).getPlansByStateId(districtPlan.getStateId())).withRel("districtPlans"));
+    }
+
+    @GetMapping("/states/{state_id}/seatVoteCurve/{dp_id}")
+    public EntityModel<SeatVoteCurveMeasures> getSeatVoteCurve(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId){
+        System.out.println("Controller seatVoteCurve ...");
+        SeatVoteCurveMeasures seatVote = svService.getSeatVoteCurve(stateId, planId);
+        System.out.println("Returning seatVoteCurve ...\n");
+        return EntityModel.of(seatVote);
     }
 
 //    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id1}/{dp_id2}")

@@ -27,21 +27,23 @@ public class DistrictService {
     // public List<District> findAll() {return dRepository.findAll(); }
 
     public Set<District> getDistrictsByPlanId(StateCode stateId, String planId){
+        System.out.println("Service districts ...");
         Set<District> districts = dRepository.findByStateIdAndPlanId(stateId, planId);
         for (District d : districts){
             d.setDemographic(packDemographic(d));
             // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
         }
-        System.out.println("Service districts ...");
+        System.out.println("Returning districts ...");
         return districts;
     }
 
     public District getDistrictByPlanIdAndDistrictId(StateCode stateId, String planId, int districtId) {
+        System.out.println("Service district ...");
         try{
             Optional<District> d = dRepository.findByStateIdAndPlanIdAndDistrictId(stateId, planId, districtId);
             if(d.isPresent()){
                  d.get().setDemographic(packDemographic(d.get()));
-                System.out.println("Service district ...");
+                System.out.println("Returning district ...");
                 return d.get();
             } else{
                 throw new NoSuchElementException();

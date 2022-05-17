@@ -33,3 +33,4 @@ build/
 .vscode/
 /src/main/resources/json/
 /src/main/java/com/example/server/json/DistrictPlanJson.java
+/src/main/java/com/example/server/model/User.java

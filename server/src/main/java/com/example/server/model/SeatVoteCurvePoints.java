@@ -22,17 +22,32 @@ public class SeatVoteCurvePoints {
     private int id;
 
     @Column(name="state_id")
-    private StateCode stateId;
+    private String stateId;
 
-//    @Column(name="district_plan_id", nullable = false)
-//    private int planId;
+    @Column(name="district_plan_id", nullable = false)
+    private String planId;
 
-    @Column(name = "votes")
-    double voteBias;
+    @Column(name="district_id", nullable = false)
+    private String districtId;
 
-    @Column(name = "seats_republican")
-    double seatRepublican;
+    @Column(name = "dem_Pres")
+    private String demPres;
 
-    @Column(name = "seats_democratic")
-    double seatDemocratic;
+    @Column(name = "rep_Pres")
+    private String repPres;
+
+    @Column(name = "dem_Sen")
+    private String demSen;
+
+    @Column(name = "rep_Sen")
+    private String repSen;
+
+//    @Column(name = "votes")
+//    double voteBias;
+//
+//    @Column(name = "seats_republican")
+//    double seatRepublican;
+//
+//    @Column(name = "seats_democratic")
+//    double seatDemocratic;
 }

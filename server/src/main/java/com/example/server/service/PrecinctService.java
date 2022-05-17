@@ -25,20 +25,22 @@ public class PrecinctService {
     // public List<Precinct> findAll() { return pRepository.findAll(); }
 
     public Set<Precinct> getPrecinctsByStateId(StateCode stateId) {
+        System.out.println("Service precincts ...");
         Set<Precinct> precincts = pRepository.findByStateId(stateId);
         for (Precinct p : precincts){
             p.setDemographic(packDemographic(p));
         }
-        System.out.println("Service precincts ...");
+        System.out.println("Returning precincts ...");
         return precincts;
     }
 
     public Precinct getPrecinctsByStateIdAndPrecinctId(StateCode stateId, int precinctId) {
+        System.out.println("Service precincts ...");
         try{
             Optional<Precinct> p = pRepository.findByStateIdAndPrecinctId(stateId, precinctId);
             if(p.isPresent()){
                 p.get().setDemographic(packDemographic(p.get()));
-                System.out.println("Service precinct ...");
+                System.out.println("Returning precinct ...");
                 return p.get();
             } else{
                 throw new NoSuchElementException();

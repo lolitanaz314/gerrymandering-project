@@ -6,10 +6,7 @@ import com.example.server.model.District;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,6 +16,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/api")
 public class DistrictController {
     final DistrictService dService;
     public DistrictController (DistrictService dService) {this.dService = dService; }
@@ -27,7 +25,7 @@ public class DistrictController {
     /* @GetMapping("/api/districts")
     public List<District> getDistricts() { return dService.findAll(); }*/
 
-    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts")
+    @GetMapping("/states/{state_id}/districtPlans/{dp_id}/districts")
     public CollectionModel<EntityModel<District>> getDistrictsByPlanId(@PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId) {
         System.out.println("Controller Districts ...");
         Set<District> districts = dService.getDistrictsByPlanId(stateId, planId);
@@ -41,7 +39,7 @@ public class DistrictController {
                 linkTo(methodOn(DistrictController.class).getDistrictsByPlanId(stateId, planId)).withSelfRel());
     }
 
-    @GetMapping("/api/states/{state_id}/districtPlans/{dp_id}/districts/{id}")
+    @GetMapping("/states/{state_id}/districtPlans/{dp_id}/districts/{id}")
     public EntityModel<District> getDistrictByPlanIdAndDistrictId(
             @PathVariable("state_id") StateCode stateId, @PathVariable("dp_id") String planId, @PathVariable("id") int districtId) {
         System.out.println("Controller District ...");

@@ -26,23 +26,25 @@ public class DistrictPlanService {
     // public List<DistrictPlan> findAll() { return dpRepository.findAll(); }
 
     public List<DistrictPlan> getPlansByStateId(StateCode stateId) {
+        System.out.println("Service districtPlans ...");
         List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId);
         for (DistrictPlan dp : districtPlans){
             dp.setDemographic(packDemographic(dp));
             dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getPlanId()));
             // dp.setPopulationEquality(getPopulationEqualityMeasure(dp));
         }
-        System.out.println("Service districtPlans ...");
+        System.out.println("Returning districtPlans ...");
         return dpRepository.findByStateId(stateId);
     }
 
     public DistrictPlan getPlanByStateIdAndDistrictId(StateCode stateId, String planId) {
+        System.out.println("Service districtPlan ...");
         try{
             Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId, planId);
             if(dp.isPresent()){
                 dp.get().setDemographic(packDemographic(dp.get()));
                 dp.get().setDistricts(dService.getDistrictsByPlanId(stateId, planId));
-                System.out.println("Service districtPlan ...");
+                System.out.println("Returning districtPlan ...");
                 return dp.get();
             } else{
                 throw new NoSuchElementException();

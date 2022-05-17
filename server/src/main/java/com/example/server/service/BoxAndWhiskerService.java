@@ -26,6 +26,7 @@ public class BoxAndWhiskerService {
 
     public BoxAndWhiskerPlot getBoxAndWhiskerByStateId(StateCode stateId, Category demographic) {
         BoxAndWhiskerPlot boxAndWhiskerPlot = new BoxAndWhiskerPlot();
+        System.out.println("Service boxAndWhisker ...");
         System.out.println("Demographic: " + demographic);
         try {
             boxAndWhiskerPlot.setDemographic(demographic);
@@ -41,7 +42,7 @@ public class BoxAndWhiskerService {
                 BoxAndWhisker bw = new BoxAndWhisker(id, points);
                 boxAndWhiskers.add(bw);
             }
-            System.out.println("Service boxAndWhisker ...");
+            System.out.println("Returning boxAndWhisker ...");
             System.out.println("Size: " + boxAndWhiskers.size());
             boxAndWhiskerPlot.setBoxAndWhiskers(boxAndWhiskers);
 

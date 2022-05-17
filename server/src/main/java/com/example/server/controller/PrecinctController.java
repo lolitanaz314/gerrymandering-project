@@ -6,10 +6,7 @@ import com.example.server.service.PrecinctService;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,6 +16,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/api")
 public class PrecinctController {
     final PrecinctService pService;
     public PrecinctController (PrecinctService pService) {this.pService = pService; }
@@ -27,7 +25,7 @@ public class PrecinctController {
     /* @GetMapping("/api/precincts")
     public List<Precinct> getPrecincts() { return pService.findAll(); }*/
 
-    @GetMapping("/api/states/{state_id}/precincts")
+    @GetMapping("/states/{state_id}/precincts")
     public CollectionModel<EntityModel<Precinct>> getPrecinctsByStateId(@PathVariable("state_id") StateCode stateId) {
         System.out.println("Controller Precincts ...");
         Set<Precinct> precincts = pService.getPrecinctsByStateId(stateId);
@@ -41,7 +39,7 @@ public class PrecinctController {
                 linkTo(methodOn(PrecinctController.class).getPrecinctsByStateId(stateId)).withSelfRel());
     }
 
-    @GetMapping("/api/states/{state_id}/precincts/{id}")
+    @GetMapping("/states/{state_id}/precincts/{id}")
     public EntityModel<Precinct> getPrecinctsByStateIdAndPrecinctId(@PathVariable("state_id") StateCode stateId, @PathVariable("id") int precinctId) {
         System.out.println("Controller Precinct ...");
         Precinct precinct = pService.getPrecinctsByStateIdAndPrecinctId(stateId, precinctId);
