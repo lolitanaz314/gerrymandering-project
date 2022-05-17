@@ -28,6 +28,8 @@ public class DistrictPlanService {
         System.out.println("Service districtPlans ...");
         List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId.ordinal());
         for (DistrictPlan dp : districtPlans){
+            dp.setDupStateId(stateId);
+            dp.setDupPlanId(dp.getPlanId());
             dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getPlanId()));
             dp.setDemographic(packDemographic(dp));
 
@@ -48,6 +50,8 @@ public class DistrictPlanService {
         try{
             Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId.ordinal(), planId);
             if(dp.isPresent()){
+                dp.get().setDupStateId(stateId);
+                dp.get().setDupPlanId(planId);
                 dp.get().setDistricts(dService.getDistrictsByPlanId(stateId, planId));
                 dp.get().setDemographic(packDemographic(dp.get()));
 
@@ -94,7 +98,7 @@ public class DistrictPlanService {
         }
         return SumCompactness / dp.getDistricts().size();
     }
-    public double getPopulationEqualityMeasure(DistrictPlan dp){    // double
+    public double getPopulationEqualityMeasure(DistrictPlan dp){    // PERCENT
         int population;
         int minPop = Integer.MAX_VALUE;
         int maxPop = 0;

@@ -28,6 +28,9 @@ public class DistrictService {
         System.out.println("Service districts ...");
         Set<District> districts = dRepository.findByStateIdAndPlanId(stateId, planId);
         for (District d : districts){
+            d.setDupStateId(stateId);
+            d.setDupPlanId(d.getPlanId());
+            d.setDupDistrictId(d.getDistrictId());
             d.setDemographic(packDemographic(d));
             // d.setPrecincts(pService.get(dp.getStateId(), dp.getId()));
         }
@@ -40,7 +43,10 @@ public class DistrictService {
         try{
             Optional<District> d = dRepository.findByStateIdAndPlanIdAndDistrictId(stateId, planId, districtId);
             if(d.isPresent()){
-                 d.get().setDemographic(packDemographic(d.get()));
+                d.get().setDupStateId(stateId);
+                d.get().setDupPlanId(d.get().getPlanId());
+                d.get().setDupDistrictId(d.get().getDistrictId());
+                d.get().setDemographic(packDemographic(d.get()));
                 System.out.println("Returning district ...");
                 return d.get();
             } else{

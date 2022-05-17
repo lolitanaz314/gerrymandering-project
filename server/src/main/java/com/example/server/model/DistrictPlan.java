@@ -34,6 +34,9 @@ public class DistrictPlan {
     @Column(name="district_plan_id", nullable = false)
     private String planId;
 
+    @Transient private StateCode dupStateId;
+    @Transient private String dupPlanId;
+
     @Column(name="date")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;

@@ -31,6 +31,10 @@ public class District {
     @Column(name="district_id", nullable = false)
     private int districtId;
 
+    @Transient private StateCode dupStateId;
+    @Transient private String dupPlanId;
+    @Transient int dupDistrictId;
+
 //    @ManyToOne
 //    private DistrictPlan districtPlan;
 
