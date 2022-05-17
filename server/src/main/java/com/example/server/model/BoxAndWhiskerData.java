@@ -22,7 +22,7 @@ public class BoxAndWhiskerData {
     private String demographic;   // Category
 
     @Column(name="state_id")
-    private String stateId;  // StateCode
+    private StateCode stateId;  // StateCode
 
     @Column(name="district_id")
     private Integer districtId;

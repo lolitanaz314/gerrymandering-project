@@ -25,20 +25,20 @@ public class DistrictPlanService {
 
     public List<DistrictPlan> getPlansByStateId(StateCode stateId) {
         System.out.println("Service districtPlans ...");
-        List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId);
+        List<DistrictPlan> districtPlans = dpRepository.findByStateId(stateId.ordinal());
         for (DistrictPlan dp : districtPlans){
             dp.setDemographic(packDemographic(dp));
             dp.setDistricts(dService.getDistrictsByPlanId(dp.getStateId(), dp.getPlanId()));
             // dp.setPopulationEquality(getPopulationEqualityMeasure(dp));
         }
         System.out.println("Returning districtPlans ...");
-        return dpRepository.findByStateId(stateId);
+        return dpRepository.findByStateId(stateId.ordinal());
     }
 
     public DistrictPlan getPlanByStateIdAndDistrictId(StateCode stateId, String planId) {
         System.out.println("Service districtPlan ...");
         try{
-            Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId, planId);
+            Optional<DistrictPlan> dp = dpRepository.findByStateIdAndPlanId(stateId.ordinal(), planId);
             if(dp.isPresent()){
                 dp.get().setDemographic(packDemographic(dp.get()));
                 dp.get().setDistricts(dService.getDistrictsByPlanId(stateId, planId));
