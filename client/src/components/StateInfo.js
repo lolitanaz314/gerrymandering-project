@@ -10,9 +10,9 @@ const StateInfo = (props) => {
     let basic = <></>;
     let plan;
     let comparing;
-    if (props.plans.length !== 0) {
-        plan = props.plans[props.currentDp];
-        comparing = props.plans[props.pinned];
+    if (props.plans.length) {
+        plan = props.plans.find(x => x.dupPlanId === props.current);
+        comparing = props.plans.find(x => x.dupPlanId === props.pinnedDp);
         basic = <>
             <h5 id="districting-sum">Overview</h5>
             <p>
@@ -73,8 +73,8 @@ const StateInfo = (props) => {
         basic = <Table>
             <thead>
                 <tr>
-                    <th style={{ float: 'left' }}>District Plan {props.currentDp}</th>
-                    <th style={{ float: 'right' }}>District Plan {props.pinned}</th>
+                    <th style={{ float: 'left' }}>{plan.dupPlanId}</th>
+                    <th style={{ float: 'right' }}>{comparing.dupPlanId}</th>
                 </tr>
             </thead>
 
@@ -84,9 +84,9 @@ const StateInfo = (props) => {
                     <td>
                         <h5 id="districting-sum">Overview</h5>
                         <p style={comparingStyle}>
-                            <b>Status:</b> {props.plan.status}<br></br>
-                            <b>Proposed By:</b> {props.plan.proposedBy}<br></br>
-                            <b>Date Proposed:</b> {props.plan.date}
+                            <b>Status:</b> {plan.status}<br></br>
+                            <b>Proposed By:</b> {plan.proposedBy}<br></br>
+                            <b>Date Proposed:</b> {plan.date}
                         </p>
 
                         <h5 id="total-pop">Population Data 2020</h5>
@@ -180,14 +180,14 @@ const StateInfo = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Object.keys(comparing.compositeData).map(function (key) {
-                                    return <>
-                                        <tr>
-                                            <td>{key}</td>
-                                            <td>{comparing.compositeData[key]}</td>
-                                        </tr>
-                                    </>;
-                                })}
+                                <tr>
+                                    <td>Republican</td>
+                                    <td>{comparing.republicanPres}</td>
+                                </tr>
+                                <tr>
+                                    <td>Democratic</td>
+                                    <td>{comparing.democraticPres}</td>
+                                </tr>
                             </tbody>
                         </Table>
                     </td>

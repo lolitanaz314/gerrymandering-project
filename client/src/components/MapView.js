@@ -12,10 +12,9 @@ import Tennessee from './Tennessee';
 import South from './South';
 import Colorado from './Colorado';
 import RightSidebar from './RightSidebar';
-import Legend from './Legend';
 import HoverBox from './HoverBox';
 import State from '../api/service/StateService';
-import './style/Legend.css';
+// import './style/Legend.css';
 
 /*
 currentLocation contains fallback coordinates of the center of the United States
@@ -135,7 +134,7 @@ const MapView = (props) => {
     //changes css to show hover boxes
     setOnselect({});
     document.getElementsByClassName("info-box")[0].classList.remove('hidden');
-    document.getElementsByClassName("legend")[0].classList.remove('hidden');
+    // document.getElementsByClassName("legend")[0].classList.remove('hidden');
 
     //resets fairness tab
     document.getElementById('bw').classList.add('hidden');

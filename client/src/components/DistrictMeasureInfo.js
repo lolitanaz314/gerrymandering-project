@@ -14,7 +14,7 @@ const comparingStyle = { //style for compare view (seat plot)
 }
 
 const tableStyle = { //style for compare view (measure table)
-    height: 200
+    height: 350
 }
 
 const DistrictMeasureInfo = (props) => {
@@ -22,8 +22,8 @@ const DistrictMeasureInfo = (props) => {
     let plan;
     let comparing;
     if (props.plans) {
-        plan = props.plans[props.currentDp];
-        comparing = props.plans[props.pinned];
+        plan = props.plans.find(x => x.dupPlanId === props.current);
+        comparing = props.plans.find(x => x.dupPlanId === props.pinnedDp);
 
         let dataA = {
             type: 'scatterpolar',
@@ -87,12 +87,12 @@ const DistrictMeasureInfo = (props) => {
 
         basic = <>
             <Table>
-                <thead>
-                    <tr>
-                        <th style={{ float: 'left' }}>District Plan {props.currentDp}</th>
-                        <th style={{ float: 'right' }}>District Plan {props.pinned}</th>
-                    </tr>
-                </thead>
+            <thead>
+                <tr>
+                    <th style={{ float: 'left' }}>{plan.dupPlanId}</th>
+                    <th style={{ float: 'right' }}>{comparing.dupPlanId}</th>
+                </tr>
+            </thead>
 
                 <tbody>
                     <Table className='column'>

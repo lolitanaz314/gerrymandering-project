@@ -12,23 +12,11 @@ const BoxAndWhisker = (props) => {
     const [clicked, setCheck] = useState(false);
     const toggleState = () => setCheck(prevCheck => !prevCheck);
 
-    // let trace1;
+
     let points = [];
-    let id = 'Co_P_1_2021';
+    let id;
     let trace;
-    // if (props.demographic !== 'None') {
-    //     points = coData.districtPlans.find(x => x.districtPlanId === id).data[props.demographic];
-    //     let xval = Array.from({length: points.length}, (_, i) => i + 1)
-    //     trace1 = {
-    //         y: points,
-    //         x: xval,
-    //         type: 'scatter',
-    //         name: id,
-    //         marker: {
-    //             color: 'red'
-    //         }
-    //     };
-    // }
+    if (props.plans.length !== 0) id = props.plans[props.currentDp].dupPlanId;
 
     const [box, setGraphData] = useState({
         y: [0],
@@ -56,19 +44,19 @@ const BoxAndWhisker = (props) => {
                     }
                     filter.push(obj);
                 }
-                // points = coData.districtPlans.find(x => x.districtPlanId === id).data[props.demographic];
-                // let xval = Array.from({length: points.length}, (_, i) => i + 1)
-                // trace = {
-                //     y: points,
-                //     x: xval,
-                //     type: 'scatter',
-                //     name: id,
-                //     mode: 'markers',
-                //     marker: {
-                //         color: 'red'
-                //     }
-                // };
-                // filter.push(trace);
+                points = coData.districtPlans.find(x => x.districtPlanId === id).data[props.demographic];
+                let xval = Array.from({length: points.length}, (_, i) => i + 1)
+                trace = {
+                    y: points,
+                    x: xval,
+                    type: 'scatter',
+                    name: id,
+                    mode: 'markers',
+                    marker: {
+                        color: 'red'
+                    }
+                };
+                filter.push(trace);
                 setGraphData(filter);
                 showBW();
             }).catch(error => { console.log('Something went wrong', error); })

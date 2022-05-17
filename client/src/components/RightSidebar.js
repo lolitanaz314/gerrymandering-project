@@ -58,14 +58,11 @@ const RightSidebar = (props) => {
     let plans = [];
     if(props.state) plans = props.state.districtPlans;
 
-    //used for the fake data
-    let stateID = 0;
-    if (props.code === "SC") stateID = 1;
-    else if (props.code === "CO") stateID = 2;
-
     //scrollbar menu functions
-    let pinnedDP = 'District Plan #' + props.pinned;
-    if (props.pinned === null) pinnedDP = "None";
+    let pinnedDP = "None";
+    if (props.state && props.pinned !== null) pinnedDP = plans[props.pinned].dupPlanId;
+    let current = "None";
+    if (props.state) current = plans[props.currentDp].dupPlanId;
 
     return (
         <>
@@ -75,7 +72,7 @@ const RightSidebar = (props) => {
                 </Offcanvas.Header>
 
                 <hr /> <div className='scroll-header'>
-                    <h5 className='dp-info'> Currently Displaying: District Plan #{props.currentDp} </h5>
+                    <h5 className='dp-info'> Currently Displaying: {current} </h5>
                     <h6 className='dp-info'> Pinned Plan For Comparison: {pinnedDP} </h6>
                     <div id='compare-button' className={`${props.comparing ? "" : "hidden"}`}>
                         <input type="button" value="Compare" onClick={() => props.setCompare(true)} />
@@ -118,7 +115,7 @@ const RightSidebar = (props) => {
                                 </Container>
                             </Navbar>
                             <br></br> <StateInfo name={props.name} compare={props.comparing} state={props.state}
-                                pinned={props.pinned} currentDp={props.currentDp} plans={plans} />
+                                pinned={props.pinned} currentDp={props.currentDp} plans={plans} current={current} pinnedDp={pinnedDP} />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
@@ -144,7 +141,7 @@ const RightSidebar = (props) => {
                                 </Container>
                             </Navbar>
                             <br></br> <DistrictMeasureInfo currentDp={props.currentDp} name={props.name}
-                                compare={props.comparing} pinned={props.pinned} plans={plans}/>
+                                compare={props.comparing} pinned={props.pinned} plans={plans} current={current} pinnedDp={pinnedDP} />
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
@@ -174,7 +171,7 @@ const RightSidebar = (props) => {
 
                         <Tab eventKey="fairness" title="SeaWulf Fairness">
                             <BoxAndWhisker code={props.code} currentState={props.currentState} currentDp={props.currentDp}
-                                demographic={props.demographic} />
+                                demographic={props.demographic} plans={plans}/>
                             <div className="jump-link-top">
                                 <Button variant="link" href="#above-tab">Back to Top</Button>
                             </div>
