@@ -82,20 +82,20 @@ public class District {
     private int republicanSen;
 
     // political demographic percentage
-    @Column(name="democratic_pres_perc", columnDefinition = "double default 10")
+    @Column(name="democratic_pres_perc", columnDefinition = "double default .5")
     private double democraticPresPerc;
 
-    @Column(name="republican_pres_perc", columnDefinition = "double default 10")
+    @Column(name="republican_pres_perc", columnDefinition = "double default .5")
     private double republicanPresPerc;
 
-    @Column(name="democratic_sen_perc", columnDefinition = "double default 10")
+    @Column(name="democratic_sen_perc", columnDefinition = "double default .5")
     private double democraticSenPerc;
 
-    @Column(name="republican_sen_perc", columnDefinition = "double default 10")
+    @Column(name="republican_sen_perc", columnDefinition = "double default .5")
     private double republicanSenPerc;
 
     // measures
-    @Column(name="polsby_popper", columnDefinition = "double default 10.0")
+    @Column(name="polsby_popper", columnDefinition = "double default 1.0")
     private double polsbyPopper;    // compactness
 
     // geometry

@@ -100,20 +100,20 @@ public class DistrictPlan {
     private double voteSplitRepubSen;
 
     // measures
-    @Column(name="polsby_popper", columnDefinition = "double default 10.0")
+    @Column(name="polsby_popper", columnDefinition = "double default 1.0")
     private double polsbyPopper;    // compactness
 
-    @Column(name="efficiency_gap", columnDefinition = "double default 10.0")
+    @Column(name="efficiency_gap", columnDefinition = "double default .3")
     private double efficiencyGap;
 
     @Column(name="num_majority_minority_districts", columnDefinition = "integer default 10")
     private int numMajorityMinorityDistricts;
 
     // in DB but not in GUI
-    @Column(name="mean_median_diff", columnDefinition = "double default 10.0")
-    private double meanMedianDiff;
+    @Column(name="mean_median_diff", columnDefinition = "integer default 10")
+    private int meanMedianDiff;
 
-    @Column(name="population_equality", columnDefinition = "double default 10.0")
+    @Column(name="population_equality", columnDefinition = "double default .05")
     private double populationEquality;
 
     @Column(name="split_county", columnDefinition = "double default 10.0")
