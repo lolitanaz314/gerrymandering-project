@@ -44,6 +44,9 @@ public class DistrictPlan {
     @Column(name="proposed_by")
     private String proposedBy;
 
+    @Column(name="election_winner")
+    private String electionWinner;
+
     // demographic
     @Column(name="total_pop", columnDefinition = "integer default 10")
     private Integer totalPop;
@@ -84,17 +87,17 @@ public class DistrictPlan {
     private int republicanSen;
 
     // vote-split
-    @Column(name="vote_split_democrats_pres", columnDefinition = "integer default 10")
-    private int voteSplitDemoPres;
+    @Column(name="vote_split_democrats_pres", columnDefinition = "double default 10.0")
+    private double voteSplitDemoPres;
 
-    @Column(name="vote_split_republicans_pres", columnDefinition = "integer default 10")
-    private int voteSplitRepubPres;
+    @Column(name="vote_split_republicans_pres", columnDefinition = "double default 10.0")
+    private double voteSplitRepubPres;
 
-    @Column(name="vote_split_democrats_sen", columnDefinition = "integer default 10")
-    private int voteSplitDemoSen;
+    @Column(name="vote_split_democrats_sen", columnDefinition = "double default 10.0")
+    private double voteSplitDemoSen;
 
-    @Column(name="vote_split_republicans_sen", columnDefinition = "integer default 10")
-    private int voteSplitRepubSen;
+    @Column(name="vote_split_republicans_sen", columnDefinition = "double default 10.0")
+    private double voteSplitRepubSen;
 
     // measures
     @Column(name="polsby_popper", columnDefinition = "double default 10.0")
@@ -103,7 +106,10 @@ public class DistrictPlan {
     @Column(name="efficiency_gap", columnDefinition = "double default 10.0")
     private double efficiencyGap;
 
-    // not used in production
+    @Column(name="num_majority_minority_districts", columnDefinition = "integer default 10")
+    private int numMajorityMinorityDistricts;
+
+    // in DB but not in GUI
     @Column(name="mean_median_diff", columnDefinition = "double default 10.0")
     private double meanMedianDiff;
 
@@ -113,11 +119,8 @@ public class DistrictPlan {
     @Column(name="split_county", columnDefinition = "double default 10.0")
     private double splitCounty;
 
-    @Column(name="num_majority_minority_districts", columnDefinition = "integer default 10")
-    private int numMajorityMinorityDistricts;
-
-    @Column(name="competitive_district_count", columnDefinition = "integer default 10")
-    private int competitiveDistrictCount;
+    @Column(name="competitive_district_count", columnDefinition = "double default 10.0")
+    private double competitiveDistrictCount;
 
     @Column(name="political_fairness", columnDefinition = "double default 10.0")
     private double politicalFairness;
@@ -125,47 +128,10 @@ public class DistrictPlan {
     @Column(name="geometry")
     private JSONObject geometry;
 
+    @Column(name="path")
+    private String path; // path to geometry
+
     @Transient
     @OneToMany
     private Set<District> districts;
 }
-
-/*
-[done]
-'districtPlanId',
-'stateId',
-'proposedBy',
-
-[missing in JSON]
-date
-status
-
-[done]
-"polsby_popper",
-"efficiency_gap",
-"num_majority_minority_districts",
-
-[missing in JSON]
-population_equality
-split_county
-num_majority_minority_districts
-competitive_district_count
-political_fairness
-
-[done]
-"total_pop",
-"white",
-"af_amer",
-"asian",
-"hispanic",
-"native_hawaiian",
-"two_or_more",
-"democraticPres",
-"democraticSen",
-"republicanPres",
-"republicanSen",
-"vote_split_democrats_pres",
-"vote_split_republicans_pres",
-"vote_split_democrats_sen",
-"vote_split_republicans_sen"
- */

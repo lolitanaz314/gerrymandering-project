@@ -1,10 +1,10 @@
 package com.example.server.model.enumeration;
 
 public enum Status {
-    PROPOSED,
-    LITIGATION,
-    ACCEPTED,
-    REJECTED;
+    Proposed,
+    Litigation,
+    Accepted,
+    Rejected;
 
 //    PROPOSED(0),
 //    LITIGATION(1),

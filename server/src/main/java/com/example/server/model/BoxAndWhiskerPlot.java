@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class BoxAndWhiskerPlot {
-    private Category demographic;
+    private String demographic;
 
     private List<BoxAndWhisker> boxAndWhiskers;
 }

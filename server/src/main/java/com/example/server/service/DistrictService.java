@@ -1,8 +1,6 @@
 package com.example.server.service;
 
-import com.example.server.model.State;
 import com.example.server.model.enumeration.Category;
-import com.example.server.model.id.DistrictId;
 import com.example.server.model.enumeration.StateCode;
 import com.example.server.model.District;
 import com.example.server.repository.DistrictRepository;
@@ -56,12 +54,12 @@ public class DistrictService {
     public Map<Category, Integer> packDemographic(District d) {
         Map<Category, Integer> demographic = new HashMap<>();
         try {
-            demographic.put(Category.WHITE, d.getWhite());
-            demographic.put(Category.BLACK, d.getAfricanAmerican());
-            demographic.put(Category.HISPANIC, d.getHispanic());
-            demographic.put(Category.ASIAN, d.getAsian());
-            demographic.put(Category.NATIVE, d.getNativeHawaiian());
-            demographic.put(Category.MIXED, d.getTwoOrMore());
+            demographic.put(Category.White, d.getWhite());
+            demographic.put(Category.Black, d.getAfricanAmerican());
+            demographic.put(Category.Hispanic, d.getHispanic());
+            demographic.put(Category.Asian, d.getAsian());
+            demographic.put(Category.Native, d.getNativeHawaiian());
+            demographic.put(Category.Mixed, d.getTwoOrMore());
 //            System.out.println("SIZE: " + demographic.size());
             return demographic;
         } catch (NoSuchElementException ex){

@@ -24,7 +24,10 @@ public class BoxAndWhiskerService {
         this.sService = sService;
     }
 
-    public BoxAndWhiskerPlot getBoxAndWhiskerByStateId(StateCode stateId, Category demographic) {
+    public BoxAndWhiskerPlot getBoxAndWhiskerByStateId(String stateId, String demographic) {
+
+        // String conversion from client to db
+
         BoxAndWhiskerPlot boxAndWhiskerPlot = new BoxAndWhiskerPlot();
         System.out.println("Service boxAndWhisker ...");
         System.out.println("Demographic: " + demographic);
@@ -32,7 +35,7 @@ public class BoxAndWhiskerService {
             boxAndWhiskerPlot.setDemographic(demographic);
 
             // TODO: make change to this block
-            List<BoxAndWhiskerData> data = bwRepository.findPoints(demographic.ordinal(), stateId.ordinal());
+            List<BoxAndWhiskerData> data = bwRepository.findPoints(demographic, stateId);
             List<BoxAndWhisker> boxAndWhiskers = new ArrayList<>();
             for (BoxAndWhiskerData datum : data) {
                 String id = Integer.toString(datum.getDistrictId());

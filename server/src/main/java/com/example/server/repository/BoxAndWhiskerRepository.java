@@ -13,5 +13,5 @@ public interface BoxAndWhiskerRepository extends JpaRepository<BoxAndWhiskerData
     @Query(value = "SELECT * " +
             "FROM box_and_whisker_data " +
             "WHERE demographic = ?1 AND state_id = ?2", nativeQuery = true)
-    List<BoxAndWhiskerData> findPoints(int demographic, int state_id);
+    List<BoxAndWhiskerData> findPoints(String demographic, String state_id);
 }

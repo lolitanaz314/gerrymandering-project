@@ -19,10 +19,10 @@ public class BoxAndWhiskerData {
     private int id;
 
     @Column(name="demographic")
-    private Category demographic;
+    private String demographic;   // Category
 
     @Column(name="state_id")
-    private StateCode stateId;
+    private String stateId;  // StateCode
 
     @Column(name="district_id")
     private Integer districtId;

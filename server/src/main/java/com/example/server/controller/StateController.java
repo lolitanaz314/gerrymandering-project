@@ -54,8 +54,8 @@ public class StateController {
     }
 
     @GetMapping("/states/{state_id}/boxAndWhisker/{demographic}")
-    public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") StateCode stateId,
-                                                                    @PathVariable("demographic") Category demographic) {
+    public EntityModel<BoxAndWhiskerPlot> getBoxAndWhiskerByStateId(@PathVariable("state_id") String stateId,
+                                                                    @PathVariable("demographic") String demographic) {
         System.out.println("Controller BoxAndWhiskerPlot ...");
         BoxAndWhiskerPlot bw = bwService.getBoxAndWhiskerByStateId(stateId, demographic);
         System.out.println("Returning BoxAndWhiskerPlot ...\n");

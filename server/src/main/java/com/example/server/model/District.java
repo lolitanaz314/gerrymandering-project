@@ -39,7 +39,7 @@ public class District {
 //    private int lean;
 
     // not used in production
-    @Column(name="incumbent", columnDefinition = "varchar(255) default 'Hi'")
+    @Column(name="incumbent", columnDefinition = "varchar(255) default ''")
     private String incumbent;
 
     // demographic

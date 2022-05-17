@@ -1,12 +1,12 @@
 package com.example.server.model.enumeration;
 
 public enum Category {
-    WHITE,
-    HISPANIC,
-    BLACK,
-    ASIAN,
-    NATIVE,
-    MIXED,   // two_or_more
-    DEMOCRATIC_PARTY,
-    REPUBLICAN_PARTY;
+    White,
+    Hispanic,
+    Black,
+    Asian,
+    Native,
+    Mixed,   // two_or_more
+    Democratic,
+    Republican;
 }
