@@ -36,13 +36,13 @@ const MapView = (props) => {
   //get state object from server
   const [state, setState] = useState({});
   useEffect(() => {
-      State.getStateById(currentLocation.code)
-        .then(response => {
-          setState(response.data);
-        })
-        .catch(error => {
-          console.log('Something went wrong', error);
-        })
+    State.getStateById(currentLocation.code)
+      .then(response => {
+        setState(response.data);
+      })
+      .catch(error => {
+        console.log('Something went wrong', error);
+      })
   }, [currentLocation.code]);
 
   //change view (border lines)
@@ -246,6 +246,18 @@ const MapView = (props) => {
     })
   }
 
+  let districtPlan = <></>;
+  // can eventually move right sidebar here too
+  if (currentLocation.jsonCode === 'TN')
+    districtPlan =
+      <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />;
+  else if (currentLocation.jsonCode === 'SC')
+    districtPlan =
+      <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />;
+  else if (currentLocation.jsonCode === 'CO')
+    districtPlan =
+      <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />;
+
   return (
     <div>
       <Navigation className='google-maps' zoomState={zoomState} name={currentLocation.name} demographic={demographic} view={view}
@@ -259,12 +271,9 @@ const MapView = (props) => {
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           <Base zoomState={zoomState} currentLocation={currentLocation} />
-          <Tennessee currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
-          <South currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
-          <Colorado currentLocation={currentLocation} view={view} districtPlans={districtPlans} highlightFeature={highlightFeature} />
-
           <Counties currentLocation={currentLocation} view={view} />
           <Precincts currentLocation={currentLocation} view={view} />
+          {districtPlan}
 
           <RightSidebar selectDP={(id) => selectDP(id)} pinDP={(id) => pinDP(id)} unpinDP={(id) => unpinDP(id)}
             show={show} name={currentLocation.name} pinned={districtPlans.pinned} demographic={demographic}

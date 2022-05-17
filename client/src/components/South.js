@@ -21,20 +21,17 @@ const South = (props) => {
           borderData.map((data, index) => {
             let state_name = data.abbreviation;
             let check = false;
-            if(props.view.district && props.currentLocation.jsonCode === state_name){
-              if(props.districtPlans.currentDp === index) check = true;
-              if(props.districtPlans.pinned && props.districtPlans.pinned === index) check = true;
-            }
-            
+            if (props.districtPlans.currentDp === index) check = true;
+            if (props.districtPlans.pinned && props.districtPlans.pinned === index) check = true;
+
             return (
               <>
-                <LayersControl.Overlay checked={check} name={state_name+index}>
-                    <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }}
-                    onEachFeature={highlight} />
+                <LayersControl.Overlay checked={check} name={state_name + index}>
+                  <GeoJSON key={state_name} data={data} pathOptions={{ color: colorings[index] }} onEachFeature={highlight} />
                 </LayersControl.Overlay>
               </>
             )
-        })}
+          })}
       </LayersControl>
     </>
   )

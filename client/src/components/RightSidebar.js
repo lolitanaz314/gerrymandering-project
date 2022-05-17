@@ -119,16 +119,6 @@ const testData = [ //testData has data of all plans from all states
                 Republican: 1153570,
                 Other: 140739
             }
-        }, {
-            id: 3,
-            status: "Approved",
-            proposedBy: 'Colorado Independent Congressional Redistricting Commission staff',
-            date: '2021-09-28',
-            compositeData: {
-                Democratic: 1476448,
-                Republican: 1053470,
-                Other: 100459
-            }
         }
     ]
 ];
@@ -243,7 +233,7 @@ const RightSidebar = (props) => {
                             </div>
                         </Tab>
 
-                        <Tab eventKey="measures" title="District Plan Measures">
+                        <Tab eventKey="measures" title="Measures">
                             <Navbar bg="light" expand="lg">
                                 <Container>
                                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
