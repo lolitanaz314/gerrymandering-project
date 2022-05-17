@@ -30,8 +30,10 @@ data/co_data
 data/sc_data
 data/tn_data
 data/sample_data
-data/post-processing/postseawulf_CSV_path/TnSW9_districtPlans.csv
-data/post-processing/postseawulf_CSV_path/TnSW9_districts.csv
+data/post-processing/processed_districtplan_path_seawulf
+data/post-processing/postseawulf_CSV_path
+data/post-processing/processed_districtplan_path_seawulf
+data/box_and_whisker_seawulf
 
 server/src/main/java/com/example/server/repository/UserRepository.java
 server/src/main/java/com/example/server/service/UserService.java

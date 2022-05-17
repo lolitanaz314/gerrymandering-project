@@ -1,6 +1,8 @@
 from shapely.ops import unary_union
 from shapely import wkt
 import pandas as pd
+import sys
+import geopandas as gpd
 
 from gerrychain.accept import always_accept
 import numpy as np
@@ -132,7 +134,10 @@ class Seawulf:
 
 if __name__ == '__main__':
     # load from csv to DataFrame for SeaWulf to run
-    df = pd.read_csv("/Users/cherrypi/Desktop/gerrymandering-project/data/pre-processing/preseawulf_precincts_path/final_precincts_preseawulf_tn.csv")
+
+    precincts_file_name=sys.argv[1]
+
+    df = pd.read_csv(precincts_file_name)
     df['geometry'] = df['geometry'].apply(wkt.loads)
     precincts_gdf = gpd.GeoDataFrame(df, crs='epsg:4269')
     
@@ -144,9 +149,9 @@ if __name__ == '__main__':
     41 -> TN
     '''
     precincts_df = precincts_gdf
-    state = "Tn"
-    num_districtPlans = 10
-    iterations = 10
+    state = "Tn" # THIS IS FOR THE DISTRICT PLAN FILE NAMES
+    num_districtPlans = 15
+    iterations = 15
     assignment_criteria = 'districtId'
     random_initial_partition = True
     epsilon = 0.02
@@ -161,3 +166,5 @@ if __name__ == '__main__':
                       output_path=output_path)
     
     seawulf.run(num_districtPlans=num_districtPlans, iterations=iterations)
+
+    print("done")
