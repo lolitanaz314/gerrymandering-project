@@ -13,22 +13,37 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "seat_vote_curve_values")
+@Table(name = "seat_vote_curve_measures")
 @IdClass(DistrictPlanId.class)
-public class SeatVoteCurveValues {
+public class SeatVoteCurveMeasures {
     @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
+
     @Column(name="state_id", nullable = false)
-    private StateCode stateId;
+    private String stateId;
 
-    @Id
     @Column(name="district_plan_id", nullable = false)
-    private int planId;
+    private String planId;
 
-    @Column(name = "vote_bias", columnDefinition = "double default 10.0")
-    double voteBias;
+    @Column(name = "election_type")
+    private String electionType;
 
-    @Column(name = "seat_bias", columnDefinition = "double default 10.0")
-    double seatBias;
+    @Column(name = "symmetry_gini_score")
+    private String symmetryGiniScore;
+
+    @Column(name = "partisan_bias")
+    private String partisanBias;
+
+    @Column(name = "mean_median_score")
+    private String meanMedianScore;
+
+//    @Column(name = "vote_bias", columnDefinition = "double default 10.0")
+//    double voteBias;
+//
+//    @Column(name = "seat_bias", columnDefinition = "double default 10.0")
+//    double seatBias;
 
     @Transient
     List<SeatVoteCurvePoints> seatVotePoints;
