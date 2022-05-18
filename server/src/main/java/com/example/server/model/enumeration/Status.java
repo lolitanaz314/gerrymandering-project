@@ -4,7 +4,8 @@ public enum Status {
     Proposed,
     Litigation,
     Accepted,
-    Rejected;
+    Rejected,
+    Enacted;
 
 //    PROPOSED(0),
 //    LITIGATION(1),
