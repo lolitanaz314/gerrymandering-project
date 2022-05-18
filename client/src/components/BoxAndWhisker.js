@@ -3,6 +3,8 @@ import State from '../api/service/StateService';
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import coData from "../assets/json/co/bw.json";
+import tnData from "../assets/json/tn/bw.json";
+import scData from "../assets/json/sc/bw.json";
 
 const BoxAndWhisker = (props) => {
 
@@ -12,11 +14,32 @@ const BoxAndWhisker = (props) => {
     const [clicked, setCheck] = useState(false);
     const toggleState = () => setCheck(prevCheck => !prevCheck);
 
-
-    let points = [];
-    let id;
-    let trace;
-    if (props.plans.length !== 0) id = props.plans[props.currentDp].dupPlanId;
+    // let points = [];
+    // let id;
+    // let trace;
+    // let dots;
+    // if (props.plans) {
+    //     id = props.plans[props.currentDp].dupPlanId;
+    //     if(props.code === 'TN'){
+    //         dots = tnData;
+    //     }else if(props.code === 'SC'){
+    //         dots = scData;
+    //     }else if(props.code === 'CO'){
+    //         dots = coData;
+    //     }
+    //     points = ({dots}.districtPlans).find(x => x.districtPlanId === id).data[props.demographic];
+    //     let xval = Array.from({length: points.length}, (_, i) => i + 1)
+    //     trace = {
+    //         y: points,
+    //         x: xval,
+    //         type: 'scatter',
+    //         name: id,
+    //         mode: 'markers',
+    //         marker: {
+    //             color: 'red'
+    //         }
+    //     };
+    // }
 
     const [box, setGraphData] = useState({
         y: [0],
@@ -44,19 +67,19 @@ const BoxAndWhisker = (props) => {
                     }
                     filter.push(obj);
                 }
-                points = coData.districtPlans.find(x => x.districtPlanId === id).data[props.demographic];
-                let xval = Array.from({length: points.length}, (_, i) => i + 1)
-                trace = {
-                    y: points,
-                    x: xval,
-                    type: 'scatter',
-                    name: id,
-                    mode: 'markers',
-                    marker: {
-                        color: 'red'
-                    }
-                };
-                filter.push(trace);
+                // points = {dots}.districtPlans.find(x => x.districtPlanId === id).data[props.demographic];
+                // let xval = Array.from({length: points.length}, (_, i) => i + 1)
+                // trace = {
+                //     y: points,
+                //     x: xval,
+                //     type: 'scatter',
+                //     name: id,
+                //     mode: 'markers',
+                //     marker: {
+                //         color: 'red'
+                //     }
+                // };
+                // filter.push(trace);
                 setGraphData(filter);
                 showBW();
             }).catch(error => { console.log('Something went wrong', error); })
