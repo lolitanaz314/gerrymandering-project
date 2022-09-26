@@ -2,22 +2,22 @@
 Team members (4): Jun Ho Lee, Jenny Fu, Lolita Nazarov, Christina Low
 
 ## Dependencies used 
-Client (JS):
+A] Client (JS):
 * React
 * BootStrap 5
 * leaflet
 * plotly.js
 * axios
 
-Server (Java):
+B] Server (Java):
 * Spring Boot
 * JPA
 * Hibernate ORM
 * Lombok
 
-Database (MySQL)
+C] Database (MySQL)
 
-Data processing (python):
+D] Data processing (python):
 * pandas
 * matplotlib
 * geopandas
