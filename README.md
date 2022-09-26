@@ -1,43 +1,67 @@
-# gerrymandering-project
-CSE 416 Project
+# Redistricting Analysis tool
+Team members (4): Jun Ho Lee, Jenny Fu, Lolita Nazarov, Christina Low
 
-<hr />
-<b>Run server:</b> <br/>
-mvn clean install <br />
-mvn spring-boot:run
+## Dependencies used 
+Client (JS):
+* React
+* BootStrap 5
+* leaflet
+* plotly.js
+* axios
 
+Server (Java):
+* Spring Boot
+* JPA
+* Hibernate ORM
+* Lombok
 
-<hr />
-<b>In client:</b>
-npm install axios
+Database (MySQL)
 
-Navbar options: "npm install react react-dom"<br/>
-                "npm install react-bootstrap bootstrap@5.1.3"
+Data processing (python):
+* pandas
+* matplotlib
+* geopandas
+* shapely
+* gerrychain
 
-Tabs: "npm install react-bootstrap-tabs" <br/> "npm install react-bootstrap-tab"
+## About the project
+Redistricting Analysis tool is a full stack web application that analyzes the gerrymandering of multiple district plans in 3 US states. We worked on Tennessee, Colorado, and South Carolina
 
-Icon: "npm install react-icons"
+## How does it work?
+### A] Map display
+In the start of the page, the user will be presnted a map of the United States. Three states - Tennessee, Colorado, and South Carolina - are highlighted so that user can click the state to learn about it. Once a state is chosen, the map zooms into the chosen state and a sidebar appears to present information.
 
-Recharts: "npm install recharts"
+### B] Sidebar
+On the top half of the sidebar, there is a carousel of clickable district plans along with information about them. Once a district plan is clicked, the map updates borer lines of congresional districts, counties, and precincts.
 
-Plotly: "npm install react-plotly.js plotly.js"
+### 1) Summary
+Shows summary about the state and district plan. This shows:
+* population and demographic data based on Census 2020
+* who proposed the plan, when was it proposed, and status
 
-// currently wont need <br/>
-Centroid: "npm install @turf/centroid" <br/>
-Center of Mass: "npm install @turf/center-of-mass" <br/>
-Routes: "npm install browser-router" <br/>
-Popup Modal: "npm install reactjs-popup --save" <br/>
+### 2) Measures
+Shows summary of measures such as:
+* seat-vote curve
+* efficiency gap
+* majority-minoriy districts
+* compactness
+* equal population
+* split counties
+* competitive district
+* radar chart for comparing these measures above
 
+### 3) Simulated results
+Shows distribution of:
+* number of majority-minority districts
+* republican/democratic split
 
-<hr />
-<b>In data:</b>
+by extracting data from 10,000 simulated redistricting of a state <br />
+[y-axis: # of simulated district plans]
 
-MGGG algorithm: pip install gerrychain
+### 4) Box and Whisker
+Shows box and whiskers plot of:
+* distribution of percentage of chosen demographic in each district
 
-Mapping geographies (precinct to block, block to district): pip install maup
-
-<hr />
-<b>Terminal command used to compress geojson file:</b><br/>
-&emsp;npm install -g mapshaper <br/>
-&emsp;mapshaper old_file.geojson -simplify dp 10% keep-shapes -o format=geojson new_file.geojson <br/>
-File is 10% the size of the original file. Original precinct geojsons can be found in the shared Lynx folder
+by extracting data from 10,000 simulated redistricting of a state <br />
+[x-axis: district ordered by percentage of chosen demographic from least to greatest <br />
+ y-axis: distribution of percentage of chosen demographic in district]
