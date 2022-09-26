@@ -1,5 +1,5 @@
 # Redistricting Analysis tool
-Team members (4): Jun Ho Lee, Jenny Fu, Lolita Nazarov, Christina Low
+## Team members (4): Jun Ho Lee, Jenny Fu, Lolita Nazarov, Christina Low
 
 ## Dependencies used 
 A] Client (JS):
